@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:sqlserver://172.21.40.113\instance-1:1433;database=gacha</property>
+    <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <mapping class="com.gachaapi.Model.Affilation"/>
+      <mapping class="com.gachaapi.Model.Artefact"/>
+    <mapping class="com.gachaapi.Model.ArtefactSet"/>
+    <mapping class="com.gachaapi.Model.Character"/>
+    <mapping class="com.gachaapi.Model.CharacterAtrefact"/>
+    <mapping class="com.gachaapi.Model.CharacterChest"/>
+    <mapping class="com.gachaapi.Model.Chest"/>
+    <mapping class="com.gachaapi.Model.ChestReward"/>
+    <mapping class="com.gachaapi.Model.Clazz"/>
+    <mapping class="com.gachaapi.Model.Collection"/>
+    <mapping class="com.gachaapi.Model.Dungeon"/>
+    <mapping class="com.gachaapi.Model.DungeonFloor"/>
+    <mapping class="com.gachaapi.Model.DungeonFloorDungeon"/>
+    <mapping class="com.gachaapi.Model.Element"/>
+    <mapping class="com.gachaapi.Model.InGameCurrencyPurchase"/>
+    <mapping class="com.gachaapi.Model.Material"/>
+    <mapping class="com.gachaapi.Model.MaterialAffilation"/>
+    <mapping class="com.gachaapi.Model.MaterialClass"/>
+    <mapping class="com.gachaapi.Model.MaterialElement"/>
+    <mapping class="com.gachaapi.Model.MaterialWeaponClass"/>
+    <mapping class="com.gachaapi.Model.MaterialReward"/>
+    <mapping class="com.gachaapi.Model.MoveOrder"/>
+    <mapping class="com.gachaapi.Model.Party"/>
+    <mapping class="com.gachaapi.Model.PartyCharacter"/>
+    <mapping class="com.gachaapi.Model.PartyDungeonFloor"/>
+    <mapping class="com.gachaapi.Model.PaymentMethod"/>
+    <mapping class="com.gachaapi.Model.Player"/>
+    <mapping class="com.gachaapi.Model.PlayerArtefact"/>
+    <mapping class="com.gachaapi.Model.PlayerCharacter"/>
+    <mapping class="com.gachaapi.Model.PlayerChestItem"/>
+    <mapping class="com.gachaapi.Model.PlayerDungeonFloor"/>
+    <mapping class="com.gachaapi.Model.PlayerMaterial"/>
+    <mapping class="com.gachaapi.Model.PlayerPurchase"/>
+    <mapping class="com.gachaapi.Model.PlayerWeapon"/>
+    <mapping class="com.gachaapi.Model.Rarity"/>
+    <mapping class="com.gachaapi.Model.Reward"/>
+    <mapping class="com.gachaapi.Model.Set"/>
+    <mapping class="com.gachaapi.Model.StatArtifact"/>
+    <mapping class="com.gachaapi.Model.StatClass"/>
+    <mapping class="com.gachaapi.Model.StatWeapon"/>
+    <mapping class="com.gachaapi.Model.Statistic"/>
+    <mapping class="com.gachaapi.Model.Weapon"/>
+    <mapping class="com.gachaapi.Model.WeaponClass"/>
+    <mapping class="com.gachaapi.Model.WeaponChest"/>
+    <mapping class="com.gachaapi.Model.WeaponReward"/>
+    <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>
