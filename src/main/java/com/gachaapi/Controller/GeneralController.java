@@ -1,9 +1,9 @@
 package com.gachaapi.Controller;
 
 
-import com.gachaapi.Model.Player;
+
+import com.gachaapi.Entity.Player;
 import com.gachaapi.Service.interfaces.PlayerService;
-import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +22,6 @@ public class GeneralController {
 
     @GetMapping("/players")
     public ResponseEntity<List<Player>> getPlayers(){
-        return new ResponseEntity<>(playerService.getAllPlayers(), HttpStatus.OK);
+        return new ResponseEntity<List<Player>>(playerService.getAllPlayers(), HttpStatus.OK);
     }
 }

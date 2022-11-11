@@ -1,6 +1,7 @@
 package com.gachaapi.Repository;
 
-import com.gachaapi.Model.Player;
+
+import com.gachaapi.Entity.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

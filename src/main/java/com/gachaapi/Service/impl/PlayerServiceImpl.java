@@ -1,18 +1,16 @@
 package com.gachaapi.Service.impl;
 
-import com.gachaapi.Model.Player;
+import com.gachaapi.Entity.Player;
 import com.gachaapi.Repository.PlayerRepository;
 import com.gachaapi.Service.interfaces.PlayerService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class PlayerServiceImpl implements PlayerService {
-
-    public PlayerServiceImpl(PlayerRepository playerRepository){
-        this.playerRepository = playerRepository;
-    }
 
     private PlayerRepository playerRepository;
 
