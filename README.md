@@ -10,7 +10,8 @@ przymuje jsona w formacie:
   "nick":"SuperKozackiNick",  
   "hashedPassword":"GigaTajneHasło"  
 }  
-nie przejmujcie się nazwą pola "hashedPassword" należy dać zwykłe, poprawię nazwę w najbliższym czasie :).  
+Nie przejmujcie się nazwą pola "hashedPassword" należy dać zwykłe, poprawię nazwę w najbliższym czasie :).  
+W przyszłości będzie jeszcze przyjmować datę urodzenia.  
   
 2. GET /players  
 wyświetla wszystkich użytkowników, dostępne tylko dla adminów  
