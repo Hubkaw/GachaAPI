@@ -15,7 +15,7 @@ nie przejmujcie się nazwą pola "hashedPassword" należy dać zwykłe, poprawi�
 2. GET /players  
 wyświetla wszystkich użytkowników, dostępne tylko dla adminów  
   
-3.GET /roles  
+3. GET /roles  
 wyświetla dostępne role użytkowników, dostępne dla zalogowanych.  
   
 DOMYŚLNE KONTA:   
