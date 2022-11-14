@@ -29,6 +29,6 @@ aktualnie nie da się tworzyć adminów bez ręcznego wchodzenia w bazę
 INSTRUKCJA AUTORYZACJI ZAPYTAŃ:  
 1. łączysz user i password w formacie "user:password"  
 2. hashujesz to za pomocą Base64 (powinno być wbudowane we wszystko co może się łączyć z internetem)  
-3. Do wysyłanego pakietu dodajesz nagłówek Authorization z wartością "Basic <hash>"  
+3. Do wysyłanego pakietu dodajesz nagłówek Authorization z wartością "Basic hash"    
 PRZYKŁAD  
 Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
