@@ -1,6 +1,7 @@
 package com.gachaapi.Controller;
 
 import com.gachaapi.Entity.Player;
+import com.gachaapi.RequestBody.NewPlayer;
 import com.gachaapi.Security.JWTService;
 import com.gachaapi.Service.interfaces.PlayerService;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class SecurityController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<Player> createPlayer(@RequestBody Player newPlayer) {
+    public ResponseEntity<Player> createPlayer(@RequestBody NewPlayer newPlayer) {
         return new ResponseEntity<>(playerService.createNewPlayer(newPlayer), HttpStatus.CREATED);
     }
 

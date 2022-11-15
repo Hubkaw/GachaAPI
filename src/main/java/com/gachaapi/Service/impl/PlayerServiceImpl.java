@@ -4,6 +4,7 @@ import com.gachaapi.Entity.Player;
 import com.gachaapi.Entity.Role;
 import com.gachaapi.Repository.PlayerRepository;
 import com.gachaapi.Repository.RoleRepository;
+import com.gachaapi.RequestBody.NewPlayer;
 import com.gachaapi.Service.interfaces.PlayerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -34,19 +37,19 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Player createNewPlayer(Player newPlayer) {
+    public Player createNewPlayer(NewPlayer newPlayer) {
         if (!validateNewPlayer(newPlayer)){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Data");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid login or password");
         }
         if (playerRepository.existsByNick(newPlayer.getNick())){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Nickname already used");
         }
         Player player = new Player();
         player.setNick(newPlayer.getNick());
-        player.setHashedPassword(passwordEncoder.encode(newPlayer.getHashedPassword()));
+        player.setHashedPassword(passwordEncoder.encode(newPlayer.getPassword()));
         player.setRoles(new HashSet<>());
         player.getRoles().add(roleRepository.findByName(USER_ROLE));
-        player.setBirthDate(Timestamp.valueOf("1998-01-01 01:01:01"));
+        player.setBirthDate(Timestamp.valueOf(LocalDateTime.now().minus(20, ChronoUnit.YEARS)));
         player.setEloPoints(0);
         player.setJoinDate(Timestamp.valueOf(LocalDateTime.now()));
         player.setPvpLooses(0);
@@ -63,15 +66,15 @@ public class PlayerServiceImpl implements PlayerService {
         return roleRepository.findAll();
     }
 
-    private boolean validateNewPlayer(Player player) {
+    private boolean validateNewPlayer(NewPlayer player) {
         System.out.println(player);
         return player != null
                 && player.getNick() != null
-                && player.getHashedPassword() != null
+                && player.getPassword() != null
                 && player.getNick().length() <= 32
                 && !player.getNick().contains("/")
                 && !player.getNick().contains(";")
-                && !player.getHashedPassword().contains(";")
-                && !player.getHashedPassword().contains("/");
+                && !player.getPassword().contains(";")
+                && !player.getPassword().contains("/");
     }
 }
