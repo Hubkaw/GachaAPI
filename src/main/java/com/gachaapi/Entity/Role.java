@@ -25,7 +25,7 @@ public class Role {
                     @JoinColumn(name = "Role_Id")
             },
             inverseJoinColumns = {
-                    @JoinColumn(name = "Player_PlayerId")
+                    @JoinColumn(name = "Player_Player_Id")
             })
     @JsonIgnore
     private Set<Player> players;

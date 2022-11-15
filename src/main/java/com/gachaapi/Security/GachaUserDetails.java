@@ -18,7 +18,6 @@ public class GachaUserDetails implements UserDetails {
     public GachaUserDetails(Player player){
         nickname = player.getNick();
         password = player.getHashedPassword();
-        System.out.println("sldoasdko");
         roles = player.getRoles().stream().map(
                 role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());

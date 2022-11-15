@@ -94,7 +94,7 @@ public class Player {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "Player_Role",
             joinColumns = {
-                    @JoinColumn(name = "Player_PlayerId")
+                    @JoinColumn(name = "Player_Player_Id")
 
             },
             inverseJoinColumns = {
