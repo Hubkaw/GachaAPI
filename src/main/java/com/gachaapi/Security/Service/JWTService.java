@@ -1,4 +1,4 @@
-package com.gachaapi.Security;
+package com.gachaapi.Security.Service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;

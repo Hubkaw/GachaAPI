@@ -3,7 +3,7 @@ package com.gachaapi.Service.interfaces;
 
 import com.gachaapi.Entity.Player;
 import com.gachaapi.Entity.Role;
-import com.gachaapi.RequestBody.NewPlayer;
+import com.gachaapi.Utils.NewPlayer;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.gachaapi.Security;
+package com.gachaapi.Security.Config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -1,6 +1,6 @@
 package com.gachaapi;
 
-import com.gachaapi.Security.RsaKeyProperties;
+import com.gachaapi.Security.Config.RsaKeyProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

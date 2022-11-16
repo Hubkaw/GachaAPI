@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Dev Stats</title>
+</head>
+<body>
+<div>
+    <h1>Dev Stats</h1>
+    <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <form th:action="@{/dev/stats}" th:method="post" th:object="${newStat}">
+        <h2>Name:</h2><br>
+        <input th:type="text" name="name"><br>
+        <h2>Short Name (3 capital letters):</h2><br>
+        <input th:type="text" name="shortName"><br>
+        <input type="submit" value="submit"><br>
+    </form>
+    <div >
+        <table>
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Short Name</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${statsList}">
+                <td th:text="${item.statId}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.shortName}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

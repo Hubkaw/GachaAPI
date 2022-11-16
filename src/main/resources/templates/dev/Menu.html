@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gacha Dev Menu</title>
+</head>
+<body>
+<h1>Dev Menu</h1>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Link</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${Nav}">
+            <td th:text="${item.name}"></td>
+            <td><a th:href="${item.link}" th:text="Link"></a> </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.gachaapi.Security;
+package com.gachaapi.Security.Config;
 
 import com.gachaapi.Entity.Player;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,8 +1,8 @@
 package com.gachaapi.Controller;
 
 import com.gachaapi.Entity.Player;
-import com.gachaapi.RequestBody.NewPlayer;
-import com.gachaapi.Security.JWTService;
+import com.gachaapi.Utils.NewPlayer;
+import com.gachaapi.Security.Service.JWTService;
 import com.gachaapi.Service.interfaces.PlayerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -8,12 +8,14 @@ import java.util.Objects;
 public class Statistic {
     private int statId;
     private String name;
+    private String shortName;
     private Collection<StatArtefactset> statArtefactsetsByStatId;
     private Collection<StatArtifact> statArtifactsByStatId;
     private Collection<StatClass> statClassesByStatId;
     private Collection<StatWeapon> statWeaponsByStatId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Stat_id", nullable = false)
     public int getStatId() {
         return statId;
@@ -33,6 +35,11 @@ public class Statistic {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "shortName", nullable = false, length = 3)
+    public String getShortName(){return shortName;}
+
+    public void setShortName(String shortName){this.shortName = shortName;}
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -20,7 +20,7 @@ public class Player {
     private int idPlayer;
 
     @Basic
-    @Column(name = "Nick", nullable = false, length = 32)
+    @Column(name = "Nick", nullable = false, length = 32, unique = true)
     private String nick;
 
     @Basic

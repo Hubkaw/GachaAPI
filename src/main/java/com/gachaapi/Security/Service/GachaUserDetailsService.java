@@ -1,6 +1,7 @@
-package com.gachaapi.Security;
+package com.gachaapi.Security.Service;
 
 import com.gachaapi.Repository.PlayerRepository;
+import com.gachaapi.Security.Config.GachaUserDetails;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

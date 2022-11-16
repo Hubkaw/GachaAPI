@@ -1,4 +1,4 @@
-package com.gachaapi.RequestBody;
+package com.gachaapi.Utils;
 
 import lombok.Data;
 
