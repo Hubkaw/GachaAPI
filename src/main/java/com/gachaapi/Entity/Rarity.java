@@ -8,13 +8,14 @@ import java.util.Objects;
 public class Rarity {
     private int id;
     private String name;
-    private int shortcut;
+    private String shortcut;
     private int weight;
     private Collection<Artefact> artefactsById;
     private Collection<Character> charactersById;
     private Collection<Weapon> weaponsById;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -35,12 +36,12 @@ public class Rarity {
     }
 
     @Basic
-    @Column(name = "shortcut", nullable = false)
-    public int getShortcut() {
+    @Column(name = "shortcut", nullable = false, length = 3)
+    public String getShortcut() {
         return shortcut;
     }
 
-    public void setShortcut(int shortcut) {
+    public void setShortcut(String shortcut) {
         this.shortcut = shortcut;
     }
 

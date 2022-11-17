@@ -27,4 +27,9 @@ public class StatisticServiceImpl implements StatisticService {
         stat.setShortName(newStat.getShortName());
         statisticRepository.save(stat);
     }
+
+    @Override
+    public void delete(int id) {
+        statisticRepository.delete(statisticRepository.getReferenceById(id));
+    }
 }

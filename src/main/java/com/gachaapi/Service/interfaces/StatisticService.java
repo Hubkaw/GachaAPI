@@ -8,4 +8,5 @@ import java.util.List;
 public interface StatisticService {
     List<Statistic> getAll();
     void addStat(NewStat newStat);
+    void delete(int id);
 }

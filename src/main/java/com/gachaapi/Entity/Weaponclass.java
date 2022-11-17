@@ -8,13 +8,14 @@ import java.util.Objects;
 public class Weaponclass {
     private int id;
     private String name;
-    private int shortcut;
+    private String shortName;
     private Collection<Clazz> clazzesById;
     private Collection<Materialweaponclass> materialweaponclassesById;
     private Collection<Weapon> weaponsById;
 
     @Id
     @Column(name = "Id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -34,13 +35,13 @@ public class Weaponclass {
     }
 
     @Basic
-    @Column(name = "Shortcut", nullable = false)
-    public int getShortcut() {
-        return shortcut;
+    @Column(name = "short_name", nullable = false, length = 3)
+    public String getShortName() {
+        return shortName;
     }
 
-    public void setShortcut(int shortcut) {
-        this.shortcut = shortcut;
+    public void setShortName(String shortcut) {
+        this.shortName = shortcut;
     }
 
     @Override
@@ -48,12 +49,12 @@ public class Weaponclass {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Weaponclass that = (Weaponclass) o;
-        return id == that.id && shortcut == that.shortcut && Objects.equals(name, that.name);
+        return id == that.id && shortName == that.shortName && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, shortcut);
+        return Objects.hash(id, name, shortName);
     }
 
     @OneToMany(mappedBy = "weaponclassByWeaponClass")
