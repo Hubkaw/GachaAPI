@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{style.css}" rel="stylesheet" />
+    <title>Dev Collections</title>
+</head>
+<body>
+<div>
+    <h1>Dev Collections</h1>
+    <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <form th:action="@{/dev/collection}" th:method="post" th:object="${newCollection}">
+        <h2>Name:</h2><br>
+        <input th:type="text" name="name"><br>
+        <input type="submit" value="submit"><br>
+    </form>
+    <div >
+        <table>
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Delete</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${collectionList}">
+                <td th:text="${item.idCollection}"></td>
+                <td th:text="${item.name}"></td>
+                <td><a th:href="@{'/dev/collection/delete/'+${item.idCollection}}">
+                    <button>Delete</button>
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

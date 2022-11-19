@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{style.css}" rel="stylesheet" />
+    <title th:text="${chest.name}"></title>
+</head>
+<body>
+<div>
+    <h1>Dev Weapon <span th:text="${chest.name}"></span></h1>
+    <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <form th:action="@{/dev/chest/weapon}" th:method="post" th:object="${newWeaponChest}">
+        <input th:type="hidden" name="chestId" th:value="${chest.idChest}"/>
+        <h3>Stat:</h3>
+        <select name="weaponId">
+            <option th:each="item : ${weaponList}" th:value="${item.id}" th:text="${item.name}"></option>
+        </select>
+        <input type="submit" value="submit"><br>
+    </form>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Rarity</td>
+                <td>Delete</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${chest.weapons}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.rarityByRarityId.shortcut}"></td>
+                <td><a th:href="@{'/dev/chest/weapon/delete/'+${item.id}+'/'+${chest.idChest}}">
+                    <button>Delete</button>
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

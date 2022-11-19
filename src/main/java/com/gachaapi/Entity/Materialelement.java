@@ -12,6 +12,7 @@ public class Materialelement {
     private Element elementByElementId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", nullable = false)
     public int getId() {
         return id;

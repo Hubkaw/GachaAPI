@@ -13,6 +13,7 @@ import java.util.Set;
 public class Chest {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "IdChest", nullable = false)
     private int idChest;
 

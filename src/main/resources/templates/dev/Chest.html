@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{style.css}" rel="stylesheet" />
+    <title>Dev Chest</title>
+</head>
+<body>
+<div>
+    <h1>Dev Chest</h1>
+    <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <form th:action="@{/dev/chest}" th:method="post" th:object="${newChest}">
+        <h3>Name:</h3><br>
+        <input th:type="text" name="name" required><br>
+        <h3>Release date:</h3><br>
+        <input th:type="date" name="releasedAt" required><br>
+        <h3>Expiration date:</h3>
+        <input th:type="date" name="expiresAt"><br>
+        <h3>Collection:</h3>
+        <select name="collectionId">
+            <option th:each="item : ${collectionList}" th:value="${item.idCollection}" th:text="${item.name}"></option>
+        </select><br>
+        <input type="submit" value="submit"><br>
+    </form>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Release date</td>
+                <td>Expiration date</td>
+                <td>Collection</td>
+                <td>Weapons</td>
+                <td>Delete</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${chestList}">
+                <td th:text="${item.idChest}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.releasedAt}"></td>
+                <td th:text="${item.expiresAt}"></td>
+                <td th:text="${item.collectionByCollectionIdCollection.name}"></td>
+                <td><a th:href="@{'/dev/chest/weapon/'+${item.idChest}}">
+                    <button>Manage</button>
+                </a></td>
+                <td><a th:href="@{'/dev/chest/delete/'+${item.idChest}}">
+                    <button>Delete</button>
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

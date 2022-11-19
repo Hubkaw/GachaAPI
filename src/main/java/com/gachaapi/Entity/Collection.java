@@ -10,6 +10,7 @@ public class Collection {
     private java.util.Collection<Chest> chestsByIdCollection;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "IDCollection", nullable = false)
     public int getIdCollection() {
         return idCollection;
