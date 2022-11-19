@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{style.css}" rel="stylesheet" />
+    <title>Dev Element</title>
+</head>
+<body>
+<div>
+    <h1>Dev Element</h1>
+    <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <form th:action="@{/dev/element}" th:method="post" th:object="${newElement}">
+        <h3>Name:</h3><br>
+        <input th:type="text" name="name" required><br>
+        <input type="submit" value="submit"><br>
+    </form>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>delete</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${elementList}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td><a th:href="@{'/dev/element/delete/'+${item.id}}">
+                    <button>Delete</button>
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

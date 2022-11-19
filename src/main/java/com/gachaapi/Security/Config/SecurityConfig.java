@@ -42,8 +42,7 @@ public class SecurityConfig {
                 .userDetailsService(gachaUserDetailsService)
                 .authorizeRequests(auth -> {
                     auth.antMatchers("/signup", "/login").permitAll();
-                    auth.antMatchers("/dev/**")
-                            .access("hasIpAddress('127.0.0.1') or hasIpAddress('::1') or hasAuthority('ADMIN') or hasAuthority('SCOPE_ADMIN')");
+                    auth.antMatchers("/dev/**").access("hasIpAddress('127.0.0.1') or hasIpAddress('::1') or hasAuthority('ADMIN') or hasAuthority('SCOPE_ADMIN')");
                     auth.antMatchers("/players").hasAuthority("SCOPE_"+ADMIN_ROLE);
                     auth.anyRequest().hasAuthority("SCOPE_"+USER_ROLE);
 //                    auth.anyRequest().permitAll();

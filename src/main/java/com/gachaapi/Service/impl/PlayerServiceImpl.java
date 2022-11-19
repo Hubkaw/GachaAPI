@@ -8,6 +8,7 @@ import com.gachaapi.Utils.NewPlayer;
 import com.gachaapi.Service.interfaces.PlayerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -61,6 +62,11 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public List<Role> getRoles() {
         return roleRepository.findAll();
+    }
+
+    @Override
+    public Player getByName(String nick) {
+        return playerRepository.findByNick(nick).orElseThrow(() -> new UsernameNotFoundException("Invalid username"));
     }
 
     private boolean validateNewPlayer(NewPlayer player) {

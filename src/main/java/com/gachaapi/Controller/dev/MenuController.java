@@ -18,7 +18,9 @@ public class MenuController {
             new DevMenuRecord("Menu", "/dev/menu"),
             new DevMenuRecord("Stats", "/dev/stats"),
             new DevMenuRecord("WeaponClass", "/dev/weaponClass"),
-            new DevMenuRecord("Rarity", "/dev/rarity")
+            new DevMenuRecord("Weapon", "/dev/weapon"),
+            new DevMenuRecord("Rarity", "/dev/rarity"),
+            new DevMenuRecord("Element", "/dev/element")
     );
 
 
