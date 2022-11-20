@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @AllArgsConstructor
 @Controller
-public class StatController {
+public class DevStatController {
 
     private StatisticService statisticService;
 

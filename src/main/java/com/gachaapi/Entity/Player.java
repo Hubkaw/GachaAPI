@@ -41,6 +41,7 @@ public class Player {
 
     @Basic
     @Column(name = "HashedPassword", nullable = false, length = 126)
+    @JsonIgnore
     private String hashedPassword;
 
     @Basic

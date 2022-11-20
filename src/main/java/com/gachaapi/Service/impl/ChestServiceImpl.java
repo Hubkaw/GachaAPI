@@ -8,11 +8,10 @@ import com.gachaapi.Repository.WeaponRepository;
 import com.gachaapi.Service.interfaces.ChestService;
 import com.gachaapi.Utils.dev.NewChest;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class ChestServiceImpl implements ChestService {
         chest.setName(newChest.getName());
         chest.setExpiresAt(new Timestamp(newChest.getExpiresAt().getTime()));
         chest.setReleasedAt(new Timestamp(newChest.getReleasedAt().getTime()));
-        chest.setCollectionByCollectionIdCollection(collectionRepository.getReferenceById(newChest.getCollectionId()));
+        chest.setCollection(collectionRepository.getReferenceById(newChest.getCollectionId()));
         chestRepository.save(chest);
     }
 
@@ -68,6 +67,13 @@ public class ChestServiceImpl implements ChestService {
     @Override
     public Chest getById(int id) {
         return chestRepository.getReferenceById(id);
+    }
+
+    @Override
+    public List<Chest> getAvailable() {
+        return chestRepository.findAllByExpiresAtIsAfterAndReleasedAtBefore(
+                Timestamp.from(Instant.now()), Timestamp.from(Instant.now())
+        );
     }
 
 

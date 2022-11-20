@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -9,9 +11,13 @@ public class Statistic {
     private int statId;
     private String name;
     private String shortName;
+    @JsonIgnore
     private Collection<StatArtefactset> statArtefactsetsByStatId;
+    @JsonIgnore
     private Collection<StatArtifact> statArtifactsByStatId;
+    @JsonIgnore
     private Collection<StatClass> statClassesByStatId;
+    @JsonIgnore
     private Collection<StatWeapon> statWeaponsByStatId;
 
     @Id

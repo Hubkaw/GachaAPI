@@ -1,7 +1,6 @@
 package com.gachaapi.Service.impl;
 
 import com.gachaapi.Entity.StatWeapon;
-import com.gachaapi.Entity.Statistic;
 import com.gachaapi.Entity.Weapon;
 import com.gachaapi.Repository.*;
 import com.gachaapi.Service.interfaces.WeaponService;
@@ -33,9 +32,9 @@ public class WeaponServiceImpl implements WeaponService {
     public void create(NewWeapon newWeapon) {
         Weapon weapon = new Weapon();
         weapon.setName(newWeapon.getName());
-        weapon.setElementByElementId(elementRepository.getReferenceById(newWeapon.getElementId()));
-        weapon.setWeaponclassByWeaponClassId(weaponClassRepository.getReferenceById(newWeapon.getWeaponClassId()));
-        weapon.setRarityByRarityId(rarityRepository.getReferenceById(newWeapon.getRarityId()));
+        weapon.setElement(elementRepository.getReferenceById(newWeapon.getElementId()));
+        weapon.setWeaponClass(weaponClassRepository.getReferenceById(newWeapon.getWeaponClassId()));
+        weapon.setRarity(rarityRepository.getReferenceById(newWeapon.getRarityId()));
         weaponRepository.save(weapon);
     }
 

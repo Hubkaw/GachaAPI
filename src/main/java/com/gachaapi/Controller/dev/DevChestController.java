@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @AllArgsConstructor
-public class ChestController {
+public class DevChestController {
 
     private ChestService chestService;
     private CollectionService collectionService;

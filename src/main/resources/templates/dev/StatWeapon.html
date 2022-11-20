@@ -32,7 +32,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item : ${weapon.statWeaponsById}">
+            <tr th:each="item : ${weapon.stats}">
                 <td th:text="${item.id}"></td>
                 <td th:text="${item.statisticByStatisticStatId.shortName}"></td>
                 <td th:text="${item.value}"></td>

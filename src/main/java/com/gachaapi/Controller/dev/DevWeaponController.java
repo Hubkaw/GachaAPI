@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @AllArgsConstructor
 @Controller
-public class WeaponController {
+public class DevWeaponController {
     private WeaponService weaponService;
     private RarityService rarityService;
     private WeaponClassService weaponClassService;

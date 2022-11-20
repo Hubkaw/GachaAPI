@@ -12,7 +12,7 @@ import static java.util.Arrays.asList;
 
 @AllArgsConstructor
 @Controller
-public class MenuController {
+public class DevMenuController {
 
     private static List<DevMenuRecord> NAV_LINKS = asList(
             new DevMenuRecord("Menu", "/dev/menu"),

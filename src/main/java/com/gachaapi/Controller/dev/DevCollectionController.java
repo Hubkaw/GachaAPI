@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @AllArgsConstructor
-public class CollectionController {
+public class DevCollectionController {
 
     private CollectionService collectionService;
 

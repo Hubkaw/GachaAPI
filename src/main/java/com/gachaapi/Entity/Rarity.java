@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -10,8 +12,11 @@ public class Rarity {
     private String name;
     private String shortcut;
     private int weight;
+    @JsonIgnore
     private Collection<Artefact> artefactsById;
+    @JsonIgnore
     private Collection<Character> charactersById;
+    @JsonIgnore
     private Collection<Weapon> weaponsById;
 
     @Id
@@ -69,6 +74,7 @@ public class Rarity {
     }
 
     @OneToMany(mappedBy = "rarityByRarityId")
+    @JsonIgnore
     public Collection<Artefact> getArtefactsById() {
         return artefactsById;
     }
@@ -78,6 +84,7 @@ public class Rarity {
     }
 
     @OneToMany(mappedBy = "rarityByRarityId")
+    @JsonIgnore
     public Collection<Character> getCharactersById() {
         return charactersById;
     }
@@ -86,7 +93,8 @@ public class Rarity {
         this.charactersById = charactersById;
     }
 
-    @OneToMany(mappedBy = "rarityByRarityId")
+    @OneToMany(mappedBy = "rarity")
+    @JsonIgnore
     public Collection<Weapon> getWeaponsById() {
         return weaponsById;
     }

@@ -45,9 +45,9 @@
       <tr th:each="item : ${weaponList}">
         <td th:text="${item.id}"></td>
         <td th:text="${item.name}"></td>
-        <td th:text="${item.rarityByRarityId.name}"></td>
-        <td th:text="${item.weaponclassByWeaponClassId.name}"></td>
-        <td th:text="${item.elementByElementId.name}"></td>
+        <td th:text="${item.rarity.name}"></td>
+        <td th:text="${item.weaponClass.name}"></td>
+        <td th:text="${item.element.name}"></td>
         <td>
           <a th:href="@{'/dev/weapon/stats/'+${item.id}}">
             <button>Manage</button>

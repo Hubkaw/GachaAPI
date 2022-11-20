@@ -14,4 +14,5 @@ public interface ChestService {
     void addWeapon(int chestId, int weaponId);
     void deleteWeapon(int chestId, int weaponId);
     Chest getById(int id);
+    List<Chest> getAvailable();
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
-public class WeaponClassController {
+public class DevWeaponClassController {
 
     WeaponClassService weaponClassService;
 

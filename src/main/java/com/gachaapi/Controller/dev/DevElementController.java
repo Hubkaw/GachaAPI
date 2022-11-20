@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @AllArgsConstructor
 @Controller
-public class ElementController {
+public class DevElementController {
 
     private ElementService elementService;
 

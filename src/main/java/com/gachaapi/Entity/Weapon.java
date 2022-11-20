@@ -1,5 +1,6 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.parameters.P;
 
@@ -21,22 +22,23 @@ public class Weapon {
     private String name;
 
     @OneToMany(mappedBy = "weaponByWeaponId")
+    @JsonIgnore
     private Collection<PlayerWeapon> playerWeaponsById;
 
     @OneToMany(mappedBy = "weaponByWeaponId")
-    private Collection<StatWeapon> statWeaponsById;
+    private Collection<StatWeapon> stats;
 
     @ManyToOne
     @JoinColumn(name = "Element_id", referencedColumnName = "id", nullable = false)
-    private Element elementByElementId;
+    private Element element;
 
     @ManyToOne
     @JoinColumn(name = "Rarity_id", referencedColumnName = "id", nullable = false)
-    private Rarity rarityByRarityId;
+    private Rarity rarity;
 
     @ManyToOne
     @JoinColumn(name = "WeaponClass_Id", referencedColumnName = "Id", nullable = false)
-    private Weaponclass weaponclassByWeaponClassId;
+    private Weaponclass weaponClass;
 
     @ManyToMany(cascade = {
             CascadeType.ALL
@@ -48,9 +50,11 @@ public class Weapon {
             inverseJoinColumns = {
                     @JoinColumn(name = "Chest_IdChest")
             })
+    @JsonIgnore
     private Collection<Chest> chests;
 
     @OneToMany(mappedBy = "weaponByWeaponId")
+    @JsonIgnore
     private Collection<WeaponReward> weaponRewardsById;
 
 

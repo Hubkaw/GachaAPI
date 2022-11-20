@@ -33,7 +33,7 @@
             <tr th:each="item : ${chest.weapons}">
                 <td th:text="${item.id}"></td>
                 <td th:text="${item.name}"></td>
-                <td th:text="${item.rarityByRarityId.shortcut}"></td>
+                <td th:text="${item.rarity.shortcut}"></td>
                 <td><a th:href="@{'/dev/chest/weapon/delete/'+${item.id}+'/'+${chest.idChest}}">
                     <button>Delete</button>
                 </a></td>

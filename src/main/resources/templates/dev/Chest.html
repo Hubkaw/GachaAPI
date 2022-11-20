@@ -43,7 +43,7 @@
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.releasedAt}"></td>
                 <td th:text="${item.expiresAt}"></td>
-                <td th:text="${item.collectionByCollectionIdCollection.name}"></td>
+                <td th:text="${item.collection.name}"></td>
                 <td><a th:href="@{'/dev/chest/weapon/'+${item.idChest}}">
                     <button>Manage</button>
                 </a></td>

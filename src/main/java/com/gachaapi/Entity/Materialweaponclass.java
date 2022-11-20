@@ -8,7 +8,7 @@ public class Materialweaponclass {
     private int id;
     private int baseAmount;
     private int perLvlAmount;
-    private Material materialByMaterialId;
+    private Material material;
     private Weaponclass weaponclassByWeaponClassId;
 
     @Id
@@ -56,12 +56,12 @@ public class Materialweaponclass {
 
     @ManyToOne
     @JoinColumn(name = "Material_Id", referencedColumnName = "Id", nullable = false)
-    public Material getMaterialByMaterialId() {
-        return materialByMaterialId;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setMaterialByMaterialId(Material materialByMaterialId) {
-        this.materialByMaterialId = materialByMaterialId;
+    public void setMaterial(Material materialByMaterialId) {
+        this.material = materialByMaterialId;
     }
 
     @ManyToOne

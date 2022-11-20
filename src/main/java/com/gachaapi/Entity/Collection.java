@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -7,6 +9,7 @@ import java.util.Objects;
 public class Collection {
     private int idCollection;
     private String name;
+    @JsonIgnore
     private java.util.Collection<Chest> chestsByIdCollection;
 
     @Id
@@ -43,7 +46,7 @@ public class Collection {
         return Objects.hash(idCollection, name);
     }
 
-    @OneToMany(mappedBy = "collectionByCollectionIdCollection")
+    @OneToMany(mappedBy = "collection")
     public java.util.Collection<Chest> getChestsByIdCollection() {
         return chestsByIdCollection;
     }

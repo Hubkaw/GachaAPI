@@ -1,5 +1,6 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -31,7 +32,7 @@ public class Chest {
 
     @ManyToMany(cascade = {
             CascadeType.ALL
-    })
+    }, fetch = FetchType.EAGER)
     @JoinTable(name = "character_chest" ,
             joinColumns = {
                     @JoinColumn(name = "Chest_IdChest")
@@ -41,11 +42,13 @@ public class Chest {
             })
     private Set<Character> characters;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Collection_IDCollection", referencedColumnName = "IDCollection", nullable = false)
-    private com.gachaapi.Entity.Collection collectionByCollectionIdCollection;
+    private com.gachaapi.Entity.Collection collection;
+
 
     @OneToMany(mappedBy = "chestByChestIdChest")
+    @JsonIgnore
     private Collection<PlayerChestitem> playerChestitemsByIdChest;
 
 
