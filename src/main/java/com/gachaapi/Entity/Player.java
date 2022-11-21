@@ -1,7 +1,6 @@
 package com.gachaapi.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -69,7 +68,7 @@ public class Player {
     private Collection<PlayerArtefact> playerArtefactsByIdPlayer;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "playerByPlayerIdPlayer")
+    @OneToMany(mappedBy = "player")
     private Collection<PlayerCharacter> playerCharactersByIdPlayer;
 
     @JsonIgnore
@@ -89,7 +88,7 @@ public class Player {
     private Collection<PlayerPurchase> playerPurchasesByIdPlayer;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "playerByPlayerIdPlayer")
+    @OneToMany(mappedBy = "player")
     private Collection<PlayerWeapon> playerWeaponsByIdPlayer;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

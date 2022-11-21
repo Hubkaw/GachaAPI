@@ -1,8 +1,8 @@
 package com.gachaapi.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gachaapi.Utils.PossibleChestReward;
 import lombok.Data;
-import org.springframework.security.core.parameters.P;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Data
 @Entity
-public class Weapon {
+public class Weapon implements PossibleChestReward {
 
     @Id
     @Column(name = "Id", nullable = false)
@@ -21,7 +21,7 @@ public class Weapon {
     @Column(name = "Name", nullable = false, length = 64)
     private String name;
 
-    @OneToMany(mappedBy = "weaponByWeaponId")
+    @OneToMany(mappedBy = "weapon")
     @JsonIgnore
     private Collection<PlayerWeapon> playerWeaponsById;
 
@@ -69,5 +69,10 @@ public class Weapon {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    @Override
+    public int getWeight() {
+        return rarity.getWeight();
     }
 }

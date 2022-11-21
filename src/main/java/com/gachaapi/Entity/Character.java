@@ -1,5 +1,6 @@
 package com.gachaapi.Entity;
 
+import com.gachaapi.Utils.PossibleChestReward;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.util.Set;
 
 @Data
 @Entity
-public class Character {
+public class Character  implements PossibleChestReward {
 
     @Id
     @Column(name = "Id", nullable = false)
@@ -47,7 +48,7 @@ public class Character {
             })
     private Set<Chest> chests;
 
-    @OneToMany(mappedBy = "characterByCharacterId")
+    @OneToMany(mappedBy = "character")
     private Collection<PlayerCharacter> playerCharactersById;
 
     @Override
@@ -63,4 +64,8 @@ public class Character {
         return Objects.hash(id, name, ability);
     }
 
+    @Override
+    public int getWeight() {
+        return rarityByRarityId.getWeight();
+    }
 }

@@ -9,11 +9,12 @@ public class PlayerWeapon {
     private int id;
     private int ascension;
     private int lvl;
-    private PlayerCharacter playerCharacterByWieldingCharacter;
-    private Player playerByPlayerIdPlayer;
-    private Weapon weaponByWeaponId;
+    private PlayerCharacter wieldingCharacter;
+    private Player player;
+    private Weapon weapon;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -57,32 +58,32 @@ public class PlayerWeapon {
     }
 
     @ManyToOne
-    @JoinColumn(name = "WieldingCharacter", referencedColumnName = "Id", nullable = false)
-    public PlayerCharacter getPlayerCharacterByWieldingCharacter() {
-        return playerCharacterByWieldingCharacter;
+    @JoinColumn(name = "WieldingCharacter", referencedColumnName = "Id", nullable = true)
+    public PlayerCharacter getWieldingCharacter() {
+        return wieldingCharacter;
     }
 
-    public void setPlayerCharacterByWieldingCharacter(PlayerCharacter playerCharacterByWieldingCharacter) {
-        this.playerCharacterByWieldingCharacter = playerCharacterByWieldingCharacter;
+    public void setWieldingCharacter(PlayerCharacter playerCharacterByWieldingCharacter) {
+        this.wieldingCharacter = playerCharacterByWieldingCharacter;
     }
 
     @ManyToOne
     @JoinColumn(name = "Player_IdPlayer", referencedColumnName = "IdPlayer", nullable = false)
-    public Player getPlayerByPlayerIdPlayer() {
-        return playerByPlayerIdPlayer;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setPlayerByPlayerIdPlayer(Player playerByPlayerIdPlayer) {
-        this.playerByPlayerIdPlayer = playerByPlayerIdPlayer;
+    public void setPlayer(Player playerByPlayerIdPlayer) {
+        this.player = playerByPlayerIdPlayer;
     }
 
     @ManyToOne
     @JoinColumn(name = "Weapon_Id", referencedColumnName = "Id", nullable = false)
-    public Weapon getWeaponByWeaponId() {
-        return weaponByWeaponId;
+    public Weapon getWeapon() {
+        return weapon;
     }
 
-    public void setWeaponByWeaponId(Weapon weaponByWeaponId) {
-        this.weaponByWeaponId = weaponByWeaponId;
+    public void setWeapon(Weapon weaponByWeaponId) {
+        this.weapon = weaponByWeaponId;
     }
 }

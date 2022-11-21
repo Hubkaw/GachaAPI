@@ -37,6 +37,11 @@ Token jest ważny przez 15 minut, potem trzeba uderzyć tu ponownie po nowy.
 - Wymaga tokenu (instrukcja znajduje się na końcu readme)
 - Wielkie litery mają znaczenie
 
+##### GET /chests, /chests/all, /chests/open/{id}
+
+- Pozwala wyświetlać i otwierać skrzynki
+- Zaleca się lokalne dodanie skrzynki z price = 0 bo gracze nie mogą jeszcze zarabiać :)  
+
 ### DOMYŚLNE KONTA:
 
 - login: user hasło: user  

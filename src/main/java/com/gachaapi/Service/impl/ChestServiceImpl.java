@@ -1,19 +1,21 @@
 package com.gachaapi.Service.impl;
 
-import com.gachaapi.Entity.Chest;
-import com.gachaapi.Entity.Weapon;
-import com.gachaapi.Repository.ChestRepository;
-import com.gachaapi.Repository.CollectionRepository;
-import com.gachaapi.Repository.WeaponRepository;
+import com.gachaapi.Entity.*;
+import com.gachaapi.Entity.Character;
+import com.gachaapi.Repository.*;
 import com.gachaapi.Service.interfaces.ChestService;
+import com.gachaapi.Utils.ChestReward;
+import com.gachaapi.Utils.PossibleChestReward;
 import com.gachaapi.Utils.dev.NewChest;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -22,6 +24,11 @@ public class ChestServiceImpl implements ChestService {
     private ChestRepository chestRepository;
     private CollectionRepository collectionRepository;
     private WeaponRepository weaponRepository;
+    private PlayerRepository playerRepository;
+    private PlayerCharacterRepository playerCharacterRepository;
+    private PlayerWeaponRepository playerWeaponRepository;
+
+    private static final Random random = new Random();
 
     @Override
     public List<Chest> getAll() {
@@ -35,12 +42,15 @@ public class ChestServiceImpl implements ChestService {
         chest.setExpiresAt(new Timestamp(newChest.getExpiresAt().getTime()));
         chest.setReleasedAt(new Timestamp(newChest.getReleasedAt().getTime()));
         chest.setCollection(collectionRepository.getReferenceById(newChest.getCollectionId()));
+        chest.setPrice(newChest.getPrice());
         chestRepository.save(chest);
     }
 
     @Override
     public void delete(int id) {
-        chestRepository.delete(chestRepository.getReferenceById(id));
+        Chest chest = chestRepository.getReferenceById(id);
+        chest.setWeapons(new HashSet<>());
+        chestRepository.delete(chest);
     }
 
     @Override
@@ -52,7 +62,7 @@ public class ChestServiceImpl implements ChestService {
     public void addWeapon(int chestId, int weaponId) {
         Chest chest = chestRepository.getReferenceById(chestId);
         if (chest.getWeapons() == null)
-            chest.setWeapons(new ArrayList<>());
+            chest.setWeapons(new HashSet<>());
         chest.getWeapons().add(weaponRepository.getReferenceById(weaponId));
         chestRepository.save(chest);
     }
@@ -76,5 +86,70 @@ public class ChestServiceImpl implements ChestService {
         );
     }
 
+    @Override
+    public ChestReward openChest(String nick, int chestId) {
+        Player player = playerRepository.findByNick(nick).orElseThrow(()-> new UsernameNotFoundException("AAAAA"));
+        Chest chest = chestRepository.getReferenceById(chestId);
+        int playerBalance = player.getPlayerBalance();
+        if (playerBalance < chest.getPrice())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You dont have enough money ");
+        if (!getAvailable().contains(chest))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This chest is unavailable");
+        player.setPlayerBalance(playerBalance - chest.getPrice());
+        playerRepository.save(player);
+        PossibleChestReward reward = new RewardGenerator(chest).generate();
+        return addRewardToPlayer(reward, player);
 
+    }
+
+    private ChestReward addRewardToPlayer(PossibleChestReward reward, Player player){
+        if (reward instanceof Weapon){
+            PlayerWeapon playerWeapon = new PlayerWeapon();
+            playerWeapon.setWeapon((Weapon) reward);
+            playerWeapon.setPlayer(player);
+            playerWeapon.setAscension(1);
+            playerWeapon.setLvl(1);
+            playerWeaponRepository.save(playerWeapon);
+            return new ChestReward("Weapon", reward);
+        }
+        if (reward instanceof Character){
+            PlayerCharacter playerCharacter = new PlayerCharacter();
+            playerCharacter.setCharacter((Character) reward);
+            playerCharacter.setPlayer(player);
+            playerCharacter.setAscention(1);
+            playerCharacter.setLvl(1);
+            playerCharacter.setParties(new HashSet<>());
+            playerCharacter.setPlayerArtefacts(new HashSet<>());
+            playerCharacter.setPlayerWeapons(new ArrayList<>());
+            playerCharacterRepository.save(playerCharacter);
+            return new ChestReward("Character", reward);
+        }
+        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "There was a problem with your reward");
+    }
+
+
+    static class RewardGenerator {
+        private NavigableMap<Integer, PossibleChestReward> map = new TreeMap<>();
+        private int total;
+
+        public RewardGenerator(Chest chest){
+            if (chest.getCharacters()!=null)
+                chest.getCharacters().forEach(this::add);
+            if(chest.getWeapons()!=null)
+                chest.getWeapons().forEach(this::add);
+        }
+
+        private void add(PossibleChestReward pcr){
+            int weight = pcr.getWeight();
+            if (weight<=0)
+                return;
+            total+=weight;
+            map.put(total, pcr);
+        }
+
+        public PossibleChestReward generate(){
+            int rnd = random.nextInt(total) + 1;
+            return map.ceilingEntry(rnd).getValue();
+        }
+    }
 }

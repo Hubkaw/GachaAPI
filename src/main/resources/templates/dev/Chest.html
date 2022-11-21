@@ -18,6 +18,8 @@
         <input th:type="date" name="releasedAt" required><br>
         <h3>Expiration date:</h3>
         <input th:type="date" name="expiresAt"><br>
+        <h3>Price:</h3>
+        <input th:type="number" name="price"><br>
         <h3>Collection:</h3>
         <select name="collectionId">
             <option th:each="item : ${collectionList}" th:value="${item.idCollection}" th:text="${item.name}"></option>
@@ -32,6 +34,7 @@
                 <td>Name</td>
                 <td>Release date</td>
                 <td>Expiration date</td>
+                <td>Price</td>
                 <td>Collection</td>
                 <td>Weapons</td>
                 <td>Delete</td>
@@ -43,6 +46,7 @@
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.releasedAt}"></td>
                 <td th:text="${item.expiresAt}"></td>
+                <td th:text="${item.price}"></td>
                 <td th:text="${item.collection.name}"></td>
                 <td><a th:href="@{'/dev/chest/weapon/'+${item.idChest}}">
                     <button>Manage</button>

@@ -13,6 +13,7 @@ import java.util.Set;
 public class PlayerCharacter {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", nullable = false)
     private int id;
 
@@ -50,14 +51,14 @@ public class PlayerCharacter {
 
     @ManyToOne
     @JoinColumn(name = "Player_IdPlayer", referencedColumnName = "IdPlayer", nullable = false)
-    private Player playerByPlayerIdPlayer;
+    private Player player;
 
     @ManyToOne
     @JoinColumn(name = "Character_Id", referencedColumnName = "Id", nullable = false)
-    private Character characterByCharacterId;
+    private Character character;
 
-    @OneToMany(mappedBy = "playerCharacterByWieldingCharacter")
-    private Collection<PlayerWeapon> playerWeaponsById;
+    @OneToMany(mappedBy = "wieldingCharacter")
+    private Collection<PlayerWeapon> playerWeapons;
 
 
 

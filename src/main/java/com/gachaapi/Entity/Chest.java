@@ -30,6 +30,10 @@ public class Chest {
     @Column(name = "ExpiresAt", nullable = true)
     private Timestamp expiresAt;
 
+    @Basic
+    @Column(name = "Price", nullable = false)
+    private int price;
+
     @ManyToMany(cascade = {
             CascadeType.ALL
     }, fetch = FetchType.EAGER)
@@ -62,7 +66,7 @@ public class Chest {
             inverseJoinColumns = {
                     @JoinColumn(name = "Weapon_Id")
             })
-    private Collection<Weapon> weapons;
+    private Set<Weapon> weapons;
 
     @Override
     public boolean equals(Object o) {

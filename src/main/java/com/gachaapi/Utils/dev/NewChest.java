@@ -13,6 +13,7 @@ public class NewChest {
     private Date releasedAt;
     private Date expiresAt;
     private int collectionId;
+    private int price;
 
 
 }
