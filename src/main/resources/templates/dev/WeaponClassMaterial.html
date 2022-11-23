@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{style.css}" rel="stylesheet" />
+    <title th:text="${weaponClass.name}"></title>
+</head>
+<body>
+<div>
+    <h1>Dev Weapon class <span th:text="${weaponClass.name}"></span></h1>
+    <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <form th:action="@{/dev/weaponClass/material}" th:method="post" th:object="${newWeaponClassMaterial}">
+        <input th:type="hidden" name="weaponClassId" th:value="${weaponClass.id}"/>
+        <h3>Material:</h3>
+        <select name="materialId" required>
+            <option th:each="item : ${materialList}" th:value="${item.id}" th:text="${item.name}"></option>
+        </select>
+        <h3>Base Amount:</h3>
+        <input th:type="number" name="baseAmount" required><br>
+        <h3>Amount per Level:</h3>
+        <input th:type="number" name="perLvlAmount" required><br>
+        <input type="submit" value="submit"><br>
+    </form>
+    <div >
+        <table>
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Material</td>
+                <td>Base Amount</td>
+                <td>Per Level</td>
+                <td>Delete</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${weaponClass.materialWeaponClasses}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.material.name}"></td>
+                <td th:text="${item.baseAmount}"></td>
+                <td th:text="${item.perLvlAmount}"></td>
+                <td><a th:href="@{'/dev/weaponClass/material/delete/'+${item.id}+'/'+${weaponClass.id}}">
+                    <button>Delete</button>
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

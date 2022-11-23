@@ -28,6 +28,6 @@ public class RarityServiceImpl implements RarityService {
 
     @Override
     public void delete(int id) {
-        rarityRepository.delete(rarityRepository.getReferenceById(id));
+        rarityRepository.deleteById(id);
     }
 }

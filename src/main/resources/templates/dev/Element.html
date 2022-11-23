@@ -22,13 +22,17 @@
             <tr>
                 <td>Id</td>
                 <td>Name</td>
-                <td>delete</td>
+                <td>Materials</td>
+                <td>Delete</td>
             </tr>
             </thead>
             <tbody>
             <tr th:each="item : ${elementList}">
                 <td th:text="${item.id}"></td>
                 <td th:text="${item.name}"></td>
+                <td><a th:href="@{'/dev/element/material/'+${item.id}}">
+                    <button>Manage</button>
+                </a></td>
                 <td><a th:href="@{'/dev/element/delete/'+${item.id}}">
                     <button>Delete</button>
                 </a></td>

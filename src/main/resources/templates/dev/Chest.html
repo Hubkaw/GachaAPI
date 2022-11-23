@@ -17,9 +17,9 @@
         <h3>Release date:</h3><br>
         <input th:type="date" name="releasedAt" required><br>
         <h3>Expiration date:</h3>
-        <input th:type="date" name="expiresAt"><br>
+        <input th:type="date" name="expiresAt" required><br>
         <h3>Price:</h3>
-        <input th:type="number" name="price"><br>
+        <input th:type="number" name="price" required><br>
         <h3>Collection:</h3>
         <select name="collectionId">
             <option th:each="item : ${collectionList}" th:value="${item.idCollection}" th:text="${item.name}"></option>

@@ -1,7 +1,9 @@
 package com.gachaapi.Controller.dev;
 
 import com.gachaapi.Service.interfaces.ElementService;
+import com.gachaapi.Service.interfaces.MaterialService;
 import com.gachaapi.Utils.dev.NewElement;
+import com.gachaapi.Utils.dev.NewMaterialElement;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class DevElementController {
 
     private ElementService elementService;
+    private MaterialService materialService;
 
     @GetMapping("/dev/element")
     public String getElements(Model model){
@@ -32,5 +35,24 @@ public class DevElementController {
     public String deleteElement(Model model, @PathVariable("id")int id){
         elementService.delete(id);
         return "redirect:/dev/element";
+    }
+
+    @GetMapping("/dev/element/material/{id}")
+    public String getElementMaterial(Model model, @PathVariable("id")int elementId){
+        model.addAttribute("element", elementService.getById(elementId));
+        model.addAttribute("materialList", materialService.getAll());
+        return "dev/ElementMaterial";
+    }
+
+    @PostMapping("/dev/element/material")
+    public String createElementMaterial(Model model, @ModelAttribute("newMaterialElement")NewMaterialElement newMaterialElement){
+        elementService.addMaterial(newMaterialElement);
+        return "redirect:/dev/element/material/"+newMaterialElement.getElementId();
+    }
+
+    @GetMapping("/dev/element/material/delete/{materialElementId}/{elementId}")
+    public String deleteElementMaterial(Model model, @PathVariable("materialElementId")int materialElementId, @PathVariable("elementId")int elementId){
+        elementService.deleteMaterial(materialElementId);
+        return "redirect:/dev/element/material/"+elementId;
     }
 }

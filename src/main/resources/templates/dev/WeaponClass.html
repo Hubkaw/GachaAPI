@@ -13,9 +13,9 @@
     <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
     <form th:action="@{/dev/weaponClass}" th:method="post" th:object="${newWeaponClass}">
         <h2>Name:</h2><br>
-        <input th:type="text" name="name"><br>
+        <input th:type="text" name="name" required><br>
         <h2>Short Name (3 capital letters):</h2><br>
-        <input th:type="text" name="shortName"><br>
+        <input th:type="text" name="shortName" required><br>
         <input type="submit" value="submit"><br>
     </form>
     <div >
@@ -25,7 +25,8 @@
                 <td>Id</td>
                 <td>Name</td>
                 <td>Short Name</td>
-                <td>delete</td>
+                <td>Materials</td>
+                <td>Delete</td>
             </tr>
             </thead>
             <tbody>
@@ -33,6 +34,9 @@
                 <td th:text="${item.id}"></td>
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.shortName}"></td>
+                <td><a th:href="@{'/dev/weaponClass/material/'+${item.id}}">
+                    <button>Manage</button>
+                </a> </td>
                 <td><a th:href="@{'/dev/weaponClass/delete/'+${item.id}}">
                     <button>Delete</button>
                 </a></td>

@@ -11,9 +11,9 @@ public class Element {
     private int id;
     private String name;
     @JsonIgnore
-    private Collection<Materialelement> materialelementsById;
+    private Collection<Materialelement> materialElements;
     @JsonIgnore
-    private Collection<Weapon> weaponsById;
+    private Collection<Weapon> weapons;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,21 +49,21 @@ public class Element {
         return Objects.hash(id, name);
     }
 
-    @OneToMany(mappedBy = "elementByElementId")
-    public Collection<Materialelement> getMaterialelementsById() {
-        return materialelementsById;
+    @OneToMany(mappedBy = "element")
+    public Collection<Materialelement> getMaterialElements() {
+        return materialElements;
     }
 
-    public void setMaterialelementsById(Collection<Materialelement> materialelementsById) {
-        this.materialelementsById = materialelementsById;
+    public void setMaterialElements(Collection<Materialelement> materialelementsById) {
+        this.materialElements = materialelementsById;
     }
 
     @OneToMany(mappedBy = "element")
-    public Collection<Weapon> getWeaponsById() {
-        return weaponsById;
+    public Collection<Weapon> getWeapons() {
+        return weapons;
     }
 
-    public void setWeaponsById(Collection<Weapon> weaponsById) {
-        this.weaponsById = weaponsById;
+    public void setWeapons(Collection<Weapon> weaponsById) {
+        this.weapons = weaponsById;
     }
 }

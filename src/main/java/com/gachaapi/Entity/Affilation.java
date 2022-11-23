@@ -9,10 +9,9 @@ public class Affilation {
     private int id;
     private String name;
     private int requirement;
-    private int bonusStat;
-    private int bonusValue;
-    private Collection<Character> charactersById;
-    private Collection<Materialaffilation> materialaffilationsById;
+    private Collection<Character> characters;
+    private Collection<Materialaffilation> materialAffilations;
+    private Collection<StatAffiliation> statAffiliations;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -44,54 +43,43 @@ public class Affilation {
         this.requirement = requirement;
     }
 
-    @Basic
-    @Column(name = "BonusStat", nullable = false)
-    public int getBonusStat() {
-        return bonusStat;
-    }
-
-    public void setBonusStat(int bonusStat) {
-        this.bonusStat = bonusStat;
-    }
-
-    @Basic
-    @Column(name = "BonusValue", nullable = false)
-    public int getBonusValue() {
-        return bonusValue;
-    }
-
-    public void setBonusValue(int bonusValue) {
-        this.bonusValue = bonusValue;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Affilation that = (Affilation) o;
-        return id == that.id && requirement == that.requirement && bonusStat == that.bonusStat && bonusValue == that.bonusValue && Objects.equals(name, that.name);
+        return id == that.id && requirement == that.requirement  && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, requirement, bonusStat, bonusValue);
+        return Objects.hash(id, name, requirement);
     }
 
     @OneToMany(mappedBy = "affilationByAffilationId")
-    public Collection<Character> getCharactersById() {
-        return charactersById;
+    public Collection<Character> getCharacters() {
+        return characters;
     }
 
-    public void setCharactersById(Collection<Character> charactersById) {
-        this.charactersById = charactersById;
+    public void setCharacters(Collection<Character> charactersById) {
+        this.characters = charactersById;
     }
 
     @OneToMany(mappedBy = "affilationByAffilationId")
-    public Collection<Materialaffilation> getMaterialaffilationsById() {
-        return materialaffilationsById;
+    public Collection<Materialaffilation> getMaterialAffilations() {
+        return materialAffilations;
     }
 
-    public void setMaterialaffilationsById(Collection<Materialaffilation> materialaffilationsById) {
-        this.materialaffilationsById = materialaffilationsById;
+    public void setMaterialAffilations(Collection<Materialaffilation> materialaffilationsById) {
+        this.materialAffilations = materialaffilationsById;
+    }
+
+    @OneToMany(mappedBy = "affiliation")
+    public Collection<StatAffiliation> getStatAffiliations() {
+        return statAffiliations;
+    }
+
+    public void setStatAffiliations(Collection<StatAffiliation> statAffiliations) {
+        this.statAffiliations = statAffiliations;
     }
 }

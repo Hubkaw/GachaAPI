@@ -27,6 +27,6 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Override
     public void delete(int id) {
-        collectionRepository.delete(collectionRepository.getReferenceById(id));
+        collectionRepository.deleteById(id);
     }
 }

@@ -30,6 +30,6 @@ public class StatisticServiceImpl implements StatisticService {
 
     @Override
     public void delete(int id) {
-        statisticRepository.delete(statisticRepository.getReferenceById(id));
+        statisticRepository.deleteById(id);
     }
 }

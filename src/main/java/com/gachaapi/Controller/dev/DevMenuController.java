@@ -22,7 +22,9 @@ public class DevMenuController {
             new DevMenuRecord("Rarity", "/dev/rarity"),
             new DevMenuRecord("Element", "/dev/element"),
             new DevMenuRecord("Chest Collection", "/dev/collection"),
-            new DevMenuRecord("Chest", "/dev/chest")
+            new DevMenuRecord("Chest", "/dev/chest"),
+            new DevMenuRecord("Material", "/dev/material"),
+            new DevMenuRecord("Affiliation", "/dev/affiliation")
     );
 
 

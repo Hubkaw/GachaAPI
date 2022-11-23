@@ -40,7 +40,7 @@ public class WeaponServiceImpl implements WeaponService {
 
     @Override
     public void delete(int id) {
-        weaponRepository.delete(weaponRepository.getReferenceById(id));
+        weaponRepository.deleteById(id);
     }
 
     @Override

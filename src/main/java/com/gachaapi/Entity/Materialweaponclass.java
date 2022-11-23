@@ -9,9 +9,10 @@ public class Materialweaponclass {
     private int baseAmount;
     private int perLvlAmount;
     private Material material;
-    private Weaponclass weaponclassByWeaponClassId;
+    private Weaponclass weaponClasses;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", nullable = false)
     public int getId() {
         return id;
@@ -66,11 +67,11 @@ public class Materialweaponclass {
 
     @ManyToOne
     @JoinColumn(name = "WeaponClass_Id", referencedColumnName = "Id", nullable = false)
-    public Weaponclass getWeaponclassByWeaponClassId() {
-        return weaponclassByWeaponClassId;
+    public Weaponclass getWeaponClasses() {
+        return weaponClasses;
     }
 
-    public void setWeaponclassByWeaponClassId(Weaponclass weaponclassByWeaponClassId) {
-        this.weaponclassByWeaponClassId = weaponclassByWeaponClassId;
+    public void setWeaponClasses(Weaponclass weaponclassByWeaponClassId) {
+        this.weaponClasses = weaponclassByWeaponClassId;
     }
 }

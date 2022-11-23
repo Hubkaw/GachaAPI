@@ -19,7 +19,7 @@
         <tbody>
         <tr th:each="item : ${Nav}">
             <td th:text="${item.name}"></td>
-            <td><a th:href="${item.link}" th:text="Link"></a> </td>
+            <td><a th:href="${item.link}"><button th:text="Link"></button></a> </td>
         </tr>
         </tbody>
     </table>

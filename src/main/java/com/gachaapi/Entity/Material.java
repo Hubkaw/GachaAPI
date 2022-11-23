@@ -16,6 +16,7 @@ public class Material {
     private Collection<PlayerMaterial> playerMaterialsById;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", nullable = false)
     public int getId() {
         return id;
@@ -75,7 +76,7 @@ public class Material {
         this.materialclassesById = materialclassesById;
     }
 
-    @OneToMany(mappedBy = "materialByMaterialId")
+    @OneToMany(mappedBy = "material")
     public Collection<Materialelement> getMaterialelementsById() {
         return materialelementsById;
     }

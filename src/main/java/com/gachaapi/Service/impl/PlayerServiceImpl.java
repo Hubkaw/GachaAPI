@@ -56,7 +56,7 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPlayerBalance(0);
         playerRepository.save(player);
 
-        return null;
+        return player;
     }
 
     @Override

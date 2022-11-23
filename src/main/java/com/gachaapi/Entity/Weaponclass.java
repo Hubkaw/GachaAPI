@@ -14,7 +14,7 @@ public class Weaponclass {
     @JsonIgnore
     private Collection<Clazz> clazzesById;
     @JsonIgnore
-    private Collection<Materialweaponclass> materialweaponclassesById;
+    private Collection<Materialweaponclass> materialWeaponClasses;
     @JsonIgnore
     private Collection<Weapon> weaponsById;
 
@@ -71,13 +71,13 @@ public class Weaponclass {
         this.clazzesById = clazzesById;
     }
 
-    @OneToMany(mappedBy = "weaponclassByWeaponClassId")
-    public Collection<Materialweaponclass> getMaterialweaponclassesById() {
-        return materialweaponclassesById;
+    @OneToMany(mappedBy = "weaponClasses")
+    public Collection<Materialweaponclass> getMaterialWeaponClasses() {
+        return materialWeaponClasses;
     }
 
-    public void setMaterialweaponclassesById(Collection<Materialweaponclass> materialweaponclassesById) {
-        this.materialweaponclassesById = materialweaponclassesById;
+    public void setMaterialWeaponClasses(Collection<Materialweaponclass> materialweaponclassesById) {
+        this.materialWeaponClasses = materialweaponclassesById;
     }
 
     @OneToMany(mappedBy = "weaponClass")

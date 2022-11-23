@@ -19,6 +19,8 @@ public class Statistic {
     private Collection<StatClass> statClassesByStatId;
     @JsonIgnore
     private Collection<StatWeapon> statWeaponsByStatId;
+    @JsonIgnore
+    private Collection<StatAffiliation> statAffiliations;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -93,5 +95,14 @@ public class Statistic {
 
     public void setStatWeaponsByStatId(Collection<StatWeapon> statWeaponsByStatId) {
         this.statWeaponsByStatId = statWeaponsByStatId;
+    }
+
+    @OneToMany(mappedBy = "statistic")
+    public Collection<StatAffiliation> getStatAffiliations() {
+        return statAffiliations;
+    }
+
+    public void setStatAffiliations(Collection<StatAffiliation> statAffiliations) {
+        this.statAffiliations = statAffiliations;
     }
 }
