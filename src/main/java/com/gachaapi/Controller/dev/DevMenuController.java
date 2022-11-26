@@ -25,7 +25,10 @@ public class DevMenuController {
             new DevMenuRecord("Chest", "/dev/chest"),
             new DevMenuRecord("Material", "/dev/material"),
             new DevMenuRecord("Affiliation", "/dev/affiliation"),
-            new DevMenuRecord("Class", "/dev/class")
+            new DevMenuRecord("Class", "/dev/class"),
+            new DevMenuRecord("Dungeon", "/dev/dungeon")
+
+
     );
 
 
