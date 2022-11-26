@@ -79,7 +79,7 @@ public class Statistic {
         this.statArtifactsByStatId = statArtifactsByStatId;
     }
 
-    @OneToMany(mappedBy = "statisticByStatisticStatId")
+    @OneToMany(mappedBy = "stat")
     public Collection<StatClass> getStatClassesByStatId() {
         return statClassesByStatId;
     }

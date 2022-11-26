@@ -3,6 +3,7 @@ package com.gachaapi.Service.interfaces;
 import com.gachaapi.Entity.Affilation;
 import com.gachaapi.Utils.dev.NewAffiliation;
 import com.gachaapi.Utils.dev.NewAffiliationStat;
+import com.gachaapi.Utils.dev.NewMaterialAffiliation;
 import com.gachaapi.Utils.dev.NewStat;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface AffiliationService {
     Affilation getById(int id);
     void addStat(NewAffiliationStat newAffiliationStat);
     void deleteStat(int id);
+    void addMaterial(NewMaterialAffiliation newMaterialAffiliation);
+    void deleteMaterial(int id);
 
 }

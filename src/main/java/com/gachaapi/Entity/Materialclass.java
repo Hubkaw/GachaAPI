@@ -8,10 +8,11 @@ public class Materialclass {
     private int id;
     private int baseAmount;
     private int perLvlAmount;
-    private Material materialByMaterialId;
-    private Clazz clazzByClassId;
+    private Material material;
+    private Clazz clazz;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", nullable = false)
     public int getId() {
         return id;
@@ -56,21 +57,21 @@ public class Materialclass {
 
     @ManyToOne
     @JoinColumn(name = "Material_Id", referencedColumnName = "Id", nullable = false)
-    public Material getMaterialByMaterialId() {
-        return materialByMaterialId;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setMaterialByMaterialId(Material materialByMaterialId) {
-        this.materialByMaterialId = materialByMaterialId;
+    public void setMaterial(Material materialByMaterialId) {
+        this.material = materialByMaterialId;
     }
 
     @ManyToOne
     @JoinColumn(name = "Class_id", referencedColumnName = "id", nullable = false)
-    public Clazz getClazzByClassId() {
-        return clazzByClassId;
+    public Clazz getClazz() {
+        return clazz;
     }
 
-    public void setClazzByClassId(Clazz clazzByClassId) {
-        this.clazzByClassId = clazzByClassId;
+    public void setClazz(Clazz clazzByClassId) {
+        this.clazz = clazzByClassId;
     }
 }

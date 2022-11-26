@@ -8,8 +8,8 @@ public class Materialaffilation {
     private int id;
     private int baseAmount;
     private int perLvlAmount;
-    private Material materialByMaterialId;
-    private Affilation affilationByAffilationId;
+    private Material material;
+    private Affilation affilation;
 
     @Id
     @Column(name = "Id", nullable = false)
@@ -56,21 +56,21 @@ public class Materialaffilation {
 
     @ManyToOne
     @JoinColumn(name = "Material_Id", referencedColumnName = "Id", nullable = false)
-    public Material getMaterialByMaterialId() {
-        return materialByMaterialId;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setMaterialByMaterialId(Material materialByMaterialId) {
-        this.materialByMaterialId = materialByMaterialId;
+    public void setMaterial(Material materialByMaterialId) {
+        this.material = materialByMaterialId;
     }
 
     @ManyToOne
     @JoinColumn(name = "Affilation_id", referencedColumnName = "id", nullable = false)
-    public Affilation getAffilationByAffilationId() {
-        return affilationByAffilationId;
+    public Affilation getAffilation() {
+        return affilation;
     }
 
-    public void setAffilationByAffilationId(Affilation affilationByAffilationId) {
-        this.affilationByAffilationId = affilationByAffilationId;
+    public void setAffilation(Affilation affilationByAffilationId) {
+        this.affilation = affilationByAffilationId;
     }
 }

@@ -1,0 +1,31 @@
+body {
+    background-color: #222;
+    color: azure;
+}
+
+a {
+    color: deeppink;
+}
+h1 {
+    color: crimson;
+}
+select {
+    background-color: crimson;
+    color: azure;
+}
+input {
+    background-color: crimson;
+    color: azure;
+}
+
+td {
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: crimson;
+}
+
+button {
+    background-color: crimson;
+    color: azure;
+}

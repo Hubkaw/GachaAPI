@@ -8,10 +8,11 @@ import java.util.Objects;
 public class StatClass {
     private int id;
     private int value;
-    private Statistic statisticByStatisticStatId;
-    private Clazz clazzByClassId;
+    private Statistic stat;
+    private Clazz clazz;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -46,21 +47,21 @@ public class StatClass {
 
     @ManyToOne
     @JoinColumn(name = "Statistic_Stat_id", referencedColumnName = "Stat_id", nullable = false)
-    public Statistic getStatisticByStatisticStatId() {
-        return statisticByStatisticStatId;
+    public Statistic getStat() {
+        return stat;
     }
 
-    public void setStatisticByStatisticStatId(Statistic statisticByStatisticStatId) {
-        this.statisticByStatisticStatId = statisticByStatisticStatId;
+    public void setStat(Statistic statisticByStatisticStatId) {
+        this.stat = statisticByStatisticStatId;
     }
 
     @ManyToOne
     @JoinColumn(name = "Class_id", referencedColumnName = "id", nullable = false)
-    public Clazz getClazzByClassId() {
-        return clazzByClassId;
+    public Clazz getClazz() {
+        return clazz;
     }
 
-    public void setClazzByClassId(Clazz clazzByClassId) {
-        this.clazzByClassId = clazzByClassId;
+    public void setClazz(Clazz clazzByClassId) {
+        this.clazz = clazzByClassId;
     }
 }

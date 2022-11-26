@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <!-- CSS only -->
-    <link th:href="@{style.css}" rel="stylesheet" />
+    <link th:href="@{/assets/style.css}" rel="stylesheet" />
     <title>Dev Affiliation</title>
 </head>
 <body>
@@ -24,8 +24,9 @@
             <tr>
                 <td>Id</td>
                 <td>Name</td>
-                <td>Weight</td>
+                <td>Requirement</td>
                 <td>Stats</td>
+                <td>Material</td>
                 <td>Delete</td>
             </tr>
             </thead>
@@ -37,6 +38,9 @@
                 <td><a th:href="@{'/dev/affiliation/stats/'+${item.id}}">
                     <button>Manage</button>
                 </a></td>
+                <td><a th:href="@{'/dev/affiliation/material/'+${item.id}}">
+                    <button>Manage</button>
+                </a> </td>
                 <td><a th:href="@{'/dev/affiliation/delete/'+${item.id}}">
                     <button>Delete</button>
                 </a></td>

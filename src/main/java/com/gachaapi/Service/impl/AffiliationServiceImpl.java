@@ -1,14 +1,13 @@
 package com.gachaapi.Service.impl;
 
 import com.gachaapi.Entity.Affilation;
+import com.gachaapi.Entity.Materialaffilation;
 import com.gachaapi.Entity.StatAffiliation;
-import com.gachaapi.Repository.AffiliationRepository;
-import com.gachaapi.Repository.StatAffiliationRepository;
-import com.gachaapi.Repository.StatisticRepository;
+import com.gachaapi.Repository.*;
 import com.gachaapi.Service.interfaces.AffiliationService;
 import com.gachaapi.Utils.dev.NewAffiliation;
 import com.gachaapi.Utils.dev.NewAffiliationStat;
-import com.gachaapi.Utils.dev.NewStat;
+import com.gachaapi.Utils.dev.NewMaterialAffiliation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +20,8 @@ public class AffiliationServiceImpl implements AffiliationService {
     private AffiliationRepository affiliationRepository;
     private StatAffiliationRepository statAffiliationRepository;
     private StatisticRepository statisticRepository;
+    private MaterialAffiliationRepository materialAffiliationRepository;
+    private MaterialRepository materialRepository;
 
     @Override
     public List<Affilation> getAll() {
@@ -54,5 +55,20 @@ public class AffiliationServiceImpl implements AffiliationService {
     @Override
     public void deleteStat(int id) {
         statAffiliationRepository.deleteById(id);
+    }
+
+    @Override
+    public void addMaterial(NewMaterialAffiliation newMaterialAffiliation) {
+        Materialaffilation ma = new Materialaffilation();
+        ma.setMaterial(materialRepository.getReferenceById(newMaterialAffiliation.getMaterialId()));
+        ma.setAffilation(affiliationRepository.getReferenceById(newMaterialAffiliation.getAffiliationId()));
+        ma.setBaseAmount(newMaterialAffiliation.getBaseAmount());
+        ma.setPerLvlAmount(newMaterialAffiliation.getPerLvlAmount());
+        materialAffiliationRepository.save(ma);
+    }
+
+    @Override
+    public void deleteMaterial(int id) {
+        materialAffiliationRepository.deleteById(id);
     }
 }

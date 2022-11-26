@@ -58,7 +58,7 @@ public class Material {
         this.materialRewardsById = materialRewardsById;
     }
 
-    @OneToMany(mappedBy = "materialByMaterialId")
+    @OneToMany(mappedBy = "material")
     public Collection<Materialaffilation> getMaterialaffilationsById() {
         return materialaffilationsById;
     }
@@ -67,7 +67,7 @@ public class Material {
         this.materialaffilationsById = materialaffilationsById;
     }
 
-    @OneToMany(mappedBy = "materialByMaterialId")
+    @OneToMany(mappedBy = "material")
     public Collection<Materialclass> getMaterialclassesById() {
         return materialclassesById;
     }

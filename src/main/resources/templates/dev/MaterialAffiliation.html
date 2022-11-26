@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <!-- CSS only -->
     <link th:href="@{/assets/style.css}" rel="stylesheet" />
-    <title th:text="${weaponClass.name}"></title>
+    <title th:text="${affiliation.name}"></title>
 </head>
 <body>
 <div>
-    <h1>Dev Weapon class <span th:text="${weaponClass.name}"></span></h1>
+    <h1>Dev Affiliation <span th:text="${affiliation.name}"></span></h1>
     <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
-    <form th:action="@{/dev/weaponClass/material}" th:method="post" th:object="${newWeaponClassMaterial}">
-        <input th:type="hidden" name="weaponClassId" th:value="${weaponClass.id}"/>
+    <form th:action="@{/dev/affiliation/material}" th:method="post" th:object="${newMaterialAffiliation}">
+        <input th:type="hidden" name="affiliationId" th:value="${affiliation.id}"/>
         <h3>Material:</h3>
         <select name="materialId" required>
             <option th:each="item : ${materialList}" th:value="${item.id}" th:text="${item.name}"></option>
@@ -35,12 +35,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item : ${weaponClass.materialWeaponClasses}">
+            <tr th:each="item : ${affiliation.materialAffilations}">
                 <td th:text="${item.id}"></td>
                 <td th:text="${item.material.name}"></td>
                 <td th:text="${item.baseAmount}"></td>
                 <td th:text="${item.perLvlAmount}"></td>
-                <td><a th:href="@{'/dev/weaponClass/material/delete/'+${item.id}+'/'+${weaponClass.id}}">
+                <td><a th:href="@{'/dev/affiliation/material/delete/'+${item.id}+'/'+${affiliation.id}}">
                     <button>Delete</button>
                 </a></td>
             </tr>

@@ -1,10 +1,13 @@
 package com.gachaapi.Controller.dev;
 
 
+import com.gachaapi.Entity.Materialaffilation;
 import com.gachaapi.Service.interfaces.AffiliationService;
+import com.gachaapi.Service.interfaces.MaterialService;
 import com.gachaapi.Service.interfaces.StatisticService;
 import com.gachaapi.Utils.dev.NewAffiliation;
 import com.gachaapi.Utils.dev.NewAffiliationStat;
+import com.gachaapi.Utils.dev.NewMaterialAffiliation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +22,7 @@ public class DevAffiliationController {
 
     private AffiliationService affiliationService;
     private StatisticService statisticService;
+    private MaterialService materialService;
 
     @GetMapping("/dev/affiliation")
     public String getAffiliation(Model model){
@@ -56,4 +60,24 @@ public class DevAffiliationController {
         affiliationService.deleteStat(id);
         return "redirect:/dev/affiliation/stats/"+affiliationId;
     }
+
+    @GetMapping("/dev/affilation/material/{id}")
+    public String getAffilationMaterials(Model model, @PathVariable("id")int id){
+        model.addAttribute("Affiliation", affiliationService.getById(id));
+        model.addAttribute("materialList", materialService.getAll());
+        return "dev/MaterialAffiliation";
+    }
+
+    @PostMapping("/dev/affiliation/material")
+    public String createAffiliationMaterial(Model model, @ModelAttribute("newMaterialAffiliation")NewMaterialAffiliation newMaterialAffiliation){
+        affiliationService.addMaterial(newMaterialAffiliation);
+        return "redirect:/dev/affiliation/material/"+newMaterialAffiliation.getAffiliationId();
+    }
+
+    @GetMapping("/dev/affiliation/material/delete/{id}/{affiliationId}")
+    public String deleteAffiliationMaterial(Model model, @PathVariable("id") int id, @PathVariable("affiliationId") int affiliationId){
+        affiliationService.deleteMaterial(id);
+        return "redirect:/dev/affiliation/material/"+affiliationId;
+    }
+
 }

@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <!-- CSS only -->
     <link th:href="@{/assets/style.css}" rel="stylesheet" />
-    <title th:text="${weapon.name}"></title>
+    <title th:text="${class.name}"></title>
 </head>
 <body>
 <div>
-    <h1>Dev Weapon <span th:text="${weapon.name}"></span></h1>
+    <h1>Dev Class <span th:text="${class.name}"></span></h1>
     <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
-    <form th:action="@{/dev/weapon/stats}" th:method="post" th:object="${newStatWeapon}">
-        <input th:type="hidden" name="weaponId" th:value="${weapon.id}"/>
+    <form th:action="@{/dev/class/stats}" th:method="post" th:object="${newStatClass}">
+        <input th:type="hidden" name="classId" th:value="${class.id}"/>
         <h3>Stat:</h3>
         <select name="statId" required>
             <option th:each="item : ${statList}" th:value="${item.statId}" th:text="${item.name}"></option>
@@ -32,11 +32,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item : ${weapon.stats}">
+            <tr th:each="item : ${class.stats}">
                 <td th:text="${item.id}"></td>
-                <td th:text="${item.statistic.shortName}"></td>
+                <td th:text="${item.stat.shortName}"></td>
                 <td th:text="${item.value}"></td>
-                <td><a th:href="@{'/dev/weapon/stats/delete/'+${item.id}+'/'+${weapon.id}}">
+                <td><a th:href="@{'/dev/class/stats/delete/'+${item.id}+'/'+${class.id}}">
                     <button>Delete</button>
                 </a></td>
             </tr>

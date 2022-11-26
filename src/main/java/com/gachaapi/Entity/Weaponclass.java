@@ -62,7 +62,7 @@ public class Weaponclass {
         return Objects.hash(id, name, shortName);
     }
 
-    @OneToMany(mappedBy = "weaponclassByWeaponClass")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "weaponClass")
     public Collection<Clazz> getClazzesById() {
         return clazzesById;
     }

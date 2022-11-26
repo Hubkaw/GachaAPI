@@ -88,15 +88,20 @@ public class ChestServiceImpl implements ChestService {
 
     @Override
     public ChestReward openChest(String nick, int chestId) {
+
         Player player = playerRepository.findByNick(nick).orElseThrow(()-> new UsernameNotFoundException("AAAAA"));
         Chest chest = chestRepository.getReferenceById(chestId);
         int playerBalance = player.getPlayerBalance();
+
         if (playerBalance < chest.getPrice())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You dont have enough money ");
         if (!getAvailable().contains(chest))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This chest is unavailable");
+
+
         player.setPlayerBalance(playerBalance - chest.getPrice());
         playerRepository.save(player);
+
         PossibleChestReward reward = new RewardGenerator(chest).generate();
         return addRewardToPlayer(reward, player);
 
