@@ -40,13 +40,13 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .userDetailsService(gachaUserDetailsService)
-//                .authorizeRequests(auth -> {
-//                    auth.antMatchers("/signup", "/login").permitAll();
-//                    auth.antMatchers("/dev/**").access("hasIpAddress('127.0.0.1') or hasIpAddress('::1') or hasAuthority('ADMIN') or hasAuthority('SCOPE_ADMIN')");
-//                    auth.antMatchers("/players").hasAuthority("SCOPE_"+ADMIN_ROLE);
-//                    auth.anyRequest().hasAuthority("SCOPE_"+USER_ROLE);
+                .authorizeRequests(auth -> {
+                    auth.antMatchers("/signup", "/login").permitAll();
+                    auth.antMatchers("/dev/**").access("hasIpAddress('127.0.0.1') or hasIpAddress('::1') or hasAuthority('ADMIN') or hasAuthority('SCOPE_ADMIN')");
+                    auth.antMatchers("/players").hasAuthority("SCOPE_"+ADMIN_ROLE);
+                    auth.anyRequest().hasAuthority("SCOPE_"+USER_ROLE);
 //                    auth.anyRequest().permitAll();
-//                })
+                })
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
