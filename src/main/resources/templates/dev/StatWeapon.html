@@ -34,7 +34,7 @@
             <tbody>
             <tr th:each="item : ${weapon.stats}">
                 <td th:text="${item.id}"></td>
-                <td th:text="${item.statistic.shortName}"></td>
+                <td th:text="${item.statisticByStatisticStatId.shortName}"></td>
                 <td th:text="${item.value}"></td>
                 <td><a th:href="@{'/dev/weapon/stats/delete/'+${item.id}+'/'+${weapon.id}}">
                     <button>Delete</button>
