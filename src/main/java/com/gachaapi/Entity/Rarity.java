@@ -73,7 +73,7 @@ public class Rarity {
         return Objects.hash(id, name, shortcut, weight);
     }
 
-    @OneToMany(mappedBy = "rarityByRarityId")
+    @OneToMany(mappedBy = "rarity")
     @JsonIgnore
     public Collection<Artefact> getArtefactsById() {
         return artefactsById;

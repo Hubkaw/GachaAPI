@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Artefact {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", nullable = false)
     private int id;
 
@@ -23,9 +24,10 @@ public class Artefact {
     @Column(name = "Type", nullable = false, length = 12)
     private String type;
 
+
     @ManyToOne
     @JoinColumn(name = "Rarity_id", referencedColumnName = "id", nullable = false)
-    private Rarity rarityByRarityId;
+    private Rarity rarity;
 
     @OneToMany(mappedBy = "artefactByArtefactId")
     private Collection<ArtefactReward> artefactRewardsById;

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{/assets/style.css}" rel="stylesheet" />
+    <title>Dev Collections</title>
+</head>
+<body>
+<div>
+    <h1>Dev Artefact</h1>
+    <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <form th:action="@{/dev/artefact}" th:method="post" th:object="${newArtefact}">
+        <h2>Name:</h2><br>
+        <input th:type="text" name="name" required><br>
+        <h2>Type:</h2><br>
+        <input th:type="text" name="type" required><br>
+        <h3>Rarity:</h3>
+        <select name="rarityId" required>
+            <option th:each="item : ${rarityList}" th:value="${item.id}" th:text="${item.name}"></option>
+        </select>
+        <input type="submit" value="submit"><br>
+    </form>
+    <div >
+        <table>
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Type</td>
+                <td>Rarity</td>
+                <td>Delete</td>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${artefactList}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.type}"></td>
+                <td th:text="${item.rarity.name}"></td>
+                <td><a th:href="@{'/dev/artefact/delete/'+${item.id}}">
+                    <button>Delete</button>
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
