@@ -39,4 +39,9 @@ public class DevMenuController {
         System.out.println(model);
         return "dev/menu";
     }
+
+    @GetMapping("/dev")
+    public String getShortMenu(Model model) {
+        return "redirect:/dev/menu";
+    }
 }

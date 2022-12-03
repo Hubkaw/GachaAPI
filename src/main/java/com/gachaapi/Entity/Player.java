@@ -115,4 +115,8 @@ public class Player {
     public int hashCode() {
         return Objects.hash(idPlayer, nick, birthDate, joinDate, activeParty, playerBalance, hashedPassword, pityRollStatus, pvpWins, pvpLooses, eloPoints);
     }
+
+    public void incrementPity(){
+        pityRollStatus++;
+    }
 }

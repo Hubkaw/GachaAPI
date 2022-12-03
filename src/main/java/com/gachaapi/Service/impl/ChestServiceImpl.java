@@ -27,8 +27,12 @@ public class ChestServiceImpl implements ChestService {
     private PlayerRepository playerRepository;
     private PlayerCharacterRepository playerCharacterRepository;
     private PlayerWeaponRepository playerWeaponRepository;
+    private PlayerChestItemRepository playerChestItemRepository;
 
     private static final Random random = new Random();
+
+    private static final int HARD_PITY = 15;
+
 
     @Override
     public List<Chest> getAll() {
@@ -50,6 +54,7 @@ public class ChestServiceImpl implements ChestService {
     public void delete(int id) {
         Chest chest = chestRepository.getReferenceById(id);
         chest.setWeapons(new HashSet<>());
+        chest.setCharacters(new HashSet<>());
         chestRepository.delete(chest);
     }
 
@@ -89,27 +94,53 @@ public class ChestServiceImpl implements ChestService {
     @Override
     public ChestReward openChest(String nick, int chestId) {
 
-        Player player = playerRepository.findByNick(nick).orElseThrow(()-> new UsernameNotFoundException("AAAAA"));
+        Player player = playerRepository.findByNick(nick).orElseThrow(() -> new UsernameNotFoundException("AAAAA"));
         Chest chest = chestRepository.getReferenceById(chestId);
         int playerBalance = player.getPlayerBalance();
 
         if (playerBalance < chest.getPrice())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You dont have enough money ");
-        if (!getAvailable().contains(chest))
+        if (!Instant.now().isBefore(chest.getExpiresAt().toInstant()) || !Instant.now().isAfter(chest.getReleasedAt().toInstant()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This chest is unavailable");
 
 
         player.setPlayerBalance(playerBalance - chest.getPrice());
+
+        PlayerChestitem pci = new PlayerChestitem();
+        pci.setChestByChestIdChest(chest);
+        pci.setPlayerByPlayerIdPlayer(player);
+        pci.setBoughtAt(Timestamp.from(Instant.now()));
+        playerChestItemRepository.save(pci);
+
+        PossibleChestReward reward;
+        if (player.getPityRollStatus() >= HARD_PITY) {
+            List<PossibleChestReward> possibleChestRewards = new ArrayList<>();
+            possibleChestRewards.addAll(chest.getWeapons());
+            possibleChestRewards.addAll(chest.getCharacters());
+            List<PossibleChestReward> rarestItems = possibleChestRewards.stream().filter(possibleChestReward -> possibleChestReward.getWeight() == 1).toList();
+            if (rarestItems.size() > 0)
+                reward = rarestItems.get(random.nextInt(rarestItems.size()));
+            else
+                reward = new RewardGenerator(chest).generate(player.getPityRollStatus());
+        } else {
+            reward = new RewardGenerator(chest).generate(player.getPityRollStatus());
+        }
+
+        if (reward.getWeight() == 1) {
+            player.setPityRollStatus(0);
+        } else {
+            player.incrementPity();
+        }
         playerRepository.save(player);
 
-        PossibleChestReward reward = new RewardGenerator(chest).generate();
         return addRewardToPlayer(reward, player);
 
     }
 
-    private ChestReward addRewardToPlayer(PossibleChestReward reward, Player player){
-        if (reward instanceof Weapon){
+    private ChestReward addRewardToPlayer(PossibleChestReward reward, Player player) {
+        if (reward instanceof Weapon) {
             PlayerWeapon playerWeapon = new PlayerWeapon();
+            System.out.println(playerWeapon.getId());
             playerWeapon.setWeapon((Weapon) reward);
             playerWeapon.setPlayer(player);
             playerWeapon.setAscension(1);
@@ -117,7 +148,7 @@ public class ChestServiceImpl implements ChestService {
             playerWeaponRepository.save(playerWeapon);
             return new ChestReward("Weapon", reward);
         }
-        if (reward instanceof Character){
+        if (reward instanceof Character) {
             PlayerCharacter playerCharacter = new PlayerCharacter();
             playerCharacter.setCharacter((Character) reward);
             playerCharacter.setPlayer(player);
@@ -134,25 +165,27 @@ public class ChestServiceImpl implements ChestService {
 
 
     static class RewardGenerator {
-        private NavigableMap<Integer, PossibleChestReward> map = new TreeMap<>();
+        private final NavigableMap<Integer, PossibleChestReward> map = new TreeMap<>();
         private int total;
 
-        public RewardGenerator(Chest chest){
-            if (chest.getCharacters()!=null)
+        public RewardGenerator(Chest chest) {
+            if (chest.getCharacters() != null)
                 chest.getCharacters().forEach(this::add);
-            if(chest.getWeapons()!=null)
+            if (chest.getWeapons() != null)
                 chest.getWeapons().forEach(this::add);
         }
 
-        private void add(PossibleChestReward pcr){
+        private void add(PossibleChestReward pcr) {
             int weight = pcr.getWeight();
-            if (weight<=0)
+            if (weight <= 0)
                 return;
-            total+=weight;
+            total += weight;
             map.put(total, pcr);
         }
 
-        public PossibleChestReward generate(){
+        public PossibleChestReward generate(int pity) {
+
+            System.out.println(map);
             int rnd = random.nextInt(total) + 1;
             return map.ceilingEntry(rnd).getValue();
         }

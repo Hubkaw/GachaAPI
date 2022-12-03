@@ -1,6 +1,6 @@
 body {
     background-color: #222;
-    color: azure;
+    color: darkgray;
 }
 
 a {
@@ -17,7 +17,11 @@ input {
     background-color: crimson;
     color: azure;
 }
-
+thead td {
+    background-color: crimson;
+    color: azure;
+    font-weight: bold;
+}
 td {
     border-radius: 2px;
     border-width: 1px;
@@ -26,6 +30,9 @@ td {
 }
 
 button {
-    background-color: crimson;
+    border-width: medium;
+    border-color: crimson;
+    background-color: #222;
+    border-radius: 3px;
     color: azure;
 }

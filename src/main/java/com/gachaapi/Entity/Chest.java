@@ -51,7 +51,7 @@ public class Chest {
     private com.gachaapi.Entity.Collection collection;
 
 
-    @OneToMany(mappedBy = "chestByChestIdChest")
+    @OneToMany(mappedBy = "chestByChestIdChest", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnore
     private Collection<PlayerChestitem> playerChestitemsByIdChest;
 
@@ -79,5 +79,10 @@ public class Chest {
     @Override
     public int hashCode() {
         return Objects.hash(idChest, name, releasedAt, expiresAt);
+    }
+
+    @Override
+    public String toString(){
+        return "Id: "+idChest+" name: "+name;
     }
 }

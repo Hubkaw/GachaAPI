@@ -11,9 +11,9 @@ INSERT INTO artefact (id,name,type,rarity_id) values (1,'art1','zrob z',1);
 INSERT INTO artefact (id,name,type,rarity_id) values (2,'art2','tego',2);
 INSERT INTO artefact (id,name,type,rarity_id) values (3,'art3','tabele',3);
 --player id z party?
-INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints) values (1,'testplayer1','1900-01-01 00:00:00','2022-01-01 00:00:00',1,10000,'xDDDDDDDDD',1,1,1,1);
-INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints) values (2,'testplayer2','1900-01-01 00:00:00','2022-01-01 00:00:00',2,1,'xDDDDDDDDD',1,1,1,1);
-INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints) values (3,'testplayer3','1900-01-01 00:00:00','2022-01-01 00:00:00',3,0,'xDDDDDDDDD',1,1,1,1);
+INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints) values (1,'admin','1900-01-01 00:00:00','2022-01-01 00:00:00',1,10000,'$2a$12$qmuu8mn/qN1D.ykSKYMJp.JNWJzL2fL77VHtd7/uzlpzOWv8r5dBC',1,1,1,1);
+INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints) values (2,'user','1900-01-01 00:00:00','2022-01-01 00:00:00',2,9999,'$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe',1,1,1,1);
+INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints) values (3,'autist','1900-01-01 00:00:00','2022-01-01 00:00:00',3,9999,'$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe',1,1,1,1);
 --Dungeon
 INSERT INTO Dungeon (id,name,released_at,expires_at) values (1,'jurna wieza','2022-01-01 00:00:00',null);
 INSERT INTO Dungeon (id,name,released_at,expires_at) values (2,'piwnica','2000-01-01 00:00:00','2002-01-01 00:00:00');
@@ -43,8 +43,8 @@ INSERT INTO collection (idcollection,name) values (1,'coll1');
 INSERT INTO collection (idcollection,name) values (2,'coll2');
 INSERT INTO collection (idcollection,name) values (3,'coll3');
 --chest
-INSERT INTO chest (id_chest,name,collection_idcollection,released_at,expires_at,price) values (1,'chest1',1,'2022-01-01 00:00:00',null,1);
-INSERT INTO chest (id_chest,name,collection_idcollection,released_at,expires_at,price) values (2,'chest2',2,'2024-01-01 00:00:00',null,2);
+INSERT INTO chest (id_chest,name,collection_idcollection,released_at,expires_at,price) values (1,'chest1',1,'2022-01-01 00:00:00','2030-01-01 00:00:00',1);
+INSERT INTO chest (id_chest,name,collection_idcollection,released_at,expires_at,price) values (2,'chest2',2,'2024-01-01 00:00:00','2030-01-01 00:00:00',2);
 INSERT INTO chest (id_chest,name,collection_idcollection,released_at,expires_at,price) values (3,'chest3',3,'2022-01-01 00:00:00','2030-01-01 00:00:00',3);
 --material
 INSERT INTO material (id,name) values (1, 'material1');
