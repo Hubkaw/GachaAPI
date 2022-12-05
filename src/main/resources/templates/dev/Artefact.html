@@ -41,6 +41,11 @@
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.type}"></td>
                 <td th:text="${item.rarity.name}"></td>
+                <td>
+                    <a th:href="@{'/dev/artefact/stats/'+${item.id}}">
+                        <button>Manage</button>
+                    </a>
+                </td>
                 <td><a th:href="@{'/dev/artefact/delete/'+${item.id}}">
                     <button>Delete</button>
                 </a></td>

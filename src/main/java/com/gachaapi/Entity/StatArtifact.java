@@ -8,10 +8,11 @@ import java.util.Objects;
 public class StatArtifact {
     private int id;
     private int value;
-    private Statistic statisticByStatisticStatId;
+    private Statistic stats;
     private Artefact artefactByArtefactId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -46,12 +47,12 @@ public class StatArtifact {
 
     @ManyToOne
     @JoinColumn(name = "Statistic_Stat_id", referencedColumnName = "Stat_id", nullable = false)
-    public Statistic getStatisticByStatisticStatId() {
-        return statisticByStatisticStatId;
+    public Statistic getStats() {
+        return stats;
     }
 
-    public void setStatisticByStatisticStatId(Statistic statisticByStatisticStatId) {
-        this.statisticByStatisticStatId = statisticByStatisticStatId;
+    public void setStats(Statistic statisticByStatisticStatId) {
+        this.stats = statisticByStatisticStatId;
     }
 
     @ManyToOne
