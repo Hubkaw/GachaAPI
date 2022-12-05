@@ -1,5 +1,6 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class PlayerArtefact {
             inverseJoinColumns = {
                     @JoinColumn(name = "PlayerCharacter_Id")
             })
+    @JsonIgnore
     private Set<PlayerCharacter> playerCharacters;
 
     @ManyToOne

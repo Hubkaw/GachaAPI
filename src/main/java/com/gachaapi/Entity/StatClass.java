@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -9,6 +11,7 @@ public class StatClass {
     private int id;
     private int value;
     private Statistic stat;
+    @JsonIgnore
     private Clazz clazz;
 
     @Id

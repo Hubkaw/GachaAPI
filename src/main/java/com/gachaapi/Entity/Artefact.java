@@ -1,5 +1,6 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -30,6 +31,7 @@ public class Artefact {
     private Rarity rarity;
 
     @OneToMany(mappedBy = "artefactByArtefactId")
+    @JsonIgnore
     private Collection<ArtefactReward> artefactRewardsById;
 
     @ManyToMany(cascade = {
@@ -45,6 +47,7 @@ public class Artefact {
     private java.util.Set<Set> sets;
 
     @OneToMany(mappedBy = "artefactByArtefactId")
+    @JsonIgnore
     private Collection<PlayerArtefact> playerArtefactsById;
 
     @OneToMany(mappedBy = "artefactByArtefactId")

@@ -1,5 +1,6 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,9 +24,11 @@ public class Dungeonfloor {
 
     @ManyToOne
     @JoinColumn(name = "Dungeon_ID", referencedColumnName = "ID", nullable = false)
+    @JsonIgnore
     private Dungeon dungeonByDungeonId;
 
     @OneToMany(mappedBy = "dungeonfloorByDungeonFloorId")
+    @JsonIgnore
     private Collection<MaterialReward> materialRewardsById;
 
     @ManyToMany(cascade = {
@@ -41,6 +44,7 @@ public class Dungeonfloor {
     private Collection<Party> parties;
 
     @OneToMany(mappedBy = "dungeonfloorByDungeonFloorId")
+    @JsonIgnore
     private Collection<PlayerDungeonfloor> playerDungeonfloorsById;
 
     @OneToMany(mappedBy = "dungeonfloorByDungeonFloorId")

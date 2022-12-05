@@ -1,5 +1,6 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gachaapi.Utils.PossibleChestReward;
 import lombok.Data;
 
@@ -46,9 +47,11 @@ public class Character  implements PossibleChestReward {
             inverseJoinColumns = {
                     @JoinColumn(name = "Chest_IdChest")
             })
+    @JsonIgnore
     private Set<Chest> chests;
 
     @OneToMany(mappedBy = "character")
+    @JsonIgnore
     private Collection<PlayerCharacter> playerCharactersById;
 
     @Override

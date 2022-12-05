@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -8,11 +10,17 @@ import java.util.Objects;
 public class Material {
     private int id;
     private String name;
+    @JsonIgnore
     private Collection<MaterialReward> materialRewardsById;
+    @JsonIgnore
     private Collection<Materialaffilation> materialaffilationsById;
+    @JsonIgnore
     private Collection<Materialclass> materialclassesById;
+    @JsonIgnore
     private Collection<Materialelement> materialelementsById;
+    @JsonIgnore
     private Collection<Materialweaponclass> materialweaponclassesById;
+    @JsonIgnore
     private Collection<PlayerMaterial> playerMaterialsById;
 
     @Id

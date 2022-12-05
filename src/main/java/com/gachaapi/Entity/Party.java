@@ -1,5 +1,6 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -37,6 +38,7 @@ public class Party {
             inverseJoinColumns = {
                     @JoinColumn(name = "DungeonFloor_ID")
             })
+    @JsonIgnore
     private Set<Dungeonfloor> dungeonFloors;
 
     @ManyToMany(cascade = {

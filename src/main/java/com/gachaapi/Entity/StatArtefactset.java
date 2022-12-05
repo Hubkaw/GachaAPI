@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -8,8 +10,9 @@ import java.util.Objects;
 public class StatArtefactset {
     private int id;
     private int value;
-    private Set setBySetId;
-    private Statistic statisticByStatisticStatId;
+    @JsonIgnore
+    private Set set;
+    private Statistic stat;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -46,21 +49,21 @@ public class StatArtefactset {
 
     @ManyToOne
     @JoinColumn(name = "Set_Id", referencedColumnName = "Id", nullable = false)
-    public Set getSetBySetId() {
-        return setBySetId;
+    public Set getSet() {
+        return set;
     }
 
-    public void setSetBySetId(Set setBySetId) {
-        this.setBySetId = setBySetId;
+    public void setSet(Set setBySetId) {
+        this.set = setBySetId;
     }
 
     @ManyToOne
     @JoinColumn(name = "Statistic_Stat_id", referencedColumnName = "Stat_id", nullable = false)
-    public Statistic getStatisticByStatisticStatId() {
-        return statisticByStatisticStatId;
+    public Statistic getStat() {
+        return stat;
     }
 
-    public void setStatisticByStatisticStatId(Statistic statisticByStatisticStatId) {
-        this.statisticByStatisticStatId = statisticByStatisticStatId;
+    public void setStat(Statistic statisticByStatisticStatId) {
+        this.stat = statisticByStatisticStatId;
     }
 }

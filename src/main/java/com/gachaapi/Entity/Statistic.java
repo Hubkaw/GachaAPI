@@ -61,7 +61,7 @@ public class Statistic {
         return Objects.hash(statId, name);
     }
 
-    @OneToMany(mappedBy = "statisticByStatisticStatId")
+    @OneToMany(mappedBy = "stat")
     public Collection<StatArtefactset> getStatArtefactsetsByStatId() {
         return statArtefactsetsByStatId;
     }

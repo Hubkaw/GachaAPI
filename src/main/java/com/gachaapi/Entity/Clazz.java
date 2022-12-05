@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -10,6 +12,7 @@ public class Clazz {
     private int id;
     private String name;
     private String shortcut;
+    @JsonIgnore
     private Collection<Character> characters;
     private Weaponclass weaponClass;
     private Collection<Materialclass> materialClasses;

@@ -1,5 +1,6 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,9 +29,10 @@ public class Set {
             inverseJoinColumns = {
                     @JoinColumn(name = "Artefact_Id")
             })
+    @JsonIgnore
     private java.util.Set<Artefact> artefacts;
 
-    @OneToMany(mappedBy = "setBySetId")
+    @OneToMany(mappedBy = "set")
     private Collection<StatArtefactset> statArtefactsetsById;
 
     @Override

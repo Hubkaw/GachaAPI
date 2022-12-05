@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -9,6 +11,7 @@ public class ArtefactReward {
     private int id;
     private int quantity;
     private Artefact artefactByArtefactId;
+    @JsonIgnore
     private Dungeonfloor dungeonfloorByDungeonFloorId;
 
     @Id

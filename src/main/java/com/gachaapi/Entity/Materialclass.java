@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -9,6 +11,7 @@ public class Materialclass {
     private int baseAmount;
     private int perLvlAmount;
     private Material material;
+    @JsonIgnore
     private Clazz clazz;
 
     @Id
