@@ -20,7 +20,7 @@ przymuje jsona w formacie:
 }  
 W przyszłości będzie jeszcze przyjmować datę urodzenia.
 
-##### POST /login
+##### POST /token
 
 Przyjmuje puste Body i autoryzacje typu Basic (Sposób działania opisany na dole)  
 Zwraca Token JWT potrzebny do KAŻDEGO z poniższych zapytań.  
@@ -40,14 +40,15 @@ Token jest ważny przez 15 minut, potem trzeba uderzyć tu ponownie po nowy.
 ##### GET /chests, /chests/all, /chests/open/{id}
 
 - Pozwala wyświetlać i otwierać skrzynki
-- Zaleca się lokalne dodanie skrzynki z price = 0 bo gracze nie mogą jeszcze zarabiać :)  
+- Zaleca się lokalne dodanie skrzynki z price = 0 bo gracze nie mogą jeszcze zarabiać :)
+- /chests wyświetla tylko aktualnie dostępne skrzynki
 
 ### DOMYŚLNE KONTA:
 
 - login: user hasło: user  
 - login: admin hasło: admin  
   
-aktualnie nie da się tworzyć adminów bez ręcznego wchodzenia w bazę
+aktualnie nie da się tworzyć adminów bez ręcznego wchodzenia w bazę (i raczej tak zostanie)
 
 ### MENU DO DODAWANIA DO BAZY
 
@@ -65,7 +66,7 @@ Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
 ### INSTRUKCJA AUTORYZACJI ZAPYTAŃ TYPU BEARER TOKEN (JWT):
 
-1. za pomocą basic auth uderzasz w końcówkę /login, która zwróci Ci token  
+1. za pomocą basic auth uderzasz w końcówkę /token, która zwróci Ci token  
 2. Przy każdym następnym zapytaniu dodajesz nagłówek Authorization z wartością "Bearer Token"  
 PRZYKŁAD  
 Authorization : Bearer cn389ncoiwuencr
