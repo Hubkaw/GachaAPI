@@ -42,3 +42,6 @@ button {
 table {
     padding-top: 15px;
 }
+html{
+    cursor: url("../images/kys.jpg"), auto;
+}
