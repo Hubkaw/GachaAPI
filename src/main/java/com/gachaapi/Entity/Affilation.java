@@ -17,7 +17,7 @@ public class Affilation {
     private Collection<StatAffiliation> statAffiliations;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -60,7 +60,7 @@ public class Affilation {
         return Objects.hash(id, name, requirement);
     }
 
-    @OneToMany(mappedBy = "affilationByAffilationId")
+    @OneToMany(mappedBy = "affilation")
     public Collection<Character> getCharacters() {
         return characters;
     }

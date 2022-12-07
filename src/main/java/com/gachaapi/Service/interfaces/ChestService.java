@@ -17,4 +17,6 @@ public interface ChestService {
     Chest getById(int id);
     List<Chest> getAvailable();
     ChestReward openChest(String nick, int chestId);
+    void addCharacter(int chestId, int characterId);
+    void deleteCharacter(int chestId, int characterId);
 }

@@ -13,6 +13,7 @@ public class Ingamecurrencypurchase {
     private Collection<PlayerPurchase> playerPurchasesByIdigcp;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IDIGCP", nullable = false)
     public int getIdigcp() {
         return idigcp;

@@ -14,7 +14,7 @@ public class Weapon implements PossibleChestReward {
 
     @Id
     @Column(name = "Id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Basic

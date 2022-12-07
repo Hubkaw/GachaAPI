@@ -15,7 +15,7 @@ public class PlayerChestitem {
     private Chest chestByChestIdChest;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     public int getId() {
         return id;

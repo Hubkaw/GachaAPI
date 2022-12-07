@@ -15,6 +15,7 @@ public class WeaponReward {
     private Dungeonfloor dungeonfloorByDungeonFloorId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     public int getId() {
         return id;

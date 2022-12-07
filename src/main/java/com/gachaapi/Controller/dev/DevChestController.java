@@ -1,10 +1,11 @@
 package com.gachaapi.Controller.dev;
 
 
-import com.gachaapi.Repository.CollectionRepository;
+import com.gachaapi.Service.interfaces.CharacterService;
 import com.gachaapi.Service.interfaces.ChestService;
 import com.gachaapi.Service.interfaces.CollectionService;
 import com.gachaapi.Service.interfaces.WeaponService;
+import com.gachaapi.Utils.dev.NewCharacterChest;
 import com.gachaapi.Utils.dev.NewChest;
 import com.gachaapi.Utils.dev.NewWeaponChest;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ public class DevChestController {
     private ChestService chestService;
     private CollectionService collectionService;
     private WeaponService weaponService;
+    private CharacterService characterService;
 
     @GetMapping("/dev/chest")
     public String getChests(Model model){
@@ -59,6 +61,25 @@ public class DevChestController {
     public String deleteWeapon(Model model, @PathVariable("weaponId")int weaponId, @PathVariable("chestId")int chestId){
         chestService.deleteWeapon(chestId, weaponId);
         return "redirect:/dev/chest/weapon/"+chestId;
+    }
+
+    @GetMapping("/dev/chest/character/{id}")
+    public String getChestCharacters(Model model, @PathVariable("id")int id){
+        model.addAttribute("chest", chestService.getById(id));
+        model.addAttribute("characterList", characterService.getAll());
+        return "dev/characterChest";
+    }
+
+    @PostMapping("/dev/chest/character")
+    public String createChestCharacter(Model model, @ModelAttribute("newCharacterChest") NewCharacterChest newCharacterChest){
+        chestService.addCharacter(newCharacterChest.getChestId(), newCharacterChest.getCharacterId());
+        return "redirect:/dev/chest/character/"+newCharacterChest.getChestId();
+    }
+
+    @GetMapping("/dev/chest/character/delete/{characterId}/{chestId}")
+    public String deleteCharacter(Model model, @PathVariable("characterId")int characterId, @PathVariable("chestId")int chestId){
+        chestService.deleteCharacter(chestId, characterId);
+        return "redirect:/dev/chest/character/"+chestId;
     }
 
 }

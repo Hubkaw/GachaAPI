@@ -15,7 +15,7 @@ public class Player {
 
     @Id
     @Column(name = "IdPlayer", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPlayer;
 
     @Basic

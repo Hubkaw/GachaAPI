@@ -28,6 +28,7 @@ public class ChestServiceImpl implements ChestService {
     private PlayerCharacterRepository playerCharacterRepository;
     private PlayerWeaponRepository playerWeaponRepository;
     private PlayerChestItemRepository playerChestItemRepository;
+    private CharacterRepository characterRepository;
 
     private static final Random random = new Random();
 
@@ -135,6 +136,21 @@ public class ChestServiceImpl implements ChestService {
 
         return addRewardToPlayer(reward, player);
 
+    }
+
+    @Override
+    public void addCharacter(int chestId, int characterId) {
+        Character character = characterRepository.getReferenceById(characterId);
+        Chest chest = chestRepository.getReferenceById(chestId);
+        chest.getCharacters().add(character);
+        chestRepository.save(chest);
+    }
+
+    @Override
+    public void deleteCharacter(int chestId, int characterId) {
+        Chest chest = chestRepository.getReferenceById(chestId);
+        chest.getCharacters().removeIf(c -> c.getId()==characterId);
+        chestRepository.save(chest);
     }
 
     private ChestReward addRewardToPlayer(PossibleChestReward reward, Player player) {

@@ -14,7 +14,7 @@ import java.util.Set;
 public class Chest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdChest", nullable = false)
     private int idChest;
 

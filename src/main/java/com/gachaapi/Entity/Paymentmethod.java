@@ -11,6 +11,7 @@ public class Paymentmethod {
     private Collection<PlayerPurchase> playerPurchasesByIdPaymentMethod;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IDPaymentMethod", nullable = false)
     public int getIdPaymentMethod() {
         return idPaymentMethod;

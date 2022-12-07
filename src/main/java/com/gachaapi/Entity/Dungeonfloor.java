@@ -12,6 +12,7 @@ import java.util.Objects;
 public class Dungeonfloor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private int id;
 

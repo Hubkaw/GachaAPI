@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{/assets/style.css}" rel="stylesheet" />
+    <title th:text="${chest.name}"></title>
+</head>
+<body>
+<div>
+    <h1>Dev Character <span th:text="${chest.name}"></span></h1>
+    <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <form th:action="@{/dev/chest/character}" th:method="post" th:object="${newCharacterChest}">
+        <input th:type="hidden" name="chestId" th:value="${chest.idChest}" />
+        <h3>Character:</h3>
+        <select name="characterId" required>
+            <option th:each="item : ${characterList}" th:value="${item.id}" th:text="${item.name}" ></option>
+        </select>
+        <input type="submit" value="submit"><br>
+    </form>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Rarity</td>
+                <td>Delete</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${chest.characters}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.rarity.shortcut}"></td>
+                <td><a th:href="@{'/dev/chest/character/delete/'+${item.id}+'/'+${chest.idChest}}">
+                    <button>Delete</button>
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -12,6 +12,7 @@ public class PlayerMaterial {
     private Player playerByPlayerIdPlayer;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     public int getId() {
         return id;

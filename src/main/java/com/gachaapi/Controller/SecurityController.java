@@ -22,7 +22,7 @@ public class SecurityController {
     private final JWTService jwtService;
     private final PlayerService playerService;
 
-    @GetMapping("/login")
+    @GetMapping("/token")
     public ResponseEntity<TokenResponse> token(Authentication authentication){
         if(authentication==null)
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);

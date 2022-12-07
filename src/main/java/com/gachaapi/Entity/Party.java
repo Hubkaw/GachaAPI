@@ -13,6 +13,7 @@ import java.util.Set;
 public class Party {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     private int id;
 

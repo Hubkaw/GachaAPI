@@ -14,7 +14,7 @@ public class Dungeon {
     private Collection<Dungeonfloor> dungeonfloorsById;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     public int getId() {
         return id;

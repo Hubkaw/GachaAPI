@@ -18,9 +18,11 @@ input {
     color: azure;
 }
 thead td {
-    background-color: crimson;
-    color: azure;
+    background-color: #222;
+    color: darkgray;
     font-weight: bold;
+    border-style: none;
+    text-align: center;
 }
 td {
     border-radius: 2px;
@@ -35,4 +37,8 @@ button {
     background-color: #222;
     border-radius: 3px;
     color: azure;
+    width: 100%;
+}
+table {
+    padding-top: 15px;
 }

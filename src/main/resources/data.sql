@@ -39,29 +39,29 @@ INSERT INTO artefact_set (set_id,artefact_id) values (1,1);
 INSERT INTO artefact_set (set_id,artefact_id) values (2,2);
 INSERT INTO artefact_set (set_id,artefact_id) values (3,3);
 --collection
-INSERT INTO collection (idcollection,name) values (1,'coll1');
-INSERT INTO collection (idcollection,name) values (2,'coll2');
-INSERT INTO collection (idcollection,name) values (3,'coll3');
+INSERT INTO collection (idcollection,name) values (1,'Winter collection');
+INSERT INTO collection (idcollection,name) values (2,'Summer collection');
+INSERT INTO collection (idcollection,name) values (3,'Special collection');
 --chest
-INSERT INTO chest (id_chest,name,collection_idcollection,released_at,expires_at,price) values (1,'chest1',1,'2022-01-01 00:00:00','2030-01-01 00:00:00',1);
-INSERT INTO chest (id_chest,name,collection_idcollection,released_at,expires_at,price) values (2,'chest2',2,'2024-01-01 00:00:00','2030-01-01 00:00:00',2);
-INSERT INTO chest (id_chest,name,collection_idcollection,released_at,expires_at,price) values (3,'chest3',3,'2022-01-01 00:00:00','2030-01-01 00:00:00',3);
+INSERT INTO chest (id_chest,name,collection_idcollection,released_at,expires_at,price) values (1,'basic chest',1,'2022-01-01 00:00:00','2030-01-01 00:00:00',1);
+INSERT INTO chest (id_chest,name,collection_idcollection,released_at,expires_at,price) values (2,'rare chest',2,'2024-01-01 00:00:00','2030-01-01 00:00:00',2);
+INSERT INTO chest (id_chest,name,collection_idcollection,released_at,expires_at,price) values (3,'super rare chest',3,'2022-01-01 00:00:00','2030-01-01 00:00:00',3);
 --material
-INSERT INTO material (id,name) values (1, 'material1');
-INSERT INTO material (id,name) values (2, 'material2');
-INSERT INTO material (id,name) values (3, 'material3');
+INSERT INTO material (id,name) values (1, 'Wood');
+INSERT INTO material (id,name) values (2, 'Iron');
+INSERT INTO material (id,name) values (3, 'Leather');
 --statistic
-INSERT INTO statistic (stat_id,name,short_name) values (1, 'strength','STR');
-INSERT INTO statistic (stat_id,name,short_name) values (2, 'agility','AGI');
-INSERT INTO statistic (stat_id,name,short_name) values (3, 'inteligence','INT');
+INSERT INTO statistic (stat_id,name,short_name) values (1, 'Health','HP');
+INSERT INTO statistic (stat_id,name,short_name) values (2, 'Attack','ATK');
+INSERT INTO statistic (stat_id,name,short_name) values (3, 'Initiative','INI');
 --weaponClass
 INSERT INTO weaponClass(id,name,short_name) values (1, 'cleric','CLR');
 INSERT INTO weaponClass(id,name,short_name) values (2, 'vtuber','VTB');
 INSERT INTO weaponClass(id,name,short_name) values (3, 'furry','fur');
 --element
-INSERT INTO element (id,name) values (1, 'element1');
-INSERT INTO element (id,name) values (2, 'element2');
-INSERT INTO element (id,name) values (3, 'element3');
+INSERT INTO element (id,name) values (1, 'Fire');
+INSERT INTO element (id,name) values (2, 'Ice');
+INSERT INTO element (id,name) values (3, 'Wind');
 --paymentmethod
 INSERT INTO paymentmethod (IDPayment_Method,Name) values (1,'PayPal');
 INSERT INTO paymentmethod (IDPayment_Method,Name) values (2,'SMS');
@@ -87,9 +87,9 @@ INSERT INTO stat_artifact (id,statistic_stat_id,artefact_id,value) values (1,1,1
 INSERT INTO stat_artifact (id,statistic_stat_id,artefact_id,value) values (2,2,2,200);
 INSERT INTO stat_artifact (id,statistic_stat_id,artefact_id,value) values (3,3,3,300);
 --weapon
-INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (1,'club',1,1,1);
-INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (2,'club',2,2,2);
-INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (3,'club',3,3,3);
+INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (1,'Sword',1,1,1);
+INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (2,'Bow',2,2,2);
+INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (3,'Almanac',3,3,3);
 --character
 INSERT INTO gacha.character (id,name,affilation_id,ability,class_id,rarity_id) VALUES (1,'weeb',1,1,1,1);
 INSERT INTO gacha.character (id,name,affilation_id,ability,class_id,rarity_id) VALUES (2,'warrior',2,2,2,2);
@@ -161,9 +161,9 @@ INSERT INTO stat_class (id,value, class_id, statistic_stat_id) VALUES (1,1,1,1);
 INSERT INTO stat_class (id,value, class_id, statistic_stat_id) VALUES (2,2,2,2);
 INSERT INTO stat_class (id,value, class_id, statistic_stat_id) VALUES (3,3,3,3);
 --party NAME IS INT, TO UPDATE
-INSERT INTO party (id,player_id_player,name,move_order) VALUES (1,1,1,123456);
-INSERT INTO party (id,player_id_player,name,move_order) VALUES (2,2,2,654321);
-INSERT INTO party (id,player_id_player,name,move_order) VALUES (3,3,3,615243);
+INSERT INTO party (id,player_id_player,name,move_order) VALUES (1,1,1,1234);
+INSERT INTO party (id,player_id_player,name,move_order) VALUES (2,2,2,4321);
+INSERT INTO party (id,player_id_player,name,move_order) VALUES (3,3,3,3214);
 -- player_chestitem
 INSERT INTO player_chestitem (id,player_id_player,chest_id_chest,bought_at) VALUES (1,1,1,curdate());
 INSERT INTO player_chestitem (id,player_id_player,chest_id_chest,bought_at) VALUES (2,2,2,curdate());

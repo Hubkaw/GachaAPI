@@ -14,6 +14,7 @@ import java.util.Set;
 public class Character  implements PossibleChestReward {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     private int id;
 
@@ -22,20 +23,20 @@ public class Character  implements PossibleChestReward {
     private String name;
 
     @Basic
-    @Column(name = "Ability", nullable = false)
-    private int ability;
+    @Column(name = "Ability", nullable = false, length = 64)
+    private String ability;
 
     @ManyToOne
     @JoinColumn(name = "Affilation_id", referencedColumnName = "id", nullable = false)
-    private Affilation affilationByAffilationId;
+    private Affilation affilation;
 
     @ManyToOne
     @JoinColumn(name = "Class_id", referencedColumnName = "id", nullable = false)
-    private Clazz clazzByClassId;
+    private Clazz characterClass;
 
     @ManyToOne
     @JoinColumn(name = "Rarity_id", referencedColumnName = "id", nullable = false)
-    private Rarity rarityByRarityId;
+    private Rarity rarity;
 
     @ManyToMany(cascade = {
             CascadeType.ALL
@@ -69,6 +70,6 @@ public class Character  implements PossibleChestReward {
 
     @Override
     public int getWeight() {
-        return rarityByRarityId.getWeight();
+        return rarity.getWeight();
     }
 }

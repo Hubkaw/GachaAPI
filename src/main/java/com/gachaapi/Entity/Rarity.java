@@ -20,7 +20,7 @@ public class Rarity {
     private Collection<Weapon> weaponsById;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -83,7 +83,7 @@ public class Rarity {
         this.artefactsById = artefactsById;
     }
 
-    @OneToMany(mappedBy = "rarityByRarityId")
+    @OneToMany(mappedBy = "rarity")
     @JsonIgnore
     public Collection<Character> getCharactersById() {
         return charactersById;

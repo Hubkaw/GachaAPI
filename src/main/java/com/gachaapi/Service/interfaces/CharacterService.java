@@ -8,5 +8,6 @@ import java.util.List;
 public interface CharacterService {
     List<Character> getAll();
     void create(NewCharacter newCharacter);
+    void delete(int id);
 
 }

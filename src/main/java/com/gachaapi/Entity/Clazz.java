@@ -19,7 +19,7 @@ public class Clazz {
     private Collection<StatClass> stats;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -63,7 +63,7 @@ public class Clazz {
         return Objects.hash(id, name, shortcut);
     }
 
-    @OneToMany(mappedBy = "clazzByClassId")
+    @OneToMany(mappedBy = "characterClass")
     public Collection<Character> getCharacters() {
         return characters;
     }

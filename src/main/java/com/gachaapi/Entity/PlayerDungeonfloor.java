@@ -14,7 +14,7 @@ public class PlayerDungeonfloor {
 
     @Id
     @Column(name = "Id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
 
     @ManyToOne

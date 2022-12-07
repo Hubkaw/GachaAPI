@@ -41,15 +41,17 @@ public class SecurityConfig {
                 .disable()
                 .userDetailsService(gachaUserDetailsService)
                 .authorizeRequests(auth -> {
-                    auth.antMatchers("/signup", "/login").permitAll();
-                    auth.antMatchers("/dev/**", "/assets/style.css").access("hasIpAddress('127.0.0.1') or hasIpAddress('::1') or hasAuthority('ADMIN') or hasAuthority('SCOPE_ADMIN')");
+                    auth.antMatchers("/signup", "/token").permitAll();
+//                    auth.antMatchers("/dev/**", "/assets/style.css").access("hasIpAddress('127.0.0.1') or hasIpAddress('::1') or hasAuthority('ADMIN') or hasAuthority('SCOPE_ADMIN')");
+                    auth.antMatchers("/dev/**", "/assets/style.css").hasAnyAuthority( ADMIN_ROLE);
                     auth.antMatchers("/players").hasAuthority("SCOPE_"+ADMIN_ROLE);
                     auth.anyRequest().hasAuthority("SCOPE_"+USER_ROLE);
 //                    auth.anyRequest().permitAll();
                 })
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .httpBasic(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults())
                 .build();
     }
 

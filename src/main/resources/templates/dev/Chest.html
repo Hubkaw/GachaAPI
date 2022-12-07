@@ -36,6 +36,7 @@
                 <td>Expiration date</td>
                 <td>Price</td>
                 <td>Collection</td>
+                <td>Characters</td>
                 <td>Weapons</td>
                 <td>Delete</td>
             </tr>
@@ -48,6 +49,9 @@
                 <td th:text="${item.expiresAt}"></td>
                 <td th:text="${item.price}"></td>
                 <td th:text="${item.collection.name}"></td>
+                <td><a th:href="@{'/dev/chest/character/'+${item.idChest}}">
+                    <button>Manage</button>
+                </a></td>
                 <td><a th:href="@{'/dev/chest/weapon/'+${item.idChest}}">
                     <button>Manage</button>
                 </a></td>

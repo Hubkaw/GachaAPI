@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{/assets/style.css}" rel="stylesheet" />
+    <title>Dev Character</title>
+</head>
+<body>
+<div>
+    <h1>Dev Character</h1>
+    <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <form th:action="@{/dev/character}" th:method="post" th:object="${newCharacter}">
+        <h3>Name:</h3><br>
+        <input th:type="text" name="name" required><br>
+        <h3>Ability:</h3><br>
+        <input th:type="number" name="ability" required><br>
+        <h3>Class:</h3>
+        <select name="classId" required>
+            <option th:each="item : ${classList}" th:value="${item.id}" th:text="${item.name}"></option>
+        </select><br>
+        <h3>Rarity:</h3>
+        <select name="rarityId" required>
+            <option th:each="item : ${rarityList}" th:value="${item.id}" th:text="${item.name}"></option>
+        </select><br>
+        <h3>Affiliation:</h3>
+        <select name="affiliationId" required>
+            <option th:each="item : ${affiliationList}" th:value="${item.id}" th:text="${item.name}"></option>
+        </select><br>
+        <input type="submit" value="submit"><br>
+    </form>
+    <div >
+        <table>
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Ability</td>
+                <td>Class</td>
+                <td>Rarity</td>
+                <td>Affiliation</td>
+                <td>Delete</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${characterList}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.ability}"></td>
+                <td th:text="${item.characterClass.name}"></td>
+                <td th:text="${item.rarity.name}"></td>
+                <td th:text="${item.affilation.name}"></td>
+                <td><a th:href="@{'/dev/character/delete/'+${item.id}}">
+                    <button>Delete</button>
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
 @Controller
 public class DevMenuController {
 
-    private static List<DevMenuRecord> NAV_LINKS = asList(
+    private static final List<DevMenuRecord> NAV_LINKS = asList(
             new DevMenuRecord("Menu", "/dev/menu"),
             new DevMenuRecord("Stats", "/dev/stats"),
             new DevMenuRecord("WeaponClass", "/dev/weaponClass"),
@@ -26,6 +26,7 @@ public class DevMenuController {
             new DevMenuRecord("Material", "/dev/material"),
             new DevMenuRecord("Affiliation", "/dev/affiliation"),
             new DevMenuRecord("Class", "/dev/class"),
+            new DevMenuRecord("Character", "/dev/character"),
             new DevMenuRecord("Dungeon", "/dev/dungeon"),
             new DevMenuRecord("Artefact", "/dev/artefact")
 
