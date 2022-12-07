@@ -3,6 +3,7 @@ package com.gachaapi.Service.interfaces;
 
 import com.gachaapi.Entity.Artefact;
 import com.gachaapi.Utils.dev.NewArtefact;
+import com.gachaapi.Utils.dev.NewArtefactSet;
 import com.gachaapi.Utils.dev.NewStatArtefact;
 import com.gachaapi.Utils.dev.NewStatWeapon;
 
@@ -19,4 +20,7 @@ public interface ArtefactService {
 
     void createStatArtefact(NewStatArtefact newStatArtefact);
     void deleteStatArtefact(int id);
+
+    void createArtefactSet(NewArtefactSet newArtefactSet);
+    void deleteArtefactSet(int setId, int artefactId);
 }

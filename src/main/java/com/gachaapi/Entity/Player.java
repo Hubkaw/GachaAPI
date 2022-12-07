@@ -119,4 +119,9 @@ public class Player {
     public void incrementPity(){
         pityRollStatus++;
     }
+
+    @Override
+    public String toString(){
+        return nick;
+    }
 }

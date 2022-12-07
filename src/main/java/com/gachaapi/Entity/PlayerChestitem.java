@@ -11,6 +11,7 @@ import java.util.Objects;
 public class PlayerChestitem {
     private int id;
     private Timestamp boughtAt;
+    @JsonIgnore
     private Player playerByPlayerIdPlayer;
     private Chest chestByChestIdChest;
 

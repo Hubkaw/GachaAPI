@@ -38,6 +38,7 @@ public class PlayerArtefact {
 
     @ManyToOne
     @JoinColumn(name = "Player_IdPlayer", referencedColumnName = "IdPlayer", nullable = false)
+    @JsonIgnore
     private Player playerByPlayerIdPlayer;
 
     @ManyToOne
@@ -56,5 +57,10 @@ public class PlayerArtefact {
     @Override
     public int hashCode() {
         return Objects.hash(id, lvl);
+    }
+
+    @Override
+    public String toString(){
+        return artefactByArtefactId.getName()+" "+playerByPlayerIdPlayer.getNick();
     }
 }

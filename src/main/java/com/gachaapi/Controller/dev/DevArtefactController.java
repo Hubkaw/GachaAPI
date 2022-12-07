@@ -3,8 +3,10 @@ package com.gachaapi.Controller.dev;
 
 import com.gachaapi.Service.interfaces.ArtefactService;
 import com.gachaapi.Service.interfaces.RarityService;
+import com.gachaapi.Service.interfaces.SetService;
 import com.gachaapi.Service.interfaces.StatisticService;
 import com.gachaapi.Utils.dev.NewArtefact;
+import com.gachaapi.Utils.dev.NewArtefactSet;
 import com.gachaapi.Utils.dev.NewStatArtefact;
 import com.gachaapi.Utils.dev.NewStatWeapon;
 import lombok.AllArgsConstructor;
@@ -23,6 +25,7 @@ public class DevArtefactController {
     private ArtefactService artefactService;
     private RarityService rarityService;
     private StatisticService statisticService;
+    private SetService setService;
 
     @GetMapping("/dev/artefact")
     public String getArtefact(Model model){
@@ -60,5 +63,24 @@ public class DevArtefactController {
         artefactService.deleteStatArtefact(id);
         return "redirect:/dev/artefact/stats/"+artefactId;
     }
+
+    @GetMapping("/dev/artefact/sets/{id}")
+    public String getArtefactSets(Model model, @PathVariable("id") int id){
+        model.addAttribute("artefact", artefactService.getById(id));
+        model.addAttribute("setList", setService.getAll());
+        return "dev/setArtefact";
+    }
+    @PostMapping("/dev/artefact/sets")
+    public String createArtefactSet(Model model, @ModelAttribute("newArtefactSet") NewArtefactSet newArtefactSet){
+        artefactService.createArtefactSet(newArtefactSet);
+        return "redirect:/dev/artefact/sets/"+newArtefactSet.getArtefactId();
+    }
+
+    @GetMapping("/dev/artefact/sets/delete/{id}/{artefactId}")
+    public String deleteArtefactSet(Model model, @PathVariable("id")int id, @PathVariable("artefactId")int artefactId){
+        artefactService.deleteArtefactSet(id, artefactId);
+        return "redirect:/dev/artefact/sets/"+artefactId;
+    }
+
 }
 

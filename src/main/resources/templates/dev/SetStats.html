@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <!-- CSS only -->
+  <link th:href="@{/assets/style.css}" rel="stylesheet" />
+  <title th:text="${set.name}"></title>
+</head>
+<body>
+<div>
+  <h1>Dev Set <span th:text="${set.name}"></span></h1>
+  <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+  <form th:action="@{/dev/set/stats}" th:method="post" th:object="${newSetStat}">
+    <input th:type="hidden" name="setId" th:value="${set.id}"/>
+    <h3>Stat:</h3>
+    <select name="statId" required>
+      <option th:each="item : ${statList}" th:value="${item.statId}" th:text="${item.name}"></option>
+    </select>
+    <h3>Value:</h3>
+    <input th:type="number" name="value" required><br>
+    <input type="submit" value="submit"><br>
+  </form>
+  <div >
+    <table>
+      <thead>
+      <tr>
+        <td>Id</td>
+        <td>Stat</td>
+        <td>Value</td>
+        <td>Delete</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="item : ${set.stats}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.stat.shortName}"></td>
+        <td th:text="${item.value}"></td>
+        <td><a th:href="@{'/dev/set/stats/delete/'+${item.id}+'/'+${set.id}}">
+          <button>Delete</button>
+        </a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

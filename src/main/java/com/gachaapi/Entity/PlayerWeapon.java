@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,6 +12,7 @@ public class PlayerWeapon {
     private int ascension;
     private int lvl;
     private PlayerCharacter wieldingCharacter;
+    @JsonIgnore
     private Player player;
     private Weapon weapon;
 

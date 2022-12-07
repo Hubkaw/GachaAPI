@@ -27,6 +27,7 @@ public class Party {
 
     @ManyToOne
     @JoinColumn(name = "Player_IdPlayer", referencedColumnName = "IdPlayer", nullable = false)
+    @JsonIgnore
     private Player playerByPlayerIdPlayer;
 
     @ManyToMany(cascade = {
@@ -66,5 +67,10 @@ public class Party {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, moveOrder);
+    }
+
+    @Override
+    public String toString(){
+        return  "party "+id;
     }
 }

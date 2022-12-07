@@ -34,7 +34,7 @@ public class Set {
     private java.util.Set<Artefact> artefacts;
 
     @OneToMany(mappedBy = "set")
-    private Collection<StatArtefactset> statArtefactsetsById;
+    private Collection<StatArtefactset> stats;
 
     @Override
     public boolean equals(Object o) {

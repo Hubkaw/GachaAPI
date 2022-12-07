@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -9,6 +11,7 @@ import java.util.Objects;
 public class PlayerPurchase {
     private int id;
     private Timestamp boughtAt;
+    @JsonIgnore
     private Player playerByPlayerIdPlayer;
     private Paymentmethod paymentmethodByPaymentMethodIdPaymentMethod;
     private Ingamecurrencypurchase ingamecurrencypurchaseByInGameCurrencyPurchaseIdigcp;

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{/assets/style.css}" rel="stylesheet" />
+    <title>Dev Set</title>
+</head>
+<body>
+<div>
+    <h1>Dev Set</h1>
+    <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <form th:action="@{/dev/set}" th:method="post" th:object="${newSet}">
+        <h3>Name:</h3><br>
+        <input th:type="text" name="name" required><br>
+        <input type="submit" value="submit"><br>
+    </form>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Stats</td>
+                <td>Delete</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${setList}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td><a th:href="@{'/dev/set/stats/'+${item.id}}">
+                    <button>Manage</button>
+                </a></td>
+                <td><a th:href="@{'/dev/set/delete/'+${item.id}}">
+                    <button>Delete</button>
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

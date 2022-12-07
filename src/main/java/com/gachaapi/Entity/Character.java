@@ -72,4 +72,9 @@ public class Character  implements PossibleChestReward {
     public int getWeight() {
         return rarity.getWeight();
     }
+
+    @Override
+    public String toString(){
+        return  name;
+    }
 }

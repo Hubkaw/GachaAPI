@@ -32,7 +32,7 @@ public class Artefact {
 
     @OneToMany(mappedBy = "artefactByArtefactId")
     @JsonIgnore
-    private Collection<ArtefactReward> artefactRewardsById;
+    private Collection<ArtefactReward> artefactRewards;
 
     @ManyToMany(cascade = {
             CascadeType.ALL
@@ -44,14 +44,14 @@ public class Artefact {
             inverseJoinColumns = {
                     @JoinColumn(name = "Set_Id")
             })
-    private java.util.Set<Set> sets;
+    private java.util.Set<com.gachaapi.Entity.Set> sets;
 
     @OneToMany(mappedBy = "artefactByArtefactId")
     @JsonIgnore
-    private Collection<PlayerArtefact> playerArtefactsById;
+    private Collection<PlayerArtefact> playerArtefacts;
 
     @OneToMany(mappedBy = "artefactByArtefactId")
-    private Collection<StatArtifact> statArtifactsById;
+    private Collection<StatArtifact> statArtifacts;
 
 
     @Override

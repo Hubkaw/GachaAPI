@@ -30,6 +30,8 @@
                 <td>Name</td>
                 <td>Type</td>
                 <td>Rarity</td>
+                <td>Stats</td>
+                <td>Sets</td>
                 <td>Delete</td>
 
 
@@ -43,6 +45,11 @@
                 <td th:text="${item.rarity.name}"></td>
                 <td>
                     <a th:href="@{'/dev/artefact/stats/'+${item.id}}">
+                        <button>Manage</button>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{'/dev/artefact/sets/'+${item.id}}">
                         <button>Manage</button>
                     </a>
                 </td>
