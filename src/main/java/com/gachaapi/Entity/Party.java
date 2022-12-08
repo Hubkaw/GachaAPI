@@ -18,8 +18,8 @@ public class Party {
     private int id;
 
     @Basic
-    @Column(name = "Name", nullable = false)
-    private int name;
+    @Column(name = "Name", nullable = false, length = 32)
+    private String name;
 
     @Basic
     @Column(name = "MoveOrder", nullable = false)
