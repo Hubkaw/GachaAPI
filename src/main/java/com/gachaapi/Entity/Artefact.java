@@ -35,7 +35,7 @@ public class Artefact {
     private Collection<ArtefactReward> artefactRewards;
 
     @ManyToMany(cascade = {
-            CascadeType.ALL
+            CascadeType.PERSIST
     })
     @JoinTable(name = "artefact_set" ,
             joinColumns = {
@@ -50,7 +50,7 @@ public class Artefact {
     @JsonIgnore
     private Collection<PlayerArtefact> playerArtefacts;
 
-    @OneToMany(mappedBy = "artefactByArtefactId")
+    @OneToMany(mappedBy = "artefactByArtefactId", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Collection<StatArtifact> statArtifacts;
 
 

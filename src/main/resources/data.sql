@@ -1,19 +1,67 @@
+DELETE FROM player_weapon;
+DELETE FROM partycharacter;
+DELETE FROM stat_weapon;
+DELETE FROM player_chestitem;
+DELETE FROM stat_class;
+DELETE FROM stat_affiliation;
+DELETE FROM weapon_chest;
+DELETE FROM weapon_reward;
+DELETE FROM material_reward;
+DELETE FROM Player_Role;
+DELETE FROM gacha.role;
+DELETE FROM materialweaponclass;
+DELETE FROM character_chest;
+DELETE FROM characteratrefact;
+DELETE FROM player_artefact;
+DELETE FROM materialclass;
+DELETE FROM materialaffilation;
+DELETE FROM materialelement;
+DELETE FROM player_material;
+DELETE FROM player_character;
+DELETE FROM gacha.character;
+DELETE FROM weapon;
+DELETE FROM stat_artifact;
+DELETE FROM stat_artefactSet;
+DELETE FROM gacha.class;
+DELETE FROM player_purchase;
+DELETE FROM ingamecurrencyPurchase;
+DELETE FROM paymentmethod;
+DELETE FROM element;
+DELETE FROM weaponClass;
+DELETE FROM statistic;
+DELETE FROM material;
+DELETE FROM chest;
+DELETE FROM collection;
+DELETE FROM artefact_set;
+DELETE FROM gacha.set;
+DELETE FROM player_dungeonfloor;
+DELETE FROM Artefact_Reward;
+DELETE FROM dungeonfloor;
+DELETE FROM party;
+DELETE FROM player;
+DELETE FROM Dungeon;
+DELETE FROM artefact;
+DELETE FROM rarity;
+DELETE FROM affilation;
+
+
+
 -- affilation
-INSERT INTO affilation (id,name,requirement) VALUES (1,'test1',1);
-INSERT INTO affilation (id,name,requirement) VALUES (2,'test2',2);
-INSERT INTO affilation (id,name,requirement) VALUES (3,'test3',3);
-INSERT INTO affilation (id,name,requirement) VALUES (4,'test4',4);
-INSERT INTO affilation (id,name,requirement) VALUES (5,'test5',5);
-INSERT INTO affilation (id,name,requirement) VALUES (6,'test6',6);
-INSERT INTO affilation (id,name,requirement) VALUES (7,'test7',7);
-INSERT INTO affilation (id,name,requirement) VALUES (8,'test8',8);
-INSERT INTO affilation (id,name,requirement) VALUES (9,'test9',9);
+INSERT INTO affilation (id,name,requirement) VALUES (1,'Elf',1);
+INSERT INTO affilation (id,name,requirement) VALUES (2,'Barbarian',2);
+INSERT INTO affilation (id,name,requirement) VALUES (3,'Gensokyo',3);
+INSERT INTO affilation (id,name,requirement) VALUES (4,'Wrocław',4);
+INSERT INTO affilation (id,name,requirement) VALUES (5,'Warszawa',5);
+INSERT INTO affilation (id,name,requirement) VALUES (6,'Podlasie',6);
+INSERT INTO affilation (id,name,requirement) VALUES (7,'Uć',7);
+INSERT INTO affilation (id,name,requirement) VALUES (8,'Porażka życiowa',8);
+INSERT INTO affilation (id,name,requirement) VALUES (9,'Chad',9);
 --rarity
-INSERT INTO rarity (id,name,shortcut,weight) values (1,'rarity1','Mythic',5);
-INSERT INTO rarity (id,name,shortcut,weight) values (2,'rarity2','Legendary',4);
-INSERT INTO rarity (id,name,shortcut,weight) values (3,'rarity3','Epic',3);
-INSERT INTO rarity (id,name,shortcut,weight) values (3,'rarity3','Uncommon',2);
-INSERT INTO rarity (id,name,shortcut,weight) values (3,'rarity3','Common',1);
+INSERT INTO rarity (id,name,shortcut,weight) values (1,'Mythic','MYT',4);
+INSERT INTO rarity (id,name,shortcut,weight) values (2,'Legendary','LEG',1);
+INSERT INTO rarity (id,name,shortcut,weight) values (3,'Epic','EPC',10);
+INSERT INTO rarity (id,name,shortcut,weight) values (4,'Uncommon','UCM',25);
+INSERT INTO rarity (id,name,shortcut,weight) values (5,'Common','CMN',60);
 --artefact
 INSERT INTO artefact (id,name,type,rarity_id) values (1,'Projektor','item',1);
 INSERT INTO artefact (id,name,type,rarity_id) values (2,'Wskaznik','itemizer',2);
@@ -27,19 +75,6 @@ INSERT INTO Dungeon (id,name,released_at,expires_at) values (1,'jurna wieza','20
 INSERT INTO Dungeon (id,name,released_at,expires_at) values (2,'piwnica','2000-01-01 00:00:00','2002-01-01 00:00:00');
 INSERT INTO Dungeon (id,name,released_at,expires_at) values (3,'cyberpunk','2037-01-01 00:00:00',null);
 INSERT INTO Dungeon (id,name,released_at,expires_at) values (4,'PJATK','2018-01-01 00:00:00','2025-01-01 00:00:00');
---dungeonfloor
-INSERT INTO dungeonfloor (id,dungeon_id,depth) values (1,1,1);
-INSERT INTO dungeonfloor (id,dungeon_id,depth) values (2,1,2);
-INSERT INTO dungeonfloor (id,dungeon_id,depth) values (3,2,1);
-INSERT INTO dungeonfloor (id,dungeon_id,depth) values (4,4,10);
---player_dungeonfloor
-INSERT INTO player_dungeonfloor (id,dungeon_floor_id,player_id_player,clear_date) VALUES (1,1,1,curdate());
-INSERT INTO player_dungeonfloor (id,dungeon_floor_id,player_id_player,clear_date) VALUES (2,2,2,'2022-01-01 00:00:00');
-INSERT INTO player_dungeonfloor (id,dungeon_floor_id,player_id_player,clear_date) VALUES (3,3,1,curdate());
---Artefact_Reward_
-INSERT INTO Artefact_Reward(id,quantity,artefact_id,dungeon_floor_id) values (1,1,1,1);
-INSERT INTO Artefact_Reward(id,quantity,artefact_id,dungeon_floor_id) values (2,2,2,2);
-INSERT INTO Artefact_Reward(id,quantity,artefact_id,dungeon_floor_id) values (3,3,3,3);
 --set
 INSERT INTO gacha.set (id,name) values (1,'choker set');
 INSERT INTO gacha.set (id,name) values (2,'test set');
@@ -110,8 +145,8 @@ INSERT INTO stat_artifact (id,statistic_stat_id,artefact_id,value) values (3,3,3
 INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (1,'Sword',1,1,1);
 INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (2,'Bow',2,2,2);
 INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (3,'Almanac',3,3,3);
-INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (3,'Shield',4,4,4);
-INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (3,'Fork',5,5,5);
+INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (4,'Shield',4,4,4);
+INSERT INTO weapon (id,name,element_id,rarity_id,weapon_class_id) VALUES (5,'Fork',5,5,5);
 --character
 INSERT INTO gacha.character (id,name,affilation_id,ability,class_id,rarity_id) VALUES (1,'weeb',1,1,1,1);
 INSERT INTO gacha.character (id,name,affilation_id,ability,class_id,rarity_id) VALUES (2,'warrior',2,2,2,2);
@@ -120,7 +155,7 @@ INSERT INTO gacha.character (id,name,affilation_id,ability,class_id,rarity_id) V
 INSERT INTO gacha.character (id,name,affilation_id,ability,class_id,rarity_id) VALUES (5,'Bob',5,4,5,5);
 INSERT INTO gacha.character (id,name,affilation_id,ability,class_id,rarity_id) VALUES (6,'Greg',6,1,2,2);
 INSERT INTO gacha.character (id,name,affilation_id,ability,class_id,rarity_id) VALUES (7,'George',7,4,4,5);
-INSERT INTO gacha.character (id,name,affilation_id,ability,class_id,rarity_id) VALUES (8,'Stefan',8,3,3,4);
+INSERT INTO gacha.character (id,name,affilation_id,ability,class_id,rarity_id) VALUES (8,'Krzysztof Woś',8,3,3,4);
 INSERT INTO gacha.character (id,name,affilation_id,ability,class_id,rarity_id) VALUES (9,'Stefan',9,2,1,3);
 --Player_Character
 INSERT INTO player_character (id,player_id_player,character_id,ascention,lvl) VALUES (1,1,1,1,1);
@@ -152,11 +187,11 @@ INSERT INTO materialclass (id,material_id,class_id,base_amount,per_lvl_amount) V
 INSERT INTO player_artefact (id,player_id_player,artefact_id,lvl) VALUES (1,1,1,1);
 INSERT INTO player_artefact (id,player_id_player,artefact_id,lvl) VALUES (2,2,2,2);
 INSERT INTO player_artefact (id,player_id_player,artefact_id,lvl) VALUES (3,3,3,3);
-    --characterartefact
+--characterartefact
 INSERT INTO characteratrefact (player_character_id,player_artefact_id) VALUES (1,1);
 INSERT INTO characteratrefact (player_character_id,player_artefact_id) VALUES (1,2);
 INSERT INTO characteratrefact (player_character_id,player_artefact_id) VALUES (2,3);
---character_chest 
+--character_chest
 INSERT INTO character_chest (chest_id_chest,character_id) VALUES (1,1);
 INSERT INTO character_chest (chest_id_chest,character_id) VALUES (1,2);
 INSERT INTO character_chest (chest_id_chest,character_id) VALUES (2,3);
@@ -174,6 +209,23 @@ INSERT INTO Player_Role (Player_player_id,role_id ) VALUES (1,2);
 INSERT INTO Player_Role (Player_player_id,role_id ) VALUES (2,2);
 INSERT INTO Player_Role (Player_player_id,role_id ) VALUES (3,2);
 INSERT INTO Player_Role (Player_player_id,role_id ) VALUES (3,3);
+--party NAME
+INSERT INTO party (id,player_id_player,name,move_order) VALUES (1,1,1,1234);
+INSERT INTO party (id,player_id_player,name,move_order) VALUES (2,2,2,4321);
+INSERT INTO party (id,player_id_player,name,move_order) VALUES (3,3,3,3214);
+--dungeonfloor
+INSERT INTO dungeonfloor (id,dungeon_id,depth,party_id) values (1,1,1,1);
+INSERT INTO dungeonfloor (id,dungeon_id,depth,party_id) values (2,1,2,1);
+INSERT INTO dungeonfloor (id,dungeon_id,depth,party_id) values (3,2,1,1);
+INSERT INTO dungeonfloor (id,dungeon_id,depth,party_id) values (4,4,10,1);
+--player_dungeonfloor
+INSERT INTO player_dungeonfloor (id,dungeon_floor_id,player_id_player,clear_date) VALUES (1,1,1,curdate());
+INSERT INTO player_dungeonfloor (id,dungeon_floor_id,player_id_player,clear_date) VALUES (2,2,2,'2022-01-01 00:00:00');
+INSERT INTO player_dungeonfloor (id,dungeon_floor_id,player_id_player,clear_date) VALUES (3,3,1,curdate());
+--Artefact_Reward_
+INSERT INTO Artefact_Reward(id,quantity,artefact_id,dungeon_floor_id) values (1,1,1,1);
+INSERT INTO Artefact_Reward(id,quantity,artefact_id,dungeon_floor_id) values (2,2,2,2);
+INSERT INTO Artefact_Reward(id,quantity,artefact_id,dungeon_floor_id) values (3,3,3,3);
 --material_reward
 INSERT INTO material_reward (id, material_id,dungeon_floor_id,quantity) VALUES (1,1,1,1);
 INSERT INTO material_reward (id,material_id ,dungeon_floor_id,quantity) VALUES (2,2,2,20);
@@ -194,10 +246,7 @@ INSERT INTO stat_affiliation (id,value,affiliation_id,statistic_stat_id) VALUES 
 INSERT INTO stat_class (id,value, class_id, statistic_stat_id) VALUES (1,1,1,1);
 INSERT INTO stat_class (id,value, class_id, statistic_stat_id) VALUES (2,2,2,2);
 INSERT INTO stat_class (id,value, class_id, statistic_stat_id) VALUES (3,3,3,3);
---party NAME
-INSERT INTO party (id,player_id_player,name,move_order) VALUES (1,1,1,1234);
-INSERT INTO party (id,player_id_player,name,move_order) VALUES (2,2,2,4321);
-INSERT INTO party (id,player_id_player,name,move_order) VALUES (3,3,3,3214);
+
 -- player_chestitem
 INSERT INTO player_chestitem (id,player_id_player,chest_id_chest,bought_at) VALUES (1,1,1,curdate());
 INSERT INTO player_chestitem (id,player_id_player,chest_id_chest,bought_at) VALUES (2,2,2,curdate());
@@ -209,15 +258,12 @@ INSERT INTO stat_weapon(id,statistic_stat_id,weapon_id,value) values (3,3,3,300)
 --partycharacter
 INSERT INTO partycharacter (party_id,player_character_id) VALUES (1,1);
 INSERT INTO partycharacter (party_id,player_character_id) VALUES (1,2);
-INSERT INTO partycharacter (party_id,player_character_id) VALUES (2,1);
+INSERT INTO partycharacter (party_id,player_character_id) VALUES (2,8);
 INSERT INTO partycharacter (party_id,player_character_id) VALUES (1,3);
 INSERT INTO partycharacter (party_id,player_character_id) VALUES (1,4);
 INSERT INTO partycharacter (party_id,player_character_id) VALUES (2,5);
 INSERT INTO partycharacter (party_id,player_character_id) VALUES (2,6);
 INSERT INTO partycharacter (party_id,player_character_id) VALUES (2,7);
---party_dungeonfloor
-INSERT INTO party_dungeonfloor (party_id,dungeon_floor_ID) VALUES (1,1);
-INSERT INTO party_dungeonfloor (party_id,dungeon_floor_ID) VALUES (2,2);
 --player_weapon
 INSERT INTO player_weapon (id, wielding_character, player_id_player, weapon_id, ascension, lvl) VALUES (1,1,1,1,1,1);
 INSERT INTO player_weapon (id, wielding_character, player_id_player, weapon_id, ascension, lvl) VALUES (2,2,2,2,2,2);

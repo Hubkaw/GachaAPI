@@ -30,16 +30,7 @@ public class Party {
     @JsonIgnore
     private Player playerByPlayerIdPlayer;
 
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    })
-    @JoinTable(name = "party_dungeonfloor" ,
-            joinColumns = {
-                    @JoinColumn(name = "Party_Id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "DungeonFloor_ID")
-            })
+    @OneToMany(mappedBy = "party")
     @JsonIgnore
     private Set<Dungeonfloor> dungeonFloors;
 

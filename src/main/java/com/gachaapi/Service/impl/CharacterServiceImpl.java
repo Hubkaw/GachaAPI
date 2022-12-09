@@ -38,6 +38,8 @@ public class CharacterServiceImpl implements CharacterService {
     }
     @Override
     public void delete(int id) {
-        characterRepository.deleteById(id);
+        Character character = characterRepository.getReferenceById(id);
+        if(character.getPlayerCharactersById().isEmpty())
+            characterRepository.deleteById(id);
     }
 }

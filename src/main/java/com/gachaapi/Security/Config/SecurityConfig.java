@@ -22,8 +22,8 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static com.gachaapi.Service.Constants.ADMIN_ROLE;
-import static com.gachaapi.Service.Constants.USER_ROLE;
+import static com.gachaapi.Utils.Constants.ADMIN_ROLE;
+import static com.gachaapi.Utils.Constants.USER_ROLE;
 
 
 @Configuration
@@ -54,6 +54,7 @@ public class SecurityConfig {
                 .formLogin(Customizer.withDefaults())
                 .build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

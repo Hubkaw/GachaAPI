@@ -8,7 +8,6 @@ import com.gachaapi.Service.interfaces.StatisticService;
 import com.gachaapi.Utils.dev.NewArtefact;
 import com.gachaapi.Utils.dev.NewArtefactSet;
 import com.gachaapi.Utils.dev.NewStatArtefact;
-import com.gachaapi.Utils.dev.NewStatWeapon;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

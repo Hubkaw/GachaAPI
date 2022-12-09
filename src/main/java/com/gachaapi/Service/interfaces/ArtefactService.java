@@ -5,7 +5,6 @@ import com.gachaapi.Entity.Artefact;
 import com.gachaapi.Utils.dev.NewArtefact;
 import com.gachaapi.Utils.dev.NewArtefactSet;
 import com.gachaapi.Utils.dev.NewStatArtefact;
-import com.gachaapi.Utils.dev.NewStatWeapon;
 
 import java.util.List;
 

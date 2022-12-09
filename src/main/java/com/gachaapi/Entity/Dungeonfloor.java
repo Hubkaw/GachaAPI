@@ -32,17 +32,9 @@ public class Dungeonfloor {
     @JsonIgnore
     private Collection<MaterialReward> materialRewardsById;
 
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    })
-    @JoinTable(name = "party_dungeonfloor" ,
-            joinColumns = {
-                    @JoinColumn(name = "DungeonFloor_ID")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "Party_Id")
-            })
-    private Collection<Party> parties;
+    @ManyToOne
+    @JoinColumn(name = "partyId", referencedColumnName = "Id", nullable = false)
+    private Party party;
 
     @OneToMany(mappedBy = "dungeonfloorByDungeonFloorId")
     @JsonIgnore

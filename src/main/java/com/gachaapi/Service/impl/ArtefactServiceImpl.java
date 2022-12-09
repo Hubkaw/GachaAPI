@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -38,8 +37,10 @@ public class ArtefactServiceImpl implements ArtefactService {
     }
 
     @Override
-    public void delete(int id) {
-        artefactRepository.deleteById(id);
+    public void delete(int id){
+        Artefact artefact = artefactRepository.getReferenceById(id);
+        if (artefact.getPlayerArtefacts().isEmpty())
+            artefactRepository.deleteById(id);
     }
 
     @Override

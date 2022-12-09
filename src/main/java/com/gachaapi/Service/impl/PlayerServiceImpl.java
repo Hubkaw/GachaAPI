@@ -19,7 +19,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.List;
 
-import static com.gachaapi.Service.Constants.USER_ROLE;
+import static com.gachaapi.Utils.Constants.USER_ROLE;
 
 @Service
 @AllArgsConstructor

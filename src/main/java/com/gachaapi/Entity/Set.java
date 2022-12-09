@@ -21,7 +21,7 @@ public class Set {
     private String name;
 
     @ManyToMany(cascade = {
-            CascadeType.ALL
+            CascadeType.PERSIST
     })
     @JoinTable(name = "artefact_set" ,
             joinColumns = {
@@ -33,7 +33,7 @@ public class Set {
     @JsonIgnore
     private java.util.Set<Artefact> artefacts;
 
-    @OneToMany(mappedBy = "set")
+    @OneToMany(mappedBy = "set", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Collection<StatArtefactset> stats;
 
     @Override

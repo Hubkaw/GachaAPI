@@ -1,6 +1,7 @@
 body {
     background-color: #222;
     color: darkgray;
+    font-size: large;
 }
 
 a {
@@ -29,6 +30,7 @@ td {
     border-width: 1px;
     border-style: solid;
     border-color: crimson;
+
 }
 
 button {
@@ -43,5 +45,5 @@ table {
     padding-top: 15px;
 }
 html{
-    cursor: url("../images/kys.jpg"), auto;
+    cursor: url("https://imgur.com/a/GnETciV"), auto;
 }
