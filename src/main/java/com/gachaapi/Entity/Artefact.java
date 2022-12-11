@@ -1,6 +1,7 @@
 package com.gachaapi.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gachaapi.Utils.ArtefactType;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,7 +24,7 @@ public class Artefact {
 
     @Basic
     @Column(name = "Type", nullable = false, length = 12)
-    private String type;
+    private ArtefactType type;
 
 
     @ManyToOne

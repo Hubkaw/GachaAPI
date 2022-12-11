@@ -60,7 +60,7 @@ public class PlayerCharacter {
     private Character character;
 
     @OneToMany(mappedBy = "wieldingCharacter")
-    private Collection<PlayerWeapon> playerWeapons;
+    private Collection<PlayerWeapon> wieldedWeapons;
 
 
 

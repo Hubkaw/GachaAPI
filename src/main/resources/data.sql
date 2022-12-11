@@ -63,10 +63,10 @@ INSERT INTO rarity (id,name,shortcut,weight) values (3,'Epic','EPC',10);
 INSERT INTO rarity (id,name,shortcut,weight) values (4,'Uncommon','UCM',25);
 INSERT INTO rarity (id,name,shortcut,weight) values (5,'Common','CMN',60);
 --artefact
-INSERT INTO artefact (id,name,type,rarity_id) values (1,'Projektor','item',1);
-INSERT INTO artefact (id,name,type,rarity_id) values (2,'Wskaznik','itemizer',2);
-INSERT INTO artefact (id,name,type,rarity_id) values (3,'Was Tomaszewa','moustache',3);
---player id z party?
+INSERT INTO artefact (id,name,type,rarity_id) values (1,'Projektor',1,1);
+INSERT INTO artefact (id,name,type,rarity_id) values (2,'Wskaznik',1,2);
+INSERT INTO artefact (id,name,type,rarity_id) values (3,'Was Tomaszewa',0,3);
+--player !!! ADMIN MA ZAWSZE MIEC ID 1 !!!
 INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints) values (1,'admin','1900-01-01 00:00:00','2022-01-01 00:00:00',1,10000,'$2a$12$qmuu8mn/qN1D.ykSKYMJp.JNWJzL2fL77VHtd7/uzlpzOWv8r5dBC',1,1,1,1);
 INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints) values (2,'user','1900-01-01 00:00:00','2022-01-01 00:00:00',2,9999,'$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe',1,1,1,1);
 INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints) values (3,'autist','1900-01-01 00:00:00','2022-01-01 00:00:00',3,9999,'$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe',1,1,1,1);

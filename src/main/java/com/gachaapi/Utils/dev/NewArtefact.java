@@ -3,6 +3,7 @@ package com.gachaapi.Utils.dev;
 import com.gachaapi.Entity.Artefact;
 import com.gachaapi.Entity.Dungeon;
 import com.gachaapi.Entity.Rarity;
+import com.gachaapi.Utils.ArtefactType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -20,7 +21,7 @@ public class NewArtefact {
     public Artefact create() {
         Artefact newArtefact = new Artefact();
         newArtefact.setName(name);
-        newArtefact.setType(type);
+        newArtefact.setType(ArtefactType.valueOf(type));
         return newArtefact;
     }
 }

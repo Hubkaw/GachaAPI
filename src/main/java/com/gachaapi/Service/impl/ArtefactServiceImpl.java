@@ -5,6 +5,7 @@ import com.gachaapi.Entity.Artefact;
 import com.gachaapi.Entity.StatArtifact;
 import com.gachaapi.Repository.*;
 import com.gachaapi.Service.interfaces.ArtefactService;
+import com.gachaapi.Utils.ArtefactType;
 import com.gachaapi.Utils.dev.NewArtefact;
 import com.gachaapi.Utils.dev.NewArtefactSet;
 import com.gachaapi.Utils.dev.NewStatArtefact;
@@ -27,6 +28,11 @@ public class ArtefactServiceImpl implements ArtefactService {
     @Override
     public List<Artefact> getAll() {
         return artefactRepository.findAll();
+    }
+
+    @Override
+    public List<Artefact> getAllByType(ArtefactType artefactType) {
+        return artefactRepository.findAllByType(artefactType);
     }
 
     @Override
@@ -76,5 +82,6 @@ public class ArtefactServiceImpl implements ArtefactService {
         artefact.getSets().removeIf(s -> s.getId()==setId);
         artefactRepository.save(artefact);
     }
+
 
 }

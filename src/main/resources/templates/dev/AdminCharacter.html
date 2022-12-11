@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{/assets/style.css}" rel="stylesheet"/>
+    <title>Dev Admin Character</title>
+</head>
+<body>
+<div>
+    <h1>Create PvE Character</h1>
+    <form th:action="@{/dev/admin/character}" th:method="post" th:object="${newAdminCharacter}">
+    <table>
+        <tr><td th:colspan="2" class="head-cell">Character</td></tr>
+        <tr>
+            <td>Choose Character:</td>
+            <td><label>
+                <select name="charId">
+                    <option value="-1">None</option>
+                    <option th:each="item : ${characterList}" th:value="${item.id}" th:text="${item.name}+' - '+${item.characterClass.name}"></option>
+                </select>
+            </label></td>
+        </tr>
+        <tr>
+            <td>Level:</td>
+            <td><label>
+                <input th:type="number" name="charLvl" value="0" required>
+            </label></td>
+        </tr>
+        <tr><td th:colspan="2" class="head-cell">Weapon</td>
+        </tr>
+        <tr>
+            <td>Choose Weapon:</td>
+            <td>
+                <select name="weaponId">
+                    <option value="-1">Please select a Character</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Level:</td>
+            <td><input th:type="number" name="weaponLvl" value="0"></td>
+        </tr>
+        <tr class="head-cell" th:colspan="2">
+            <td th:colspan="2" class="head-cell">Artefacts</td>
+        </tr>
+        <tr>
+            <td>Ring:</td>
+            <td><select name="ringId">
+                <option value=-1>None</option>
+                <option th:each="item : ${ringList}" th:value="${item.id}" th:text="${item.name}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Level:</td>
+            <td><input name="ringLvl" type="number" value="0"></td>
+        </tr>
+        <tr>
+            <td>Glasses:</td>
+            <td><select name="glassesId">
+                <option value=-1>None</option>
+                <option th:each="item : ${glassesList}" th:value="${item.id}" th:text="${item.name}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Level:</td>
+            <td><input name="glassesLvl" type="number" value="0"></td>
+        </tr>
+        <tr>
+            <td>Hat:</td>
+            <td><select name="hatId">
+                <option value=-1>None</option>
+                <option th:each="item : ${hatList}" th:value="${item.id}" th:text="${item.name}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Level:</td>
+            <td><input name="hatLvl" type="number" value="0"></td>
+        </tr>
+        <tr><td th:colspan="2"><input class="big-button" type="submit" th:value="submit"></tr>
+    </table>
+    </form>
+    <br>
+</div>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Level</td>
+            <td>Weapon</td>
+            <td>Weapon lvl</td>
+            <td>Delete</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${adminCharacterList}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.character.name}"></td>
+            <td th:text="${item.lvl}"></td>
+            <td th:if="${!item.wieldedWeapons.empty}" th:text="${item.wieldedWeapons[0].weapon.name}"></td>
+            <td th:if="${item.wieldedWeapons.empty}" th:text="'- -'"></td>
+            <td th:if="${!item.wieldedWeapons.empty}" th:text="${item.wieldedWeapons[0].lvl}"></td>
+            <td th:if="${item.wieldedWeapons.empty}" th:text="'- -'"></td>
+            <td><a th:href="@{'/dev/admin/character/delete'+${item.id}}">
+                <button>Delete</button>
+            </a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var characters = /*[[${characterList}]]*/;
+    var weapons = /*[[${weaponList}]]*/;
+
+    $('select[name="charId"]').change(function(){
+        console.log($(this).val())
+        if($(this).val() != -1) {
+            var weaponClassId = characters.find(x => x.id == $(this).val()).characterClass.weaponClass.id;
+            var avalibleWeapons = weapons.filter(x => x.weaponClass.id == weaponClassId);
+            $('select[name="weaponId"]').empty();
+            for (var i = 0; i < avalibleWeapons.length; i++) {
+                $('select[name="weaponId"]').append('<option value="' + avalibleWeapons[i].id + '">' + avalibleWeapons[i].name + '</option>');
+            }
+        } else {
+            $('select[name="weaponId"]').empty().append('<option value="-1">Please select a Character</option>');
+        }
+    })
+    /*]]>*/
+</script>
+</body>
+</html>
