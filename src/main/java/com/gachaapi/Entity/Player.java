@@ -59,7 +59,7 @@ public class Player {
     @Column(name = "ELOPoints", nullable = false)
     private int eloPoints;
 
-    @OneToMany(mappedBy = "playerByPlayerIdPlayer")
+    @OneToMany(mappedBy = "player")
     @JsonIgnore
     private Collection<Party> partiesByIdPlayer;
 

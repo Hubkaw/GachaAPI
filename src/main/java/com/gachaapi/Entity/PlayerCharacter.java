@@ -48,6 +48,7 @@ public class PlayerCharacter {
             inverseJoinColumns = {
                     @JoinColumn(name = "Party_Id")
             })
+    @JsonIgnore
     private Set<Party> parties;
 
     @ManyToOne

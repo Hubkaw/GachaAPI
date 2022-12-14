@@ -6,6 +6,7 @@ import com.gachaapi.Security.Service.JWTService;
 import com.gachaapi.Service.interfaces.PlayerService;
 import com.gachaapi.Utils.TokenResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -15,8 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+
+import static com.gachaapi.Utils.Constants.ADMIN_ROLE;
 
 @RestController
 @AllArgsConstructor
@@ -35,6 +41,23 @@ public class SecurityController {
     @PostMapping("/signup")
     public ResponseEntity<Player> createPlayer(@RequestBody NewPlayer newPlayer) {
         return new ResponseEntity<>(playerService.createNewPlayer(newPlayer), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/login")
+    public ModelAndView getLoginPage(Model model){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("game/login");
+        return mv;
+    }
+
+    @GetMapping("/")
+    public RedirectView getRedirector(Model model, HttpServletRequest request){
+        RedirectView redirectView = new RedirectView();
+        if (request.isUserInRole(ADMIN_ROLE) || request.isUserInRole("SCOPE_"+ADMIN_ROLE))
+            redirectView.setUrl("/dev/menu");
+        else
+            redirectView.setUrl("/home");
+        return redirectView;
     }
 
 }

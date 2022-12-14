@@ -2,13 +2,16 @@ body {
     background-color: #222;
     color: darkgray;
     font-size: large;
+    text-shadow: 1px 1px darkred;
 }
 
 a {
     color: deeppink;
+    text-shadow: 1px 1px black;
 }
 h1 {
     color: crimson;
+    text-shadow: 1px 1px black;
 }
 select {
     background-color: crimson;
@@ -67,4 +70,16 @@ tr td select{
 tr td input{
     width: auto;
     height: 100%;
+}
+
+#login-table{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+
 }

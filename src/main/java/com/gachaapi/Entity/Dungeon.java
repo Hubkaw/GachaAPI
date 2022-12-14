@@ -11,7 +11,7 @@ public class Dungeon {
     private String name;
     private Timestamp releasedAt;
     private Timestamp expiresAt;
-    private Collection<Dungeonfloor> dungeonfloorsById;
+    private Collection<Dungeonfloor> floors;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,11 +68,11 @@ public class Dungeon {
     }
 
     @OneToMany(mappedBy = "dungeonByDungeonId")
-    public Collection<Dungeonfloor> getDungeonfloorsById() {
-        return dungeonfloorsById;
+    public Collection<Dungeonfloor> getFloors() {
+        return floors;
     }
 
-    public void setDungeonfloorsById(Collection<Dungeonfloor> dungeonfloorsById) {
-        this.dungeonfloorsById = dungeonfloorsById;
+    public void setFloors(Collection<Dungeonfloor> dungeonfloorsById) {
+        this.floors = dungeonfloorsById;
     }
 }

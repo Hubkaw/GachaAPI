@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{/assets/style.css}" rel="stylesheet"/>
+    <title>Dev Admin Character</title>
+</head>
+<body>
+<div>
+    <h1 class="center">Create Dungeon Floor Party</h1>
+    <h3 class="center"><a th:href="@{/dev/menu}" >Back to menu</a></h3>
+    <form th:action="@{/dev/admin/party}" th:method="post" th:object="${newAdminParty}">
+        <table class="center">
+            <tr><td class="head-cell" th:colspan="4">Dungeon</td></tr>
+            <tr>
+                <td th:colspan="2">Dugeon: </td>
+                <td th:colspan="2">
+                    <select name="dungeon">
+                        <option th:each="item : ${dungeonList}" th:value="${item.id}" th:text="${item.name}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td th:colspan="2">Floor depth: </td>
+                <td th:colspan="2"><input name="depth" type="number" readonly></td>
+            </tr>
+            <tr><td class="head-cell" th:colspan="4">Party</td></tr>
+            <tr>
+                <td th:colspan="2">Party Name:</td>
+                <td th:colspan="2"><input name="name" type="text"></td>
+            </tr>
+            <tr>
+                <td>Character Slot 1</td>
+                <td>Character Slot 2</td>
+                <td>Character Slot 3</td>
+                <td>Character Slot 4</td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="char1">
+                        <option th:each="item : ${characterList}" th:value="${item.id}" th:text="${item.character}+' '+${item.lvl}+'lvl'"></option>
+                    </select>
+                </td>
+                <td>
+                    <select name="char2">
+                        <option th:each="item : ${characterList}" th:value="${item.id}" th:text="${item.character}+' '+${item.lvl}+'lvl'"></option>
+                    </select>
+                </td>
+                <td>
+                    <select name="char3">
+                        <option th:each="item : ${characterList}" th:value="${item.id}" th:text="${item.character}+' '+${item.lvl}+'lvl'"></option>
+                    </select>
+                </td>
+                <td>
+                    <select name="char4">
+                        <option th:each="item : ${characterList}" th:value="${item.id}" th:text="${item.character}+' '+${item.lvl}+'lvl'"></option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+    </form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var dungeons = /*[[${dungeonList}]]*/;
+
+
+
+    $('select[name="dungeon"]').on('change load ready', function() {
+        if ($(this).val() >= 0) {
+            var floors = dungeons.find(x => x.id == $(this).val()).floors;
+            var newFloorDepth = Math.max(floors.map(f => f.depth), 0) + 1;
+            $('input[name=depth]').val(newFloorDepth);
+        } else {
+            $('input[name=depth]').val(0);
+        }
+    })
+    /*]]>*/
+</script>
+</body>
+</html>

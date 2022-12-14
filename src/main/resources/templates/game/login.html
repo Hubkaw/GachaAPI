@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{/assets/style.css}" rel="stylesheet" />
+    <title>Login to Gacha</title>
+</head>
+<body>
+<h1 class="center">Login to Gacha</h1>
+<form name="f" th:action="@{/login}" method="post">
+    <table id="login-table">
+        <tr> <td class="head-cell"><label for="nick">Your Login:</label></td></tr>
+        <tr> <td><input name="nick" type="text" id="nick"></td></tr>
+        <tr> <td class="head-cell"><label for="password">Your Password:</label></td></tr>
+        <tr> <td><input name="password" id="password" type="password"></td></tr>
+        <tr><td><input type="submit" value="Log in"></td></tr>
+    </table><br>
+
+    <div th:if="${param.error}">
+        <span class="error">Invalid username adn/or password.</span>
+    </div>
+</form>
+</body>
+</html>

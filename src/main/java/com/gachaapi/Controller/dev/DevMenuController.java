@@ -30,7 +30,8 @@ public class DevMenuController {
             new DevMenuRecord("Dungeon", "/dev/dungeon"),
             new DevMenuRecord("Artefact", "/dev/artefact"),
             new DevMenuRecord("Artefact Set", "/dev/set"),
-            new DevMenuRecord("Admin Character", "/dev/admin/character")
+            new DevMenuRecord("Admin Character", "/dev/admin/character"),
+            new DevMenuRecord("Admin Party", "/dev/admin/party")
     );
 
 

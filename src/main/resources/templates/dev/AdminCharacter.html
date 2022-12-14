@@ -10,9 +10,10 @@
 </head>
 <body>
 <div>
-    <h1>Create PvE Character</h1>
+    <h1 class="center">Create PvE Character</h1>
+    <h3 class="center"><a th:href="@{/dev/menu}" >Back to menu</a></h3>
     <form th:action="@{/dev/admin/character}" th:method="post" th:object="${newAdminCharacter}">
-    <table>
+    <table class="center">
         <tr><td th:colspan="2" class="head-cell">Character</td></tr>
         <tr>
             <td>Choose Character:</td>
@@ -84,7 +85,7 @@
     </form>
     <br>
 </div>
-<div>
+<div class="center">
     <table>
         <thead>
         <tr>
@@ -119,7 +120,6 @@
     var weapons = /*[[${weaponList}]]*/;
 
     $('select[name="charId"]').change(function(){
-        console.log($(this).val())
         if($(this).val() != -1) {
             var weaponClassId = characters.find(x => x.id == $(this).val()).characterClass.weaponClass.id;
             var avalibleWeapons = weapons.filter(x => x.weaponClass.id == weaponClassId);

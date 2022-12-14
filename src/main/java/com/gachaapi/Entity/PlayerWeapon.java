@@ -11,6 +11,7 @@ public class PlayerWeapon {
     private int id;
     private int ascension;
     private int lvl;
+    @JsonIgnore
     private PlayerCharacter wieldingCharacter;
     @JsonIgnore
     private Player player;

@@ -28,7 +28,7 @@ public class Party {
     @ManyToOne
     @JoinColumn(name = "Player_IdPlayer", referencedColumnName = "IdPlayer", nullable = false)
     @JsonIgnore
-    private Player playerByPlayerIdPlayer;
+    private Player player;
 
     @OneToMany(mappedBy = "party")
     @JsonIgnore
@@ -44,7 +44,7 @@ public class Party {
             inverseJoinColumns = {
             @JoinColumn(name = "PlayerCharacter_Id")
     })
-    private Set<Character> characters;
+    private Set<PlayerCharacter> characters;
 
 
     @Override
