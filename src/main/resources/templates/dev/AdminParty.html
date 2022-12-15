@@ -12,6 +12,7 @@
 <div>
     <h1 class="center">Create Dungeon Floor Party</h1>
     <h3 class="center"><a th:href="@{/dev/menu}" >Back to menu</a></h3>
+    <p th:if="${error}" th:text="${error}" class="center"></p>
     <form th:action="@{/dev/admin/party}" th:method="post" th:object="${newAdminParty}">
         <table class="center">
             <tr><td class="head-cell" th:colspan="4">Dungeon</td></tr>
@@ -27,6 +28,7 @@
                 <td th:colspan="2">Floor depth: </td>
                 <td th:colspan="2"><input name="depth" type="number" readonly></td>
             </tr>
+            <tr></tr>
             <tr><td class="head-cell" th:colspan="4">Party</td></tr>
             <tr>
                 <td th:colspan="2">Party Name:</td>
@@ -60,9 +62,39 @@
                     </select>
                 </td>
             </tr>
+            <tr><td th:colspan="4"><input type="submit" value="submit"></td></tr>
         </table>
-
     </form>
+</div>
+<div class="center">
+    <table>
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Dungeon</td>
+            <td>Depth</td>
+            <td th:colspan="4">Characters</td>
+            <td>Rewards</td>
+            <td>Delete</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${dungeonFloorList}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.party.name}"></td>
+            <td th:text="${item.dungeon.name}"></td>
+            <td th:text="${item.depth}"></td>
+            <td th:each="char : ${item.party.characters}" th:text="${char.character}+' '+${char.lvl}+'lvl'"></td>
+            <td><a th:href="@{'/dev/admin/party/rewards/'+${item.id}}">
+                <button>Manage</button>
+            </a></td>
+            <td><a th:href="@{'/dev/admin/party/delete/'+${item.id}}">
+                <button>Delete</button>
+            </a></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script th:inline="javascript">

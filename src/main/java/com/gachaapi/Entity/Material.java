@@ -57,7 +57,7 @@ public class Material {
         return Objects.hash(id, name);
     }
 
-    @OneToMany(mappedBy = "materialByMaterialId")
+    @OneToMany(mappedBy = "material")
     public Collection<MaterialReward> getMaterialRewardsById() {
         return materialRewardsById;
     }

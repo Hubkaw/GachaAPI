@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .authorizeRequests(auth -> {
                     auth.antMatchers("/","/signup", "/token", "/assets/style.css", "/images/**").permitAll();
 //                    auth.antMatchers("/dev/**", "/assets/style.css").access("hasIpAddress('127.0.0.1') or hasIpAddress('::1') or hasAuthority('ADMIN') or hasAuthority('SCOPE_ADMIN')");
-                    auth.antMatchers("/dev/**").hasAnyAuthority(ADMIN_ROLE);
+                    auth.antMatchers("/dev/**", "/error").hasAnyAuthority(ADMIN_ROLE);
                     auth.antMatchers("/players").hasAuthority("SCOPE_" + ADMIN_ROLE);
                     auth.anyRequest().hasAuthority("SCOPE_" + USER_ROLE);
 //                    auth.anyRequest().permitAll();

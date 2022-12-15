@@ -10,9 +10,9 @@ import java.util.Objects;
 public class MaterialReward {
     private int id;
     private int quantity;
-    private Material materialByMaterialId;
+    private Material material;
     @JsonIgnore
-    private Dungeonfloor dungeonfloorByDungeonFloorId;
+    private Dungeonfloor dungeonFloor;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,21 +50,21 @@ public class MaterialReward {
 
     @ManyToOne
     @JoinColumn(name = "Material_Id", referencedColumnName = "Id", nullable = false)
-    public Material getMaterialByMaterialId() {
-        return materialByMaterialId;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setMaterialByMaterialId(Material materialByMaterialId) {
-        this.materialByMaterialId = materialByMaterialId;
+    public void setMaterial(Material materialByMaterialId) {
+        this.material = materialByMaterialId;
     }
 
     @ManyToOne
     @JoinColumn(name = "DungeonFloor_ID", referencedColumnName = "ID", nullable = false)
-    public Dungeonfloor getDungeonfloorByDungeonFloorId() {
-        return dungeonfloorByDungeonFloorId;
+    public Dungeonfloor getDungeonFloor() {
+        return dungeonFloor;
     }
 
-    public void setDungeonfloorByDungeonFloorId(Dungeonfloor dungeonfloorByDungeonFloorId) {
-        this.dungeonfloorByDungeonFloorId = dungeonfloorByDungeonFloorId;
+    public void setDungeonFloor(Dungeonfloor dungeonfloorByDungeonFloorId) {
+        this.dungeonFloor = dungeonfloorByDungeonFloorId;
     }
 }

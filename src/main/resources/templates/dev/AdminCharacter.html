@@ -106,7 +106,7 @@
             <td th:if="${item.wieldedWeapons.empty}" th:text="'- -'"></td>
             <td th:if="${!item.wieldedWeapons.empty}" th:text="${item.wieldedWeapons[0].lvl}"></td>
             <td th:if="${item.wieldedWeapons.empty}" th:text="'- -'"></td>
-            <td><a th:href="@{'/dev/admin/character/delete'+${item.id}}">
+            <td><a th:href="@{'/dev/admin/character/delete/'+${item.id}}">
                 <button>Delete</button>
             </a></td>
         </tr>

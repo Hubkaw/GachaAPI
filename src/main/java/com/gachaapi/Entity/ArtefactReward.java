@@ -10,9 +10,9 @@ import java.util.Objects;
 public class ArtefactReward {
     private int id;
     private int quantity;
-    private Artefact artefactByArtefactId;
+    private Artefact artefact;
     @JsonIgnore
-    private Dungeonfloor dungeonfloorByDungeonFloorId;
+    private Dungeonfloor dungeonFloor;
 
     @Id
     @Column(name = "Id", nullable = false)
@@ -49,21 +49,21 @@ public class ArtefactReward {
 
     @ManyToOne
     @JoinColumn(name = "Artefact_Id", referencedColumnName = "Id", nullable = false)
-    public Artefact getArtefactByArtefactId() {
-        return artefactByArtefactId;
+    public Artefact getArtefact() {
+        return artefact;
     }
 
-    public void setArtefactByArtefactId(Artefact artefactByArtefactId) {
-        this.artefactByArtefactId = artefactByArtefactId;
+    public void setArtefact(Artefact artefactByArtefactId) {
+        this.artefact = artefactByArtefactId;
     }
 
     @ManyToOne
     @JoinColumn(name = "DungeonFloor_ID", referencedColumnName = "ID", nullable = false)
-    public Dungeonfloor getDungeonfloorByDungeonFloorId() {
-        return dungeonfloorByDungeonFloorId;
+    public Dungeonfloor getDungeonFloor() {
+        return dungeonFloor;
     }
 
-    public void setDungeonfloorByDungeonFloorId(Dungeonfloor dungeonfloorByDungeonFloorId) {
-        this.dungeonfloorByDungeonFloorId = dungeonfloorByDungeonFloorId;
+    public void setDungeonFloor(Dungeonfloor dungeonfloorByDungeonFloorId) {
+        this.dungeonFloor = dungeonfloorByDungeonFloorId;
     }
 }

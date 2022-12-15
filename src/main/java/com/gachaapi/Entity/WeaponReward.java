@@ -10,9 +10,9 @@ import java.util.Objects;
 public class WeaponReward {
     private int id;
     private int quantity;
-    private Weapon weaponByWeaponId;
+    private Weapon weapon;
     @JsonIgnore
-    private Dungeonfloor dungeonfloorByDungeonFloorId;
+    private Dungeonfloor dungeonFloor;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,21 +50,21 @@ public class WeaponReward {
 
     @ManyToOne
     @JoinColumn(name = "Weapon_Id", referencedColumnName = "Id", nullable = false)
-    public Weapon getWeaponByWeaponId() {
-        return weaponByWeaponId;
+    public Weapon getWeapon() {
+        return weapon;
     }
 
-    public void setWeaponByWeaponId(Weapon weaponByWeaponId) {
-        this.weaponByWeaponId = weaponByWeaponId;
+    public void setWeapon(Weapon weaponByWeaponId) {
+        this.weapon = weaponByWeaponId;
     }
 
     @ManyToOne
     @JoinColumn(name = "DungeonFloor_ID", referencedColumnName = "ID", nullable = false)
-    public Dungeonfloor getDungeonfloorByDungeonFloorId() {
-        return dungeonfloorByDungeonFloorId;
+    public Dungeonfloor getDungeonFloor() {
+        return dungeonFloor;
     }
 
-    public void setDungeonfloorByDungeonFloorId(Dungeonfloor dungeonfloorByDungeonFloorId) {
-        this.dungeonfloorByDungeonFloorId = dungeonfloorByDungeonFloorId;
+    public void setDungeonFloor(Dungeonfloor dungeonfloorByDungeonFloorId) {
+        this.dungeonFloor = dungeonfloorByDungeonFloorId;
     }
 }

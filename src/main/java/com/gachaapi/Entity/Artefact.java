@@ -31,7 +31,7 @@ public class Artefact {
     @JoinColumn(name = "Rarity_id", referencedColumnName = "id", nullable = false)
     private Rarity rarity;
 
-    @OneToMany(mappedBy = "artefactByArtefactId")
+    @OneToMany(mappedBy = "artefact")
     @JsonIgnore
     private Collection<ArtefactReward> artefactRewards;
 

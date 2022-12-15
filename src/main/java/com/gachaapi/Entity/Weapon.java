@@ -53,7 +53,7 @@ public class Weapon implements PossibleChestReward {
     @JsonIgnore
     private Collection<Chest> chests;
 
-    @OneToMany(mappedBy = "weaponByWeaponId")
+    @OneToMany(mappedBy = "weapon")
     @JsonIgnore
     private Collection<WeaponReward> weaponRewardsById;
 

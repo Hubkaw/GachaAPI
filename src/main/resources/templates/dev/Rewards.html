@@ -1,0 +1,122 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{/assets/style.css}" rel="stylesheet"/>
+    <title>Dev Admin Character</title>
+</head>
+<body>
+<h1 class="center">Create Dungeon Floor Party</h1>
+<h3 class="center"><a th:href="@{/dev/menu}">Back to menu</a></h3>
+<p th:if="${error}" th:text="${error}" class="center"></p>
+
+<form class="center" th:action="@{/dev/admin/party/rewards/weapon}" th:object="${newWeaponReward}" method="post">
+    <input type="hidden" name="dungeonFloorId" th:value="${dungeonFloor.id}">
+    <table width="350px">
+        <tr>
+            <td th:colspan="2" class="head-cell">Weapon</td>
+        </tr>
+        <tr>
+            <td>Weapon:</td>
+            <td><select name="weaponId">
+                <option th:each="item : ${weaponList}" th:value="${item.id}" th:text="${item.name}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Quantity:</td>
+            <td><input name="quantity" type="number"></td>
+        </tr>
+        <tr>
+            <td th:colspan="2"><input type="submit" th:value="submit"></td>
+        </tr>
+    </table>
+</form>
+<div class="center">
+    <table th:width="350px">
+
+        <tr>
+            <td th:colspan="2" class="head-cell">Current:</td>
+        </tr>
+        <tr th:each="item : ${dungeonFloor.weaponRewards}">
+            <td th:text="${item.weapon.name}"></td>
+            <td><a th:href="'/dev/admin/party/rewards/weapon/delete/'+${item.id}+'/'+${dungeonFloor.id}">
+                <button>Delete</button>
+            </a></td>
+        </tr>
+    </table>
+</div>
+<hr th:width="600px">
+
+<form class="center" th:action="@{/dev/admin/party/rewards/artefact}" th:object="${newArtefactReward}" method="post">
+    <input type="hidden" name="dungeonFloorId" th:value="${dungeonFloor.id}">
+    <table width="350px">
+        <tr>
+            <td th:colspan="2" class="head-cell">Artefact</td>
+        </tr>
+        <tr>
+            <td>Artefact:</td>
+            <td><select name="artefactId">
+                <option th:each="item : ${artefactList}" th:value="${item.id}" th:text="${item.name}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Quantity:</td>
+            <td><input name="quantity" type="number"></td>
+        </tr>
+        <tr>
+            <td th:colspan="2"><input type="submit" th:value="submit"></td>
+        </tr>
+    </table>
+</form>
+<div class="center"><table width="350px">
+    <tr>
+            <td th:colspan="2" class="head-cell">Current:</td>
+        </tr>
+        <tr th:each="item : ${dungeonFloor.artefactRewards}">
+            <td th:text="${item.artefact.name}"></td>
+            <td><a th:href="'/dev/admin/party/rewards/artefact/delete/'+${item.id}+'/'+${dungeonFloor.id}">
+                <button>Delete</button>
+            </a></td>
+        </tr>
+</table></div>
+<hr th:width="600px">
+
+<form class="center" th:action="@{/dev/admin/party/rewards/material}" th:object="${newMaterialReward}" method="post">
+    <input type="hidden" name="dungeonFloorId" th:value="${dungeonFloor.id}">
+    <table width="350px">
+        <tr>
+            <td th:colspan="2" class="head-cell">Material</td>
+        </tr>
+        <tr>
+            <td>Material:</td>
+            <td><select name="materialId">
+                <option th:each="item : ${materialList}" th:value="${item.id}" th:text="${item.name}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Quantity:</td>
+            <td><input name="quantity" type="number"></td>
+        </tr>
+        <tr>
+            <td th:colspan="2"><input type="submit" th:value="submit"></td>
+        </tr>
+    </table>
+</form>
+<div class="center"><table th:width="350px">
+        <tr>
+            <td th:colspan="2" class="head-cell">Current:</td>
+        </tr>
+        <tr th:each="item : ${dungeonFloor.materialRewards}">
+            <td th:text="${item.material.name}"></td>
+            <td><a th:href="'/dev/admin/party/rewards/material/delete/'+${item.id}+'/'+${dungeonFloor.id}">
+                <button>Delete</button>
+            </a></td>
+        </tr>
+    </table>
+</div>
+
+
+</body>
+</html>

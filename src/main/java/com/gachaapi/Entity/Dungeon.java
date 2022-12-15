@@ -67,7 +67,7 @@ public class Dungeon {
         return Objects.hash(id, name, releasedAt, expiresAt);
     }
 
-    @OneToMany(mappedBy = "dungeonByDungeonId")
+    @OneToMany(mappedBy = "dungeon")
     public Collection<Dungeonfloor> getFloors() {
         return floors;
     }

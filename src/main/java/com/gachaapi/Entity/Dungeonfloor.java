@@ -20,17 +20,17 @@ public class Dungeonfloor {
     @Column(name = "Depth", nullable = false)
     private int depth;
 
-    @OneToMany(mappedBy = "dungeonfloorByDungeonFloorId")
-    private Collection<ArtefactReward> artefactRewardsById;
+    @OneToMany(mappedBy = "dungeonFloor")
+    private Collection<ArtefactReward> artefactRewards;
 
     @ManyToOne
     @JoinColumn(name = "Dungeon_ID", referencedColumnName = "ID", nullable = false)
     @JsonIgnore
-    private Dungeon dungeonByDungeonId;
+    private Dungeon dungeon;
 
-    @OneToMany(mappedBy = "dungeonfloorByDungeonFloorId")
+    @OneToMany(mappedBy = "dungeonFloor")
     @JsonIgnore
-    private Collection<MaterialReward> materialRewardsById;
+    private Collection<MaterialReward> materialRewards;
 
     @ManyToOne
     @JoinColumn(name = "partyId", referencedColumnName = "Id", nullable = false)
@@ -38,10 +38,10 @@ public class Dungeonfloor {
 
     @OneToMany(mappedBy = "dungeonfloorByDungeonFloorId")
     @JsonIgnore
-    private Collection<PlayerDungeonfloor> playerDungeonfloorsById;
+    private Collection<PlayerDungeonfloor> playerDungeonfloors;
 
-    @OneToMany(mappedBy = "dungeonfloorByDungeonFloorId")
-    private Collection<WeaponReward> weaponRewardsById;
+    @OneToMany(mappedBy = "dungeonFloor")
+    private Collection<WeaponReward> weaponRewards;
 
     @Override
     public boolean equals(Object o) {
