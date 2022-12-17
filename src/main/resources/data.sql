@@ -1,3 +1,4 @@
+DELETE FROM premium_purchase;
 DELETE FROM player_weapon;
 DELETE FROM partycharacter;
 DELETE FROM stat_weapon;
@@ -67,9 +68,9 @@ INSERT INTO artefact (id,name,type,rarity_id) values (1,'Projektor',1,1);
 INSERT INTO artefact (id,name,type,rarity_id) values (2,'Wskaznik',1,2);
 INSERT INTO artefact (id,name,type,rarity_id) values (3,'Was Tomaszewa',0,3);
 --player !!! ADMIN MA ZAWSZE MIEC ID 1 !!!
-INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints) values (1,'admin','1900-01-01 00:00:00','2022-01-01 00:00:00',1,10000,'$2a$12$qmuu8mn/qN1D.ykSKYMJp.JNWJzL2fL77VHtd7/uzlpzOWv8r5dBC',1,1,1,1);
-INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints) values (2,'user','1900-01-01 00:00:00','2022-01-01 00:00:00',2,9999,'$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe',1,1,1,1);
-INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints) values (3,'autist','1900-01-01 00:00:00','2022-01-01 00:00:00',3,9999,'$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe',1,1,1,1);
+INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints, premium_left) values (1,'admin','1900-01-01 00:00:00','2022-01-01 00:00:00',1,10000,'$2a$12$qmuu8mn/qN1D.ykSKYMJp.JNWJzL2fL77VHtd7/uzlpzOWv8r5dBC',1,1,1,1,99999);
+INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints, premium_left) values (2,'user','1900-01-01 00:00:00','2022-01-01 00:00:00',2,9999,'$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe',1,1,1,1,0);
+INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints, premium_left) values (3,'autist','1900-01-01 00:00:00','2022-01-01 00:00:00',3,9999,'$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe',1,1,1,1,0);
 --Dungeon
 INSERT INTO Dungeon (id,name,released_at,expires_at) values (1,'jurna wieza','2022-01-01 00:00:00',null);
 INSERT INTO Dungeon (id,name,released_at,expires_at) values (2,'piwnica','2000-01-01 00:00:00','2002-01-01 00:00:00');
@@ -202,13 +203,13 @@ INSERT INTO materialweaponclass (id,material_id,weapon_class_id,base_amount,per_
 --role
 INSERT INTO gacha.role (id,name) VALUES (1,'ADMIN');
 INSERT INTO gacha.role (id,name) VALUES (2,'USER');
-INSERT INTO gacha.role (id,name) VALUES (3,'autist');
+INSERT INTO gacha.role (id,name) VALUES (3,'PREMIUM');
 --Player_Role
 INSERT INTO Player_Role (Player_player_id,role_id ) VALUES (1,1);
 INSERT INTO Player_Role (Player_player_id,role_id ) VALUES (1,2);
 INSERT INTO Player_Role (Player_player_id,role_id ) VALUES (2,2);
 INSERT INTO Player_Role (Player_player_id,role_id ) VALUES (3,2);
-INSERT INTO Player_Role (Player_player_id,role_id ) VALUES (3,3);
+INSERT INTO Player_Role (Player_player_id,role_id ) VALUES (1,3);
 --party NAME
 INSERT INTO party (id,player_id_player,name,move_order) VALUES (1,1,1,1234);
 INSERT INTO party (id,player_id_player,name,move_order) VALUES (2,2,2,4321);

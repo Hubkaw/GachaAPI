@@ -59,6 +59,10 @@ public class Player {
     @Column(name = "ELOPoints", nullable = false)
     private int eloPoints;
 
+    @Basic
+    @Column(name = "PremiumLeft", nullable = false)
+    private int premiumLeft;
+
     @OneToMany(mappedBy = "player")
     @JsonIgnore
     private Collection<Party> partiesByIdPlayer;
@@ -123,5 +127,12 @@ public class Player {
     @Override
     public String toString(){
         return nick;
+    }
+
+    public boolean pay(int amount){
+        if (getPlayerBalance()<amount)
+            return false;
+        setPlayerBalance(getPlayerBalance()-amount);
+        return true;
     }
 }
