@@ -1,4 +1,4 @@
-package com.gachaapi.Controller;
+package com.gachaapi.Controller.api;
 
 
 import com.gachaapi.Entity.Player;
@@ -17,7 +17,7 @@ public class PlayerController {
 
     private PlayerService playerService;
 
-    @GetMapping("/playerInfo")
+    @GetMapping("/api/playerInfo")
     public ResponseEntity<Player> getPlayerInfo(Principal principal){
         return new ResponseEntity<>(playerService.getByName(principal.getName()), HttpStatus.OK);
     }

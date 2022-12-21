@@ -1,4 +1,4 @@
-package com.gachaapi.Controller;
+package com.gachaapi.Controller.api;
 
 
 import com.gachaapi.Entity.Player;
@@ -19,12 +19,12 @@ public class GeneralController {
     private PlayerService playerService;
 
 
-    @GetMapping("/roles")
+    @GetMapping("/api/roles")
     public ResponseEntity<List<Role>> getRoles() {
         return new ResponseEntity<>(playerService.getRoles(), HttpStatus.OK);
     }
 
-    @GetMapping("/players")
+    @GetMapping("/api/players")
     public ResponseEntity<List<Player>> getPlayers() {
         return new ResponseEntity<>(playerService.getAllPlayers(), HttpStatus.OK);
     }

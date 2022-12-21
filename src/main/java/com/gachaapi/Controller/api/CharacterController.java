@@ -1,4 +1,4 @@
-package com.gachaapi.Controller;
+package com.gachaapi.Controller.api;
 
 import com.gachaapi.Entity.Character;
 import com.gachaapi.Service.interfaces.CharacterService;
@@ -16,7 +16,7 @@ public class CharacterController {
 
     private CharacterService characterService;
 
-    @GetMapping("/characters")
+    @GetMapping("/api/characters")
     public ResponseEntity<List<Character>> getCharacters(){
         return new ResponseEntity<>(characterService.getAll(), HttpStatus.OK);
     }

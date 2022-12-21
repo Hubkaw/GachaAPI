@@ -11,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -40,7 +37,28 @@ public class SecurityController {
 
     @PostMapping("/signup")
     public ResponseEntity<Player> createPlayer(@RequestBody NewPlayer newPlayer) {
-        return new ResponseEntity<>(playerService.createNewPlayer(newPlayer), HttpStatus.CREATED);
+        try {
+            return new ResponseEntity<>(playerService.createNewPlayer(newPlayer), HttpStatus.CREATED);
+        } catch (Exception e) {
+            System.out.println("ruchanie");
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/signup")
+    public ModelAndView getSignup(Model model){
+        return new ModelAndView("game/signup");
+    }
+
+    @PostMapping("/createAccount")
+    public String createAccount(Model model, @ModelAttribute("newPlayer")NewPlayer newPlayer){
+        System.out.println("beniz");
+        try {
+            System.out.println(playerService.createNewPlayer(newPlayer));
+        } catch (Exception e){
+            System.out.println("ruchanie");
+        }
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
@@ -51,12 +69,12 @@ public class SecurityController {
     }
 
     @GetMapping("/")
-    public RedirectView getRedirector(Model model, HttpServletRequest request){
+    public RedirectView getRedirector(Model model, Principal principal){
         RedirectView redirectView = new RedirectView();
-        if (request.isUserInRole(ADMIN_ROLE) || request.isUserInRole("SCOPE_"+ADMIN_ROLE))
+        if (principal.getName().equals("admin"))
             redirectView.setUrl("/dev/menu");
         else
-            redirectView.setUrl("/home");
+            redirectView.setUrl("/game/home");
         return redirectView;
     }
 

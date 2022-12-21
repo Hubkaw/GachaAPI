@@ -1,4 +1,4 @@
-package com.gachaapi.Controller;
+package com.gachaapi.Controller.api;
 
 import com.gachaapi.Entity.Material;
 import com.gachaapi.Service.interfaces.MaterialService;
@@ -16,7 +16,7 @@ public class MaterialController {
 
     private MaterialService materialService;
 
-    @GetMapping("/materials")
+    @GetMapping("/api/materials")
     public ResponseEntity<List<Material>> getMaterials(){
         return new ResponseEntity<>(materialService.getAll(), HttpStatus.OK);
     }

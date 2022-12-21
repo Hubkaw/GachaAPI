@@ -1,4 +1,4 @@
-package com.gachaapi.Controller;
+package com.gachaapi.Controller.api;
 
 import com.gachaapi.Entity.Weapon;
 import com.gachaapi.Service.interfaces.WeaponService;
@@ -16,7 +16,7 @@ public class WeaponController {
 
     private WeaponService weaponService;
 
-    @GetMapping("/weapons")
+    @GetMapping("/api/weapons")
     public ResponseEntity<List<Weapon>> getWeapons(){
         return new ResponseEntity<>(weaponService.getAll(), HttpStatus.OK);
     }

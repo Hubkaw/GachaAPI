@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link th:href="@{/assets/style.css}" rel="stylesheet" />
+    <title>Create Gacha Account</title>
+</head>
+<body>
+<div>
+    <form th:action="@{/createAccount}" th:method="post" th:object="${newPlayer}">
+        <table class="center">
+            <tr>
+                <td th:colspan="2" class="head-cell">New Account</td>
+            </tr>
+            <tr>
+                <td>Login:</td>
+                <td><input name="nick" type="text"></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input name="password" type="password"></td>
+            </tr>
+            <tr>
+                <td>Birth date:</td>
+                <td><input name="birthDate" th:type="date"></td>
+            </tr>
+            <tr>
+                <td th:colspan="2">
+                    <input type="submit" value="submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

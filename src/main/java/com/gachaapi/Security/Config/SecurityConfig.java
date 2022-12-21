@@ -22,8 +22,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static com.gachaapi.Utils.Constants.ADMIN_ROLE;
-import static com.gachaapi.Utils.Constants.USER_ROLE;
+import static com.gachaapi.Utils.Constants.*;
 
 
 @Configuration
@@ -34,19 +33,25 @@ public class SecurityConfig {
     private RsaKeyProperties rsaKeys;
     private GachaUserDetailsService gachaUserDetailsService;
 
+    private static final String[] NO_AUTH_URLS = {"/","/signup", "/token", "/assets/**", "/images/**","/createAccount"};
+    private static final String[] ADMIN_ONLY_URLS = {"/dev/**","/api/players","/error"};
+    private static final String[] USER_BASIC_ALLOWED_URLS = {"/game/**"};
+    private static final String[] USER_TOKEN_ALLOWED_URLS = {"/api/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf()
                 .disable()
+                .cors()
+                .disable()
                 .userDetailsService(gachaUserDetailsService)
                 .authorizeRequests(auth -> {
-                    auth.antMatchers("/","/signup", "/token", "/assets/style.css", "/images/**").permitAll();
-//                    auth.antMatchers("/dev/**", "/assets/style.css").access("hasIpAddress('127.0.0.1') or hasIpAddress('::1') or hasAuthority('ADMIN') or hasAuthority('SCOPE_ADMIN')");
-                    auth.antMatchers("/dev/**", "/error").hasAnyAuthority(ADMIN_ROLE);
-                    auth.antMatchers("/players").hasAuthority("SCOPE_" + ADMIN_ROLE);
-                    auth.anyRequest().hasAuthority("SCOPE_" + USER_ROLE);
+                    auth.antMatchers(NO_AUTH_URLS).permitAll();
+                    auth.antMatchers(ADMIN_ONLY_URLS).hasAnyAuthority(ADMIN_ROLE, ADMIN_ROLE_TOKEN);
+                    auth.antMatchers(USER_BASIC_ALLOWED_URLS).hasAuthority(USER_ROLE);
+                    auth.antMatchers(USER_TOKEN_ALLOWED_URLS).hasAuthority(USER_ROLE_TOKEN);
+//                    auth.anyRequest().hasIpAddress("localhost");
 //                    auth.anyRequest().permitAll();
                 })
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
@@ -57,6 +62,9 @@ public class SecurityConfig {
                         .permitAll()
                         .usernameParameter("nick")
                         .passwordParameter("password"))
+                .logout()
+                .logoutSuccessUrl("/login")
+                .and()
                 .build();
     }
 

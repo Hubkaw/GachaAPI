@@ -13,9 +13,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.ejb.Local;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -35,19 +40,23 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Player createNewPlayer(NewPlayer newPlayer) {
+    public Player createNewPlayer(NewPlayer newPlayer) throws ParseException {
         if (!validateNewPlayer(newPlayer)){
+            System.out.println("beniz");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid login or password");
+
         }
         if (playerRepository.existsByNick(newPlayer.getNick())){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Nickname already used");
         }
+        System.out.println(newPlayer.getNick());
+        System.out.println(newPlayer.getBirthDate());
         Player player = new Player();
         player.setNick(newPlayer.getNick());
         player.setHashedPassword(passwordEncoder.encode(newPlayer.getPassword()));
         player.setRoles(new HashSet<>());
         player.getRoles().add(roleRepository.findByName(USER_ROLE));
-        player.setBirthDate(Timestamp.valueOf(LocalDateTime.now().minus(20, ChronoUnit.YEARS)));
+        player.setBirthDate(Timestamp.from(new SimpleDateFormat("yyyy-MM-dd").parse(newPlayer.getBirthDate()).toInstant()));
         player.setEloPoints(0);
         player.setJoinDate(Timestamp.valueOf(LocalDateTime.now()));
         player.setPvpLooses(0);

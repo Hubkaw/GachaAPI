@@ -1,4 +1,4 @@
-package com.gachaapi.Controller;
+package com.gachaapi.Controller.game;
 
 import lombok.AllArgsConstructor;
 import org.springframework.boot.Banner;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @AllArgsConstructor
 public class HomeController {
 
-    @GetMapping("/home")
+    @GetMapping("/game/home")
     public ModelAndView getHome(Model model){
         return new ModelAndView("game/home");
     }

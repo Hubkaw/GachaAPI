@@ -1,4 +1,4 @@
-package com.gachaapi.Controller;
+package com.gachaapi.Controller.api;
 
 import com.gachaapi.Entity.Artefact;
 import com.gachaapi.Service.interfaces.ArtefactService;
@@ -17,7 +17,7 @@ public class ArtefactController {
     private ArtefactService artefactService;
 
 
-    @GetMapping("/artefacts")
+    @GetMapping("/api/artefacts")
     public ResponseEntity<List<Artefact>> getArtefacts(){
         return new ResponseEntity<>(artefactService.getAll(), HttpStatus.OK);
     }

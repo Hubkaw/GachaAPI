@@ -1,4 +1,4 @@
-package com.gachaapi.Controller;
+package com.gachaapi.Controller.api;
 
 import com.gachaapi.Entity.Chest;
 import com.gachaapi.Service.interfaces.ChestService;
@@ -20,17 +20,17 @@ public class ChestController {
     private ChestService chestService;
 
 
-    @GetMapping("/chests")
+    @GetMapping("/api/chests")
     public ResponseEntity<List<Chest>> getChests(){
         return new ResponseEntity<>(chestService.getAvailable(), HttpStatus.OK);
     }
 
-    @GetMapping("/chests/all")
+    @GetMapping("/api/chests/all")
     public ResponseEntity<List<Chest>> getAllChests(){
         return new ResponseEntity<>(chestService.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/chests/open/{chestId}")
+    @GetMapping("/api/chests/open/{chestId}")
     public ResponseEntity<ChestReward> openChest(Principal principal, @PathVariable("chestId")int chestId){
         ChestReward chestReward = chestService.openChest(principal.getName(), chestId);
         return new ResponseEntity<>(chestReward, HttpStatus.OK);

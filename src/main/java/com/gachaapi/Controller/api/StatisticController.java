@@ -1,4 +1,4 @@
-package com.gachaapi.Controller;
+package com.gachaapi.Controller.api;
 
 import com.gachaapi.Entity.Statistic;
 import com.gachaapi.Service.interfaces.StatisticService;
@@ -14,7 +14,7 @@ public class StatisticController {
 
     private StatisticService statisticService;
 
-    @GetMapping("/stats")
+    @GetMapping("/api/stats")
     public List<Statistic> getStats(){
         return statisticService.getAll();
     }

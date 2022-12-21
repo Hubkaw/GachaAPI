@@ -1,4 +1,4 @@
-package com.gachaapi.Controller;
+package com.gachaapi.Controller.api;
 
 import com.gachaapi.Entity.Dungeon;
 import com.gachaapi.Service.interfaces.DungeonService;
@@ -16,7 +16,7 @@ public class DungeonController {
 
     private DungeonService dungeonService;
 
-    @GetMapping("/dungeons")
+    @GetMapping("/api/dungeons")
     public ResponseEntity<List<Dungeon>> getDungeons(){
         return new ResponseEntity<>(dungeonService.getAll(), HttpStatus.OK);
     }

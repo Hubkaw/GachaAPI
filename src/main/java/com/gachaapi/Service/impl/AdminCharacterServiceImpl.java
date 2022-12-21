@@ -36,6 +36,7 @@ public class AdminCharacterServiceImpl implements AdminCharacterService {
         }
         Player admin = playerRepository.findByNick("admin").orElseThrow();
         PlayerCharacter pc = new PlayerCharacter();
+        pc.setPlayerArtefacts(new HashSet<>());
         if(newAdminCharacter.getGlassesId()!=-1){
             Artefact glasses = artefactRepository.getReferenceById(newAdminCharacter.getGlassesId());
             PlayerArtefact pa = new PlayerArtefact();
