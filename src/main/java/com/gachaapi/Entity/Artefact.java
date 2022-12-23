@@ -47,7 +47,7 @@ public class Artefact {
             })
     private java.util.Set<com.gachaapi.Entity.Set> sets;
 
-    @OneToMany(mappedBy = "artefactByArtefactId")
+    @OneToMany(mappedBy = "artefact")
     @JsonIgnore
     private Collection<PlayerArtefact> playerArtefacts;
 

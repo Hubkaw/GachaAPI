@@ -7,7 +7,6 @@ import com.gachaapi.Utils.dev.NewAdminCharacter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -40,27 +39,27 @@ public class AdminCharacterServiceImpl implements AdminCharacterService {
         if(newAdminCharacter.getGlassesId()!=-1){
             Artefact glasses = artefactRepository.getReferenceById(newAdminCharacter.getGlassesId());
             PlayerArtefact pa = new PlayerArtefact();
-            pa.setArtefactByArtefactId(glasses);
+            pa.setArtefact(glasses);
             pa.setLvl(newAdminCharacter.getGlassesLvl());
-            pa.setPlayerByPlayerIdPlayer(admin);
+            pa.setPlayer(admin);
             playerArtefactRepository.save(pa);
             pc.getPlayerArtefacts().add(pa);
         }
         if(newAdminCharacter.getHatId()!=-1){
             Artefact hat = artefactRepository.getReferenceById(newAdminCharacter.getHatId());
             PlayerArtefact pa = new PlayerArtefact();
-            pa.setArtefactByArtefactId(hat);
+            pa.setArtefact(hat);
             pa.setLvl(newAdminCharacter.getHatLvl());
-            pa.setPlayerByPlayerIdPlayer(admin);
+            pa.setPlayer(admin);
             playerArtefactRepository.save(pa);
             pc.getPlayerArtefacts().add(pa);
         }
         if(newAdminCharacter.getRingId()!=-1){
             Artefact ring = artefactRepository.getReferenceById(newAdminCharacter.getRingId());
             PlayerArtefact pa = new PlayerArtefact();
-            pa.setArtefactByArtefactId(ring);
+            pa.setArtefact(ring);
             pa.setLvl(newAdminCharacter.getRingLvl());
-            pa.setPlayerByPlayerIdPlayer(admin);
+            pa.setPlayer(admin);
             playerArtefactRepository.save(pa);
             pc.getPlayerArtefacts().add(pa);
         }
@@ -72,9 +71,7 @@ public class AdminCharacterServiceImpl implements AdminCharacterService {
             pw.setPlayer(admin);
             pw.setAscension((int)Math.ceil((double)(newAdminCharacter.getWeaponLvl())/10));
             playerWeaponRepository.save(pw);
-            if (pc.getWieldedWeapons() == null)
-                pc.setWieldedWeapons(new ArrayList<>());
-            pc.getWieldedWeapons().add(pw);
+            pc.setWieldedWeapon(pw);
         }
         pc.setCharacter(characterRepository.getReferenceById(newAdminCharacter.getCharId()));
         pc.setPlayer(admin);

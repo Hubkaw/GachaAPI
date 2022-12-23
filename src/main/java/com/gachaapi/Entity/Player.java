@@ -2,6 +2,7 @@ package com.gachaapi.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -63,33 +64,37 @@ public class Player {
     @Column(name = "PremiumLeft", nullable = false)
     private int premiumLeft;
 
+    @Basic
+    @Column(name = "Stamina", nullable = false)
+    private int stamina;
+
     @OneToMany(mappedBy = "player")
     @JsonIgnore
-    private Collection<Party> partiesByIdPlayer;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "playerByPlayerIdPlayer")
-    private Collection<PlayerArtefact> playerArtefactsByIdPlayer;
+    private Collection<Party> parties;
 
     @JsonIgnore
     @OneToMany(mappedBy = "player")
-    private Collection<PlayerCharacter> playerCharactersByIdPlayer;
+    private Collection<PlayerArtefact> playerArtefacts;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "player")
+    private Collection<PlayerCharacter> playerCharacters;
 
     @JsonIgnore
     @OneToMany(mappedBy = "playerByPlayerIdPlayer")
-    private Collection<PlayerChestitem> playerChestitemsByIdPlayer;
+    private Collection<PlayerChestitem> playerChestitems;
 
     @JsonIgnore
     @OneToMany(mappedBy = "playerByPlayerIdPlayer")
-    private Collection<PlayerDungeonfloor> playerDungeonfloorsByIdPlayer;
+    private Collection<PlayerDungeonfloor> playerDungeonfloors;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "player")
+    private Collection<PlayerMaterial> playerMaterials;
 
     @JsonIgnore
     @OneToMany(mappedBy = "playerByPlayerIdPlayer")
-    private Collection<PlayerMaterial> playerMaterialsByIdPlayer;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "playerByPlayerIdPlayer")
-    private Collection<PlayerPurchase> playerPurchasesByIdPlayer;
+    private Collection<PlayerPurchase> playerPurchases;
 
     @JsonIgnore
     @OneToMany(mappedBy = "player")

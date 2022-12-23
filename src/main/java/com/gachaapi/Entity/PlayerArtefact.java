@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
@@ -39,11 +38,11 @@ public class PlayerArtefact {
     @ManyToOne
     @JoinColumn(name = "Player_IdPlayer", referencedColumnName = "IdPlayer", nullable = false)
     @JsonIgnore
-    private Player playerByPlayerIdPlayer;
+    private Player player;
 
     @ManyToOne
     @JoinColumn(name = "Artefact_Id", referencedColumnName = "Id", nullable = false)
-    private Artefact artefactByArtefactId;
+    private Artefact artefact;
 
 
     @Override
@@ -61,6 +60,6 @@ public class PlayerArtefact {
 
     @Override
     public String toString(){
-        return artefactByArtefactId.getName()+" "+playerByPlayerIdPlayer.getNick();
+        return artefact.getName()+" "+ player.getNick();
     }
 }

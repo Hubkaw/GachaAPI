@@ -9,17 +9,17 @@
 5. Wystartuj Api z IntelliJ 
 6. Gotowe :)
 
-### DOSTĘPNE KOŃCÓWKI:
+### WAŻNE KOŃCÓWKI:
 
 ##### POST /signup
 
 przymuje jsona w formacie:  
 {  
   "nick":"SuperKozackiNick",  
-  "password":"GigaTajneHasło"  
+  "password":"GigaTajneHasło",  
+  "birthDate":"1984-01-01"  
 }  
-W przyszłości będzie jeszcze przyjmować datę urodzenia.
-
+  
 ##### POST /token
 
 Przyjmuje puste Body i autoryzacje typu Basic (Sposób działania opisany na dole)  
@@ -43,6 +43,7 @@ Token jest ważny przez 15 minut, potem trzeba uderzyć tu ponownie po nowy.
 - Zaleca się lokalne dodanie skrzynki z price = 0 bo gracze nie mogą jeszcze zarabiać :)
 - /chests wyświetla tylko aktualnie dostępne skrzynki
 
+###### Inne końcówki można znależć w plikach znajdujących się w folderze /Controller/api/   
 ### DOMYŚLNE KONTA:
 
 - login: user hasło: user  
@@ -53,8 +54,8 @@ aktualnie nie da się tworzyć adminów bez ręcznego wchodzenia w bazę (i racz
 ### MENU DO DODAWANIA DO BAZY
 
 - ZNAJUDUJE SIĘ POD localhost:8080/dev/menu  
-- Z czasem będą pojawiać się tu odnośniki do formularzy pozwalających wypełniać bazę  
-- Dostępne tylko dla localhosta (teoretycznie każdy admin może wejść ale wymaga to ręcznego przesyłania autoryzacji w przeglądarce)
+- Wymaga zalogowania się na konto admina (login: admin, hasło: admin)  
+- Wszystkie niezbędne strony są już dodane, błędy zgłaszać do Huberta.  
 
 ### INSTRUKCJA AUTORYZACJI ZAPYTAŃ TYPU BASIC AUTH:
 

@@ -60,8 +60,9 @@ public class PlayerCharacter {
     @JoinColumn(name = "Character_Id", referencedColumnName = "Id", nullable = false)
     private Character character;
 
-    @OneToMany(mappedBy = "wieldingCharacter")
-    private Collection<PlayerWeapon> wieldedWeapons;
+    @OneToOne(optional = true, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "wieldedWeapon", referencedColumnName = "id")
+    private PlayerWeapon wieldedWeapon;
 
 
 

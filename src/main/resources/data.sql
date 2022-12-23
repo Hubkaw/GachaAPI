@@ -68,9 +68,9 @@ INSERT INTO artefact (id,name,type,rarity_id) values (1,'Projektor',1,1);
 INSERT INTO artefact (id,name,type,rarity_id) values (2,'Wskaznik',1,2);
 INSERT INTO artefact (id,name,type,rarity_id) values (3,'Was Tomaszewa',0,3);
 --player !!! ADMIN MA ZAWSZE MIEC ID 1 !!!
-INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints, premium_left) values (1,'admin','1900-01-01 00:00:00','2022-01-01 00:00:00',1,10000,'$2a$12$qmuu8mn/qN1D.ykSKYMJp.JNWJzL2fL77VHtd7/uzlpzOWv8r5dBC',1,1,1,1,99999);
-INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints, premium_left) values (2,'user','1900-01-01 00:00:00','2022-01-01 00:00:00',2,9999,'$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe',1,1,1,1,0);
-INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints, premium_left) values (3,'autist','1900-01-01 00:00:00','2022-01-01 00:00:00',3,9999,'$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe',1,1,1,1,0);
+INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints, premium_left, stamina) values (1,'admin','1900-01-01 00:00:00','2022-01-01 00:00:00',1,10000,'$2a$12$qmuu8mn/qN1D.ykSKYMJp.JNWJzL2fL77VHtd7/uzlpzOWv8r5dBC',1,1,1,1,99999, 100);
+INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints, premium_left, stamina) values (2,'user','1900-01-01 00:00:00','2022-01-01 00:00:00',2,9999,'$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe',1,1,1,1,0, 100);
+INSERT INTO player (id_player,nick,birth_date,join_date,active_party,player_balance,hashed_password,pity_roll_status,pvpwins,pvplooses,elopoints, premium_left, stamina) values (3,'autist','1900-01-01 00:00:00','2022-01-01 00:00:00',3,9999,'$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe',1,1,1,1,0, 100);
 --Dungeon
 INSERT INTO Dungeon (id,name,released_at,expires_at) values (1,'jurna wieza','2022-01-01 00:00:00',null);
 INSERT INTO Dungeon (id,name,released_at,expires_at) values (2,'piwnica','2000-01-01 00:00:00','2002-01-01 00:00:00');
@@ -169,9 +169,9 @@ INSERT INTO player_character (id,player_id_player,character_id,ascention,lvl) VA
 INSERT INTO player_character (id,player_id_player,character_id,ascention,lvl) VALUES (8,2,8,3,4);
 INSERT INTO player_character (id,player_id_player,character_id,ascention,lvl) VALUES (9,2,9,3,3);
 --player_material
-INSERT INTO player_material (id,material_id,player_id_player,amount) VALUES (1,1,1,1);
-INSERT INTO player_material (id,material_id,player_id_player,amount) VALUES (2,2,2,2);
-INSERT INTO player_material (id,material_id,player_id_player,amount) VALUES (3,3,3,3);
+INSERT INTO player_material (id,material_id,player_id_player,amount) VALUES (1,1,1,10);
+INSERT INTO player_material (id,material_id,player_id_player,amount) VALUES (2,2,2,10);
+INSERT INTO player_material (id,material_id,player_id_player,amount) VALUES (3,3,3,10);
 --materialelement
 INSERT INTO materialelement (id,material_id,element_id,base_amount,per_lvl_amount) VALUES (1,1,1,1,1);
 INSERT INTO materialelement (id,material_id,element_id,base_amount,per_lvl_amount) VALUES (2,2,2,20,20);
@@ -266,6 +266,6 @@ INSERT INTO partycharacter (party_id,player_character_id) VALUES (2,5);
 INSERT INTO partycharacter (party_id,player_character_id) VALUES (2,6);
 INSERT INTO partycharacter (party_id,player_character_id) VALUES (2,7);
 --player_weapon
-INSERT INTO player_weapon (id, wielding_character, player_id_player, weapon_id, ascension, lvl) VALUES (1,1,1,1,1,1);
+INSERT INTO player_weapon (id,  player_id_player, weapon_id, ascension, lvl) VALUES (1,1,1,1,1);
 INSERT INTO player_weapon (id, wielding_character, player_id_player, weapon_id, ascension, lvl) VALUES (2,2,2,2,2,2);
 INSERT INTO player_weapon (id, wielding_character, player_id_player, weapon_id, ascension, lvl) VALUES (3,3,3,3,3,3);
