@@ -1,6 +1,10 @@
+SET foreign_key_checks = 0;
 DELETE FROM premium_purchase;
-DELETE FROM player_weapon;
 DELETE FROM partycharacter;
+DELETE FROM characteratrefact;
+DELETE FROM player_artefact;
+DELETE FROM player_character;
+DELETE FROM player_weapon;
 DELETE FROM stat_weapon;
 DELETE FROM player_chestitem;
 DELETE FROM stat_class;
@@ -12,13 +16,10 @@ DELETE FROM Player_Role;
 DELETE FROM gacha.role;
 DELETE FROM materialweaponclass;
 DELETE FROM character_chest;
-DELETE FROM characteratrefact;
-DELETE FROM player_artefact;
 DELETE FROM materialclass;
 DELETE FROM materialaffilation;
 DELETE FROM materialelement;
 DELETE FROM player_material;
-DELETE FROM player_character;
 DELETE FROM gacha.character;
 DELETE FROM weapon;
 DELETE FROM stat_artifact;
@@ -44,7 +45,7 @@ DELETE FROM Dungeon;
 DELETE FROM artefact;
 DELETE FROM rarity;
 DELETE FROM affilation;
-
+SET foreign_key_checks = 1;
 
 
 -- affilation
@@ -186,6 +187,9 @@ INSERT INTO materialclass (id,material_id,class_id,base_amount,per_lvl_amount) V
 INSERT INTO materialclass (id,material_id,class_id,base_amount,per_lvl_amount) VALUES (3,3,3,300,300);
 --player_artefact
 INSERT INTO player_artefact (id,player_id_player,artefact_id,lvl) VALUES (1,1,1,1);
+INSERT INTO player_artefact (player_id_player,artefact_id,lvl) VALUES (1,1,1);
+INSERT INTO player_artefact (player_id_player,artefact_id,lvl) VALUES (1,1,1);
+INSERT INTO player_artefact (player_id_player,artefact_id,lvl) VALUES (1,1,1);
 INSERT INTO player_artefact (id,player_id_player,artefact_id,lvl) VALUES (2,2,2,2);
 INSERT INTO player_artefact (id,player_id_player,artefact_id,lvl) VALUES (3,3,3,3);
 --characterartefact

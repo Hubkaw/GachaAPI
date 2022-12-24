@@ -20,9 +20,9 @@ przymuje jsona w formacie:
   "birthDate":"1984-01-01"  
 }  
   
-##### POST /token
+##### GET /token
 
-Przyjmuje puste Body i autoryzacje typu Basic (Sposób działania opisany na dole)  
+Przyjmuje Autoryzacje typu Basic (Sposób działania opisany na dole)  
 Zwraca Token JWT potrzebny do KAŻDEGO z poniższych zapytań.  
 Token jest ważny przez 15 minut, potem trzeba uderzyć tu ponownie po nowy.
 
