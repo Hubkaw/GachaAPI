@@ -13,7 +13,6 @@ public class Weaponclass {
     private String shortName;
     @JsonIgnore
     private Collection<Clazz> clazzesById;
-    @JsonIgnore
     private Collection<Materialweaponclass> materialWeaponClasses;
     @JsonIgnore
     private Collection<Weapon> weaponsById;

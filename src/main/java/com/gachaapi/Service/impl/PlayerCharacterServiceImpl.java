@@ -53,7 +53,6 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
                 if (!weapon.getWeapon().getWeaponClass().equals(playerCharacter.getCharacter().getCharacterClass().getWeaponClass()))
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This character cant wield a "+weapon.getWeapon().getWeaponClass().getName());
                 playerCharacter.setWieldedWeapon(weapon);
-                System.out.println("fjut");
                 playerCharacterRepository.save(playerCharacter);
             });
         }
@@ -104,7 +103,9 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
 
     @Override
     public PlayerCharacter levelUp(int characterId, String nickname) {
-        PlayerCharacter playerCharacter = playerCharacterRepository.getReferenceById(characterId);
+        PlayerCharacter playerCharacter = playerCharacterRepository.findById(characterId).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"This character does not belong to you")
+        );
         if (!playerCharacter.getPlayer().getNick().equals(nickname)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This character does not belong to you");
         }
@@ -112,14 +113,17 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
 
         Map<Material, Integer> requiredMaterials = new HashMap<>();
         playerCharacter.getCharacter().getAffilation().getMaterialAffilations().forEach(ma -> {
-            int amount = ma.getBaseAmount();
-            amount += (playerCharacter.getLvl() * ma.getPerLvlAmount()); // ilość = baza + level * perLvl
+            int amount = ma.getBaseAmount() + (playerCharacter.getLvl() * ma.getPerLvlAmount());
             requiredMaterials.put(ma.getMaterial(), amount);
         });
         playerCharacter.getCharacter().getCharacterClass().getMaterialClasses().forEach(mc -> {
-            int amount = mc.getBaseAmount();
-            amount += (playerCharacter.getLvl() * mc.getPerLvlAmount()); // ilość = baza + level * perLvl
-            requiredMaterials.put(mc.getMaterial(), amount);
+            int amount = mc.getBaseAmount() + (playerCharacter.getLvl() * mc.getPerLvlAmount());
+            if (requiredMaterials.containsKey(mc.getMaterial())){
+                Integer oldAmount = requiredMaterials.get(mc.getMaterial());
+                requiredMaterials.put(mc.getMaterial(), oldAmount + amount);
+            } else {
+                requiredMaterials.put(mc.getMaterial(), amount);
+            }
         });
 
         if (requiredMaterials.isEmpty())
@@ -128,9 +132,7 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
         // Check if player has enough materials
         requiredMaterials.forEach(((material, amount) -> {
             if (player.getPlayerMaterials().stream().noneMatch(pm -> pm.getMaterial().equals(material) && pm.getAmount() >= amount)) {
-                StringBuilder sb = new StringBuilder("You dont have enough materials:\n");
-                requiredMaterials.forEach((reqMaterial, reqAmount) -> sb.append(reqMaterial.getName()).append(" ").append(reqAmount).append("\n"));
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, sb.toString());
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You dont have enough materials");
             }
         }));
 

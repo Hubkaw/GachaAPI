@@ -21,7 +21,7 @@ public class PlayerArtefactServiceImpl implements PlayerArtefactService {
         return playerArtefactRepository.findAllByPlayerNick(nickname);
     }
 
-    @Override
+      @Override
     public PlayerArtefact levelUp(int upgradedArtefactId, int destroyedArtefactId, String nickname) {
 
         PlayerArtefact destroyedArtefact = playerArtefactRepository.findById(destroyedArtefactId).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "This artefact does not exist"));
