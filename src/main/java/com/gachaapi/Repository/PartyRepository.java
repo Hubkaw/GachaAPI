@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface PartyRepository extends JpaRepository<Party, Integer> {
     List<Party> findAllByPlayer_IdPlayer(int id);
+    List<Party> findAllByPlayerNick(String nick);
 }

@@ -35,7 +35,7 @@ public class Party {
     private Set<Dungeonfloor> dungeonFloors;
 
     @ManyToMany(cascade = {
-            CascadeType.ALL
+            CascadeType.PERSIST
     })
     @JoinTable(name = "partycharacter" ,
     joinColumns = {
