@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <!-- CSS only -->
+  <link rel="stylesheet" href="/../static/assets/style2.css" th:href="@{/../../static/assets/style2.css}"/>
+
+  <title>Login to Gacha</title>
+</head>
+
+<body>
+<div class="container"  id="shop1">
+  <div>
+    <table class='headertable'>
+      <tr>
+        <td class="playerinfo"  rowspan= 2>
+          <table class="border">
+            <tr>
+              <td class="pagename"><h3>Dungeons</h3></td>
+            </tr>
+          </table>
+        </td>
+        <td class="currencytab"><a href="#" onclick="toggle()"><img src="../../static/images/plus.png" th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>2137</td>
+
+        <td><a href="#" onclick="toggle3()"><img src="../../static/images/cog.png"  th:src="@{../../images/cog.png}" alt="Options" style="width:42px;height:42px;"></a></td>
+      </tr>
+      <tr>
+        <td class="currencytab"><a href="#" onclick="toggle2()"><img src="../../static/images/plus.png"  th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>100/100
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <div class="middleb">
+
+  </div>
+  <div>
+    <table class="navtableb">
+      <tr>
+        <td class="navfield"><a href="">Wróć</a> </td>
+
+      </tr>
+    </table>
+  </div>
+</div>
+<div id="popup3">
+  <div class="settingList">
+    <div class="settingField">Opcje</div><br>
+    <div class="settingField">Twórcy</div><br>
+    <div class="settingField">Wyloguj</div><br>
+    <div class="settingField"><a href="#" onclick="toggle3()">Wróć</a></div>
+  </div>
+</div>
+</body>
+<script type="text/javascript">
+
+  function toggle3()
+  {
+    var blur=document.getElementById('shop1');
+    blur.classList.toggle('active');
+    var popup3=document.getElementById('popup3');
+    popup3.classList.toggle('active');
+  }
+</script>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

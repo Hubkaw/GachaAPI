@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="/../static/assets/style2.css" th:href="@{/../../static/assets/style2.css}"/>
+
+    <title>Login to Gacha</title>
+</head>
+<body>
+<div class="container"  id="shop1">
+    <div>
+        <table class='headertable'>
+            <tr>
+                <td class="playerinfo"  rowspan= 2>
+                    <table class="border">
+                        <tr>
+                            <td class="pagename"><h2>Summon</h2></td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="currencytab"><a href="#" onclick="toggle()"><img src="../../static/images/plus.png" th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>2137</td>
+
+                <td><a href="#" onclick="toggle3()"><img src="../../static/images/cog.png"  th:src="@{../../images/cog.png}" alt="Options" style="width:42px;height:42px;"></a></td>
+            </tr>
+            <tr>
+                <td class="currencytab"><a href="#" onclick="toggle2()"><img src="../../static/images/plus.png"  th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>100/100
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <div class="middleb">
+        <!--content-->
+        <table class="listTable">
+            <tr>
+                <td style="width:20%;"><h3>Basic Chest</h3></td>
+                <td style="width:30%"><img src="../../static/images/chest-b.png" th:src="@{../../images/chest-b.png}" alt="chest image" style="width:420px;height:auto;"/></td>
+                <td style="width:20%">SSR: 0.5% <br> SR: 2%</td>
+                <td style="width:20%"><a href="#">100$<img src="../../static/images/cart.png" th:src="@{../../images/cart.png}" alt="buy" style="width:86px;height:86px;"/></a></td>
+                <td style="width:10%"><a href="#" onclick="toggle4()">More info</a><img src="../../static/images/info.png" th:src="@{../../images/info.png}" alt="more info"  style="width:86px;height:86px;"/></a></td>
+            </tr>
+            <tr>
+                <td style="width:20%;"><h3>Decent Chest</h3></td>
+                <td style="width:30%"><img src="../../static/images/chest-d.png" th:src="@{../../images/chest-d.png}" alt="chest image" style="width:420px;height:auto;"/></td>
+                <td style="width:20%">SSR: 0.7% <br> SR: 2.5%</td>
+                <td style="width:20%"><a href="#">150$<img src="../../static/images/cart.png" th:src="@{../../images/cart.png}" alt="buy" style="width:86px;height:86px;"/></a></td>
+                <td style="width:10%"><a href="#" onclick="toggle4()">More info</a><img src="../../static/images/info.png" th:src="@{../../images/info.png}" alt="more info" style="width:86px;height:86px;"/></a></td>
+            </tr>
+            <tr>
+                <td style="width:20%;"><h3>Pay To Win Chest</h3></td>
+                <td style="width:30%"><img src="../../static/images/chest-p.png" th:src="@{../../images/chest-p.png}" alt="chest image" style="width:420px;height:auto;"/></td>
+                <td style="width:20%">SSR: 2% <br> SR: 5%</td>
+                <td style="width:20%"><a href="#">1500$<img src="../../static/images/cart.png" th:src="@{../../images/cart.png}" alt="buy" style="width:86px;height:86px;"/></a></td>
+                <td style="width:10%"><a href="#" onclick="toggle4()">More info</a><img src="../../static/images/info.png" th:src="@{../../images/info.png}" alt="more info" style="width:86px;height:86px;"/></a></td>
+            </tr>
+        </table>
+        <!--e-->
+    </div>
+    <div>
+        <table class="navtableb">
+            <tr>
+                <td class="navfield"><a href="">Wróć</a> </td>
+
+            </tr>
+        </table>
+    </div>
+</div>
+<div id="popup3">
+    <div class="settingList">
+        <div class="settingField">Opcje</div><br>
+        <div class="settingField">Twórcy</div><br>
+        <div class="settingField">Wyloguj</div><br>
+        <div class="settingField">
+            <a href="#" onclick="toggle3()">Wróć</a>
+        </div>
+    </div>
+</div>
+
+<div id="popup4">
+    <table class="listTable">
+        <tr>
+            <td style="width:20%;"><h3>Shit tier waifu</h3></td>
+            <td style="width:30%"><img src="../../static/images/waifu-1.png" th:src="@{../../images/waifu-1.png}" alt="chest image" style="width:420px;height:auto;"/></td>
+            <td style="width:20%">Common 90%</td>
+       </tr>
+        <tr>
+            <td style="width:20%;"><h3>Decent Waifu</h3></td>
+            <td style="width:30%"><img src="../../static/images/waifu-2.jpeg" th:src="@{../../images/waifu-2.jpeg}" alt="chest image" style="width:420px;height:auto;"/></td>
+            <td style="width:20%">Super rare 8%</td>
+        </tr>
+        <tr>
+            <td style="width:20%;"><h3>God tier waifu</h3></td>
+            <td style="width:30%"><img src="../../static/images/waifu-3.png" th:src="@{../../images/waifu-3.png}" alt="chest image" style="width:420px;height:auto;"/></td>
+            <td style="width:20%">SSR: 2% <br> Super Super Rare 2%</td>
+    </tr>
+    </table>
+    <div class="settingField">
+    <a href="#" onclick="toggle4()" >Wróć</a>
+    </div>
+</div>
+
+
+</body>
+<script type="text/javascript">
+
+    function toggle4()
+    {
+        var blur=document.getElementById('shop1');
+        blur.classList.toggle('active');
+        var popup4=document.getElementById('popup4');
+        popup4.classList.toggle('active');
+    }
+    function toggle3()
+    {
+        var blur=document.getElementById('shop1');
+        blur.classList.toggle('active');
+        var popup3=document.getElementById('popup3');
+        popup3.classList.toggle('active');
+    }
+</script>
+</html>
