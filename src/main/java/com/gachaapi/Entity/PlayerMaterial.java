@@ -10,9 +10,9 @@ import java.util.Objects;
 public class PlayerMaterial {
     private int id;
     private int amount;
-    private Material materialByMaterialId;
+    private Material material;
     @JsonIgnore
-    private Player playerByPlayerIdPlayer;
+    private Player player;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,21 +50,21 @@ public class PlayerMaterial {
 
     @ManyToOne
     @JoinColumn(name = "Material_Id", referencedColumnName = "Id", nullable = false)
-    public Material getMaterialByMaterialId() {
-        return materialByMaterialId;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setMaterialByMaterialId(Material materialByMaterialId) {
-        this.materialByMaterialId = materialByMaterialId;
+    public void setMaterial(Material materialByMaterialId) {
+        this.material = materialByMaterialId;
     }
 
     @ManyToOne
     @JoinColumn(name = "Player_IdPlayer", referencedColumnName = "IdPlayer", nullable = false)
-    public Player getPlayerByPlayerIdPlayer() {
-        return playerByPlayerIdPlayer;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setPlayerByPlayerIdPlayer(Player playerByPlayerIdPlayer) {
-        this.playerByPlayerIdPlayer = playerByPlayerIdPlayer;
+    public void setPlayer(Player playerByPlayerIdPlayer) {
+        this.player = playerByPlayerIdPlayer;
     }
 }

@@ -33,8 +33,8 @@ public class SecurityConfig {
     private RsaKeyProperties rsaKeys;
     private GachaUserDetailsService gachaUserDetailsService;
 
-    private static final String[] NO_AUTH_URLS = {"/","/signup", "/token", "/assets/**", "/images/**","/createAccount"};
-    private static final String[] ADMIN_ONLY_URLS = {"/dev/**","/api/players","/error"};
+    private static final String[] NO_AUTH_URLS = {"/","/api/signup", "/token", "/assets/**", "/images/**","/createAccount"};
+    private static final String[] ADMIN_ONLY_URLS = {"/dev/**","/error"};
     private static final String[] USER_BASIC_ALLOWED_URLS = {"/game/**"};
     private static final String[] USER_TOKEN_ALLOWED_URLS = {"/api/**"};
 
@@ -58,7 +58,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(c -> c.loginPage("/login")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/", false)
                         .permitAll()
                         .usernameParameter("nick")
                         .passwordParameter("password"))

@@ -40,7 +40,6 @@ public class SecurityController {
         try {
             return new ResponseEntity<>(playerService.createNewPlayer(newPlayer), HttpStatus.CREATED);
         } catch (Exception e) {
-            System.out.println("ruchanie");
             return ResponseEntity.badRequest().build();
         }
     }
@@ -52,11 +51,9 @@ public class SecurityController {
 
     @PostMapping("/createAccount")
     public String createAccount(Model model, @ModelAttribute("newPlayer")NewPlayer newPlayer){
-        System.out.println("beniz");
         try {
             System.out.println(playerService.createNewPlayer(newPlayer));
         } catch (Exception e){
-            System.out.println("ruchanie");
         }
         return "redirect:/login";
     }

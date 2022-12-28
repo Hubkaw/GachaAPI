@@ -102,7 +102,7 @@ public class Material {
         this.materialweaponclassesById = materialweaponclassesById;
     }
 
-    @OneToMany(mappedBy = "materialByMaterialId")
+    @OneToMany(mappedBy = "material")
     public Collection<PlayerMaterial> getPlayerMaterialsById() {
         return playerMaterialsById;
     }

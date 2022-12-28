@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static com.gachaapi.Utils.Constants.DEFAULT_STAMINA_AMOUNT;
 import static com.gachaapi.Utils.Constants.PREMIUM_ROLE;
 
 @EnableScheduling
@@ -23,18 +24,30 @@ public class ScheduledTasks {
     private RoleRepository roleRepository;
 
     @Bean
-    @Scheduled(cron = "0 0 3 * * *", zone="Europe/Warsaw")
-    public void updatePremium(){
-        List<Player> all = playerRepository.findAll();
+    @Scheduled(cron = "0 0 3 * * *", zone = "Europe/Warsaw")
+    public void dailyPlayerUpdate() {
         Role premiumRole = roleRepository.findByName(PREMIUM_ROLE);
-        all.forEach(p ->{
-            if (p.getPremiumLeft()==0){
-                p.getRoles().remove(premiumRole);
-            } else if (p.getPremiumLeft()>0){
-                p.setPremiumLeft(p.getPremiumLeft()-1);
-                p.getRoles().add(premiumRole);
-            }
+        playerRepository.findAll().forEach(player -> {
+            progressPremium(player, premiumRole);
+            resetStamina(player);
+            playerRepository.save(player);
         });
-        playerRepository.saveAll(all);
+
+    }
+
+    private void progressPremium(Player player, Role premiumRole) {
+        if (player.getPremiumLeft() == 0) {
+            player.getRoles().remove(premiumRole);
+        } else if (player.getPremiumLeft() > 0) {
+            player.setPremiumLeft(player.getPremiumLeft() - 1);
+            player.getRoles().add(premiumRole);
+        }
+    }
+
+    private void resetStamina(Player player) {
+        int stamina = player.getStamina();
+        if (stamina < DEFAULT_STAMINA_AMOUNT) {
+            player.setStamina(DEFAULT_STAMINA_AMOUNT);
+        }
     }
 }

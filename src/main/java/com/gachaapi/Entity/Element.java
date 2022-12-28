@@ -10,7 +10,6 @@ import java.util.Objects;
 public class Element {
     private int id;
     private String name;
-    @JsonIgnore
     private Collection<Materialelement> materialElements;
     @JsonIgnore
     private Collection<Weapon> weapons;

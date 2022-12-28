@@ -172,7 +172,6 @@ public class ChestServiceImpl implements ChestService {
             playerCharacter.setLvl(1);
             playerCharacter.setParties(new HashSet<>());
             playerCharacter.setPlayerArtefacts(new HashSet<>());
-            playerCharacter.setWieldedWeapons(new ArrayList<>());
             playerCharacterRepository.save(playerCharacter);
             return new ChestReward("Character", reward);
         }

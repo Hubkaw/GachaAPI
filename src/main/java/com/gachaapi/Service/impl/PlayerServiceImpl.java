@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import static com.gachaapi.Utils.Constants.DEFAULT_STAMINA_AMOUNT;
 import static com.gachaapi.Utils.Constants.USER_ROLE;
 
 @Service
@@ -42,7 +43,6 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Player createNewPlayer(NewPlayer newPlayer) throws ParseException {
         if (!validateNewPlayer(newPlayer)){
-            System.out.println("beniz");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid login or password");
 
         }
@@ -61,6 +61,8 @@ public class PlayerServiceImpl implements PlayerService {
         player.setJoinDate(Timestamp.valueOf(LocalDateTime.now()));
         player.setPvpLooses(0);
         player.setPvpWins(0);
+        player.setPremiumLeft(0);
+        player.setStamina(DEFAULT_STAMINA_AMOUNT);
         player.setPityRollStatus(0);
         player.setPlayerBalance(0);
         playerRepository.save(player);
