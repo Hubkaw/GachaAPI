@@ -14,8 +14,6 @@
     <form th:action="@{/dev/character}" th:method="post" th:object="${newCharacter}">
         <h3>Name:</h3><br>
         <input th:type="text" name="name" required><br>
-        <h3>Ability:</h3><br>
-        <input th:type="number" name="ability" required><br>
         <h3>Class:</h3>
         <select name="classId" required>
             <option th:each="item : ${classList}" th:value="${item.id}" th:text="${item.name}"></option>
@@ -28,29 +26,48 @@
         <select name="affiliationId" required>
             <option th:each="item : ${affiliationList}" th:value="${item.id}" th:text="${item.name}"></option>
         </select><br>
+        <h2>Ability</h2>
+        <h3>Name:</h3>
+        <input th:type="text" name="abilityName" required><br>
+        <h3>Type:</h3>
+        <select name="abilityType">
+            <option value="ATTACK">ATTACK</option>
+            <option value="BUFF">BUFF</option>
+            <option value="DEBUFF">DEBUFF</option>
+        </select><br>
+        <h3>Potency:</h3>
+        <input th:type="number" name="abilityPotency" required><br>
+        <h3>Stat</h3>
+        <select name="abilityStatId">
+            <option th:each="item : ${statList}" th:value="${item.statId}" th:text="${item.shortName}"></option>
+        </select><br>
         <input type="submit" value="submit"><br>
     </form>
     <div >
         <table>
             <thead>
             <tr>
-                <td>Id</td>
-                <td>Name</td>
-                <td>Ability</td>
-                <td>Class</td>
-                <td>Rarity</td>
-                <td>Affiliation</td>
-                <td>Delete</td>
+                <td class="head-cell">Id</td>
+                <td class="head-cell">Name</td>
+                <td class="head-cell">Class</td>
+                <td class="head-cell">Rarity</td>
+                <td class="head-cell">Affiliation</td>
+                <td colspan="4" class="head-cell">Ability</td>
+                <td class="head-cell">Delete</td>
             </tr>
             </thead>
             <tbody>
             <tr th:each="item : ${characterList}">
                 <td th:text="${item.id}"></td>
                 <td th:text="${item.name}"></td>
-                <td th:text="${item.ability}"></td>
                 <td th:text="${item.characterClass.name}"></td>
                 <td th:text="${item.rarity.name}"></td>
                 <td th:text="${item.affilation.name}"></td>
+                <td th:text="${item.ability.name}"></td>
+                <td th:text="${item.ability.type}"></td>
+                <td th:text="${item.ability.potency}"></td>
+                <td th:if="${item.ability.stat}" th:text="${item.ability.stat.shortName}"></td>
+                <td th:if="!${item.ability.stat}" th:text="'n/a'"></td>
                 <td><a th:href="@{'/dev/character/delete/'+${item.id}}">
                     <button>Delete</button>
                 </a></td>
@@ -59,5 +76,14 @@
         </table>
     </div>
 </div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $('[name="abilityType"]').change(function(){
+        var stats = $('[name="abilityStatId"]');
+        var statsEnabled = $(this).val() != 'ATTACK';
+        stats.prop("disabled", !statsEnabled);
+    }).change()
+
+</script>
 </body>
 </html>

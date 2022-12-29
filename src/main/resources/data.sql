@@ -92,6 +92,8 @@ DELETE
 FROM rarity;
 DELETE
 FROM affilation;
+DELETE
+FROM ability;
 SET
 foreign_key_checks = 1;
 
@@ -352,24 +354,43 @@ INSERT INTO weapon (id, name, element_id, rarity_id, weapon_class_id)
 VALUES (14, 'Lute of Cold Songs', 2, 4, 5);
 INSERT INTO weapon (id, name, element_id, rarity_id, weapon_class_id)
 VALUES (15, 'Whispers of the Wind', 3, 2, 5);
---character
 
-INSERT INTO `character` (`id`, `ability`, `name`, `affilation_id`, `class_id`, `rarity_id`)
-VALUES (1, 'buła mieczem', 'Sebix', 1, 1, 5),
-       (2, 'Myk szabelką', 'Jacek Soplica', 1, 1, 3),
-       (3, 'AWOOO', 'Inubarashi Momiji', 3, 1, 2),
-       (4, 'Steady Shot', 'Samurai Wannabe', 2, 2, 3),
-       (5, 'Bad Day', 'School Shooter', 1, 2, 4),
-       (6, 'uwu shot', 'Krzysztof', 4, 2, 5),
-       (7, 'Uwodzenie Wieśmina', 'Triss', 1, 3, 2),
-       (8, 'owo bolt', 'Woś', 4, 3, 4),
-       (9, 'Fog Freezing', 'Cirno', 3, 3, 1),
-       (10, 'No idea', 'Shield Hero', 2, 4, 5),
-       (11, 'Dark push', 'Rumia', 3, 4, 1),
-       (12, 'Shield Bash', 'Zawisza Czarny', 1, 4, 3),
-       (13, 'Anime Noises', 'Wołyń', 2, 5, 2),
-       (14, 'Mexican Music', 'Remilia', 3, 5, 2),
-       (15, 'Absolute Territory', 'Ken Ashcorp', 4, 5, 2);
+--ability
+INSERT INTO `ability` (`id`, `name`, `type`, `potency`, `stat_id`)
+VALUES (1, 'buła mieczem', 0, 100, null),
+       (2, 'Myk szabelką', 0, 100, null),
+       (3, 'AWOOO', 0, 100, null),
+       (4, 'Steady Shot', 0, 100, null),
+       (5, 'Bad Day', 2, 100, 2),
+       (6, 'uwu shot', 0, 100, null),
+       (7, 'Uwodzenie Wieśmina', 2, 100, 2),
+       (8, 'owo bolt', 0, 100, null),
+       (9, 'Frog Freezing', 2, 100, 2),
+       (10, 'No idea', 2, 100, 2),
+       (11, 'Dark push', 0, 100, null),
+       (12, 'Shield Bash', 0, 100, null),
+       (13, 'Anime Noises', 1, 100, 2),
+       (14, 'Mexican Music', 1, 100, 2),
+       (15, 'Absolute Territory', 1, 100, 2);
+
+--character
+INSERT INTO `character` (`id`, `ability_id`, `name`, `affilation_id`, `class_id`, `rarity_id`)
+VALUES (1, 1, 'Sebix', 1, 1, 5),
+       (2, 2, 'Jacek Soplica', 1, 1, 3),
+       (3, 3, 'Inubarashi Momiji', 3, 1, 2),
+       (4, 4, 'Samurai Wannabe', 2, 2, 3),
+       (5, 5, 'School Shooter', 1, 2, 4),
+       (6, 6, 'Krzysztof', 4, 2, 5),
+       (7, 7, 'Triss', 1, 3, 2),
+       (8, 8, 'Woś', 4, 3, 4),
+       (9, 9, 'Cirno', 3, 3, 1),
+       (10, 10, 'Shield Hero', 2, 4, 5),
+       (11, 11, 'Rumia', 3, 4, 1),
+       (12, 12, 'Zawisza Czarny', 1, 4, 3),
+       (13, 13, 'Wołyń', 2, 5, 2),
+       (14, 14, 'Remilia', 3, 5, 2),
+       (15, 15, 'Ken Ashcorp', 4, 5, 2);
+
 
 
 --Player_Character

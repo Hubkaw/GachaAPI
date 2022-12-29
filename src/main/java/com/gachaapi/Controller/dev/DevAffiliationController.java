@@ -61,9 +61,9 @@ public class DevAffiliationController {
         return "redirect:/dev/affiliation/stats/"+affiliationId;
     }
 
-    @GetMapping("/dev/affilation/material/{id}")
+    @GetMapping("/dev/affiliation/material/{id}")
     public String getAffilationMaterials(Model model, @PathVariable("id")int id){
-        model.addAttribute("Affiliation", affiliationService.getById(id));
+        model.addAttribute("affiliation", affiliationService.getById(id));
         model.addAttribute("materialList", materialService.getAll());
         return "dev/MaterialAffiliation";
     }

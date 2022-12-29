@@ -1,10 +1,7 @@
 package com.gachaapi.Controller.dev;
 
 
-import com.gachaapi.Service.interfaces.AffiliationService;
-import com.gachaapi.Service.interfaces.CharacterService;
-import com.gachaapi.Service.interfaces.ClassService;
-import com.gachaapi.Service.interfaces.RarityService;
+import com.gachaapi.Service.interfaces.*;
 import com.gachaapi.Utils.dev.NewCharacter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,6 +19,7 @@ public class DevCharacterController {
     private RarityService rarityService;
     private ClassService classService;
     private AffiliationService affiliationService;
+    private StatisticService statisticService;
 
     @GetMapping("/dev/character")
     public String getCharacter(Model model){
@@ -29,6 +27,7 @@ public class DevCharacterController {
         model.addAttribute("rarityList", rarityService.getAll());
         model.addAttribute("classList", classService.getAll());
         model.addAttribute("affiliationList", affiliationService.getAll());
+        model.addAttribute("statList", statisticService.getAll());
         return "dev/character";
     }
 

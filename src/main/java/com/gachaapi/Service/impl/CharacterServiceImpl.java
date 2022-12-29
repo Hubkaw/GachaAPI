@@ -1,11 +1,10 @@
 package com.gachaapi.Service.impl;
 
+import com.gachaapi.Entity.Ability;
 import com.gachaapi.Entity.Character;
-import com.gachaapi.Repository.AffiliationRepository;
-import com.gachaapi.Repository.CharacterRepository;
-import com.gachaapi.Repository.ClassRepository;
-import com.gachaapi.Repository.RarityRepository;
+import com.gachaapi.Repository.*;
 import com.gachaapi.Service.interfaces.CharacterService;
+import com.gachaapi.Utils.AbilityType;
 import com.gachaapi.Utils.dev.NewCharacter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,8 @@ public class CharacterServiceImpl implements CharacterService {
     private AffiliationRepository affiliationRepository;
     private ClassRepository classRepository;
     private RarityRepository rarityRepository;
+    private AbilityRepository abilityRepository;
+    private StatisticRepository statisticRepository;
 
     @Override
     public List<Character> getAll() {
@@ -30,7 +31,16 @@ public class CharacterServiceImpl implements CharacterService {
     public void create(NewCharacter newCharacter) {
         Character character = new Character();
         character.setName(newCharacter.getName());
-        character.setAbility(newCharacter.getAbility());
+
+        Ability ability = new Ability();
+        ability.setPotency(newCharacter.getAbilityPotency());
+        ability.setName(newCharacter.getName());
+        ability.setType(newCharacter.getAbilityType());
+        if (ability.getType()!=AbilityType.ATTACK && newCharacter.getAbilityStatId().isPresent()){
+            ability.setStat(statisticRepository.getReferenceById(newCharacter.getAbilityStatId().get()));
+        }
+        character.setAbility(ability);
+
         character.setAffilation(affiliationRepository.getReferenceById(newCharacter.getAffiliationId()));
         character.setCharacterClass(classRepository.getReferenceById(newCharacter.getClassId()));
         character.setRarity(rarityRepository.getReferenceById(newCharacter.getRarityId()));

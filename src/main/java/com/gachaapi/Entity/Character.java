@@ -22,10 +22,6 @@ public class Character  implements PossibleChestReward {
     @Column(name = "Name", nullable = false, length = 32)
     private String name;
 
-    @Basic
-    @Column(name = "Ability", nullable = false, length = 64)
-    private String ability;
-
     @ManyToOne
     @JoinColumn(name = "Affilation_id", referencedColumnName = "id", nullable = false)
     private Affilation affilation;
@@ -54,6 +50,10 @@ public class Character  implements PossibleChestReward {
     @OneToMany(mappedBy = "character")
     @JsonIgnore
     private Collection<PlayerCharacter> playerCharactersById;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "Ability_id", referencedColumnName = "id", nullable = false)
+    private Ability ability;
 
     @Override
     public boolean equals(Object o) {

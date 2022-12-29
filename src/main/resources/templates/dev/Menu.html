@@ -7,13 +7,13 @@
     <link th:href="@{/assets/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<h1>Dev Menu</h1>
-<div>
+<h1 class="center">Dev Menu</h1>
+<div class="center">
     <table>
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Link</th>
+            <th class="head-cell">Name</th>
+            <th class="head-cell">Link</th>
         </tr>
         </thead>
         <tbody>
@@ -21,12 +21,10 @@
             <td th:text="${item.name}"></td>
             <td><a th:href="${item.link}"><button th:text="Link"></button></a> </td>
         </tr>
+        <tr><td colspan="2"><a th:href="@{/logout}"><button>Logout</button></a></td></tr>
         </tbody>
     </table>
 </div>
-<footer>
-    <a th:href="@{/logout}"><button>Logout</button></a>
-</footer>
 
 </body>
 </html>

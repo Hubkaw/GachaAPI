@@ -15,7 +15,11 @@
         <h2>Name:</h2><br>
         <input th:type="text" name="name" required><br>
         <h2>Type:</h2><br>
-        <input th:type="text" name="type" required><br>
+        <select name="type">
+            <option value="RING">RING</option>
+            <option value="GLASSES">GLASSES</option>
+            <option value="HAT">HAT</option>
+        </select>
         <h3>Rarity:</h3>
         <select name="rarityId" required>
             <option th:each="item : ${rarityList}" th:value="${item.id}" th:text="${item.name}"></option>
