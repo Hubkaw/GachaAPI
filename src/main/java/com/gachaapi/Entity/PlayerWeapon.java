@@ -61,8 +61,7 @@ public class PlayerWeapon {
         return Objects.hash(id, ascension, lvl);
     }
 
-    @OneToOne(optional = true, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "WieldingCharacter", referencedColumnName = "Id")
+    @OneToOne(mappedBy = "wieldedWeapon")
     public PlayerCharacter getWieldingCharacter() {
         return wieldingCharacter;
     }

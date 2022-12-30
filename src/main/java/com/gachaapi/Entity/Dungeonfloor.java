@@ -36,7 +36,7 @@ public class Dungeonfloor {
     @JoinColumn(name = "partyId", referencedColumnName = "Id", nullable = false)
     private Party party;
 
-    @OneToMany(mappedBy = "dungeonfloorByDungeonFloorId")
+    @OneToMany(mappedBy = "dungeonfloor")
     @JsonIgnore
     private Collection<PlayerDungeonfloor> playerDungeonfloors;
 

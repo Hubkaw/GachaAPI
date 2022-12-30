@@ -57,8 +57,9 @@ public class PlayerServiceImpl implements PlayerService {
         player.setRoles(new HashSet<>());
         player.getRoles().add(roleRepository.findByName(USER_ROLE));
         player.setBirthDate(Timestamp.from(new SimpleDateFormat("yyyy-MM-dd").parse(newPlayer.getBirthDate()).toInstant()));
-        player.setEloPoints(0);
+        player.setEloPoints(1500);
         player.setJoinDate(Timestamp.valueOf(LocalDateTime.now()));
+        player.setActiveParty(0);
         player.setPvpLooses(0);
         player.setPvpWins(0);
         player.setPremiumLeft(0);

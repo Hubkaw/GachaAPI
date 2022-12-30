@@ -21,9 +21,6 @@ public class Party {
     @Column(name = "Name", nullable = false, length = 32)
     private String name;
 
-    @Basic
-    @Column(name = "MoveOrder", nullable = false)
-    private long moveOrder;
 
     @ManyToOne
     @JoinColumn(name = "Player_IdPlayer", referencedColumnName = "IdPlayer", nullable = false)
@@ -52,12 +49,12 @@ public class Party {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Party party = (Party) o;
-        return id == party.id && name == party.name && moveOrder == party.moveOrder;
+        return id == party.id && name == party.name ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, moveOrder);
+        return Objects.hash(id, name);
     }
 
     @Override

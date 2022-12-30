@@ -9,5 +9,18 @@ public class Constants {
 
     public static final int DEFAULT_STAMINA_AMOUNT = 100;
 
+    public static final String FIRE_ELEMENT = "FIRE";
+    public static final String ICE_ELEMENT = "ICE";
+    public static final String WIND_ELEMENT = "WIND";
+    public static final String NO_ELEMENT = "NONE";
+
+    public static final String ATTACK_STAT = "ATK";
+    public static final String HEALTH_STAT = "HP";
+    public static final String DEFENCE_STAT = "DEF";
+    public static final String INITIATIVE_STAT = "INI";
+    public static final String CRIT_RATE_STAT = "CRT";
+    public static final String CRIT_DAMAGE_STAT = "CDM";
+
+
     public static final String CANT_DELETE_USED_BY_PLAYER = "This resource is already used by a player. You cannot delete it";
 }

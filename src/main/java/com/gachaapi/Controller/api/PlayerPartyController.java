@@ -2,6 +2,7 @@ package com.gachaapi.Controller.api;
 
 
 import com.gachaapi.Entity.Party;
+import com.gachaapi.Entity.Player;
 import com.gachaapi.Service.interfaces.PlayerPartyService;
 import com.gachaapi.Utils.api.NewParty;
 import lombok.AllArgsConstructor;
@@ -33,5 +34,10 @@ public class PlayerPartyController {
     public ResponseEntity<String> deleteParty(@PathVariable("id")int id, Principal principal){
         playerPartyService.deleteParty(id, principal.getName());
         return ResponseEntity.ok("Party deleted");
+    }
+
+    @GetMapping("/api/player/parties/active/set/{id}")
+    public ResponseEntity<Player> setActiveParty(@PathVariable("id")int id, Principal principal){
+        return ResponseEntity.ok(playerPartyService.setActive(id, principal.getName()));
     }
 }

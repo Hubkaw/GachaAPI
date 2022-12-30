@@ -2,7 +2,6 @@ package com.gachaapi.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -69,34 +68,34 @@ public class Player {
     private int stamina;
 
     @OneToMany(mappedBy = "player")
-    @JsonIgnore
+
     private Collection<Party> parties;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "player")
     private Collection<PlayerArtefact> playerArtefacts;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "player")
     private Collection<PlayerCharacter> playerCharacters;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "playerByPlayerIdPlayer")
     private Collection<PlayerChestitem> playerChestitems;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "playerByPlayerIdPlayer")
+
+    @OneToMany(mappedBy = "player")
     private Collection<PlayerDungeonfloor> playerDungeonfloors;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "player")
     private Collection<PlayerMaterial> playerMaterials;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "playerByPlayerIdPlayer")
     private Collection<PlayerPurchase> playerPurchases;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "player")
     private Collection<PlayerWeapon> playerWeaponsByIdPlayer;
 

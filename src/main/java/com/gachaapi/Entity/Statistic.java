@@ -88,7 +88,7 @@ public class Statistic {
         this.statClassesByStatId = statClassesByStatId;
     }
 
-    @OneToMany(mappedBy = "statisticByStatisticStatId")
+    @OneToMany(mappedBy = "stat")
     public Collection<StatWeapon> getStatWeaponsByStatId() {
         return statWeaponsByStatId;
     }

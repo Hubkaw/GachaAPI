@@ -75,7 +75,6 @@ public class AdminPartyServiceImpl implements AdminPartyService {
         party.setName(newAdminParty.getName());
         party.setPlayer(playerRepository.getReferenceById(1));
         party.setCharacters(pcs);
-        party.setMoveOrder(1234);
         partyRepository.save(party);
 
         Dungeonfloor df = new Dungeonfloor();

@@ -57,7 +57,6 @@ public class PlayerPartyServiceImpl implements PlayerPartyService {
 
 
         Party party = new Party();
-        party.setMoveOrder(1234);
         party.setPlayer(player);
         party.setName(newParty.getName());
         party.setCharacters(characters);
@@ -72,5 +71,22 @@ public class PlayerPartyServiceImpl implements PlayerPartyService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This party doesnt belong to you");
         }
         partyRepository.delete(party);
+    }
+
+    @Override
+    public Player setActive(int id, String nickname) {
+        Player player = playerRepository.findByNick(nickname).orElseThrow();
+
+        Party party = partyRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.BAD_REQUEST, "This party does not exist"));
+        if (!party.getPlayer().equals(player)){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This Party does not belong to you");
+        }
+        if (party.getCharacters().size()!=4){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This Party is invalid senpai.");
+        }
+
+        player.setActiveParty(id);
+        return playerRepository.save(player);
     }
 }

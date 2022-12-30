@@ -53,8 +53,8 @@ public class WeaponServiceImpl implements WeaponService {
     @Override
     public void createStatWeapon(NewStatWeapon newStatWeapon) {
         StatWeapon statWeapon = new StatWeapon();
-        statWeapon.setStatisticByStatisticStatId(statisticRepository.getReferenceById(newStatWeapon.getStatId()));
-        statWeapon.setWeaponByWeaponId(weaponRepository.getReferenceById(newStatWeapon.getWeaponId()));
+        statWeapon.setStat(statisticRepository.getReferenceById(newStatWeapon.getStatId()));
+        statWeapon.setWeapon(weaponRepository.getReferenceById(newStatWeapon.getWeaponId()));
         statWeapon.setValue(newStatWeapon.getValue());
         statWeaponRepository.saveAndFlush(statWeapon);
     }

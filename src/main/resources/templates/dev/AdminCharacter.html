@@ -102,10 +102,8 @@
             <td th:text="${item.id}"></td>
             <td th:text="${item.character.name}"></td>
             <td th:text="${item.lvl}"></td>
-            <td th:if="${!item.wieldedWeapons.empty}" th:text="${item.wieldedWeapons[0].weapon.name}"></td>
-            <td th:if="${item.wieldedWeapons.empty}" th:text="'- -'"></td>
-            <td th:if="${!item.wieldedWeapons.empty}" th:text="${item.wieldedWeapons[0].lvl}"></td>
-            <td th:if="${item.wieldedWeapons.empty}" th:text="'- -'"></td>
+            <td th:text="${item.wieldedWeapon != null} ? ${item.wieldedWeapon.weapon.name} : '- -'"></td>
+            <td th:text="${item.wieldedWeapon != null} ? ${item.wieldedWeapon.lvl} : '- -'"></td>
             <td><a th:href="@{'/dev/admin/character/delete/'+${item.id}}">
                 <button>Delete</button>
             </a></td>

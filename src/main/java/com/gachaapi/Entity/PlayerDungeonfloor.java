@@ -1,11 +1,10 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Data
 @Entity
@@ -19,11 +18,12 @@ public class PlayerDungeonfloor {
 
     @ManyToOne
     @JoinColumn(name = "DungeonFloor_ID", referencedColumnName = "ID", nullable = false)
-    private Dungeonfloor dungeonfloorByDungeonFloorId;
+    private Dungeonfloor dungeonfloor;
 
     @ManyToOne
     @JoinColumn(name = "Player_IdPlayer", referencedColumnName = "IdPlayer", nullable = false)
-    private Player playerByPlayerIdPlayer;
+    @JsonIgnore
+    private Player player;
 
     @Basic
     @Column(name = "clearDate", nullable = true)

@@ -25,7 +25,7 @@ public class Weapon implements PossibleChestReward {
     @JsonIgnore
     private Collection<PlayerWeapon> playerWeaponsById;
 
-    @OneToMany(mappedBy = "weaponByWeaponId")
+    @OneToMany(mappedBy = "weapon")
     private Collection<StatWeapon> stats;
 
     @ManyToOne

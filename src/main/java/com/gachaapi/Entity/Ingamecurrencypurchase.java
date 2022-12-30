@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -10,6 +12,7 @@ public class Ingamecurrencypurchase {
     private int idigcp;
     private int volume;
     private BigDecimal price;
+    @JsonIgnore
     private Collection<PlayerPurchase> playerPurchasesByIdigcp;
 
     @Id

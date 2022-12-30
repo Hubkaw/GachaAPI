@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -8,6 +10,7 @@ import java.util.Objects;
 public class Paymentmethod {
     private int idPaymentMethod;
     private String name;
+    @JsonIgnore
     private Collection<PlayerPurchase> playerPurchasesByIdPaymentMethod;
 
     @Id

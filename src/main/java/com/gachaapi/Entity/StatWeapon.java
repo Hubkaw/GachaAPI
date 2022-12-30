@@ -10,9 +10,9 @@ import java.util.Objects;
 public class StatWeapon {
     private int id;
     private int value;
-    private Statistic statisticByStatisticStatId;
+    private Statistic stat;
     @JsonIgnore
-    private Weapon weaponByWeaponId;
+    private Weapon weapon;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,21 +50,21 @@ public class StatWeapon {
 
     @ManyToOne
     @JoinColumn(name = "Statistic_Stat_id", referencedColumnName = "Stat_id", nullable = false)
-    public Statistic getStatisticByStatisticStatId() {
-        return statisticByStatisticStatId;
+    public Statistic getStat() {
+        return stat;
     }
 
-    public void setStatisticByStatisticStatId(Statistic statisticByStatisticStatId) {
-        this.statisticByStatisticStatId = statisticByStatisticStatId;
+    public void setStat(Statistic statisticByStatisticStatId) {
+        this.stat = statisticByStatisticStatId;
     }
 
     @ManyToOne
     @JoinColumn(name = "Weapon_Id", referencedColumnName = "Id", nullable = false)
-    public Weapon getWeaponByWeaponId() {
-        return weaponByWeaponId;
+    public Weapon getWeapon() {
+        return weapon;
     }
 
-    public void setWeaponByWeaponId(Weapon weaponByWeaponId) {
-        this.weaponByWeaponId = weaponByWeaponId;
+    public void setWeapon(Weapon weaponByWeaponId) {
+        this.weapon = weaponByWeaponId;
     }
 }

@@ -27,7 +27,7 @@ FROM weapon_reward;
 DELETE
 FROM material_reward;
 DELETE
-FROM Player_Role;
+FROM player_role;
 DELETE
 FROM gacha.role;
 DELETE
@@ -49,19 +49,19 @@ FROM weapon;
 DELETE
 FROM stat_artifact;
 DELETE
-FROM stat_artefactSet;
+FROM stat_artefactset;
 DELETE
 FROM gacha.class;
 DELETE
 FROM player_purchase;
 DELETE
-FROM ingamecurrencyPurchase;
+FROM ingamecurrencypurchase;
 DELETE
 FROM paymentmethod;
 DELETE
 FROM element;
 DELETE
-FROM weaponClass;
+FROM weaponclass;
 DELETE
 FROM statistic;
 DELETE
@@ -77,7 +77,7 @@ FROM gacha.set;
 DELETE
 FROM player_dungeonfloor;
 DELETE
-FROM Artefact_Reward;
+FROM artefact_reward;
 DELETE
 FROM dungeonfloor;
 DELETE
@@ -85,7 +85,7 @@ FROM party;
 DELETE
 FROM player;
 DELETE
-FROM Dungeon;
+FROM dungeon;
 DELETE
 FROM artefact;
 DELETE
@@ -142,23 +142,23 @@ values (9, 'Cat Ears', 2, 2);
 INSERT INTO player (id_player, nick, birth_date, join_date, active_party, player_balance, hashed_password,
                     pity_roll_status, pvpwins, pvplooses, elopoints, premium_left, stamina)
 values (1, 'admin', '1900-01-01 00:00:00', '2022-01-01 00:00:00', 1, 10000,
-        '$2a$12$qmuu8mn/qN1D.ykSKYMJp.JNWJzL2fL77VHtd7/uzlpzOWv8r5dBC', 1, 1, 1, 1, 99999, 100);
+        '$2a$12$qmuu8mn/qN1D.ykSKYMJp.JNWJzL2fL77VHtd7/uzlpzOWv8r5dBC', 1, 1, 1, 0, 99999, 100);
 INSERT INTO player (id_player, nick, birth_date, join_date, active_party, player_balance, hashed_password,
                     pity_roll_status, pvpwins, pvplooses, elopoints, premium_left, stamina)
 values (2, 'user', '1900-01-01 00:00:00', '2022-01-01 00:00:00', 2, 9999,
-        '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1, 1, 1, 1, 0, 100);
+        '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1, 1, 1, 1500, 0, 100);
 INSERT INTO player (id_player, nick, birth_date, join_date, active_party, player_balance, hashed_password,
                     pity_roll_status, pvpwins, pvplooses, elopoints, premium_left, stamina)
 values (3, 'autist', '1900-01-01 00:00:00', '2022-01-01 00:00:00', 3, 9999,
-        '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1, 1, 1, 1, 0, 100);
+        '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1, 1, 1, 1500, 0, 100);
 --Dungeon
-INSERT INTO Dungeon (id, name, released_at, expires_at)
+INSERT INTO dungeon (id, name, released_at, expires_at)
 values (1, 'jurna wieza', '2022-01-01 00:00:00', null);
-INSERT INTO Dungeon (id, name, released_at, expires_at)
+INSERT INTO dungeon (id, name, released_at, expires_at)
 values (2, 'piwnica', '2000-01-01 00:00:00', '2002-01-01 00:00:00');
-INSERT INTO Dungeon (id, name, released_at, expires_at)
+INSERT INTO dungeon (id, name, released_at, expires_at)
 values (3, 'cyberpunk', '2037-01-01 00:00:00', null);
-INSERT INTO Dungeon (id, name, released_at, expires_at)
+INSERT INTO dungeon (id, name, released_at, expires_at)
 values (4, 'PJATK', '2018-01-01 00:00:00', '2025-01-01 00:00:00');
 --set
 INSERT INTO gacha.set (id, name)
@@ -239,23 +239,23 @@ values (5, 'Crit Rate', 'CRT');
 INSERT INTO statistic (stat_id, name, short_name)
 values (6, 'Crit Damage', 'CDM');
 --weaponClass
-INSERT INTO weaponClass(id, name, short_name)
+INSERT INTO weaponclass(id, name, short_name)
 values (1, 'Sword', 'SWD');
-INSERT INTO weaponClass(id, name, short_name)
+INSERT INTO weaponclass(id, name, short_name)
 values (2, 'Crossbow', 'CRS');
-INSERT INTO weaponClass(id, name, short_name)
+INSERT INTO weaponclass(id, name, short_name)
 values (3, 'Almanac', 'ALM');
-INSERT INTO weaponClass(id, name, short_name)
+INSERT INTO weaponclass(id, name, short_name)
 values (4, 'Shield', 'SHI');
-INSERT INTO weaponClass(id, name, short_name)
+INSERT INTO weaponclass(id, name, short_name)
 values (5, 'Lute', 'LTE');
 --element
 INSERT INTO element (id, name)
-values (1, 'Fire');
+values (1, 'FIRE');
 INSERT INTO element (id, name)
-values (2, 'Ice');
+values (2, 'ICE');
 INSERT INTO element (id, name)
-values (3, 'Wind');
+values (3, 'WIND');
 --paymentmethod
 INSERT INTO paymentmethod (IDPayment_Method, Name)
 values (1, 'PayPal');
@@ -266,11 +266,11 @@ values (3, 'social credits');
 INSERT INTO paymentmethod (IDPayment_Method, Name)
 values (4, 'BLIK');
 --ingamecurrencyPurchase
-INSERT INTO ingamecurrencyPurchase (idigcp, volume, price)
+INSERT INTO ingamecurrencypurchase (idigcp, volume, price)
 VALUES (1, 100, 4.99);
-INSERT INTO ingamecurrencyPurchase (idigcp, volume, price)
+INSERT INTO ingamecurrencypurchase (idigcp, volume, price)
 VALUES (2, 500, 18.99);
-INSERT INTO ingamecurrencyPurchase (idigcp, volume, price)
+INSERT INTO ingamecurrencypurchase (idigcp, volume, price)
 VALUES (3, 2137, 42.00);
 --player_purchase
 INSERT INTO player_purchase (id, player_id_player, payment_method_idpayment_method, in_game_currency_purchase_idigcp,
@@ -294,11 +294,11 @@ VALUES (4, 'Vanguard', 4, 'VNG');
 INSERT INTO gacha.class (id, name, weapon_class, shortcut)
 VALUES (5, 'Bard', 5, 'BRD');
 --stat_artefactSet
-INSERT INTO stat_artefactSet (value, set_id, statistic_stat_id)
+INSERT INTO stat_artefactset (value, set_id, statistic_stat_id)
 values (30, 1, 1);
-INSERT INTO stat_artefactSet (value, set_id, statistic_stat_id)
+INSERT INTO stat_artefactset (value, set_id, statistic_stat_id)
 values (25, 2, 3);
-INSERT INTO stat_artefactSet (value, set_id, statistic_stat_id)
+INSERT INTO stat_artefactset (value, set_id, statistic_stat_id)
 values (50, 3, 2);
 --stat_artifact
 INSERT INTO stat_artifact (id, statistic_stat_id, artefact_id, value)
@@ -370,14 +370,14 @@ VALUES (1, 'buła mieczem', 0, 100, null),
        (11, 'Dark push', 0, 100, null),
        (12, 'Shield Bash', 0, 100, null),
        (13, 'Anime Noises', 1, 100, 2),
-       (14, 'Mexican Music', 1, 100, 2),
+       (14, 'Mexican Music', 3, 100, 2),
        (15, 'Absolute Territory', 1, 100, 2);
 
 --character
 INSERT INTO `character` (`id`, `ability_id`, `name`, `affilation_id`, `class_id`, `rarity_id`)
 VALUES (1, 1, 'Sebix', 1, 1, 5),
        (2, 2, 'Jacek Soplica', 1, 1, 3),
-       (3, 3, 'Inubarashi Momiji', 3, 1, 2),
+       (3, 3, 'Inubashiri Momiji', 3, 1, 2),
        (4, 4, 'Samurai Wannabe', 2, 2, 3),
        (5, 5, 'School Shooter', 1, 2, 4),
        (6, 6, 'Krzysztof', 4, 2, 5),
@@ -412,6 +412,24 @@ INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl
 VALUES (8, 2, 8, 3, 4);
 INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
 VALUES (9, 2, 9, 3, 3);
+
+INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
+VALUES (10, 2, 3, 1, 11);
+INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
+VALUES (11, 2, 9, 1, 11);
+INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
+VALUES (12, 2, 11, 1, 40);
+INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
+VALUES (13, 2, 14, 1, 11);
+
+INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
+VALUES (14, 3, 2, 1, 11);
+INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
+VALUES (15, 3, 5, 1, 11);
+INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
+VALUES (16, 3, 7, 1, 11);
+INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
+VALUES (17, 3, 12, 1, 11);
 --player_material
 INSERT INTO player_material (id, material_id, player_id_player, amount)
 VALUES (1, 1, 1, 10);
@@ -492,23 +510,23 @@ VALUES (2, 'USER');
 INSERT INTO gacha.role (id, name)
 VALUES (3, 'PREMIUM');
 --Player_Role
-INSERT INTO Player_Role (Player_player_id, role_id)
+INSERT INTO player_role (Player_player_id, role_id)
 VALUES (1, 1);
-INSERT INTO Player_Role (Player_player_id, role_id)
+INSERT INTO player_role (Player_player_id, role_id)
 VALUES (1, 2);
-INSERT INTO Player_Role (Player_player_id, role_id)
+INSERT INTO player_role (Player_player_id, role_id)
 VALUES (2, 2);
-INSERT INTO Player_Role (Player_player_id, role_id)
+INSERT INTO player_role (Player_player_id, role_id)
 VALUES (3, 2);
-INSERT INTO Player_Role (Player_player_id, role_id)
+INSERT INTO player_role (Player_player_id, role_id)
 VALUES (1, 3);
 --party NAME
-INSERT INTO party (id, player_id_player, name, move_order)
-VALUES (1, 1, 1, 1234);
-INSERT INTO party (id, player_id_player, name, move_order)
-VALUES (2, 2, 2, 4321);
-INSERT INTO party (id, player_id_player, name, move_order)
-VALUES (3, 3, 3, 3214);
+INSERT INTO party (id, player_id_player, name)
+VALUES (1, 1, 1);
+INSERT INTO party (id, player_id_player, name)
+VALUES (2, 2, 'Super party');
+INSERT INTO party (id, player_id_player, name)
+VALUES (3, 3, 'Extra Party');
 --dungeonfloor
 INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id)
 values (1, 1, 1, 1);
@@ -526,11 +544,11 @@ VALUES (2, 2, 2, '2022-01-01 00:00:00');
 INSERT INTO player_dungeonfloor (id, dungeon_floor_id, player_id_player, clear_date)
 VALUES (3, 3, 1, curdate());
 --Artefact_Reward_
-INSERT INTO Artefact_Reward(id, quantity, artefact_id, dungeon_floor_id)
+INSERT INTO artefact_reward(id, quantity, artefact_id, dungeon_floor_id)
 values (1, 1, 1, 1);
-INSERT INTO Artefact_Reward(id, quantity, artefact_id, dungeon_floor_id)
+INSERT INTO artefact_reward(id, quantity, artefact_id, dungeon_floor_id)
 values (2, 2, 2, 2);
-INSERT INTO Artefact_Reward(id, quantity, artefact_id, dungeon_floor_id)
+INSERT INTO artefact_reward(id, quantity, artefact_id, dungeon_floor_id)
 values (3, 3, 3, 3);
 --material_reward
 INSERT INTO material_reward (id, material_id, dungeon_floor_id, quantity)
@@ -571,7 +589,7 @@ VALUES (4, 50, 1, 1),
        (11, 20, 3, 4),
        (13, 65, 4, 1),
        (14, 60, 4, 4),
-       (17, 26, 3, 1),
+       (17, 26, 3, 3),
        (18, 50, 1, 3),
        (19, 30, 4, 3),
        (20, 80, 5, 3),
@@ -641,21 +659,76 @@ VALUES (1, 1);
 INSERT INTO partycharacter (party_id, player_character_id)
 VALUES (1, 2);
 INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (2, 8);
-INSERT INTO partycharacter (party_id, player_character_id)
 VALUES (1, 3);
 INSERT INTO partycharacter (party_id, player_character_id)
 VALUES (1, 4);
+
 INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (2, 5);
+VALUES (2, 10);
 INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (2, 6);
+VALUES (2, 11);
 INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (2, 7);
+VALUES (2, 12);
+INSERT INTO partycharacter (party_id, player_character_id)
+VALUES (2, 13);
+
+INSERT INTO partycharacter (party_id, player_character_id)
+VALUES (3, 14);
+INSERT INTO partycharacter (party_id, player_character_id)
+VALUES (3, 15);
+INSERT INTO partycharacter (party_id, player_character_id)
+VALUES (3, 16);
+INSERT INTO partycharacter (party_id, player_character_id)
+VALUES (3, 17);
 --player_weapon
 INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
 VALUES (1, 1, 1, 1, 1);
-INSERT INTO player_weapon (id, wielding_character, player_id_player, weapon_id, ascension, lvl)
-VALUES (2, 2, 2, 2, 2, 2);
-INSERT INTO player_weapon (id, wielding_character, player_id_player, weapon_id, ascension, lvl)
-VALUES (3, 3, 3, 3, 3, 3);
+INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
+VALUES (2, 2, 2, 2, 2);
+INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
+VALUES (3, 3, 3, 3, 3);
+
+INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
+VALUES (4, 2, 2, 1, 11);
+INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
+VALUES (5, 2, 9, 1, 11);
+INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
+VALUES (6, 2, 11, 1, 11);
+INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
+VALUES (7, 2, 14, 1, 11);
+
+
+INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
+VALUES (9, 3, 5, 1, 11);
+INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
+VALUES (10, 3, 7, 1, 11);
+INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
+VALUES (11, 3, 12, 1, 11);
+
+UPDATE player_character
+SET wielded_weapon = 4
+WHERE id = 10;
+
+UPDATE player_character
+SET wielded_weapon = 5
+WHERE id = 11;
+
+UPDATE player_character
+SET wielded_weapon = 6
+WHERE id = 12;
+
+UPDATE player_character
+SET wielded_weapon = 7
+WHERE id = 13;
+
+UPDATE player_character
+SET wielded_weapon = 9
+WHERE id = 15;
+
+UPDATE player_character
+SET wielded_weapon = 10
+WHERE id = 16;
+
+UPDATE player_character
+SET wielded_weapon = 11
+WHERE id = 17;
