@@ -2,6 +2,7 @@ package com.gachaapi.Service.impl;
 
 import com.gachaapi.Battle.Battle;
 import com.gachaapi.Battle.BattleLogEntry;
+import com.gachaapi.Battle.EntryType;
 import com.gachaapi.Entity.Party;
 import com.gachaapi.Entity.Player;
 import com.gachaapi.Repository.PartyRepository;
@@ -35,28 +36,52 @@ public class PVPServiceImpl implements PVPService {
         Player attacker = playerRepository.findByNick(attackerName).orElseThrow();
         Player defender = playerRepository.findById(defenderId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.BAD_REQUEST, "This player does not exist."));
-        if (attacker.getActiveParty() < 1){
+        if (attacker.getActiveParty() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You have no active party.");
         }
-        if (defender.getActiveParty() < 1){
+        if (defender.getActiveParty() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Opponent has no active party.");
         }
-        if (attacker.getEloPoints()*0.8 > defender.getEloPoints()){
+        if (attacker.getEloPoints() * 0.8 > defender.getEloPoints()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Opponent's ELO is too low for you.");
         }
         Party attackerParty = partyRepository.findById(attacker.getActiveParty()).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.BAD_REQUEST, "Your active party is invalid."));
-        if (attackerParty.getCharacters().size() != 4){
+        if (attackerParty.getCharacters().size() != 4) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Your active party is invalid.");
         }
         Party defenderParty = partyRepository.findById(defender.getActiveParty()).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.BAD_REQUEST, "Opponent's active party is invalid."));
-        if (defenderParty.getCharacters().size() !=4){
+        if (defenderParty.getCharacters().size() != 4) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Opponent's active party is invalid.");
         }
 
         List<BattleLogEntry> sim = Battle.simulate(attackerParty, defenderParty);
+
+        double Ra = attacker.getEloPoints();
+        double Rd = defender.getEloPoints();
+
+        double Ea = 1 / (1 + Math.pow(10.0, ((Ra - Rd) / 400.0)));
+        double Ed = 1 / (1 + Math.pow(10.0, ((Rd - Ra) / 400.0)));
+
+        double Sa;
+        double Sd;
+        if (sim.stream().anyMatch(log -> log.getType().equals(EntryType.WINNER))) {
+            Sa = 1;
+            Sd = 0;
+        } else {
+            Sa = 0;
+            Sd = 1;
+        }
+        double Rpa = Ra + (26 * (Sa - Ea));
+        double Rpd = Rd + (26 * (Sd - Ed));
+        attacker.setEloPoints((int) Rpa);
+        defender.setEloPoints((int) Rpd);
+        playerRepository.save(attacker);
+        playerRepository.save(defender);
         // TODO save battle log to db
         return sim;
     }
+
+
 }
