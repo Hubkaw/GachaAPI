@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @AllArgsConstructor
-public class HomeController {
+public class GameHomeController {
 
     @GetMapping("/game/home")
     public ModelAndView getHome(Model model){
