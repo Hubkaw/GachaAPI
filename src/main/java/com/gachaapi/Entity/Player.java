@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -46,14 +47,6 @@ public class Player {
     @Basic
     @Column(name = "PityRollStatus", nullable = false)
     private int pityRollStatus;
-
-    @Basic
-    @Column(name = "PVPWins", nullable = false)
-    private int pvpWins;
-
-    @Basic
-    @Column(name = "PVPLooses", nullable = false)
-    private int pvpLooses;
 
     @Basic
     @Column(name = "ELOPoints", nullable = false)
@@ -99,6 +92,13 @@ public class Player {
     @OneToMany(mappedBy = "player")
     private Collection<PlayerWeapon> playerWeaponsByIdPlayer;
 
+
+    @OneToMany(mappedBy = "attacker")
+    private List<BattleHistory> attacks;
+
+    @OneToMany(mappedBy = "defender")
+    private List<BattleHistory> defences;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "Player_Role",
             joinColumns = {
@@ -116,12 +116,12 @@ public class Player {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return idPlayer == player.idPlayer && activeParty == player.activeParty && playerBalance == player.playerBalance && pityRollStatus == player.pityRollStatus && pvpWins == player.pvpWins && pvpLooses == player.pvpLooses && eloPoints == player.eloPoints && Objects.equals(nick, player.nick) && Objects.equals(birthDate, player.birthDate) && Objects.equals(joinDate, player.joinDate) && Objects.equals(hashedPassword, player.hashedPassword);
+        return idPlayer == player.idPlayer && activeParty == player.activeParty && playerBalance == player.playerBalance && pityRollStatus == player.pityRollStatus && eloPoints == player.eloPoints && Objects.equals(nick, player.nick) && Objects.equals(birthDate, player.birthDate) && Objects.equals(joinDate, player.joinDate) && Objects.equals(hashedPassword, player.hashedPassword);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idPlayer, nick, birthDate, joinDate, activeParty, playerBalance, hashedPassword, pityRollStatus, pvpWins, pvpLooses, eloPoints);
+        return Objects.hash(idPlayer, nick, birthDate, joinDate, activeParty, playerBalance, hashedPassword, pityRollStatus, eloPoints);
     }
 
     public void incrementPity(){

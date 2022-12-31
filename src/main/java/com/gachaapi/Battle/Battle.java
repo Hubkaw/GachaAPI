@@ -30,11 +30,10 @@ public class Battle {
         queue.addAll(this.defender.getCharacters());
         log = new ArrayList<>();
         log(attackerName+"'s party "+attacker.getName()+" attacks party "+defender.getName()+".", EntryType.START, Side.SYSTEM);
-        System.out.println(this);
     }
 
 
-    public List<BattleLogEntry> start(){
+    public BattleLog start(){
 
         while (turn < 30){
             turn++;
@@ -59,7 +58,7 @@ public class Battle {
                         }
 
                         if (deathCheck())
-                            return log;
+                            return new BattleLog(log);
                     }
                     case BUFF -> {
                         if (currentSide == Side.ATTACKER){
@@ -69,7 +68,8 @@ public class Battle {
                             String message = defender.buff(POTATK, currentCharacter.getBattleAbility().getStat());
                             log(entryBeggining+" to "+message+".",EntryType.BUFF, Side.DEFENDER);
                         }
-
+                        if (deathCheck())
+                            return new BattleLog(log);
                     }
                     case DEBUFF -> {
                         if (currentSide == Side.DEFENDER){
@@ -79,6 +79,8 @@ public class Battle {
                             String message = defender.debuff(POTATK, currentCharacter.getBattleAbility().getStat());
                             log(entryBeggining+" to "+message+".",EntryType.DEBUFF, Side.ATTACKER);
                         }
+                        if (deathCheck())
+                            return new BattleLog(log);
                     }
                     case HEAL -> {
                         if (currentSide == Side.ATTACKER){
@@ -88,6 +90,8 @@ public class Battle {
                             String heal = defender.heal(POTATK);
                             log(entryBeggining+" on "+defender.getName()+" to "+heal+".", EntryType.HEAL, Side.DEFENDER);
                         }
+                        if (deathCheck())
+                            return new BattleLog(log);
                     }
                 }
             }
@@ -95,7 +99,7 @@ public class Battle {
             queue.addAll(this.defender.getCharacters());
         }
         log("Defenders win by reaching turn limit.", EntryType.END, Side.SYSTEM);
-        return log;
+        return new BattleLog(log);
     }
 
 
@@ -116,7 +120,7 @@ public class Battle {
     }
 
 
-    public static List<BattleLogEntry> simulate(Party attacker, Party defender){
+    public static BattleLog simulate(Party attacker, Party defender){
         return new Battle(attacker, defender).start();
     }
 }

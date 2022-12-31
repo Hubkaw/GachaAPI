@@ -1,6 +1,6 @@
 package com.gachaapi.Battle;
 
-enum Side{
+public enum Side{
     ATTACKER,
     DEFENDER,
     SYSTEM

@@ -1,10 +1,10 @@
 package com.gachaapi.Service.impl;
 
-import com.gachaapi.Battle.Battle;
-import com.gachaapi.Battle.BattleLogEntry;
-import com.gachaapi.Battle.EntryType;
+import com.gachaapi.Battle.*;
+import com.gachaapi.Entity.BattleHistory;
 import com.gachaapi.Entity.Party;
 import com.gachaapi.Entity.Player;
+import com.gachaapi.Repository.BattleLogRepository;
 import com.gachaapi.Repository.PartyRepository;
 import com.gachaapi.Repository.PlayerRepository;
 import com.gachaapi.Service.interfaces.PVPService;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -22,6 +21,7 @@ public class PVPServiceImpl implements PVPService {
 
     private PlayerRepository playerRepository;
     private PartyRepository partyRepository;
+    private BattleLogRepository battleLogRepository;
 
 
     @Override
@@ -32,8 +32,11 @@ public class PVPServiceImpl implements PVPService {
     }
 
     @Override
-    public List<BattleLogEntry> duel(String attackerName, int defenderId) {
+    public BattleLog duel(String attackerName, int defenderId) {
         Player attacker = playerRepository.findByNick(attackerName).orElseThrow();
+        if (attacker.getIdPlayer() == defenderId){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You cannot duel yourself.");
+        }
         Player defender = playerRepository.findById(defenderId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.BAD_REQUEST, "This player does not exist."));
         if (attacker.getActiveParty() < 1) {
@@ -56,7 +59,7 @@ public class PVPServiceImpl implements PVPService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Opponent's active party is invalid.");
         }
 
-        List<BattleLogEntry> sim = Battle.simulate(attackerParty, defenderParty);
+        BattleLog sim = Battle.simulate(attackerParty, defenderParty);
 
         double Ra = attacker.getEloPoints();
         double Rd = defender.getEloPoints();
@@ -66,7 +69,7 @@ public class PVPServiceImpl implements PVPService {
 
         double Sa;
         double Sd;
-        if (sim.stream().anyMatch(log -> log.getType().equals(EntryType.WINNER))) {
+        if (sim.getWinner() == Side.ATTACKER) {
             Sa = 1;
             Sd = 0;
         } else {
@@ -79,9 +82,17 @@ public class PVPServiceImpl implements PVPService {
         defender.setEloPoints((int) Rpd);
         playerRepository.save(attacker);
         playerRepository.save(defender);
-        // TODO save battle log to db
+
+        BattleHistory battleHistory = new BattleHistory();
+        battleHistory.setLog(sim);
+        battleHistory.setAttacker(attacker);
+        battleHistory.setDefender(defender);
+        battleLogRepository.save(battleHistory);
+
         return sim;
     }
+
+
 
 
 }

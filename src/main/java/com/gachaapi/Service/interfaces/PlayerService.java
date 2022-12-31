@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface PlayerService {
     List<Player> getAllPlayers();
-    Player createNewPlayer(NewPlayer newPlayer) throws ParseException;
+    Player createNewPlayer(NewPlayer newPlayer);
     List<Role> getRoles();
     Player getByName(String nick);
 }

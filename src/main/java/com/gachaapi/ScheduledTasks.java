@@ -45,8 +45,7 @@ public class ScheduledTasks {
     }
 
     private void resetStamina(Player player) {
-        int stamina = player.getStamina();
-        if (stamina < DEFAULT_STAMINA_AMOUNT) {
+        if (player.getStamina() < DEFAULT_STAMINA_AMOUNT) {
             player.setStamina(DEFAULT_STAMINA_AMOUNT);
         }
     }

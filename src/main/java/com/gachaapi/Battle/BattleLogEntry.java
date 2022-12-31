@@ -1,19 +1,16 @@
 package com.gachaapi.Battle;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.io.Serializable;
 
 
 @Data
-public class BattleLogEntry {
+@AllArgsConstructor
+public class BattleLogEntry implements Serializable {
     private String entry;
     private EntryType type;
     private Side side;
-
-    public BattleLogEntry(String entry, EntryType type, Side side) {
-        this.entry = entry;
-        this.type = type;
-        this.side = side;
-    }
-
 
 }

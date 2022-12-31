@@ -17,6 +17,7 @@ import javax.ejb.Local;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -41,11 +42,8 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Player createNewPlayer(NewPlayer newPlayer) throws ParseException {
-        if (!validateNewPlayer(newPlayer)){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid login or password");
-
-        }
+    public Player createNewPlayer(NewPlayer newPlayer){
+        Timestamp birthDate = validateNewPlayer(newPlayer);
         if (playerRepository.existsByNick(newPlayer.getNick())){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Nickname already used");
         }
@@ -56,12 +54,10 @@ public class PlayerServiceImpl implements PlayerService {
         player.setHashedPassword(passwordEncoder.encode(newPlayer.getPassword()));
         player.setRoles(new HashSet<>());
         player.getRoles().add(roleRepository.findByName(USER_ROLE));
-        player.setBirthDate(Timestamp.from(new SimpleDateFormat("yyyy-MM-dd").parse(newPlayer.getBirthDate()).toInstant()));
+        player.setBirthDate(birthDate);
         player.setEloPoints(1500);
         player.setJoinDate(Timestamp.valueOf(LocalDateTime.now()));
         player.setActiveParty(0);
-        player.setPvpLooses(0);
-        player.setPvpWins(0);
         player.setPremiumLeft(0);
         player.setStamina(DEFAULT_STAMINA_AMOUNT);
         player.setPityRollStatus(0);
@@ -81,15 +77,22 @@ public class PlayerServiceImpl implements PlayerService {
         return playerRepository.findByNick(nick).orElseThrow(() -> new UsernameNotFoundException("Invalid username"));
     }
 
-    private boolean validateNewPlayer(NewPlayer player) {
-        System.out.println(player);
-        return player != null
-                && player.getNick() != null
-                && player.getPassword() != null
-                && player.getNick().length() <= 32
-                && !player.getNick().contains("/")
-                && !player.getNick().contains(";")
-                && !player.getPassword().contains(";")
-                && !player.getPassword().contains("/");
+    private Timestamp validateNewPlayer(NewPlayer player){
+        if (player.getNick() == null || player.getNick().isBlank() || player.getNick().contains("/") || player.getNick().contains(";") || player.getNick().contains("%") || player.getNick().length() >=32){
+            throw  new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid nickname.");
+        }
+        if (player.getPassword() == null || player.getPassword().isBlank() || player.getPassword().contains("/") || player.getPassword().contains(";") || player.getPassword().contains("%") || player.getPassword().length()>64){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid password");
+        }
+        Timestamp timestamp;
+        try {
+            timestamp = Timestamp.from(new SimpleDateFormat("yyyy-MM-dd").parse(player.getBirthDate()).toInstant());
+        } catch (ParseException parseException) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect date.");
+        }
+        if (timestamp.after(Timestamp.valueOf(LocalDateTime.now().minus(13, ChronoUnit.YEARS)))){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You are too young to create an account.");
+        }
+        return timestamp;
     }
 }

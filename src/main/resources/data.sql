@@ -140,17 +140,17 @@ INSERT INTO artefact (id, name, type, rarity_id)
 values (9, 'Cat Ears', 2, 2);
 --player !!! ADMIN MA ZAWSZE MIEC ID 1 !!!
 INSERT INTO player (id_player, nick, birth_date, join_date, active_party, player_balance, hashed_password,
-                    pity_roll_status, pvpwins, pvplooses, elopoints, premium_left, stamina)
+                    pity_roll_status,  elopoints, premium_left, stamina)
 values (1, 'admin', '1900-01-01 00:00:00', '2022-01-01 00:00:00', 1, 10000,
-        '$2a$12$qmuu8mn/qN1D.ykSKYMJp.JNWJzL2fL77VHtd7/uzlpzOWv8r5dBC', 1, 1, 1, 0, 99999, 100);
+        '$2a$12$qmuu8mn/qN1D.ykSKYMJp.JNWJzL2fL77VHtd7/uzlpzOWv8r5dBC', 1, 0, 99999, 100);
 INSERT INTO player (id_player, nick, birth_date, join_date, active_party, player_balance, hashed_password,
-                    pity_roll_status, pvpwins, pvplooses, elopoints, premium_left, stamina)
+                    pity_roll_status,  elopoints, premium_left, stamina)
 values (2, 'user', '1900-01-01 00:00:00', '2022-01-01 00:00:00', 2, 9999,
-        '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1, 1, 1, 1500, 0, 100);
+        '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1,  1500, 0, 100);
 INSERT INTO player (id_player, nick, birth_date, join_date, active_party, player_balance, hashed_password,
-                    pity_roll_status, pvpwins, pvplooses, elopoints, premium_left, stamina)
+                    pity_roll_status,  elopoints, premium_left, stamina)
 values (3, 'autist', '1900-01-01 00:00:00', '2022-01-01 00:00:00', 3, 9999,
-        '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1, 1, 1, 1500, 0, 100);
+        '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1, 1500, 0, 100);
 --Dungeon
 INSERT INTO dungeon (id, name, released_at, expires_at)
 values (1, 'jurna wieza', '2022-01-01 00:00:00', null);
