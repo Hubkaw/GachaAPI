@@ -1,6 +1,7 @@
 package com.gachaapi.Controller.api;
 
 
+import com.gachaapi.Battle.BattleLog;
 import com.gachaapi.Battle.BattleLogEntry;
 import com.gachaapi.Entity.Player;
 import com.gachaapi.Repository.PartyRepository;
@@ -29,7 +30,7 @@ public class PvPController {
     }
 
     @GetMapping("/api/pvp/duel/{id}")
-    public ResponseEntity<List<BattleLogEntry>> duel(Principal principal, @PathVariable("id") int id){
+    public ResponseEntity<BattleLog> duel(Principal principal, @PathVariable("id") int id){
         return ResponseEntity.ok(pvpService.duel(principal.getName(), id));
     }
 }

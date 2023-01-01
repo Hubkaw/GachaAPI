@@ -11,7 +11,7 @@
 
 ### WAŻNE KOŃCÓWKI:
 
-##### POST /signup
+##### POST /new-account
 
 przymuje jsona w formacie:  
 {  
@@ -26,18 +26,14 @@ Przyjmuje Autoryzacje typu Basic (Sposób działania opisany na dole)
 Zwraca Token JWT potrzebny do KAŻDEGO z poniższych zapytań.  
 Token jest ważny przez 15 minut, potem trzeba uderzyć tu ponownie po nowy.
 
-##### GET /players
 
-- Wyświetla wszystkich użytkowników
-- Wymaga uprawnień administratora
-
-##### GET /playerInfo
+##### GET /api/player-info
 
 - Wyświetla informacje o zalogowanym użytkowniku  
 - Wymaga tokenu (instrukcja znajduje się na końcu readme)
 - Wielkie litery mają znaczenie
 
-##### GET /chests, /chests/all, /chests/open/{id}
+##### GET /api/chests, /api/chests/all, /api/chests/open/{id}
 
 - Pozwala wyświetlać i otwierać skrzynki
 - Zaleca się lokalne dodanie skrzynki z price = 0 bo gracze nie mogą jeszcze zarabiać :)

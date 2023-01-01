@@ -17,9 +17,11 @@
         <tr> <td><input name="password" id="password" type="password"></td></tr>
         <tr><td><input type="submit" value="Log in"></td></tr>
     </table><br>
-
-    <div th:if="${param.error}">
+    <div th:if="${param.error}" class="center">
         <span class="error">Invalid username and/or password.</span>
+    </div>
+    <div class="center">
+        <p>Don't have an account? Create one <a th:href="@{/signup}">here</a>.</p>
     </div>
 </form>
 </body>

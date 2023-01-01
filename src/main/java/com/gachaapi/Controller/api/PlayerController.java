@@ -17,7 +17,7 @@ public class PlayerController {
 
     private PlayerService playerService;
 
-    @GetMapping("/api/playerInfo")
+    @GetMapping("/api/player-info")
     public ResponseEntity<Player> getPlayerInfo(Principal principal){
         return new ResponseEntity<>(playerService.getByName(principal.getName()), HttpStatus.OK);
     }

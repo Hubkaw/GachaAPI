@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <!-- CSS only -->
     <link th:href="@{/assets/style.css}" rel="stylesheet" />
-    <title>Dev Collections</title>
+    <title>Dev Dungeons</title>
 </head>
 <body>
 <div>
@@ -14,6 +14,13 @@
     <form th:action="@{/dev/dungeon}" th:method="post" th:object="${newDungeon}">
         <h2>Name:</h2><br>
         <input th:type="text" name="name" required><br>
+        <h2>Type:</h2><br>
+        <select name="type">
+            <option value="EVENT">EVENT</option>
+            <option value="MAIN">MAIN</option>
+            <option value="DAILY">DAILY</option>
+            <option value="WEEKLY">WEEKLY</option>
+        </select>
         <h2>Released at:</h2><br>
         <input th:type="date" name="releasedAt" required><br>
         <h2>Expires at:</h2><br>
@@ -26,6 +33,7 @@
             <tr>
                 <td>Id</td>
                 <td>Name</td>
+                <td>Type</td>
                 <td>Released at</td>
                 <td>Expires at</td>
                 <td>Delete</td>
@@ -37,6 +45,7 @@
             <tr th:each="item : ${dungeonList}">
                 <td th:text="${item.id}"></td>
                 <td th:text="${item.name}"></td>
+                <td th:text="${item.type}"></td>
                 <td th:text="${item.releasedAt}"></td>
                 <td th:text="${item.expiresAt}"></td>
                 <td><a th:href="@{'/dev/dungeon/delete/'+${item.id}}">

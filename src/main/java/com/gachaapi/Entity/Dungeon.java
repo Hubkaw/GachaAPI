@@ -1,5 +1,7 @@
 package com.gachaapi.Entity;
 
+import com.gachaapi.Utils.DungeonType;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -12,6 +14,18 @@ public class Dungeon {
     private Timestamp releasedAt;
     private Timestamp expiresAt;
     private Collection<Dungeonfloor> floors;
+
+    private DungeonType type;
+
+    @Basic
+    @Column(name = "type", nullable = false)
+    public DungeonType getType() {
+        return type;
+    }
+
+    public void setType(DungeonType type) {
+        this.type = type;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +63,7 @@ public class Dungeon {
     public Timestamp getExpiresAt() {
         return expiresAt;
     }
+
 
     public void setExpiresAt(Timestamp expiresAt) {
         this.expiresAt = expiresAt;

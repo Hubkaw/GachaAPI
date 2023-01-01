@@ -22,7 +22,6 @@ public class JWTService {
         String scope = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(" "));
-        System.out.println(scope);
         Instant now = Instant.now();
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("self")
@@ -31,7 +30,6 @@ public class JWTService {
                 .subject(authentication.getName())
                 .claim("scope", scope)
                 .build();
-        System.out.println(claims.getClaims().toString());
         return encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
 }

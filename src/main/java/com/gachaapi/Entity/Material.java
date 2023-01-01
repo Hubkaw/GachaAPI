@@ -1,13 +1,14 @@
 package com.gachaapi.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gachaapi.Utils.PvERewardInterface;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Material {
+public class Material implements PvERewardInterface {
     private int id;
     private String name;
     @JsonIgnore
