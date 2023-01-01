@@ -2,6 +2,7 @@ package com.gachaapi.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gachaapi.Utils.ArtefactType;
+import com.gachaapi.Utils.PvERewardInterface;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 @Data
 @Entity
-public class Artefact {
+public class Artefact implements PvERewardInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

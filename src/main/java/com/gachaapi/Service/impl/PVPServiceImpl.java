@@ -2,6 +2,7 @@ package com.gachaapi.Service.impl;
 
 import com.gachaapi.Battle.*;
 import com.gachaapi.Entity.BattleHistory;
+import com.gachaapi.Utils.BattleType;
 import com.gachaapi.Entity.Party;
 import com.gachaapi.Entity.Player;
 import com.gachaapi.Repository.BattleLogRepository;
@@ -85,6 +86,7 @@ public class PVPServiceImpl implements PVPService {
 
         BattleHistory battleHistory = new BattleHistory();
         battleHistory.setLog(sim);
+        battleHistory.setType(BattleType.PvP);
         battleHistory.setAttacker(attacker);
         battleHistory.setDefender(defender);
         battleLogRepository.save(battleHistory);

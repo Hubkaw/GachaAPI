@@ -152,14 +152,14 @@ INSERT INTO player (id_player, nick, birth_date, join_date, active_party, player
 values (3, 'autist', '1900-01-01 00:00:00', '2022-01-01 00:00:00', 3, 9999,
         '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1, 1500, 0, 100);
 --Dungeon
-INSERT INTO dungeon (id, name, released_at, expires_at)
-values (1, 'jurna wieza', '2022-01-01 00:00:00', null);
-INSERT INTO dungeon (id, name, released_at, expires_at)
-values (2, 'piwnica', '2000-01-01 00:00:00', '2002-01-01 00:00:00');
-INSERT INTO dungeon (id, name, released_at, expires_at)
-values (3, 'cyberpunk', '2037-01-01 00:00:00', null);
-INSERT INTO dungeon (id, name, released_at, expires_at)
-values (4, 'PJATK', '2018-01-01 00:00:00', '2025-01-01 00:00:00');
+INSERT INTO dungeon (id, name, released_at, expires_at, type)
+values (1, 'jurna wieza', '2022-01-01 00:00:00', null, 1);
+INSERT INTO dungeon (id, name, released_at, expires_at, type)
+values (2, 'piwnica', '2000-01-01 00:00:00', '2002-01-01 00:00:00',2);
+INSERT INTO dungeon (id, name, released_at, expires_at, type)
+values (3, 'cyberpunk', '2037-01-01 00:00:00', null, 0);
+INSERT INTO dungeon (id, name, released_at, expires_at, type)
+values (4, 'PJATK', '2018-01-01 00:00:00', '2025-01-01 00:00:00', 3);
 --set
 INSERT INTO gacha.set (id, name)
 values (1, 'George Floyd Set');
@@ -528,14 +528,14 @@ VALUES (2, 2, 'Super party');
 INSERT INTO party (id, player_id_player, name)
 VALUES (3, 3, 'Extra Party');
 --dungeonfloor
-INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id)
-values (1, 1, 1, 1);
-INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id)
-values (2, 1, 2, 1);
-INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id)
-values (3, 2, 1, 1);
-INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id)
-values (4, 4, 10, 1);
+INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id, balance_reward)
+values (1, 1, 1, 1, 0);
+INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id, balance_reward)
+values (2, 1, 2, 1, 0);
+INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id, balance_reward)
+values (3, 2, 1, 1, 0);
+INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id, balance_reward)
+values (4, 4, 10, 1, 0);
 --player_dungeonfloor
 INSERT INTO player_dungeonfloor (id, dungeon_floor_id, player_id_player, clear_date)
 VALUES (1, 1, 1, curdate());

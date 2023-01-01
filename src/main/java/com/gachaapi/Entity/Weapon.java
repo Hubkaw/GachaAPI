@@ -2,6 +2,7 @@ package com.gachaapi.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gachaapi.Utils.PossibleChestReward;
+import com.gachaapi.Utils.PvERewardInterface;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 @Data
 @Entity
-public class Weapon implements PossibleChestReward {
+public class Weapon implements PossibleChestReward, PvERewardInterface {
 
     @Id
     @Column(name = "Id", nullable = false)

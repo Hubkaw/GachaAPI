@@ -2,8 +2,8 @@ package com.gachaapi.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gachaapi.Battle.BattleLog;
+import com.gachaapi.Utils.BattleType;
 import lombok.Data;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -30,4 +30,9 @@ public class BattleHistory {
     @Basic
     @Column(name = "log", nullable = false, length = 65535)
     private BattleLog log;
+
+    @Basic
+    @Column(name = "type", nullable = false)
+    private BattleType type;
 }
+

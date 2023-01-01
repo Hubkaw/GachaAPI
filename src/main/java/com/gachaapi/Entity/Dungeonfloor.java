@@ -9,6 +9,8 @@ import java.util.Objects;
 
 @Data
 @Entity
+@Table(uniqueConstraints =
+@UniqueConstraint(columnNames = {"Depth", "Dungeon_ID"}))
 public class Dungeonfloor {
 
     @Id
@@ -42,6 +44,10 @@ public class Dungeonfloor {
 
     @OneToMany(mappedBy = "dungeonFloor")
     private Collection<WeaponReward> weaponRewards;
+
+    @Basic
+    @Column(name = "Balance_Reward", nullable = false)
+    private int balanceReward;
 
     @Override
     public boolean equals(Object o) {

@@ -6,7 +6,8 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "player_material", schema = "gacha", catalog = "")
+@Table(name = "player_material", schema = "gacha", catalog = "",
+uniqueConstraints = @UniqueConstraint(columnNames = {"Material_Id", "Player_IdPlayer"}))
 public class PlayerMaterial {
     private int id;
     private int amount;
