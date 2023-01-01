@@ -26,6 +26,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.gachaapi.Utils.Constants.DUNGEON_STAMINA_COST;
+
 
 @Service
 @AllArgsConstructor
@@ -84,6 +86,9 @@ public class DungeonServiceImpl implements DungeonService {
         Dungeonfloor dungeonfloor = dungeonFloorRepository.findById(floorId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find this floor"));
         Player player = playerRepository.findByNick(nickname).orElseThrow();
+        if (player.getStamina()<DUNGEON_STAMINA_COST){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You do not have enough stamina to enter.");
+        }
 
         switch (dungeonfloor.getDungeon().getType()) {
             case MAIN, EVENT -> {
@@ -109,8 +114,10 @@ public class DungeonServiceImpl implements DungeonService {
 
         BattleLog log = Battle.simulate(party, dungeonfloor.getParty());
         Side winner = log.getWinner();
+        player.setStamina(player.getStamina()-DUNGEON_STAMINA_COST);
 
         if (winner != Side.ATTACKER) {
+            playerRepository.save(player);
             return new PvEResult(false, 0, new ArrayList<>(), log);
         }
 

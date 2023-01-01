@@ -8,6 +8,7 @@ public class Constants {
     public static final String USER_ROLE_TOKEN = "SCOPE_USER";
 
     public static final int DEFAULT_STAMINA_AMOUNT = 100;
+    public static final int DUNGEON_STAMINA_COST = 5;
 
     public static final String FIRE_ELEMENT = "FIRE";
     public static final String ICE_ELEMENT = "ICE";
