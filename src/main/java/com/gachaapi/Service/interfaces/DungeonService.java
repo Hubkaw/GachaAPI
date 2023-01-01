@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface DungeonService {
 
+    
     List<Dungeon> getAll();
     void create(NewDungeon newDungeon);
     void delete(int id);
