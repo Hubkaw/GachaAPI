@@ -99,10 +99,15 @@ body {
 }
 
 .navfield {
-    background: lightgrey;
+    width: 20%;
+    background: darkgrey;
     text-align: center;
     border: 2px solid green;
+    border-spacing: 10px;
 
+}
+.navfield:hover{
+background: dimgrey;
 }
 
 .rightAlign {
@@ -349,7 +354,33 @@ table.dungeonList tr {
 table.dungeonList td {
     vertical-align: middle;
     background: lightgrey;
+
 }
+
+
+
+.playerDetail {
+    margin-left:10% ;
+    width: 80%;
+    border-spacing: 20px;
+}
+
+table.playerDetail tr {
+    padding-top: 105px;
+    vertical-align: middle;
+
+
+}
+
+table.playerDetail td {
+    vertical-align: middle;
+    background: lightgrey;
+    width: 50%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+
+}
+
 .eq-nav-field {
 
     border: 2px solid green;

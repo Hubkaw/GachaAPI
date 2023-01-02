@@ -16,21 +16,33 @@
                 <td class="playerinfo"  rowspan= 2>
                     <table class="border">
                         <tr>
-                            <td class="pagename"><h2>Dungeons</h2></td>
+                            <td class="pagename" colspan="5"><h2>Dungeons</h2></td>
+                        </tr>
+                        <tr>
+                            <td class="navfield"><a th:href="@{/game/home}">Home</a> </td>
+                            <td class="navfield"><a th:href="@{/game/equipment}">Equipment</a> </td>
+                            <td class="navfield"><a th:href="@{/game/chests}">Chests</a> </td>
+                            <td class="navfield"><a th:href="@{/game/dungeons}">PvE</a></td>
+                            <td class="navfield"><a th:href="@{/game/pvp}">PvP</a> </td>
                         </tr>
                     </table>
                 </td>
-                <td class="currencytab"><a href="#" onclick="toggle()"><img src="../../static/images/plus.png" th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>2137</td>
 
+                <!-- currency -->
+                <td class="currencytab"><a href="#" onclick="toggle()"><img src="../../static/images/plus.png" th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>
+                    <span th:text="${player.PlayerBalance}+'$'"/></td>
                 <td><a href="#" onclick="toggle3()"><img src="../../static/images/cog.png"  th:src="@{../../images/cog.png}" alt="Options" style="width:42px;height:42px;"></a></td>
             </tr>
             <tr>
-                <td class="currencytab"><a href="#" onclick="toggle2()"><img src="../../static/images/plus.png"  th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>100/100
+                <!-- stamina-->
+                <td class="currencytab"><a href="#" onclick="toggle2()"><img src="../../static/images/plus.png"  th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>
+                    <span th:text="'Stamina:'+${player.Stamina}+'/100'"/>
                 </td>
             </tr>
+
         </table>
     </div>
-</div>
+
     <br>
     <div class="middleb">
         <!--dungeon list-->
@@ -60,39 +72,15 @@
 
         </span>
         <!-- end list -->
-        <!--
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item : ${dungeonList}">
-                <td th:text="${item.id}"></td>
-                <td th:text="${item.name}"></td>
-                <td th:text="${item.releasedAt}"></td>
-                <td th:text="${item.expiresAt}"></td>
-                <td><a th:href="@{'/dev/dungeon/delete/'+${item.id}}">
-                    <button>Delete</button>
-                </a></td>
-            </tr>
-            </tbody>
-        </table>
-
--->
-    </div>
-    <div>
-        <table class="navtableb">
-            <tr>
-                <td class="navfield"><a th:href="@{/game/home}">Wróć</a> </td>
-
-            </tr>
-        </table>
 
     </div>
+</div>
 </div>
 <div id="popup3">
     <div class="settingList">
         <div class="settingField">Opcje</div><br>
         <div class="settingField">Twórcy</div><br>
-        <div class="settingField">Wyloguj</div><br>
+        <div class="settingField"><a th:href="@{/logout}">Wyloguj</a></div><br>
         <div class="settingField">
             <a href="#" onclick="toggle3()">Wróć</a>
         </div>

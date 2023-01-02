@@ -10,41 +10,69 @@
 </head>
 <body>
 <div class="container"  id="shop1">
-<div>
-<table class='headertable'>
-<tr>
-<td class="playerinfo"  rowspan= 2>
-    <table class="border">
-        <tr>
-            <td>Attack on titan enjoyer</td>
-            <td rowspan="3" class="rightAlign">Lvl 12</td>
-        </tr>
-        <tr>
-            <td>Citizen ID: 2136420</td>
-        </tr>
-        <tr>
-            <td>#drugie ID?xd</td>
-        </tr>
-    </table>
-</td>
-<td class="currencytab"><a href="#" onclick="toggle()"><img src="../../static/images/plus.png" th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>2137</td>
+    <div>
+        <table class='headertable'>
+            <tr>
+                <td class="playerinfo"  rowspan= 2>
+                    <table class="border">
+                        <tr>
+                            <td class="pagename" colspan="5"><h2 th:text="'Greetings, '+${player.nick}"></h2></td>
+                        </tr>
+                        <tr>
+                            <td class="navfield"><a th:href="@{/game/home}">Home</a> </td>
+                            <td class="navfield"><a th:href="@{/game/equipment}">Equipment</a> </td>
+                            <td class="navfield"><a th:href="@{/game/chests}">Chests</a> </td>
+                            <td class="navfield"><a th:href="@{/game/dungeons}">PvE</a></td>
+                            <td class="navfield"><a th:href="@{/game/pvp}">PvP</a> </td>
+                        </tr>
+                    </table>
+                </td>
 
-    <td><a href="#" onclick="toggle3()"><img src="../../static/images/cog.png"  th:src="@{../../images/cog.png}" alt="Options" style="width:42px;height:42px;"></a></td>
-</tr>
-<tr>
-    <td class="currencytab"><a href="#" onclick="toggle2()"><img src="../../static/images/plus.png"  th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>100/100
-    </td>
-</tr>
-</table>
-</div>
+                <!-- currency -->
+                <td class="currencytab"><a href="#" onclick="toggle()"><img src="../../static/images/plus.png" th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>
+                    <span th:text="${player.PlayerBalance}+'$'"/></td>
+                <td><a href="#" onclick="toggle3()"><img src="../../static/images/cog.png"  th:src="@{../../images/cog.png}" alt="Options" style="width:42px;height:42px;"></a></td>
+            </tr>
+            <tr>
+                <!-- stamina-->
+                <td class="currencytab"><a href="#" onclick="toggle2()"><img src="../../static/images/plus.png"  th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>
+                    <span th:text="'Stamina:'+${player.Stamina}+'/100'"/>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
 <br>
     <div class="middle">
 
-new nigga unlocked
+        <div>
+            <table class="playerDetail">
+                <tr>
+                    <td style="width: 100%;">User details</td>
+                </tr>
+            </table>
+        </div>
+<br>
+        <div>
+            <table class="playerDetail">
+
+  <tr>
+      <td th:text="${player.PremiumLeft ==0} ? 'Premium status: expired' : 'Premium status: '+${player.PremiumLeft}+' days left'"></td>
+      <td>TO DO PREMIUM SHOP REDIRECT</td>
+  </tr>
+                <tr>
+                    <td th:text="'Your ELO points- '+${player.eloPoints}"></td>
+                    <td th:text="'Won/Lost PvP battles- '+${player.pvpwins}+'/'+${player.pvplooses}"></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+
 
     </div>
-<br>
-<!--nav table -->
+</div>
+<!--nav table
     <div>
 <table class="navtable">
     <tr>
@@ -58,7 +86,7 @@ new nigga unlocked
 </table>
     </div>
 </div>
-
+ -->
 <div id="popup1">
     <table class="shoptable">
         <tr>
@@ -131,7 +159,7 @@ new nigga unlocked
 <div class="settingList">
     <div class="settingField">Opcje</div><br>
     <div class="settingField">Twórcy</div><br>
-    <div class="settingField">Wyloguj</div><br>
+    <div class="settingField"><a th:href="@{/logout}">Wyloguj</a></div><br>
     <div class="settingField">
         <a href="#" onclick="toggle3()">Wróć</a>
     </div>
