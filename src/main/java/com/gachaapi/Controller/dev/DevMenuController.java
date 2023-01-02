@@ -39,7 +39,7 @@ public class DevMenuController {
     public String getMenu(Model model) {
         model.addAttribute("Nav", NAV_LINKS);
         System.out.println(model);
-        return "dev/menu";
+        return "dev/Menu";
     }
 
     @GetMapping("/dev")

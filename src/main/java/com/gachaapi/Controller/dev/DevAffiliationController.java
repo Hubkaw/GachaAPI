@@ -27,7 +27,7 @@ public class DevAffiliationController {
     @GetMapping("/dev/affiliation")
     public String getAffiliation(Model model){
         model.addAttribute("affiliationList", affiliationService.getAll());
-        return "dev/affiliation";
+        return "dev/Affiliation";
     }
 
     @PostMapping("/dev/affiliation")

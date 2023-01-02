@@ -32,7 +32,7 @@ public class DevAdminPartyController {
         model.addAttribute("characterList", adminCharacterService.getAll());
         model.addAttribute("partyList", adminCharacterService.getAll());
         model.addAttribute("dungeonFloorList", adminPartyService.getAllDungeonFloors());
-        return "dev/adminParty";
+        return "dev/AdminParty";
     }
 
     @PostMapping("/dev/admin/party")

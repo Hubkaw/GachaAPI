@@ -20,7 +20,7 @@ public class DevMaterialController {
     @GetMapping("/dev/material")
     public String getMaterial(Model model){
         model.addAttribute("materialList", materialService.getAll());
-        return "dev/material";
+        return "dev/Material";
     }
 
     @PostMapping("/dev/material")

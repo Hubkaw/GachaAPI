@@ -10,7 +10,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "player_artefact", schema = "gacha", catalog = "")
-public class PlayerArtefact {
+public class PlayerArtefact implements Comparable<PlayerArtefact>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,5 +61,10 @@ public class PlayerArtefact {
     @Override
     public String toString(){
         return artefact.getName()+" "+ player.getNick();
+    }
+
+    @Override
+    public int compareTo(PlayerArtefact o) {
+        return Integer.compare(lvl, o.getLvl());
     }
 }

@@ -20,7 +20,7 @@ public class DevRarityController {
     @GetMapping("/dev/rarity")
     public String getRarity(Model model){
         model.addAttribute("rarityList", rarityService.getAll());
-        return "dev/rarity";
+        return "dev/Rarity";
     }
 
     @PostMapping("/dev/rarity")

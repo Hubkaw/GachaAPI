@@ -28,7 +28,7 @@ public class DevCharacterController {
         model.addAttribute("classList", classService.getAll());
         model.addAttribute("affiliationList", affiliationService.getAll());
         model.addAttribute("statList", statisticService.getAll());
-        return "dev/character";
+        return "dev/Character";
     }
 
     @PostMapping("/dev/character")

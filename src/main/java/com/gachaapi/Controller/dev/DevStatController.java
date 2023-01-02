@@ -21,7 +21,7 @@ public class DevStatController {
     @GetMapping("/dev/stats")
     public String getStat(Model model) {
         model.addAttribute("statsList", statisticService.getAll());
-        return "dev/stats";
+        return "dev/Stats";
     }
 
     @PostMapping("/dev/stats")

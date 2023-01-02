@@ -22,7 +22,7 @@ public class DevElementController {
     @GetMapping("/dev/element")
     public String getElements(Model model){
         model.addAttribute("elementList", elementService.getAll());
-        return "dev/element";
+        return "dev/Element";
     }
 
     @PostMapping("/dev/element")

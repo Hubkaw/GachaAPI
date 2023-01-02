@@ -30,7 +30,7 @@ public class DevArtefactController {
     public String getArtefact(Model model){
         model.addAttribute("artefactList", artefactService.getAll());
         model.addAttribute("rarityList", rarityService.getAll());
-        return "dev/artefact";
+        return "dev/Artefact";
     }
 
     @PostMapping("/dev/artefact")
@@ -48,7 +48,7 @@ public class DevArtefactController {
     public String getStatArtefact(Model model, @PathVariable("id")int id){
         model.addAttribute("artefact", artefactService.getById(id));
         model.addAttribute("statList", statisticService.getAll());
-        return "dev/statArtefact";
+        return "dev/StatArtefact";
     }
 
     @PostMapping("/dev/artefact/stats")
@@ -67,7 +67,7 @@ public class DevArtefactController {
     public String getArtefactSets(Model model, @PathVariable("id") int id){
         model.addAttribute("artefact", artefactService.getById(id));
         model.addAttribute("setList", setService.getAll());
-        return "dev/setArtefact";
+        return "dev/SetArtefact";
     }
     @PostMapping("/dev/artefact/sets")
     public String createArtefactSet(Model model, @ModelAttribute("newArtefactSet") NewArtefactSet newArtefactSet){

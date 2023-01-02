@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="/assets/style2.css" th:href="@{/assets/style2.css}"/>
+
+    <title>Gacha</title>
+</head>
+
+<body>
+<div class="container" id="shop1">
+    <div>
+        <table class='headertable'>
+            <tr>
+                <td class="playerinfo" rowspan=2>
+                    <table class="border">
+                        <tr>
+                            <td class="pagename"><h3>Artefacts</h3></td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="currencytab"><a href="#" onclick="toggle()"><img src="../../../static/images/plus.png"
+                                                                            th:src="@{../../images/plus.png}"
+                                                                            alt="Add shit"
+                                                                            style="width:42px;height:42px;"></a>2137
+                </td>
+
+                <td><a href="#" onclick="toggle3()"><img src="../../../static/images/cog.png"
+                                                         th:src="@{../../images/cog.png}" alt="Options"
+                                                         style="width:42px;height:42px;"></a></td>
+            </tr>
+            <tr>
+                <td class="currencytab"><a href="#" onclick="toggle2()"><img src="../../../static/images/plus.png"
+                                                                             th:src="@{../../images/plus.png}"
+                                                                             alt="Add shit"
+                                                                             style="width:42px;height:42px;"></a>100/100
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="eq-middle">
+        <p th:text="${error != null} ? ${error} : ''" class="error"></p>
+        <ul class="artefact-list">
+            <li th:each="item : ${player.playerArtefacts}">
+                <details>
+                    <summary th:text="${item.artefact.name}+' Lvl '+${item.lvl}"></summary>
+                    <p class="artefact-details-paragraph">
+                        <span class="bold">Type: </span>
+                        <span th:text="${item.artefact.type}"></span><br>
+                        <span class="bold">Rarity: </span>
+                        <span th:text="${item.artefact.rarity.name}"></span><br>
+                        <span class="bold">Stats:</span><br>
+                        <span th:each="stat : ${item.artefact.statArtifacts}"
+                              th:utext="'&emsp;'+${stat.stats.getShortName()}+': '+${stat.getValue() * item.lvl}+'<br>'"></span>
+                        <span class="bold">Sets:</span><br>
+                        <span th:each="set : ${item.artefact.sets}" th:utext="'&emsp;'+${set.name}+'<br>'"></span>
+                    </p>
+                    <p>
+                    <form method="post" th:action="@{/game/equipment/artefacts/level-up}"
+                          th:object="${artefactLevelUpInfo}">
+                        <input type="hidden" th:value="${item.id}" name="upgradedArtefactId">
+                        <span class="bold">Level up:</span><br>
+                        Cost:
+                        <select name="sacrificedArtefactId">
+                            <option th:each="art : ${player.playerArtefacts}"
+                                    th:if="${art.artefact.id == item.artefact.id && art.id != item.id}"
+                                    th:value="${art.id}"
+                                    th:text="${art.artefact.name}+' lvl '+${art.lvl}"></option>
+                        </select><br>
+                        <input type="submit" value="Confirm">
+                    </form>
+                    </p>
+                </details>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="popup3">
+    <div class="settingList">
+        <div class="settingField">Opcje</div>
+        <br>
+        <div class="settingField">Twórcy</div>
+        <br>
+        <div class="settingField">Wyloguj</div>
+        <br>
+        <div class="settingField"><a href="#" onclick="toggle3()">Wróć</a></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    function toggle3() {
+        var blur = document.getElementById('shop1');
+        blur.classList.toggle('active');
+        var popup3 = document.getElementById('popup3');
+        popup3.classList.toggle('active');
+    }
+</script>
+</html>

@@ -21,7 +21,7 @@ public class DevDungeonController {
     @GetMapping("/dev/dungeon")
     public String getDungeons(Model model){
         model.addAttribute("dungeonList", dungeonService.getAll());
-        return "dev/dungeon";
+        return "dev/Dungeon";
     }
 
     @PostMapping("/dev/dungeon")

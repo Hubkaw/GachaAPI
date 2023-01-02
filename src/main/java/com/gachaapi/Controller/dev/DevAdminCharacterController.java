@@ -32,7 +32,7 @@ public class DevAdminCharacterController {
         model.addAttribute("glassesList", artefactService.getAllByType(ArtefactType.GLASSES));
         model.addAttribute("hatList", artefactService.getAllByType(ArtefactType.HAT));
         model.addAttribute("adminCharacterList", adminCharacterService.getAll());
-        return "dev/adminCharacter";
+        return "dev/AdminCharacter";
     }
 
     @PostMapping("/dev/admin/character")

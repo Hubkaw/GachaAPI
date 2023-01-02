@@ -29,7 +29,7 @@ public class DevChestController {
     public String getChests(Model model){
         model.addAttribute("chestList", chestService.getAll());
         model.addAttribute("collectionList", collectionService.getAll());
-        return "dev/chest";
+        return "dev/Chest";
     }
 
     @PostMapping("/dev/chest")
@@ -48,7 +48,7 @@ public class DevChestController {
     public String getChestWeapons(Model model, @PathVariable("id")int id){
         model.addAttribute("chest", chestService.getById(id));
         model.addAttribute("weaponList", weaponService.getAll());
-        return "dev/weaponChest";
+        return "dev/WeaponChest";
     }
 
     @PostMapping("/dev/chest/weapon")
@@ -67,7 +67,7 @@ public class DevChestController {
     public String getChestCharacters(Model model, @PathVariable("id")int id){
         model.addAttribute("chest", chestService.getById(id));
         model.addAttribute("characterList", characterService.getAll());
-        return "dev/characterChest";
+        return "dev/CharacterChest";
     }
 
     @PostMapping("/dev/chest/character")

@@ -28,7 +28,7 @@ public class DevWeaponController {
         model.addAttribute("elementList", elementService.getAll());
         model.addAttribute("weaponClassList",weaponClassService.getAll());
         model.addAttribute("rarityList", rarityService.getAll());
-        return "dev/weapon";
+        return "dev/Weapon";
     }
 
     @PostMapping("/dev/weapon")
@@ -47,7 +47,7 @@ public class DevWeaponController {
     public String getStatWeapon(Model model, @PathVariable("id")int id){
         model.addAttribute("weapon", weaponService.getById(id));
         model.addAttribute("statList", statisticService.getAll());
-        return "dev/statWeapon";
+        return "dev/StatWeapon";
     }
 
     @PostMapping("/dev/weapon/stats")

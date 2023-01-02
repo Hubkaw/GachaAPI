@@ -24,7 +24,7 @@ public class DevSetController {
     @GetMapping("/dev/set")
     public String getSets(Model model){
         model.addAttribute("setList", setService.getAll());
-        return "dev/set";
+        return "dev/Set";
     }
 
     @PostMapping("/dev/set")
@@ -43,7 +43,7 @@ public class DevSetController {
     public String getSetStats(Model model, @PathVariable("id")int id){
         model.addAttribute("set", setService.getById(id));
         model.addAttribute("statList", statisticService.getAll());
-        return "dev/setStats";
+        return "dev/SetStats";
     }
 
     @PostMapping("/dev/set/stats")

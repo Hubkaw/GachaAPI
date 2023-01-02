@@ -20,7 +20,7 @@ public class DevWeaponClassController {
     @GetMapping("/dev/weaponClass")
     public String getWeaponClass(Model model){
         model.addAttribute("weaponClassList", weaponClassService.getAll());
-        return "dev/weaponClass";
+        return "dev/WeaponClass";
     }
 
     @PostMapping("/dev/weaponClass")

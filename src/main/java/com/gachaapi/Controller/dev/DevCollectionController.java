@@ -19,7 +19,7 @@ public class DevCollectionController {
     @GetMapping("/dev/collection")
     public String getCollections(Model model){
         model.addAttribute("collectionList", collectionService.getAll());
-        return "dev/collection";
+        return "dev/Collection";
     }
 
     @PostMapping("/dev/collection")

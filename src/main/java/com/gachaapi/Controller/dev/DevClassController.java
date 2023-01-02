@@ -28,7 +28,7 @@ public class DevClassController {
     public String getClasses(Model model){
         model.addAttribute("classList", classService.getAll());
         model.addAttribute("weaponClassList", weaponClassService.getAll());
-        return "dev/class";
+        return "dev/Class";
     }
 
     @PostMapping("/dev/class")
