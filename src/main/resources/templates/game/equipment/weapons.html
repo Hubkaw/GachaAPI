@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="/assets/style2.css" th:href="@{/assets/style2.css}"/>
+
+    <title>Gacha</title>
+</head>
+
+<body>
+<div class="container" id="shop1">
+    <div>
+        <table class='headertable'>
+            <tr>
+                <td class="playerinfo" rowspan=2>
+                    <table class="border">
+                        <tr>
+                            <td class="pagename"><h3>Weapons</h3></td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="currencytab"><a href="#" onclick="toggle()"><img src="../../../static/images/plus.png"
+                                                                            th:src="@{../../images/plus.png}"
+                                                                            alt="Add shit"
+                                                                            style="width:42px;height:42px;"></a>2137
+                </td>
+
+                <td><a href="#" onclick="toggle3()"><img src="../../../static/images/cog.png"
+                                                         th:src="@{../../images/cog.png}" alt="Options"
+                                                         style="width:42px;height:42px;"></a></td>
+            </tr>
+            <tr>
+                <td class="currencytab"><a href="#" onclick="toggle2()"><img src="../../../static/images/plus.png"
+                                                                             th:src="@{../../images/plus.png}"
+                                                                             alt="Add shit"
+                                                                             style="width:42px;height:42px;"></a>100/100
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="eq-middle">
+        <p th:text="${error != null} ? ${error} : ''" class="error"></p>
+        <ul class="artefact-list">
+            <li th:each="item : ${player.playerWeapons}">
+                <details>
+                    <summary th:text="${item.weapon.name}+' lvl'+${item.lvl}"></summary>
+                    <p class="artefact-details-paragraph">
+                        <span class="bold">Weapon Class: </span>
+                        <span th:text="${item.weapon.weaponClass.name}"></span><br>
+                        <span class="bold">Rarity: </span>
+                        <span th:text="${item.weapon.rarity.name}"></span><br>
+                        <span class="bold">Element: </span>
+                        <span th:text="${item.weapon.element.name}"></span><br>
+                        <span class="bold">Wielded by: </span>
+                        <span th:text="${item.wieldingCharacter != null} ?
+                        ${item.wieldingCharacter.character.name}+' lvl'+${item.wieldingCharacter.lvl} : 'none'"></span><br>
+                        <span class="bold">Stats: </span>
+                        <span th:each="stat : ${item.weapon.stats}"
+                              th:text="'&emsp;'+${stat.stat.shortName}+': '+${stat.value * item.lvl}"></span><br>
+                    </p>
+                    <p>
+                        <span class="bold">Level up:</span><br>
+                        Cost:<br>
+                        <span th:each="mwc : ${item.weapon.weaponClass.materialWeaponClasses}">
+                            <span th:text="${mwc.material.name}+': '+${mwc.baseAmount + (mwc.perLvlAmount * item.lvl)}+' /'"></span>
+                            <span th:text="${materialMap.containsKey(mwc.material.name)} ? ${materialMap.get(mwc.material.name)} : '0'"></span><br>
+                        </span>
+                        <span th:each="me : ${item.weapon.element.materialElements}">
+                            <span th:text="${me.material.name}+': '+${me.baseAmount + (me.perLvlAmount * item.lvl)}+' /'"></span>
+                            <span th:text="${materialMap.containsKey(me.material.name)} ? ${materialMap.get(me.material.name)} : '0'"></span><br>
+                        </span><br>
+                        <a th:href="@{'/game/equipment/weapons/level-up/'+${item.id}}">
+                            <button>Confirm</button>
+                        </a>
+                    </p>
+                </details>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="popup3">
+    <div class="settingList">
+        <div class="settingField">Opcje</div>
+        <br>
+        <div class="settingField">Twórcy</div>
+        <br>
+        <div class="settingField">Wyloguj</div>
+        <br>
+        <div class="settingField"><a href="#" onclick="toggle3()">Wróć</a></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    function toggle3() {
+        var blur = document.getElementById('shop1');
+        blur.classList.toggle('active');
+        var popup3 = document.getElementById('popup3');
+        popup3.classList.toggle('active');
+    }
+</script>
+</html>

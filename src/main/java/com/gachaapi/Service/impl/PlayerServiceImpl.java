@@ -1,6 +1,7 @@
 package com.gachaapi.Service.impl;
 
 import com.gachaapi.Entity.Player;
+import com.gachaapi.Entity.PlayerMaterial;
 import com.gachaapi.Entity.Role;
 import com.gachaapi.Repository.PlayerRepository;
 import com.gachaapi.Repository.RoleRepository;
@@ -21,9 +22,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import static com.gachaapi.Utils.Constants.DEFAULT_STAMINA_AMOUNT;
 import static com.gachaapi.Utils.Constants.USER_ROLE;
@@ -94,5 +93,14 @@ public class PlayerServiceImpl implements PlayerService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You are too young to create an account.");
         }
         return timestamp;
+    }
+
+    public Map<String, Integer> getMaterialMap(String nickname){
+        Player player = playerRepository.findByNick(nickname).orElseThrow();
+        Map<String, Integer> result = new HashMap<>();
+        for (PlayerMaterial pm : player.getPlayerMaterials()) {
+            result.put(pm.getMaterial().getName(), pm.getAmount());
+        }
+        return result;
     }
 }

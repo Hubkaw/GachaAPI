@@ -90,7 +90,7 @@ public class Player {
 
 
     @OneToMany(mappedBy = "player")
-    private Collection<PlayerWeapon> playerWeaponsByIdPlayer;
+    private Collection<PlayerWeapon> playerWeapons;
 
 
     @OneToMany(mappedBy = "attacker")

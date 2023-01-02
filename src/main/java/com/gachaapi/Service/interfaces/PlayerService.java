@@ -7,6 +7,7 @@ import com.gachaapi.Utils.NewPlayer;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 
 public interface PlayerService {
@@ -14,4 +15,6 @@ public interface PlayerService {
     Player createNewPlayer(NewPlayer newPlayer);
     List<Role> getRoles();
     Player getByName(String nick);
+
+    Map<String, Integer> getMaterialMap(String nick);
 }

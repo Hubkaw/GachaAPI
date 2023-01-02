@@ -434,7 +434,11 @@ VALUES (17, 3, 12, 1, 11);
 INSERT INTO player_material (id, material_id, player_id_player, amount)
 VALUES (1, 1, 1, 10);
 INSERT INTO player_material (id, material_id, player_id_player, amount)
-VALUES (2, 2, 2, 10);
+VALUES (4, 2, 2, 10);
+INSERT INTO player_material (id, material_id, player_id_player, amount)
+VALUES (5, 1, 2, 10);
+INSERT INTO player_material (id, material_id, player_id_player, amount)
+VALUES (6, 7, 2, 10);
 INSERT INTO player_material (id, material_id, player_id_player, amount)
 VALUES (3, 3, 3, 10);
 --materialelement
