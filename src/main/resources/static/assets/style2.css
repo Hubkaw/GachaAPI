@@ -438,8 +438,22 @@ details[open] summary {
     color: crimson;
 }
 .eq-back-table {
-    margin-left: 18vw;
+    margin-left: 15vw;
     float: left;
-    width: 50vw;
+    width: 65vw;
     margin-bottom: 15px;
 }
+
+.material-list {
+    width: 50vw;
+    margin-left: 18vw;
+
+    list-style: none;
+}
+
+.material-entry {
+    border: green solid 2px;
+    background-color: lightgray;
+}
+
+

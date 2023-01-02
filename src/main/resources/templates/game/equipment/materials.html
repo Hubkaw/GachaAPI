@@ -17,7 +17,7 @@
                 <td class="playerinfo" rowspan=2>
                     <table class="border">
                         <tr>
-                            <td class="pagename"><h3>Equipment</h3></td>
+                            <td class="pagename"><h3>Artefacts</h3></td>
                         </tr>
                     </table>
                 </td>
@@ -40,41 +40,24 @@
             </tr>
         </table>
     </div>
-    <br>
     <div class="eq-middle">
-        <table class="eq-nav-table">
-            <tr>
-                <td class="eq-nav-field"><a th:href="@{/game/equipment/parties}" class="table-nav-link">Parties</a></td>
-                <td class="eq-nav-field"><a th:href="@{/game/equipment/characters}" class="table-nav-link">Characters</a></td>
-            </tr>
-            <tr>
-                <td class="eq-nav-field"><a th:href="@{/game/equipment/weapons}" class="table-nav-link">Weapons</a></td>
-                <td class="eq-nav-field"><a th:href="@{/game/equipment/artefacts}" class="table-nav-link">Artefacts</a></td>
-            </tr>
-            <tr>
-                <td class="eq-nav-field"><a th:href="@{/game/equipment/materials}" class="table-nav-link">Materials</a></td>
-                <td class="eq-nav-field"><a th:href="@{/game/equipment/index}" class="table-nav-link">Index</a></td>
-            </tr>
-        </table>
+        <p th:text="${error != null} ? ${error} : ''" class="error"></p>
+        <ul class="material-list">
+            <li th:each="item : ${player.playerMaterials}" >
+                <p th:utext="${item.material.name}+' '+${item.amount}" class="material-entry"></p>
+            </li>
+        </ul>
     </div>
-    <div>
-        <table class="eq-back-table">
-            <tr>
-                <td class="eq-nav-field"><a th:href="@{/game/home}" class="table-nav-link">Wróć</a></td>
-
-            </tr>
-        </table>
-    </div>
-</div>
-<div id="popup3">
-    <div class="settingList">
-        <div class="settingField">Opcje</div>
-        <br>
-        <div class="settingField">Twórcy</div>
-        <br>
-        <div class="settingField">Wyloguj</div>
-        <br>
-        <div class="settingField"><a href="#" onclick="toggle3()">Wróć</a></div>
+    <div id="popup3">
+        <div class="settingList">
+            <div class="settingField">Opcje</div>
+            <br>
+            <div class="settingField">Twórcy</div>
+            <br>
+            <div class="settingField">Wyloguj</div>
+            <br>
+            <div class="settingField"><a href="#" onclick="toggle3()">Wróć</a></div>
+        </div>
     </div>
 </div>
 </body>
