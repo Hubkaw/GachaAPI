@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="/../static/assets/style2.css"  th:href="@{/assets/style2.css}"/>
+
+    <title>Login to Gacha</title>
+</head>
+
+<body>
+<div class="container"  id="shop1">
+    <div>
+        <table class='headertable'>
+            <tr>
+                <td class="playerinfo"  rowspan= 2>
+                    <table class="border">
+                        <tr>
+                            <td class="pagename" colspan="5"><h2 th:text="${chestDetails.Name}"></h2></td>
+                        </tr>
+                        <tr>
+                            <td class="navfield"><a th:href="@{/game/home}" class="nav-link">Home</a> </td>
+                            <td class="navfield"><a th:href="@{/game/equipment}" class="nav-link">Equipment</a> </td>
+                            <td class="navfield"><a th:href="@{/game/chests}" class="nav-link">Chests</a> </td>
+                            <td class="navfield"><a th:href="@{/game/dungeons}" class="nav-link">PvE</a></td>
+                            <td class="navfield"><a th:href="@{/game/pvp}" class="nav-link">PvP</a> </td>
+                        </tr>
+                    </table>
+                </td>
+
+                <!-- currency -->
+                <td class="currencytab"><a href="#" onclick="toggle()"><img src="../../static/images/plus.png" th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>
+                    <span th:text="${player.PlayerBalance}+'$'"/></td>
+                <td><a href="#" onclick="toggle3()"><img src="../../static/images/cog.png"  th:src="@{../../images/cog.png}" alt="Options" style="width:42px;height:42px;"></a></td>
+            </tr>
+            <tr>
+                <!-- stamina-->
+                <td class="currencytab"><a href="#" onclick="toggle2()"><img src="../../static/images/plus.png"  th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>
+                    <span th:text="'Stamina:'+${player.Stamina}+'/100'"/>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <br>
+    <div class="middleb">
+<div>
+    add buy button/info here
+</div>
+        <h1 th:if="${#lists.size(chestWeapons) ==0} AND ${#lists.size(chestCharacters)==0}" >No items available in chest</h1>
+
+        <h1 th:if="${#lists.size(chestWeapons) >0} AND ${#lists.size(chestCharacters)>0}" >Items available in chest</h1>
+
+<!--
+        <span th:text="${#lists.size(chestWeapons) ==0} ? 'No weapons ': ${chestWeapons[0].name}"/>
+        <span th:text="${#lists.size(chestCharacters)==0} ? 'No chars ': ${chestCharacters[0].name}"/>
+        -->
+        <br>
+
+        <div>
+            <table class="listTable">
+                    <tr th:if="${#lists.size(chestWeapons) >0} AND ${#lists.size(chestCharacters)>0}">
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Rarity</th>
+                    </tr>
+                </span>
+                  <tr th:each="itemW : ${chestWeapons}">
+                      <td style="width:20%;"><h3 th:text="${itemW.name}"></h3></td>
+                      <td style="width:30%"><img src="../../static/images/waifu-1.png" th:src="@{../../images/waifu-1.png}" alt="chest image" style="width:420px;height:auto;"/></td>
+                      <td style="width:20%"><span th:text="${itemW.rarity.name}"/></td>
+
+                      </tr>
+                <tr th:each="itemC : ${chestCharacters}">
+
+                    <td style="width:20%;"><h3 th:text="${itemC.name}"></h3></td>
+                    <td style="width:30%"><img src="../../static/images/waifu-1.png" th:src="@{../../images/waifu-1.png}" alt="chest image" style="width:420px;height:auto;"/></td>
+                    <td style="width:20%"><span th:text="${itemC.rarity.name}"/></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="popup3">
+    <div class="settingList">
+        <div class="settingField">Opcje</div><br>
+        <div class="settingField">Twórcy</div><br>
+        <div class="settingField"><a th:href="@{/logout}">Wyloguj</a></div><br>
+        <div class="settingField"><a href="#" onclick="toggle3()">Wróć</a></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    function toggle3()
+    {
+        var blur=document.getElementById('shop1');
+        blur.classList.toggle('active');
+        var popup3=document.getElementById('popup3');
+        popup3.classList.toggle('active');
+    }
+</script>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

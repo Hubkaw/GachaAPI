@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -27,7 +27,18 @@ public class GameChestsController {
                 .addObject("player",playerService.getByName(principal.getName()));
     }
 
+    @GetMapping("/game/chests/{someID}")
+    public ModelAndView getChestDetails(Model model, @PathVariable(value="someID") String id,Principal principal){
+        return new ModelAndView("game/chestDetails")
+                .addObject("player",playerService.getByName(principal.getName()))
+                .addObject("chestDetails",chestService.getById(Integer.parseInt(id)))
+                .addObject("chestWeapons",chestService.getAllWeapons(Integer.parseInt(id)))
+                .addObject("chestCharacters",chestService.getAllCharacters(Integer.parseInt(id)));
+    }
+
+
 }
+
 
 
 //dopisz service,do model and view dodaj  addobject, chestlist po przecinku [wybranyservice].getall()

@@ -8,6 +8,7 @@ import com.gachaapi.Utils.ChestReward;
 import com.gachaapi.Utils.PossibleChestReward;
 import com.gachaapi.Utils.dev.NewChest;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -139,6 +140,11 @@ public class ChestServiceImpl implements ChestService {
     }
 
     @Override
+    public List<Character> getAllCharacters(int chestId) {
+        return new ArrayList<>(chestRepository.getReferenceById(chestId).getCharacters());
+    }
+
+    @Override
     public void addCharacter(int chestId, int characterId) {
         Character character = characterRepository.getReferenceById(characterId);
         Chest chest = chestRepository.getReferenceById(chestId);
@@ -152,6 +158,8 @@ public class ChestServiceImpl implements ChestService {
         chest.getCharacters().removeIf(c -> c.getId()==characterId);
         chestRepository.save(chest);
     }
+
+
 
     private ChestReward addRewardToPlayer(PossibleChestReward reward, Player player) {
         if (reward instanceof Weapon) {

@@ -1,5 +1,6 @@
 package com.gachaapi.Service.interfaces;
 
+import com.gachaapi.Entity.Character;
 import com.gachaapi.Entity.Chest;
 import com.gachaapi.Entity.Weapon;
 import com.gachaapi.Utils.ChestReward;
@@ -17,6 +18,8 @@ public interface ChestService {
     Chest getById(int id);
     List<Chest> getAvailable();
     ChestReward openChest(String nick, int chestId);
+    List<Character> getAllCharacters(int chestId);
+
     void addCharacter(int chestId, int characterId);
     void deleteCharacter(int chestId, int characterId);
 }
