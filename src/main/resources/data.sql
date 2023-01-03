@@ -412,6 +412,8 @@ INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl
 VALUES (8, 2, 8, 3, 4);
 INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
 VALUES (9, 2, 9, 3, 3);
+INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
+VALUES (18, 2, 5, 1, 69);
 
 INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
 VALUES (10, 2, 3, 1, 11);

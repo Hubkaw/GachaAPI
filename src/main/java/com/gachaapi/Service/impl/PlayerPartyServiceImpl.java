@@ -7,6 +7,7 @@ import com.gachaapi.Repository.PartyRepository;
 import com.gachaapi.Repository.PlayerCharacterRepository;
 import com.gachaapi.Repository.PlayerRepository;
 import com.gachaapi.Service.interfaces.PlayerPartyService;
+import com.gachaapi.Utils.PartyCharacterChange;
 import com.gachaapi.Utils.api.NewParty;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,10 @@ public class PlayerPartyServiceImpl implements PlayerPartyService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This account is invalid");
         });
 
+        if (newParty.getName().contains(";") || newParty.getName().contains("/") || newParty.getName().contains("'") || newParty.getName().contains("\"") || newParty.getName().contains("{") || newParty.getName().contains("}")){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Party Name invalid");
+        }
+
         if(newParty.getName().length()>32){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Party Name too long");
         }
@@ -51,6 +56,9 @@ public class PlayerPartyServiceImpl implements PlayerPartyService {
             }
             if (characters.stream().anyMatch(pc -> pc.getCharacter().equals(playerCharacter.getCharacter()))){
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You cannot have the same character twice in a party: "+ playerCharacter.getCharacter().getName());
+            }
+            if (characters.stream().anyMatch(pc -> pc.getCharacter().getCharacterClass().equals(playerCharacter.getCharacter().getCharacterClass()))){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You cannot have the same class twice in a party: "+ playerCharacter.getCharacter().getCharacterClass().getName());
             }
             characters.add(playerCharacter);
         });
@@ -88,5 +96,37 @@ public class PlayerPartyServiceImpl implements PlayerPartyService {
 
         player.setActiveParty(id);
         return playerRepository.save(player);
+    }
+
+
+    @Override
+    public void changePartyCharacter(PartyCharacterChange pcc, String name) {
+        Party party = partyRepository.findById(pcc.getPartyId()).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "This party does not exist"));
+        if (!party.getPlayer().getNick().equals(name)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This party does not belong to you");
+        }
+        if (party.getCharacters().size()!=4){
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This party is invalid");
+        }
+        PlayerCharacter pc = playerCharacterRepository.findById(pcc.getCharacterId()).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "This character does not exist"));
+        if (!pc.getPlayer().getNick().equals(name)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This character does not belong to you");
+        }
+        if (pcc.getCharacterId() == pcc.getOldCharacterId()){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This character already belongs to this party");
+        }
+        if (party.getCharacters().stream().noneMatch(c -> c.getId() == pcc.getOldCharacterId())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This character is not in the selected party");
+        }
+        HashSet<PlayerCharacter> playerCharacters = new HashSet<>(party.getCharacters());
+        playerCharacters.removeIf(c -> c.getId() == pcc.getOldCharacterId());
+        if (playerCharacters.stream().anyMatch(c -> c.getCharacter().getCharacterClass().equals(pc.getCharacter().getCharacterClass()))){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This party already contains a hero of this class");
+        }
+        party.getCharacters().removeIf(c -> c.getId() == pcc.getOldCharacterId());
+        party.getCharacters().add(pc);
+        partyRepository.saveAndFlush(party);
     }
 }

@@ -20,7 +20,7 @@ public class BattleAbility {
         potency = character.getCharacter().getAbility().getPotency();
         name = character.getCharacter().getAbility().getName();
 
-        if (type != AbilityType.ATTACK) {
+        if (type != AbilityType.ATTACK && type != AbilityType.HEAL) {
             stat = character.getCharacter().getAbility().getStat().getShortName();
         }
         if (character.getWieldedWeapon() != null) {

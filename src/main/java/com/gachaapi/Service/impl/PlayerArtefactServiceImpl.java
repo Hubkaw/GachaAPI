@@ -36,6 +36,11 @@ public class PlayerArtefactServiceImpl implements PlayerArtefactService {
         if (!upgradedArtefact.getArtefact().equals(destroyedArtefact.getArtefact())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This is not a duplicate");
         }
+        if (destroyedArtefact.getPlayerCharacters().size()>0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This artefact is worn by:"+
+                    upgradedArtefact.getPlayerCharacters().stream().findAny().get().getCharacter().getName()+" lvl:"+
+                    upgradedArtefact.getPlayerCharacters().stream().findAny().get().getLvl());
+        }
 
         upgradedArtefact.setLvl(upgradedArtefact.getLvl()+1);
         playerArtefactRepository.delete(destroyedArtefact);
