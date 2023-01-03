@@ -46,37 +46,19 @@
     <div class="eq-middle">
         <p th:text="${error != null} ? ${error} : ''" class="error"></p>
         <ul class="artefact-list">
-            <li th:each="item : ${player.playerWeapons}">
+            <li th:each="item : ${player.playerCharacters}">
                 <details>
-                    <summary th:text="${item.weapon.name}+' lvl'+${item.lvl}"></summary>
-                    <p class="artefact-details-paragraph">
-                        <span class="bold">Weapon Class: </span>
-                        <span th:text="${item.weapon.weaponClass.name}"></span><br>
-                        <span class="bold">Rarity: </span>
-                        <span th:text="${item.weapon.rarity.name}"></span><br>
-                        <span class="bold">Element: </span>
-                        <span th:text="${item.weapon.element.name}"></span><br>
-                        <span class="bold">Wielded by: </span>
-                        <span th:text="${item.wieldingCharacter != null} ?
-                        ${item.wieldingCharacter.character.name}+' lvl'+${item.wieldingCharacter.lvl} : 'none'"></span><br>
-                        <span class="bold">Stats: </span>
-                        <span th:each="stat : ${item.weapon.stats}"
-                              th:text="'&emsp;'+${stat.stat.shortName}+': '+${stat.value * item.lvl}"></span><br>
-                    </p>
-                    <p>
-                        <span class="bold">Level up:</span><br>
-                        Cost:<br>
-                        <span th:each="mwc : ${item.weapon.weaponClass.materialWeaponClasses}">
-                            <span th:text="${mwc.material.name}+': '+${mwc.baseAmount + (mwc.perLvlAmount * item.lvl)}+' /'"></span>
-                            <span th:text="${materialMap.containsKey(mwc.material.name)} ? ${materialMap.get(mwc.material.name)} : '0'"></span><br>
-                        </span>
-                        <span th:each="me : ${item.weapon.element.materialElements}">
-                            <span th:text="${me.material.name}+': '+${me.baseAmount + (me.perLvlAmount * item.lvl)}+' /'"></span>
-                            <span th:text="${materialMap.containsKey(me.material.name)} ? ${materialMap.get(me.material.name)} : '0'"></span><br>
-                        </span><br>
-                        <a th:href="@{'/game/equipment/weapons/level-up/'+${item.id}}">
-                            <button>Confirm</button>
-                        </a>
+                    <summary>
+                        <span th:text="${item.character.name}+' lvl'+${item.lvl}"></span>
+                        <a th:href="@{'/game/equipment/characters/'+${item.id}}"><button class="manage-button">Manage Character</button></a>
+                    </summary>
+                    <p class="character-details-paragraph">
+                        <span class="character-general">Class: </span>
+                        <span th:text="'&emsp;'+${item.character.characterClass.name}"></span><br>
+                        <span class="character-general">Wielded weapon: </span>
+                        <span th:text="${item.wieldedWeapon != null} ? '&emsp;'+${item.wieldedWeapon.weapon.name}+' lvl:'+${item.wieldedWeapon.lvl} : '&emsp; none'"></span><br>
+                        <span class="character-general">Artefacts:</span>
+                        <span  th:each="art : ${item.playerArtefacts}" th:utext="'<br>&emsp;'+${art.artefact.name}"></span>
                     </p>
                 </details>
             </li>

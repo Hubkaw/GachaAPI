@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="/assets/style2.css" th:href="@{/assets/style2.css}"/>
+
+    <title>Gacha</title>
+</head>
+
+<body>
+<div class="container" id="shop1">
+    <div>
+        <table class='headertable'>
+            <tr>
+                <td class="playerinfo" rowspan=2>
+                    <table class="border">
+                        <tr>
+                            <td class="pagename" colspan="5"><h2 th:text="'Greetings, '+${player.nick}"></h2></td>
+                        </tr>
+                        <tr>
+                            <td class="navfield"><a th:href="@{/game/home}" class="nav-link">Home</a></td>
+                            <td class="navfield"><a th:href="@{/game/equipment}" class="nav-link-current">Equipment</a>
+                            </td>
+                            <td class="navfield"><a th:href="@{/game/chests}" class="nav-link">Chests</a></td>
+                            <td class="navfield"><a th:href="@{/game/dungeons}" class="nav-link">PvE</a></td>
+                            <td class="navfield"><a th:href="@{/game/pvp}" class="nav-link">PvP</a></td>
+                        </tr>
+                    </table>
+                </td>
+
+                <!-- currency -->
+                <td class="currencytab"><a href="#" onclick="toggle()"><img th:src="@{/images/plus.png}"
+                                                                            alt="Add shit"
+                                                                            style="width:42px;height:42px;"></a>
+                    <span th:text="${player.PlayerBalance}+'$'"/></td>
+                <td><a href="#" onclick="toggle3()"><img th:src="@{/images/cog.png}" alt="Options"
+                                                         style="width:42px;height:42px;"></a></td>
+            </tr>
+            <tr>
+                <!-- stamina-->
+                <td class="currencytab"><a href="#" onclick="toggle2()"><img th:src="@{/images/plus.png}"
+                                                                             alt="Add shit"
+                                                                             style="width:42px;height:42px;"></a>
+                    <span th:text="'Stamina:'+${player.Stamina}+'/100'"/>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="eq-middle">
+        <p th:text="${error != null} ? ${error} : ''" class="error"></p>
+        <table class="character-table">
+            <tr>
+                <td th:text="${playerCharacter.character.name}" colspan="2"></td>
+                <td colspan="4">
+                    <span class="character-info">
+                        <span class="bold">Level: </span>
+                        <span th:text="${playerCharacter.lvl}"></span><br>
+                        <span class="bold">Class: </span>
+                        <span th:text="${playerCharacter.character.characterClass.name}"></span><br>
+                        <span class="bold">Affiliation: </span>
+                        <span th:text="${playerCharacter.character.affilation.name}"></span><br>
+                        <span class="bold">Ability:</span><br>
+                        <span th:text="'&emsp;'+${playerCharacter.character.ability.name}" class="bold"></span><br>
+                        <span th:text="'&emsp;'+${playerCharacter.character.ability.type}"></span>
+                        <span th:text="${playerCharacter.character.ability.stat != null} ? ${playerCharacter.character.ability.stat.shortName} : ''"></span><br>
+                        <span th:text="'&emsp;'+'Potency: '+${playerCharacter.character.ability.potency}"></span>
+                    </span>
+                    <span class="character-stats">
+                        <span class="bold">Stats: </span><br>
+                        <span th:each="stat : ${totalStats}">
+                            <span th:utext="'&emsp;'+${stat.key}+': '+${stat.value}+'<br>'"></span></span>
+                    </span>
+                </td>
+            </tr>
+
+            <tr>
+                <td th:if="${playerCharacter.wieldedWeapon != null}" colspan="3"
+                    th:text="${playerCharacter.wieldedWeapon.weapon.name}"></td>
+                <td th:if="${playerCharacter.wieldedWeapon == null}" colspan="3" th:text="None"></td>
+                <td colspan="3" rowspan="2"><span th:if="${playerCharacter.wieldedWeapon != null}">
+                    <span class="character-info">
+                        <span class="bold">Level: </span>
+                        <span th:text="${playerCharacter.wieldedWeapon.lvl}"></span><br>
+                        <span class="bold">Element: </span>
+                        <span th:text="${playerCharacter.wieldedWeapon.weapon.element.name}"></span><br>
+                        <span class="bold">Rarity: </span>
+                        <span th:text="${playerCharacter.wieldedWeapon.weapon.rarity.name}"></span><br>
+                    </span>
+                    <span class="character-stats">
+                        <span th:each="stat : ${playerCharacter.wieldedWeapon.weapon.stats}">
+                            <span th:utext="'&emsp;'+${stat.stat.shortName}+': '+${stat.value * playerCharacter.wieldedWeapon.lvl}+'<br>'"></span></span>
+                        </span>
+                    </span>
+                    </span></td>
+            </tr>
+            <tr>
+                <td colspan="1"><span class="bold">Change:</span></td>
+                <td colspan="2">
+                    <form th:action="@{'/game/equipment/characters/change-weapon'}" th:method="post">
+                        <input type="hidden" th:value="${playerCharacter.id}" name="characterId">
+                        <select name="weaponId" class="weapon-select" onchange="this.form.submit()">
+                            <option value="-1">None</option>
+                            <option th:each="weapon : ${player.playerWeapons}"
+                                    th:if="${weapon.weapon.weaponClass.shortName == playerCharacter.character.characterClass.weaponClass.shortName}"
+                                    th:value="${weapon.id}"
+                                    th:text="${weapon.weapon.name}+' lvl: '+${weapon.lvl}"
+                                    th:selected="${playerCharacter.wieldedWeapon !=null && weapon.id == playerCharacter.wieldedWeapon.id}">
+                            </option>
+                        </select>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="artefact-name">RING</td>
+                <td colspan="2" class="artefact-name">GLASSES</td>
+                <td colspan="2" class="artefact-name">HAT</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="artefact-name-italic">
+                    <span th:if="${artefacts.ring != null}">
+                        <span class="bold" th:text="${artefacts.ring.artefact.name}"></span>
+                    </span>
+                    <span th:if="${artefacts.ring == null}">
+                        <span class="bold">None</span>
+                    </span>
+                </td>
+                <td colspan="2" class="artefact-name-italic">
+                    <span th:if="${artefacts.glasses != null}">
+                        <span class="bold" th:text="${artefacts.glasses.artefact.name}"></span>
+                    </span>
+                    <span th:if="${artefacts.glasses == null}">
+                        <span class="bold">None</span>
+                    </span></td>
+                <td colspan="2" class="artefact-name-italic">
+                    <span th:if="${artefacts.hat != null}">
+                        <span class="bold" th:text="${artefacts.hat.artefact.name}"></span>
+                    </span>
+                    <span th:if="${artefacts.hat == null}">
+                        <span class="bold">None</span>
+                    </span></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span th:if="${artefacts.ring != null}">
+                        <span class="bold">Level: </span>
+                        <span th:text="' '+${artefacts.ring.lvl}"></span><br>
+                        <span class="bold">Rarity:</span>
+                        <span th:text="' '+${artefacts.ring.artefact.rarity.name}"></span><br>
+                        <span class="bold">Sets:</span><br>
+                        <span th:each="set : ${artefacts.ring.artefact.sets}" th:utext="${set.name}+'<br>'"></span>
+                        <span class="bold">Stats:</span><br>
+                        <span th:each="stat : ${artefacts.ring.artefact.statArtifacts}" th:utext="${stat.stats.shortName}+': '+${stat.value * artefacts.ring.lvl}+'<br>'"></span>
+                    </span>
+                    <span th:if="${artefacts.ring == null}">
+                        <span class="artefact-name-italic">None</span>
+                    </span>
+                </td>
+                <td colspan="2">
+                    <span th:if="${artefacts.glasses != null}">
+                        <span class="bold">Level: </span>
+                        <span th:text="' '+${artefacts.glasses.lvl}"></span><br>
+                        <span class="bold">Rarity:</span>
+                        <span th:text="' '+${artefacts.glasses.artefact.rarity.name}"></span><br>
+                        <span class="bold">Sets:</span><br>
+                        <span th:each="set : ${artefacts.glasses.artefact.sets}" th:utext="${set.name}+'<br>'"></span>
+                        <span class="bold">Stats:</span><br>
+                        <span th:each="stat : ${artefacts.glasses.artefact.statArtifacts}" th:utext="${stat.stats.shortName}+': '+${stat.value * artefacts.glasses.lvl}+'<br>'"></span>
+                    </span>
+                    <span th:if="${artefacts.glasses == null}">
+                        <span class="artefact-name-italic">None</span>
+                    </span>
+                </td>
+                <td colspan="2">
+                    <span th:if="${artefacts.hat != null}">
+                        <span class="bold">Level: </span>
+                        <span th:text="' '+${artefacts.hat.lvl}"></span><br>
+                        <span class="bold">Rarity:</span>
+                        <span th:text="' '+${artefacts.hat.artefact.rarity.name}"></span><br>
+                        <span class="bold">Sets:</span><br>
+                        <span th:each="set : ${artefacts.hat.artefact.sets}" th:utext="${set.name}+'<br>'"></span>
+                        <span class="bold">Stats:</span><br>
+                        <span th:each="stat : ${artefacts.hat.artefact.statArtifacts}" th:utext="${stat.stats.shortName}+': '+${stat.value * artefacts.hat.lvl}+'<br>'"></span>
+                    </span>
+                    <span th:if="${artefacts.hat == null}">
+                        <span class="artefact-name-italic">None</span>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="bold">Change:</span><br>
+                    <form method="post" th:action="@{/game/equipment/characters/change-artefact}">
+                        <input type="hidden" name="characterId" th:value="${playerCharacter.id}">
+                        <input type="hidden" name="oldArtefactId" th:value="${artefacts.ring != null} ? ${artefacts.ring.id} : ${-1}">
+                        <select name="artefactId" class="weapon-select" onchange="this.form.submit()">
+                            <option value="-1">None</option>
+                            <option th:each="artefact : ${player.playerArtefacts}"
+                                    th:if="${artefact.artefact.type.name() == 'RING'}"
+                                    th:value="${artefact.id}"
+                                    th:utext="${artefact.playerCharacters.size()>0} ? ${artefact.artefact.name}+' Lvl:'+${artefact.lvl} :
+                                    ${artefact.artefact.name}+' Lvl:'+${artefact.lvl}"
+                                    th:selected="${artefacts.ring != null && artefacts.ring.id == artefact.id}"></option>
+                        </select>
+                    </form>
+                </td>
+                <td colspan="2">
+                    <span class="bold">Change:</span><br>
+                    <form method="post" th:action="@{/game/equipment/characters/change-artefact}">
+                        <input type="hidden" name="characterId" th:value="${playerCharacter.id}">
+                        <input type="hidden" name="oldArtefactId" th:value="${artefacts.glasses != null} ? ${artefacts.glasses.id} : ${-1}">
+                        <select name="artefactId" class="weapon-select" onchange="this.form.submit()">
+                            <option value="-1">None</option>
+                            <option th:each="artefact : ${player.playerArtefacts}"
+                                    th:if="${artefact.artefact.type.name() == 'GLASSES'}"
+                                    th:value="${artefact.id}"
+                                    th:utext="${artefact.playerCharacters.size()>0} ? ${artefact.artefact.name}+' Lvl:'+${artefact.lvl} :
+                                    ${artefact.artefact.name}+' Lvl:'+${artefact.lvl}"
+                                    th:selected="${artefacts.glasses != null && artefacts.glasses.id == artefact.id}"></option>
+                        </select>
+                    </form>
+                </td>
+                <td colspan="2">
+                    <span class="bold">Change:</span><br>
+                    <form method="post" th:action="@{/game/equipment/characters/change-artefact}">
+                        <input type="hidden" name="characterId" th:value="${playerCharacter.id}">
+                        <input type="hidden" name="oldArtefactId" th:value="${artefacts.hat != null} ? ${artefacts.hat.id} : ${-1}">
+                        <select name="artefactId" class="weapon-select" onchange="this.form.submit()">
+                            <option value="-1">None</option>
+                            <option th:each="artefact : ${player.playerArtefacts}"
+                                    th:if="${artefact.artefact.type.name() == 'HAT'}"
+                                    th:value="${artefact.id}"
+                                    th:utext="${artefact.playerCharacters.size()>0} ? ${artefact.artefact.name}+' Lvl:'+${artefact.lvl} :
+                                    ${artefact.artefact.name}+' Lvl:'+${artefact.lvl}"
+                                    th:selected="${artefacts.hat != null && artefacts.hat.id == artefact.id}"></option>
+                        </select>
+                    </form>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+<div id="popup3">
+    <div class="settingList">
+        <div class="settingField">Opcje</div>
+        <br>
+        <div class="settingField">Twórcy</div>
+        <br>
+        <div class="settingField">Wyloguj</div>
+        <br>
+        <div class="settingField"><a href="#" onclick="toggle3()">Wróć</a></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    function toggle3() {
+        var blur = document.getElementById('shop1');
+        blur.classList.toggle('active');
+        var popup3 = document.getElementById('popup3');
+        popup3.classList.toggle('active');
+    }
+</script>
+</html>

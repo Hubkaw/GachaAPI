@@ -57,14 +57,6 @@ public class Player {
     private int premiumLeft;
 
     @Basic
-    @Column(name = "pvpwins", nullable = false)
-    private int pvpwins;
-
-    @Basic
-    @Column(name = "pvplooses", nullable = false)
-    private int pvplooses;
-
-    @Basic
     @Column(name = "Stamina", nullable = false)
     private int stamina;
 
@@ -98,7 +90,7 @@ public class Player {
 
 
     @OneToMany(mappedBy = "player")
-    private Collection<PlayerWeapon> playerWeapons;
+    private Set<PlayerWeapon> playerWeapons;
 
 
     @OneToMany(mappedBy = "attacker")

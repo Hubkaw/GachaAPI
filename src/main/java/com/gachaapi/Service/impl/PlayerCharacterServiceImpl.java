@@ -1,9 +1,14 @@
 package com.gachaapi.Service.impl;
 
 import com.gachaapi.Entity.*;
+import com.gachaapi.Entity.Collection;
+import com.gachaapi.Entity.Set;
 import com.gachaapi.Repository.*;
 import com.gachaapi.Service.interfaces.PlayerCharacterService;
 import com.gachaapi.Utils.ArtefactType;
+import com.gachaapi.Utils.ChangeArtefact;
+import com.gachaapi.Utils.CharacterArtefacts;
+import com.gachaapi.Utils.WeaponChange;
 import com.gachaapi.Utils.api.CharacterEquipment;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +27,7 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
     private PlayerArtefactRepository playerArtefactRepository;
     private PlayerWeaponRepository playerWeaponRepository;
     private PlayerMaterialRepository playerMaterialRepository;
+    private StatisticRepository statisticRepository;
 
     @Override
     public List<PlayerCharacter> getPlayerCharacters(String nickname) {
@@ -51,7 +57,7 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
                 if (weapon.getWieldingCharacter() != null)
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This weapon is already used by " + weapon.getWieldingCharacter().getCharacter().getName());
                 if (!weapon.getWeapon().getWeaponClass().equals(playerCharacter.getCharacter().getCharacterClass().getWeaponClass()))
-                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This character cant wield a "+weapon.getWeapon().getWeaponClass().getName());
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This character cant wield a " + weapon.getWeapon().getWeaponClass().getName());
                 playerCharacter.setWieldedWeapon(weapon);
                 playerCharacterRepository.save(playerCharacter);
             });
@@ -104,7 +110,7 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
     @Override
     public PlayerCharacter levelUp(int characterId, String nickname) {
         PlayerCharacter playerCharacter = playerCharacterRepository.findById(characterId).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"This character does not belong to you")
+                () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "This character does not belong to you")
         );
         if (!playerCharacter.getPlayer().getNick().equals(nickname)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This character does not belong to you");
@@ -118,7 +124,7 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
         });
         playerCharacter.getCharacter().getCharacterClass().getMaterialClasses().forEach(mc -> {
             int amount = mc.getBaseAmount() + (playerCharacter.getLvl() * mc.getPerLvlAmount());
-            if (requiredMaterials.containsKey(mc.getMaterial())){
+            if (requiredMaterials.containsKey(mc.getMaterial())) {
                 Integer oldAmount = requiredMaterials.get(mc.getMaterial());
                 requiredMaterials.put(mc.getMaterial(), oldAmount + amount);
             } else {
@@ -146,6 +152,179 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
 
         playerCharacter.setLvl(playerCharacter.getLvl() + 1);
         return playerCharacterRepository.save(playerCharacter);
+    }
+
+    @Override
+    public PlayerCharacter getSafeById(int id, String nickname) {
+        PlayerCharacter pc = playerCharacterRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "This character does not exist"));
+        if (!pc.getPlayer().getNick().equals(nickname)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This character does not belong to you");
+        }
+        return pc;
+    }
+
+    @Override
+    public Map<String, Integer> getTotalStats(int id, String nickname) {
+        PlayerCharacter pc = playerCharacterRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "This character does not exist"));
+        if (!pc.getPlayer().getNick().equals(nickname)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This character does not belong to you");
+        }
+        Map<String, Integer> result = new HashMap<>();
+        for (Statistic statistic : statisticRepository.findAll()) {
+            result.put(statistic.getShortName(), 0);
+        }
+        System.out.println(result);
+        for (StatClass cs : pc.getCharacter().getCharacterClass().getStats()) {
+            result.put(cs.getStat().getShortName(), result.get(cs.getStat().getShortName()) + (cs.getValue() * pc.getLvl()));
+        }
+
+        if (pc.getWieldedWeapon() != null) {
+            for (StatWeapon stat : pc.getWieldedWeapon().getWeapon().getStats()) {
+                result.put(stat.getStat().getShortName(), result.get(stat.getStat().getShortName()) + (stat.getValue() * pc.getWieldedWeapon().getLvl()));
+            }
+        }
+
+        if (pc.getPlayerArtefacts().isEmpty()) {
+            return result;
+        }
+
+        java.util.Set<Set> sets = new HashSet<>(pc.getPlayerArtefacts().stream().findFirst().get().getArtefact().getSets());
+
+        for (PlayerArtefact pa : pc.getPlayerArtefacts()) {
+            for (StatArtifact sa : pa.getArtefact().getStatArtifacts()) {
+                result.put(sa.getStats().getShortName(), result.get(sa.getStats().getShortName()) + (sa.getValue() * pa.getLvl()));
+            }
+
+            sets.retainAll(pa.getArtefact().getSets());
+        }
+        if (pc.getPlayerArtefacts().size() == 3) {
+            for (Set set : sets) {
+                for (StatArtefactset sas : set.getStats()) {
+                    if (result.containsKey(sas.getStat().getShortName())) {
+                        result.put(sas.getStat().getShortName(), result.get(sas.getStat().getShortName()) + sas.getValue());
+                    } else {
+                        result.put(sas.getStat().getShortName(), sas.getValue());
+                    }
+                }
+            }
+        }
+        System.out.println(result);
+        return result;
+    }
+
+    @Override
+    public void changeWeapon(WeaponChange weaponChange, String nickname) {
+        Player player = playerRepository.findByNick(nickname).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Incorrect user"));
+        PlayerCharacter pc = playerCharacterRepository.findById(weaponChange.getCharacterId()).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "This character does not exist"));
+        if (!pc.getPlayer().getNick().equals(nickname)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This character does not belong to you");
+        }
+        if (weaponChange.getWeaponId() > 0) {
+            PlayerWeapon pw = playerWeaponRepository.findById(weaponChange.getWeaponId()).orElseThrow(() ->
+                    new ResponseStatusException(HttpStatus.NOT_FOUND, "This weapon does not exist"));
+            if (!pw.getPlayer().getNick().equals(nickname)) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This weapon does not belong to you");
+            }
+            if (!pw.getWeapon().getWeaponClass().equals(pc.getCharacter().getCharacterClass().getWeaponClass())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This character cannot wield ths weapon");
+            }
+            if (pw.getWieldingCharacter() != null) {
+                PlayerCharacter wieldingCharacter = pw.getWieldingCharacter();
+                wieldingCharacter.setWieldedWeapon(null);
+                playerCharacterRepository.saveAndFlush(wieldingCharacter);
+
+            }
+            if (pc.getWieldedWeapon() != null) {
+                PlayerWeapon wieldedWeapon = pc.getWieldedWeapon();
+                wieldedWeapon.setWieldingCharacter(null);
+                playerWeaponRepository.saveAndFlush(wieldedWeapon);
+            }
+
+            pc.setWieldedWeapon(pw);
+            pw.setWieldingCharacter(pc);
+            playerWeaponRepository.saveAndFlush(pw);
+        } else {
+            if (pc.getWieldedWeapon() != null) {
+                PlayerWeapon wieldedWeapon = pc.getWieldedWeapon();
+                PlayerCharacter wieldingCharacter = wieldedWeapon.getWieldingCharacter();
+                wieldingCharacter.setWieldedWeapon(null);
+                wieldedWeapon.setWieldingCharacter(null);
+                playerCharacterRepository.saveAndFlush(wieldingCharacter);
+                playerWeaponRepository.saveAndFlush(wieldedWeapon);
+            }
+            pc.setWieldedWeapon(null);
+        }
+        playerCharacterRepository.saveAndFlush(pc);
+    }
+
+    @Override
+    public CharacterArtefacts getCharacterArtefacts(int id, String nickname) {
+        PlayerCharacter pc = playerCharacterRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "This character does not exist"));
+        if (!pc.getPlayer().getNick().equals(nickname)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This character does not belong to you");
+        }
+
+        if (pc.getPlayerArtefacts().isEmpty()) {
+            return new CharacterArtefacts(null, null, null);
+        }
+        java.util.Set<PlayerArtefact> artefacts = pc.getPlayerArtefacts();
+        CharacterArtefacts ca = new CharacterArtefacts();
+        if (artefacts.stream().anyMatch(a -> a.getArtefact().getType() == ArtefactType.RING)) {
+            ca.setRing(artefacts.stream()
+                    .filter(playerArtefact -> playerArtefact.getArtefact().getType() == ArtefactType.RING)
+                    .findFirst().get());
+        }
+
+        if (artefacts.stream().anyMatch(a -> a.getArtefact().getType() == ArtefactType.GLASSES)) {
+            ca.setGlasses(artefacts.stream()
+                    .filter(playerArtefact -> playerArtefact.getArtefact().getType() == ArtefactType.GLASSES)
+                    .findFirst().get());
+        }
+
+        if (artefacts.stream().anyMatch(a -> a.getArtefact().getType() == ArtefactType.HAT)) {
+            ca.setHat(artefacts.stream()
+                    .filter(playerArtefact -> playerArtefact.getArtefact().getType() == ArtefactType.HAT)
+                    .findFirst().get());
+        }
+
+        return ca;
+    }
+
+    @Override
+    public void changeArtefact(ChangeArtefact changeArtefact, String name) {
+        PlayerCharacter pc = playerCharacterRepository.findById(changeArtefact.getCharacterId()).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "This Character does not exist"));
+        if (!pc.getPlayer().getNick().equals(name)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This character does not belong to you");
+        }
+        if (changeArtefact.getOldArtefactId() > 0) {
+            PlayerArtefact oldArtefact = playerArtefactRepository.findById(changeArtefact.getOldArtefactId()).orElseThrow(() ->
+                    new ResponseStatusException(HttpStatus.NOT_FOUND, "This artefact does not exist"));
+            oldArtefact.getPlayerCharacters().clear();
+            playerArtefactRepository.saveAndFlush(oldArtefact);
+            pc.getPlayerArtefacts().remove(oldArtefact);
+
+        }
+        if (changeArtefact.getArtefactId()>0) {
+            PlayerArtefact pa = playerArtefactRepository.findById(changeArtefact.getArtefactId()).orElseThrow(() ->
+                    new ResponseStatusException(HttpStatus.NOT_FOUND, "This artefact does not exist"));
+            if (!pa.getPlayer().getNick().equals(name)) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This artefact does not belong to you");
+            }
+
+            pa.getPlayerCharacters().clear();
+            playerArtefactRepository.saveAndFlush(pa);
+            pc.getPlayerArtefacts().add(pa);
+            playerCharacterRepository.saveAndFlush(pc);
+            System.out.println(changeArtefact);
+            System.out.println(pa.getPlayerCharacters());
+            System.out.println(pc.getPlayerArtefacts());
+        }
     }
 
 

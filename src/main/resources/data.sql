@@ -370,7 +370,7 @@ VALUES (1, 'buła mieczem', 0, 100, null),
        (11, 'Dark push', 0, 100, null),
        (12, 'Shield Bash', 0, 100, null),
        (13, 'Anime Noises', 1, 100, 2),
-       (14, 'Mexican Music', 3, 100, 2),
+       (14, 'Mexican Music', 3, 100, null),
        (15, 'Absolute Territory', 1, 100, 2);
 
 --character
@@ -479,6 +479,19 @@ INSERT INTO player_artefact (player_id_player, artefact_id, lvl)
 VALUES (1, 1, 1);
 INSERT INTO player_artefact (player_id_player, artefact_id, lvl)
 VALUES (1, 1, 1);
+
+INSERT INTO player_artefact (id, player_id_player, artefact_id, lvl)
+VALUES (8, 2, 1, 10);
+INSERT INTO player_artefact (id,player_id_player, artefact_id, lvl)
+VALUES (9, 2, 2, 10);
+INSERT INTO player_artefact (id,player_id_player, artefact_id, lvl)
+VALUES (10, 2, 3, 10);
+INSERT INTO player_artefact (id,player_id_player, artefact_id, lvl)
+VALUES (11, 2, 4, 10);
+INSERT INTO player_artefact (id,player_id_player, artefact_id, lvl)
+VALUES (12, 2, 5, 10);
+INSERT INTO player_artefact (id,player_id_player, artefact_id, lvl)
+VALUES (13, 2, 6, 10);
 --characterartefact
 INSERT INTO characteratrefact (player_character_id, player_artefact_id)
 VALUES (1, 1);
@@ -486,6 +499,18 @@ INSERT INTO characteratrefact (player_character_id, player_artefact_id)
 VALUES (1, 2);
 INSERT INTO characteratrefact (player_character_id, player_artefact_id)
 VALUES (2, 3);
+
+INSERT INTO characteratrefact (player_character_id, player_artefact_id)
+VALUES (10, 8);
+INSERT INTO characteratrefact (player_character_id, player_artefact_id)
+VALUES (10, 9);
+INSERT INTO characteratrefact (player_character_id, player_artefact_id)
+VALUES (10, 10);
+INSERT INTO characteratrefact (player_character_id, player_artefact_id)
+VALUES (11, 11);
+INSERT INTO characteratrefact (player_character_id, player_artefact_id)
+VALUES (12, 12);
+
 --character_chest
 INSERT INTO character_chest (chest_id_chest, character_id)
 VALUES (1, 1);

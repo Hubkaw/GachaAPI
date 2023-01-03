@@ -17,14 +17,14 @@
         <td class="playerinfo"  rowspan= 2>
           <table class="border">
             <tr>
-              <td class="pagename" colspan="5"><h2>Dungeons</h2></td>
+              <td class="pagename" colspan="5"><h2 th:text="'Greetings, '+${player.nick}"></h2></td>
             </tr>
             <tr>
-              <td class="navfield"><a th:href="@{/game/home}">Home</a> </td>
-              <td class="navfield"><a th:href="@{/game/equipment}">Equipment</a> </td>
-              <td class="navfield"><a th:href="@{/game/chests}">Chests</a> </td>
-              <td class="navfield"><a th:href="@{/game/dungeons}">PvE</a></td>
-              <td class="navfield"><a th:href="@{/game/pvp}">PvP</a> </td>
+              <td class="navfield"><a th:href="@{/game/home}" class="nav-link">Home</a> </td>
+              <td class="navfield"><a th:href="@{/game/equipment}" class="nav-link">Equipment</a> </td>
+              <td class="navfield"><a th:href="@{/game/chests}" class="nav-link">Chests</a> </td>
+              <td class="navfield"><a th:href="@{/game/dungeons}" class="nav-link">PvE</a></td>
+              <td class="navfield"><a th:href="@{/game/pvp}" class="nav-link">PvP</a> </td>
             </tr>
           </table>
         </td>
@@ -43,7 +43,6 @@
 
     </table>
   </div>
-</div>
   <br>
   <div class="middleb">
 

@@ -6,7 +6,7 @@
     <!-- CSS only -->
     <link rel="stylesheet" href="/../static/assets/style2.css" th:href="@{/assets/style2.css}"/>
 
-    <title>Login to Gacha</title>
+    <title>Gacha</title>
 </head>
 <body>
 <div class="container"  id="shop1">
@@ -19,11 +19,11 @@
                             <td class="pagename" colspan="5"><h2 th:text="'Greetings, '+${player.nick}"></h2></td>
                         </tr>
                         <tr>
-                            <td class="navfield"><a th:href="@{/game/home}">Home</a> </td>
-                            <td class="navfield"><a th:href="@{/game/equipment}">Equipment</a> </td>
-                            <td class="navfield"><a th:href="@{/game/chests}">Chests</a> </td>
-                            <td class="navfield"><a th:href="@{/game/dungeons}">PvE</a></td>
-                            <td class="navfield"><a th:href="@{/game/pvp}">PvP</a> </td>
+                            <td class="navfield"><a th:href="@{/game/home}" class="nav-link-current">Home</a> </td>
+                            <td class="navfield"><a th:href="@{/game/equipment}" class="nav-link">Equipment</a> </td>
+                            <td class="navfield"><a th:href="@{/game/chests}" class="nav-link">Chests</a> </td>
+                            <td class="navfield"><a th:href="@{/game/dungeons}" class="nav-link">PvE</a></td>
+                            <td class="navfield"><a th:href="@{/game/pvp}" class="nav-link">PvP</a> </td>
                         </tr>
                     </table>
                 </td>
@@ -63,7 +63,6 @@
   </tr>
                 <tr>
                     <td th:text="'Your ELO points- '+${player.eloPoints}"></td>
-                    <td th:text="'Won/Lost PvP battles- '+${player.pvpwins}+'/'+${player.pvplooses}"></td>
                 </tr>
             </table>
         </div>
@@ -117,7 +116,7 @@
     </form>
     <br>
     <div class="navfield">
-    <a href="#" onclick="toggle()">Wróć</a>
+    <a href="#" class="nav-link" onclick="toggle()">Wróć</a>
     </div>
 </div>
 <div id="popup2">
