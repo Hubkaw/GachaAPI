@@ -60,7 +60,7 @@
                 </td>
             </tr>
             <tr th:each="opponent : ${opponents}"
-                th:if="${opponent.idPlayer != player.idPlayer && opponent.activeParty > 0}">
+                th:if="${opponent.idPlayer != player.idPlayer && opponent.activeParty > 0}" class="opponent-row">
                 <td colspan="2" style="width:80%;">
                     <div>
                         <span class="opponent-float-left">
@@ -72,12 +72,12 @@
                             th:if="${party.id == opponent.activeParty}">
                             <li th:each="character : ${party.characters}">
                                 <span th:text="${character.character.name}"></span><br>
-                                <span th:text="${character.lvl}"></span><br>
+                                <span th:text="${character.lvl}+'lvl'"></span><br>
                             </li>
                         </ul>
                     </div>
                 </td>
-                <td rowspan="3" style="width:20%;border-left: green solid 5px">
+                <td style="width:20%;">
                     <a th:href="@{'/game/pvp/duel/'+${opponent.getNick()}}"> <img alt="venture" style="width:86px;height:86px;" th:src="@{/images/sword.png}"/></a>
                 </td>
 

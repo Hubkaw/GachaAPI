@@ -647,10 +647,9 @@ details[open] summary {
 }
 
 .opponent-list {
-    border: 1px solid black;
     margin-left: 18vw;
     width: 55vw;
-    border-spacing: 0;
+    border-spacing: 2px;
 }
 
 table.opponent-list tr {
@@ -660,10 +659,10 @@ table.opponent-list tr {
 
 }
 
-table.opponent-list td {
+table.opponent-list tr td {
     vertical-align: middle;
     background: lightgrey;
-
+    border: green 2px solid;
 }
 
 .pvp-battle-log {
@@ -679,14 +678,18 @@ table.opponent-list td {
 }
 .pvp-entry-attacker{
     width: 100%;
-    background-color: lightcoral;
+    background-color: lightgreen;
 }
 .pvp-entry-defender{
     width: 100%;
-    background-color: lightgreen;
+    background-color: lightcoral;
 }
 .pvp-result{
     font-weight: bold;
     font-style: italic;
     text-align: center;
+}
+.opponent-row {
+    border: green 2px solid;
+
 }
