@@ -201,14 +201,15 @@ values (3, 'Special collection');
 INSERT INTO collection (idcollection, name)
 values (4, 'Pay2Win collection');
 --chest
-INSERT INTO chest (id_chest, name, collection_idcollection, released_at, expires_at, price)
-values (1, 'basic chest', 1, '2022-01-01 00:00:00', '2030-01-01 00:00:00', 1);
-INSERT INTO chest (id_chest, name, collection_idcollection, released_at, expires_at, price)
-values (2, 'rare chest', 2, '2024-01-01 00:00:00', '2030-01-01 00:00:00', 2);
-INSERT INTO chest (id_chest, name, collection_idcollection, released_at, expires_at, price)
-values (3, 'super rare chest', 3, '2022-01-01 00:00:00', '2030-01-01 00:00:00', 3);
-INSERT INTO chest (id_chest, name, collection_idcollection, released_at, expires_at, price)
-values (4, 'pay2win chest', 4, '2023-01-01 00:00:00', '2137-01-06 00:00:00', 4);
+
+INSERT INTO `chest` (`id_chest`, `expires_at`, `name`, `price`, `released_at`, `collection_idcollection`)
+VALUES (5, '2032-10-20 00:00:00', 'Weapon Chest', 30, '2022-12-02 00:00:00', 4),
+       (6, '2035-11-15 00:00:00', 'Poland Stronk Chest', 30, '2021-02-10 00:00:00', 4),
+       (7, '2031-11-13 00:00:00', 'Character Chest', 30, '2022-07-14 00:00:00', 2),
+       (8, '2023-12-23 00:00:00', 'Gensokyo Chest', 30, '2022-05-05 00:00:00', 3),
+       (9, '2022-12-15 00:00:00', 'Old Chest', 30, '2022-08-11 00:00:00', 1),
+       (10, '2025-04-17 00:00:00', 'New Chest', 30, '2024-01-17 00:00:00', 3);
+
 --material
 INSERT INTO material (id, name)
 values (1, 'Wood');
@@ -576,12 +577,28 @@ VALUES (1, 1),
        (39, 858);
 
 --character_chest
-INSERT INTO character_chest (chest_id_chest, character_id)
-VALUES (1, 1);
-INSERT INTO character_chest (chest_id_chest, character_id)
-VALUES (1, 2);
-INSERT INTO character_chest (chest_id_chest, character_id)
-VALUES (2, 3);
+
+INSERT INTO `character_chest` (`chest_id_chest`, `character_id`)
+VALUES (6, 1),
+       (7, 1),
+       (6, 2),
+       (7, 2),
+       (8, 3),
+       (7, 4),
+       (7, 5),
+       (7, 6),
+       (6, 7),
+       (7, 7),
+       (7, 8),
+       (8, 9),
+       (7, 10),
+       (8, 11),
+       (6, 12),
+       (7, 12),
+       (6, 13),
+       (7, 13),
+       (8, 14),
+       (7, 15);
 --materialweaponclass
 INSERT INTO `materialweaponclass` (`id`, `base_amount`, `per_lvl_amount`, `material_id`, `weapon_class_id`)
 VALUES (5, 1, 2, 2, 1),
@@ -694,12 +711,31 @@ VALUES (4, 1, 19, 6),
        (8, 1, 6, 3),
        (9, 1, 7, 12);
 --weapon_chest
-INSERT INTO weapon_chest (weapon_id, chest_id_chest)
-VALUES (1, 1);
-INSERT INTO weapon_chest (weapon_id, chest_id_chest)
-VALUES (2, 2);
-INSERT INTO weapon_chest (weapon_id, chest_id_chest)
-VALUES (3, 1);
+
+INSERT INTO `weapon_chest` (`weapon_id`, `chest_id_chest`)
+VALUES (1, 5),
+       (2, 5),
+       (3, 5),
+       (4, 5),
+       (5, 5),
+       (6, 5),
+       (7, 5),
+       (8, 5),
+       (9, 5),
+       (10, 5),
+       (11, 5),
+       (12, 5),
+       (13, 5),
+       (14, 5),
+       (15, 5),
+       (1, 6),
+       (13, 6),
+       (15, 6),
+       (1, 8),
+       (2, 8),
+       (8, 8),
+       (10, 8),
+       (14, 8);
 --stat_affiliation
 INSERT INTO `stat_affiliation` (`id`, `value`, `affiliation_id`, `statistic_stat_id`)
 VALUES (2, 2, 2, 2),
@@ -726,12 +762,7 @@ VALUES (4, 50, 1, 1),
        (22, 10, 5, 4);
 
 -- player_chestitem
-INSERT INTO player_chestitem (id, player_id_player, chest_id_chest, bought_at)
-VALUES (1, 1, 1, curdate());
-INSERT INTO player_chestitem (id, player_id_player, chest_id_chest, bought_at)
-VALUES (2, 2, 2, curdate());
-INSERT INTO player_chestitem (id, player_id_player, chest_id_chest, bought_at)
-VALUES (3, 2, 2, '2000-01-01 00:00:00');
+
 --stat_weapon
 INSERT INTO `stat_weapon` (`id`, `value`, `statistic_stat_id`, `weapon_id`)
 VALUES (4, 3, 2, 1),
