@@ -28,12 +28,12 @@ public class GameChestsController {
     }
 
     @GetMapping("/game/chests/{someID}")
-    public ModelAndView getChestDetails(Model model, @PathVariable(value="someID") String id,Principal principal){
+    public ModelAndView getChestDetails(Model model, @PathVariable(value="someID") int id,Principal principal){
         return new ModelAndView("game/chestDetails")
                 .addObject("player",playerService.getByName(principal.getName()))
-                .addObject("chestDetails",chestService.getById(Integer.parseInt(id)))
-                .addObject("chestWeapons",chestService.getAllWeapons(Integer.parseInt(id)))
-                .addObject("chestCharacters",chestService.getAllCharacters(Integer.parseInt(id)));
+                .addObject("chestDetails",chestService.getById(id))
+                .addObject("chestWeapons",chestService.getAllWeapons(id))
+                .addObject("chestCharacters",chestService.getAllCharacters(id));
     }
 
 
