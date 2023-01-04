@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
+
 public class BattleLogEntry implements Serializable {
     private String entry;
     private EntryType type;

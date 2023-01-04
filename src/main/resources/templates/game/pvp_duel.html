@@ -2,6 +2,7 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <!-- CSS only -->
     <link href="/../static/assets/style2.css" rel="stylesheet" th:href="@{/assets/style2.css}"/>
@@ -35,7 +36,8 @@
                                                                             th:src="@{../../images/plus.png}"></a>
                     <span th:text="${player.PlayerBalance}+'$'"/></td>
                 <td><a href="#" onclick="toggle3()"><img alt="Options"
-                                                         src="../../static/images/cog.png" style="width:42px;height:42px;"
+                                                         src="../../static/images/cog.png"
+                                                         style="width:42px;height:42px;"
                                                          th:src="@{../../images/cog.png}"></a></td>
             </tr>
             <tr>
@@ -52,36 +54,23 @@
     </div>
     <br>
     <div class="middleb">
-        <p class="error" th:text="${error != null} ? ${error} : ''"></p>
-        <table class="opponent-list">
-            <tr th:if="${#lists.isEmpty(opponents)}">
-                <td>
-                    There are no eligible opponents for you. Try again later
-                </td>
+        <p th:text="${error != null} ? ${error} : ''"></p>
+        <table class="pvp-battle-log">
+            <tr>
+                <td class="pvp-result">BATTLE LOG:</td>
             </tr>
-            <tr th:each="opponent : ${opponents}"
-                th:if="${opponent.idPlayer != player.idPlayer && opponent.activeParty > 0}">
-                <td colspan="2" style="width:80%;">
-                    <div>
-                        <span class="opponent-float-left">
-                            <span class="opponent-info" th:text="${opponent.nick}"></span><br>
-                            <span class="opponent-info" th:text="${opponent.level}+'lvl'"></span><br>
-                            <span class="opponent-info" th:text="${opponent.eloPoints}+' ELO'"></span>
-                        </span>
-                        <ul class="pvp-opponent-party-list" th:each="party : ${opponent.parties}"
-                            th:if="${party.id == opponent.activeParty}">
-                            <li th:each="character : ${party.characters}">
-                                <span th:text="${character.character.name}"></span><br>
-                                <span th:text="${character.lvl}"></span><br>
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-                <td rowspan="3" style="width:20%;border-left: green solid 5px">
-                    <a th:href="@{'/game/pvp/duel/'+${opponent.getNick()}}"> <img alt="venture" style="width:86px;height:86px;" th:src="@{/images/sword.png}"/></a>
-                </td>
-
+            <tr th:each="be : ${log}">
+                    <td class="pvp-entry-attacker" th:if="${be.side.name() == 'ATTACKER'}"
+                          th:text="${be.entry}"></td>
+                    <td class="pvp-entry-defender" th:if="${be.side.name() == 'DEFENDER'}"
+                          th:text="${be.entry}"></td>
+                    <td class="pvp-entry" th:if="${be.side.name() == 'SYSTEM' && be.type.name() != 'WINNER' && be.type.name() != 'LOSER'}"
+                          th:text="${be.entry}"></td>
+                <td class="pvp-result" th:if="${ be.type.name() == 'WINNER' || be.type.name() == 'LOSER'}"
+                    th:text="${be.entry}"></td>
             </tr>
+            <tr><td class="pvp-result" th:text="'New ELO: '+${player.getEloPoints()}">
+            </td></tr>
         </table>
     </div>
 </div>
@@ -111,6 +100,7 @@
 </div>
 </div>
 </body>
+
 <script type="text/javascript">
 
     function toggle3() {
@@ -119,5 +109,9 @@
         var popup3 = document.getElementById('popup3');
         popup3.classList.toggle('active');
     }
+
+    $(".pvp-battle-log tr").each(function () {
+        $(this).fadeIn($(this).index() * 350);
+    });
 </script>
 </html>

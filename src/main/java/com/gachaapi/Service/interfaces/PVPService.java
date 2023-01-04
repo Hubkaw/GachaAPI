@@ -10,4 +10,5 @@ import java.util.List;
 public interface PVPService {
     List<Player> getEligibleOpponents(String name);
     BattleLog duel(String attacker, int defender);
+    BattleLog duel(String attacker, String defender);
 }

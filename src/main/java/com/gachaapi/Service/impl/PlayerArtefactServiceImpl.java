@@ -38,8 +38,8 @@ public class PlayerArtefactServiceImpl implements PlayerArtefactService {
         }
         if (destroyedArtefact.getPlayerCharacters().size()>0){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This artefact is worn by:"+
-                    upgradedArtefact.getPlayerCharacters().stream().findAny().get().getCharacter().getName()+" lvl:"+
-                    upgradedArtefact.getPlayerCharacters().stream().findAny().get().getLvl());
+                    destroyedArtefact.getPlayerCharacters().stream().findAny().get().getCharacter().getName()+" lvl:"+
+                    destroyedArtefact.getPlayerCharacters().stream().findAny().get().getLvl());
         }
 
         upgradedArtefact.setLvl(upgradedArtefact.getLvl()+1);

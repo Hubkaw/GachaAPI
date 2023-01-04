@@ -628,3 +628,65 @@ details[open] summary {
     text-align: center;
 }
 
+.pvp-opponent-party-list{
+    float: right;
+    list-style: none;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+.opponent-info{
+    font-weight: bold;
+    vertical-align: middle;
+    min-height: 20%;
+}
+.opponent-float-left{
+    float: left;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.opponent-list {
+    border: 1px solid black;
+    margin-left: 18vw;
+    width: 55vw;
+    border-spacing: 0;
+}
+
+table.opponent-list tr {
+    padding-top: 105px;
+    vertical-align: middle;
+
+
+}
+
+table.opponent-list td {
+    vertical-align: middle;
+    background: lightgrey;
+
+}
+
+.pvp-battle-log {
+    margin-left: 18vw;
+    width: 55vw;
+    background-color: lightgray;
+    border: green 2px solid;
+    text-align: left;
+}
+.pvp-entry{
+    width: 100%;
+    background-color: lightgray;
+}
+.pvp-entry-attacker{
+    width: 100%;
+    background-color: lightcoral;
+}
+.pvp-entry-defender{
+    width: 100%;
+    background-color: lightgreen;
+}
+.pvp-result{
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+}

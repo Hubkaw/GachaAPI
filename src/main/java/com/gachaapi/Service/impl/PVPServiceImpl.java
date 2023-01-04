@@ -94,7 +94,13 @@ public class PVPServiceImpl implements PVPService {
         return sim;
     }
 
-
+    @Override
+    public BattleLog duel(String attacker, String defender) {
+        Player def = playerRepository.findByNick(defender).orElseThrow(() ->
+            new ResponseStatusException(HttpStatus.NOT_FOUND, "Opponent not found")
+        );
+        return duel(attacker, def.getIdPlayer());
+    }
 
 
 }
