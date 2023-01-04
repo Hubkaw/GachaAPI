@@ -15,6 +15,7 @@ public class ArtefactReward {
     private Dungeonfloor dungeonFloor;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     public int getId() {
         return id;

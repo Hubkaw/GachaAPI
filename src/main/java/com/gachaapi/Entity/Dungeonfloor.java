@@ -22,7 +22,7 @@ public class Dungeonfloor {
     @Column(name = "Depth", nullable = false)
     private int depth;
 
-    @OneToMany(mappedBy = "dungeonFloor")
+    @OneToMany(mappedBy = "dungeonFloor", orphanRemoval = true)
     private Collection<ArtefactReward> artefactRewards;
 
     @ManyToOne
@@ -30,7 +30,7 @@ public class Dungeonfloor {
     @JsonIgnore
     private Dungeon dungeon;
 
-    @OneToMany(mappedBy = "dungeonFloor")
+    @OneToMany(mappedBy = "dungeonFloor", orphanRemoval = true)
     @JsonIgnore
     private Collection<MaterialReward> materialRewards;
 
@@ -38,11 +38,11 @@ public class Dungeonfloor {
     @JoinColumn(name = "partyId", referencedColumnName = "Id", nullable = false)
     private Party party;
 
-    @OneToMany(mappedBy = "dungeonfloor")
+    @OneToMany(mappedBy = "dungeonfloor" , orphanRemoval = true)
     @JsonIgnore
     private Collection<PlayerDungeonfloor> playerDungeonfloors;
 
-    @OneToMany(mappedBy = "dungeonFloor")
+    @OneToMany(mappedBy = "dungeonFloor", orphanRemoval = true)
     private Collection<WeaponReward> weaponRewards;
 
     @Basic

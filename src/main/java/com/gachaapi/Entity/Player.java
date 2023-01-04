@@ -40,6 +40,10 @@ public class Player {
     private int playerBalance;
 
     @Basic
+    @Column(name = "Level", nullable = false)
+    private int level;
+
+    @Basic
     @Column(name = "HashedPassword", nullable = false, length = 126)
     @JsonIgnore
     private String hashedPassword;

@@ -60,9 +60,9 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPremiumLeft(0);
         player.setStamina(DEFAULT_STAMINA_AMOUNT);
         player.setPityRollStatus(0);
-        player.setPlayerBalance(0);
+        player.setLevel(1);
+        player.setPlayerBalance(2000);
         playerRepository.save(player);
-
         return player;
     }
 

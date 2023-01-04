@@ -9,6 +9,7 @@ import com.gachaapi.Repository.*;
 import com.gachaapi.Service.interfaces.CollectionService;
 import com.gachaapi.Service.interfaces.DungeonService;
 import com.gachaapi.Utils.BattleType;
+import com.gachaapi.Utils.DungeonType;
 import com.gachaapi.Utils.PvEResult;
 import com.gachaapi.Utils.PvEReward;
 import com.gachaapi.Utils.dev.NewDungeon;
@@ -165,6 +166,11 @@ public class DungeonServiceImpl implements DungeonService {
         pdf.setDungeonfloor(dungeonfloor);
         pdf.setClearDate(Timestamp.from(Instant.now()));
         player.getPlayerDungeonfloors().add(pdf);
+
+        if (dungeonfloor.getDungeon().getType() == DungeonType.MAIN){
+            player.setLevel(player.getLevel()+1);
+        }
+
         playerRepository.save(player);
 
         BattleHistory battleHistory = new BattleHistory();

@@ -54,6 +54,9 @@
         <p th:text="${error != null} ? ${error} : ''" class="error"></p>
         <table class="character-table">
             <tr>
+                <td colspan="6" class="head-cell">CHARACTER</td>
+            </tr>
+            <tr>
                 <td th:text="${playerCharacter.character.name}" colspan="2"></td>
                 <td colspan="4">
                     <span class="character-info">
@@ -76,7 +79,9 @@
                     </span>
                 </td>
             </tr>
-
+            <tr>
+                <td colspan="6" class="head-cell">WEAPON</td>
+            </tr>
             <tr>
                 <td th:if="${playerCharacter.wieldedWeapon != null}" colspan="3"
                     th:text="${playerCharacter.wieldedWeapon.weapon.name}"></td>
@@ -113,6 +118,9 @@
                         </select>
                     </form>
                 </td>
+            </tr>
+            <tr>
+                <td colspan="6" class="head-cell">ARTEFACTS</td>
             </tr>
             <tr>
                 <td colspan="2" class="artefact-name">RING</td>

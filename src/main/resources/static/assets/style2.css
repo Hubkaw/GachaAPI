@@ -620,4 +620,11 @@ details[open] summary {
     font-weight: bold;
     font-style: italic;
 }
+.character-table .head-cell {
+    background-color: green;
+    color: lightgray;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+}
 
