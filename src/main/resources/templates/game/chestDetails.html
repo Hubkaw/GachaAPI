@@ -30,13 +30,13 @@
                 </td>
 
                 <!-- currency -->
-                <td class="currencytab"><a href="#" onclick="toggle()"><img src="../../static/images/plus.png" th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>
+                <td class="currencytab"><a href="#" onclick="toggle()"><img th:src="@{/images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>
                     <span th:text="${player.PlayerBalance}+'$'"/></td>
-                <td><a href="#" onclick="toggle3()"><img src="../../static/images/cog.png"  th:src="@{../../images/cog.png}" alt="Options" style="width:42px;height:42px;"></a></td>
+                <td><a href="#" onclick="toggle3()"><img   th:src="@{/images/cog.png}" alt="Options" style="width:42px;height:42px;"></a></td>
             </tr>
             <tr>
                 <!-- stamina-->
-                <td class="currencytab"><a href="#" onclick="toggle2()"><img src="../../static/images/plus.png"  th:src="@{../../images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>
+                <td class="currencytab"><a href="#" onclick="toggle2()"><img   th:src="@{/images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>
                     <span th:text="'Stamina:'+${player.Stamina}+'/100'"/>
                 </td>
             </tr>

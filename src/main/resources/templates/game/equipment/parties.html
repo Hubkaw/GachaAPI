@@ -32,21 +32,18 @@
 
                 <!-- currency -->
                 <td class="currencytab"><a href="#" onclick="toggle()"><img alt="Add shit"
-                                                                            src="../../static/images/plus.png"
                                                                             style="width:42px;height:42px;"
-                                                                            th:src="@{../../images/plus.png}"></a>
+                                                                            th:src="@{/images/plus.png}"></a>
                     <span th:text="${player.PlayerBalance}+'$'"/></td>
                 <td><a href="#" onclick="toggle3()"><img alt="Options"
-                                                         src="../../static/images/cog.png"
                                                          style="width:42px;height:42px;"
-                                                         th:src="@{../../images/cog.png}"></a></td>
+                                                         th:src="@{/images/cog.png}"></a></td>
             </tr>
             <tr>
                 <!-- stamina-->
                 <td class="currencytab"><a href="#" onclick="toggle2()"><img alt="Add shit"
-                                                                             src="../../static/images/plus.png"
                                                                              style="width:42px;height:42px;"
-                                                                             th:src="@{../../images/plus.png}"></a>
+                                                                             th:src="@{/images/plus.png}"></a>
                     <span th:text="'Stamina:'+${player.Stamina}+'/100'"/>
                 </td>
             </tr>
