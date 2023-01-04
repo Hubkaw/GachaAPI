@@ -140,26 +140,27 @@ INSERT INTO artefact (id, name, type, rarity_id)
 values (9, 'Cat Ears', 2, 2);
 --player !!! ADMIN MA ZAWSZE MIEC ID 1 !!!
 INSERT INTO player (id_player, nick, birth_date, join_date, active_party, player_balance, hashed_password,
-                    pity_roll_status,  elopoints, premium_left, stamina)
+                    pity_roll_status, elopoints, premium_left, stamina, level)
 values (1, 'admin', '1900-01-01 00:00:00', '2022-01-01 00:00:00', 1, 10000,
-        '$2a$12$qmuu8mn/qN1D.ykSKYMJp.JNWJzL2fL77VHtd7/uzlpzOWv8r5dBC', 1, 0, 99999, 100);
+        '$2a$12$qmuu8mn/qN1D.ykSKYMJp.JNWJzL2fL77VHtd7/uzlpzOWv8r5dBC', 1, 0, 99999, 100, 80);
 INSERT INTO player (id_player, nick, birth_date, join_date, active_party, player_balance, hashed_password,
-                    pity_roll_status,  elopoints, premium_left, stamina)
+                    pity_roll_status, elopoints, premium_left, stamina, level)
 values (2, 'user', '1900-01-01 00:00:00', '2022-01-01 00:00:00', 2, 9999,
-        '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1,  1500, 0, 100);
+        '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1, 1500, 0, 100, 80);
 INSERT INTO player (id_player, nick, birth_date, join_date, active_party, player_balance, hashed_password,
-                    pity_roll_status,  elopoints, premium_left, stamina)
+                    pity_roll_status, elopoints, premium_left, stamina, level)
 values (3, 'autist', '1900-01-01 00:00:00', '2022-01-01 00:00:00', 3, 9999,
-        '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1, 1500, 0, 100);
+        '$2a$12$X2jrACo9ErTffy3JKUTZFuSr/fndHEIEkle5btouwO25TYv14cgQe', 1, 1500, 0, 100, 80);
 --Dungeon
-INSERT INTO dungeon (id, name, released_at, expires_at, type)
-values (1, 'jurna wieza', '2022-01-01 00:00:00', null, 1);
-INSERT INTO dungeon (id, name, released_at, expires_at, type)
-values (2, 'piwnica', '2000-01-01 00:00:00', '2002-01-01 00:00:00',2);
-INSERT INTO dungeon (id, name, released_at, expires_at, type)
-values (3, 'cyberpunk', '2037-01-01 00:00:00', null, 0);
-INSERT INTO dungeon (id, name, released_at, expires_at, type)
-values (4, 'PJATK', '2018-01-01 00:00:00', '2025-01-01 00:00:00', 3);
+
+INSERT INTO `dungeon` (`id`, `expires_at`, `name`, `released_at`, `type`)
+VALUES (7, '2123-01-06 00:00:00', 'Main Dungeon', '2022-05-16 00:00:00', 3),
+       (8, '2023-03-10 00:00:00', 'Winter Event Dungeon', '2022-12-01 00:00:00', 0),
+       (9, '2133-01-06 00:00:00', 'Great Riches Dungeon', '2023-01-01 00:00:00', 1),
+       (10, '2123-01-06 00:00:00', 'Moriya Shrine', '2023-01-01 00:00:00', 2),
+       (11, '2123-01-06 00:00:00', 'Dwarven Mine', '2022-12-01 00:00:00', 4),
+       (12, '2022-09-02 00:00:00', 'Summer 2022 Dungeon', '2022-05-21 00:00:00', 0),
+       (13, '2023-09-06 00:00:00', 'Summer 2023 Dungeon', '2023-05-31 00:00:00', 0);
 --set
 INSERT INTO gacha.set (id, name)
 values (1, 'George Floyd Set');
@@ -392,46 +393,78 @@ VALUES (1, 1, 'Sebix', 1, 1, 5),
        (15, 15, 'Ken Ashcorp', 4, 5, 2);
 
 
-
 --Player_Character
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (1, 1, 1, 1, 1);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (2, 2, 2, 2, 2);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (3, 3, 3, 3, 3);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (4, 1, 4, 3, 2);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (5, 1, 5, 7, 3);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (6, 1, 6, 3, 1);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (7, 2, 7, 7, 2);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (8, 2, 8, 3, 4);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (9, 2, 9, 3, 3);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (18, 2, 5, 1, 69);
-
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (10, 2, 3, 1, 11);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (11, 2, 9, 1, 11);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (12, 2, 11, 1, 40);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (13, 2, 14, 1, 11);
-
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (14, 3, 2, 1, 11);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (15, 3, 5, 1, 11);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (16, 3, 7, 1, 11);
-INSERT INTO player_character (id, player_id_player, character_id, ascention, lvl)
-VALUES (17, 3, 12, 1, 11);
+SET
+foreign_key_checks = 0;
+INSERT INTO `player_character` (`id`, `ascention`, `lvl`, `character_id`, `player_id_player`, `wielded_weapon`)
+VALUES (1, 1, 1, 1, 1, NULL),
+       (2, 2, 2, 2, 2, NULL),
+       (3, 3, 3, 3, 3, NULL),
+       (4, 3, 2, 4, 1, NULL),
+       (5, 7, 3, 5, 1, NULL),
+       (6, 3, 1, 6, 1, NULL),
+       (7, 7, 2, 7, 2, NULL),
+       (8, 3, 4, 8, 2, NULL),
+       (9, 3, 3, 9, 2, NULL),
+       (10, 1, 11, 3, 2, 4),
+       (11, 1, 11, 9, 2, 5),
+       (12, 1, 11, 11, 2, 6),
+       (13, 1, 11, 14, 2, 7),
+       (14, 1, 11, 2, 3, NULL),
+       (15, 1, 11, 5, 3, 9),
+       (16, 1, 11, 7, 3, 10),
+       (17, 1, 11, 12, 3, 11),
+       (18, 1, 69, 5, 2, NULL),
+       (19, 1, 1, 1, 1, 37),
+       (20, 1, 1, 4, 1, 38),
+       (21, 1, 1, 10, 1, 39),
+       (22, 1, 1, 7, 1, 40),
+       (23, 1, 2, 4, 1, 41),
+       (24, 1, 1, 2, 1, 42),
+       (25, 1, 1, 3, 1, 43),
+       (26, 1, 1, 5, 1, 44),
+       (27, 1, 1, 5, 1, 45),
+       (28, 1, 1, 6, 1, 46),
+       (29, 1, 1, 7, 1, 47),
+       (30, 1, 1, 8, 1, 48),
+       (31, 1, 1, 9, 1, 49),
+       (32, 1, 1, 10, 1, 50),
+       (33, 1, 1, 11, 1, 51),
+       (34, 1, 1, 12, 1, 52),
+       (35, 1, 1, 13, 1, 53),
+       (36, 1, 1, 14, 1, 54),
+       (37, 1, 1, 15, 1, 55),
+       (38, 1, 2, 1, 1, 56),
+       (39, 1, 2, 2, 1, 57),
+       (40, 1, 2, 3, 1, 58),
+       (41, 1, 2, 4, 1, 59),
+       (42, 1, 2, 5, 1, 60),
+       (43, 1, 2, 6, 1, 61),
+       (44, 1, 2, 7, 1, 62),
+       (45, 1, 2, 8, 1, 63),
+       (46, 1, 2, 9, 1, 64),
+       (47, 1, 2, 10, 1, 65),
+       (48, 1, 2, 11, 1, 66),
+       (49, 1, 2, 12, 1, 67),
+       (50, 1, 2, 13, 1, 68),
+       (51, 1, 2, 14, 1, 69),
+       (52, 1, 3, 1, 1, 70),
+       (53, 1, 3, 2, 1, 71),
+       (54, 1, 3, 3, 1, 72),
+       (55, 1, 3, 4, 1, 73),
+       (56, 1, 3, 5, 1, 74),
+       (57, 1, 3, 6, 1, 75),
+       (58, 1, 3, 7, 1, 76),
+       (59, 1, 3, 8, 1, 77),
+       (60, 1, 3, 9, 1, 78),
+       (61, 1, 3, 10, 1, 79),
+       (62, 1, 3, 11, 1, 80),
+       (63, 1, 3, 12, 1, 81),
+       (64, 1, 3, 13, 1, 82),
+       (65, 1, 3, 14, 1, 83),
+       (66, 1, 3, 15, 1, 84);
+SET
+foreign_key_checks = 1;
 --player_material
 INSERT INTO player_material (id, material_id, player_id_player, amount)
 VALUES (1, 1, 1, 10);
@@ -469,49 +502,78 @@ VALUES (4, 2, 2, 1, 2),
        (13, 2, 2, 5, 5);
 
 --player_artefact
-INSERT INTO player_artefact (id, player_id_player, artefact_id, lvl)
-VALUES (1, 1, 1, 1);
-INSERT INTO player_artefact (id, player_id_player, artefact_id, lvl)
-VALUES (2, 2, 2, 2);
-INSERT INTO player_artefact (id, player_id_player, artefact_id, lvl)
-VALUES (3, 3, 3, 3);
-INSERT INTO player_artefact (player_id_player, artefact_id, lvl)
-VALUES (1, 1, 1);
-INSERT INTO player_artefact (player_id_player, artefact_id, lvl)
-VALUES (1, 1, 1);
-INSERT INTO player_artefact (player_id_player, artefact_id, lvl)
-VALUES (1, 1, 1);
 
-INSERT INTO player_artefact (id, player_id_player, artefact_id, lvl)
-VALUES (8, 2, 1, 10);
-INSERT INTO player_artefact (id,player_id_player, artefact_id, lvl)
-VALUES (9, 2, 2, 10);
-INSERT INTO player_artefact (id,player_id_player, artefact_id, lvl)
-VALUES (10, 2, 3, 10);
-INSERT INTO player_artefact (id,player_id_player, artefact_id, lvl)
-VALUES (11, 2, 4, 10);
-INSERT INTO player_artefact (id,player_id_player, artefact_id, lvl)
-VALUES (12, 2, 5, 10);
-INSERT INTO player_artefact (id,player_id_player, artefact_id, lvl)
-VALUES (13, 2, 6, 10);
+INSERT INTO `player_artefact` (`id`, `lvl`, `artefact_id`, `player_id_player`)
+VALUES (1, 1, 1, 1),
+       (2, 2, 2, 2),
+       (3, 3, 3, 3),
+       (8, 10, 1, 2),
+       (9, 10, 2, 2),
+       (10, 10, 3, 2),
+       (11, 10, 4, 2),
+       (12, 10, 5, 2),
+       (13, 10, 6, 2),
+       (833, 1, 1, 1),
+       (834, 1, 1, 1),
+       (835, 1, 1, 1),
+       (836, 1, 9, 1),
+       (837, 1, 1, 1),
+       (838, 1, 5, 1),
+       (839, 1, 1, 1),
+       (840, 1, 1, 1),
+       (841, 1, 2, 1),
+       (842, 2, 4, 1),
+       (843, 1, 1, 1),
+       (844, 1, 2, 1),
+       (845, 1, 7, 1),
+       (846, 1, 8, 1),
+       (847, 1, 9, 1),
+       (848, 1, 7, 1),
+       (849, 1, 4, 1),
+       (850, 1, 5, 1),
+       (851, 1, 4, 1),
+       (852, 1, 5, 1),
+       (853, 1, 6, 1),
+       (854, 1, 4, 1),
+       (855, 0, 6, 1),
+       (856, 2, 1, 1),
+       (857, 2, 7, 1),
+       (858, 2, 2, 1);
+
 --characterartefact
-INSERT INTO characteratrefact (player_character_id, player_artefact_id)
-VALUES (1, 1);
-INSERT INTO characteratrefact (player_character_id, player_artefact_id)
-VALUES (1, 2);
-INSERT INTO characteratrefact (player_character_id, player_artefact_id)
-VALUES (2, 3);
 
-INSERT INTO characteratrefact (player_character_id, player_artefact_id)
-VALUES (10, 8);
-INSERT INTO characteratrefact (player_character_id, player_artefact_id)
-VALUES (10, 9);
-INSERT INTO characteratrefact (player_character_id, player_artefact_id)
-VALUES (10, 10);
-INSERT INTO characteratrefact (player_character_id, player_artefact_id)
-VALUES (11, 11);
-INSERT INTO characteratrefact (player_character_id, player_artefact_id)
-VALUES (12, 12);
+INSERT INTO `characteratrefact` (`player_character_id`, `player_artefact_id`)
+VALUES (1, 1),
+       (1, 2),
+       (2, 3),
+       (10, 8),
+       (10, 9),
+       (10, 10),
+       (11, 11),
+       (12, 12),
+       (19, 836),
+       (19, 837),
+       (20, 838),
+       (20, 839),
+       (21, 840),
+       (22, 841),
+       (23, 842),
+       (24, 843),
+       (25, 844),
+       (25, 845),
+       (27, 846),
+       (27, 847),
+       (27, 848),
+       (28, 849),
+       (29, 850),
+       (30, 851),
+       (31, 852),
+       (32, 853),
+       (33, 854),
+       (36, 855),
+       (37, 856),
+       (38, 857),
+       (39, 858);
 
 --character_chest
 INSERT INTO character_chest (chest_id_chest, character_id)
@@ -552,49 +614,85 @@ VALUES (3, 2);
 INSERT INTO player_role (Player_player_id, role_id)
 VALUES (1, 3);
 --party NAME
-INSERT INTO party (id, player_id_player, name)
-VALUES (1, 1, 1);
-INSERT INTO party (id, player_id_player, name)
-VALUES (2, 2, 'Super party');
-INSERT INTO party (id, player_id_player, name)
-VALUES (3, 3, 'Extra Party');
+INSERT INTO `party` (`id`, `name`, `player_id_player`)
+VALUES (1, 'test', 1),
+       (2, 'Super party', 2),
+       (3, 'Extra Party', 3),
+       (7, 'First Trial', 1),
+       (8, 'Second Trial', 1),
+       (9, 'Third Trial', 1),
+       (10, 'Fentanyl Cave', 1),
+       (11, 'EGirl Lair', 1),
+       (12, 'Pudzian Gym', 1),
+       (21, 'Winter Fun', 1),
+       (22, 'Suwako Guard', 1),
+       (23, 'Carpenters', 1),
+       (24, 'Iron Mine', 1),
+       (25, 'Gold Mine', 1),
+       (26, 'Crystal Mine', 1),
+       (27, 'Cow Farm', 1),
+       (28, 'Elemental Mine', 1);
+
 --dungeonfloor
-INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id, balance_reward)
-values (1, 1, 1, 1, 0);
-INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id, balance_reward)
-values (2, 1, 2, 1, 0);
-INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id, balance_reward)
-values (3, 2, 1, 1, 0);
-INSERT INTO dungeonfloor (id, dungeon_id, depth, party_id, balance_reward)
-values (4, 4, 10, 1, 0);
+
+INSERT INTO `dungeonfloor` (`id`, `balance_reward`, `depth`, `dungeon_id`, `party_id`)
+VALUES (5, 0, 1, 7, 7),
+       (6, 0, 2, 7, 8),
+       (7, 0, 3, 7, 9),
+       (8, 0, 1, 9, 10),
+       (9, 0, 2, 9, 11),
+       (10, 0, 3, 9, 12),
+       (19, 0, 1, 8, 21),
+       (20, 0, 1, 10, 22),
+       (21, 0, 1, 11, 23),
+       (22, 0, 2, 11, 24),
+       (23, 0, 3, 11, 25),
+       (24, 0, 4, 11, 26),
+       (25, 0, 5, 11, 27),
+       (26, 0, 6, 11, 28);
+
 --player_dungeonfloor
-INSERT INTO player_dungeonfloor (id, dungeon_floor_id, player_id_player, clear_date)
-VALUES (1, 1, 1, curdate());
-INSERT INTO player_dungeonfloor (id, dungeon_floor_id, player_id_player, clear_date)
-VALUES (2, 2, 2, '2022-01-01 00:00:00');
-INSERT INTO player_dungeonfloor (id, dungeon_floor_id, player_id_player, clear_date)
-VALUES (3, 3, 1, curdate());
+
 --Artefact_Reward_
-INSERT INTO artefact_reward(id, quantity, artefact_id, dungeon_floor_id)
-values (1, 1, 1, 1);
-INSERT INTO artefact_reward(id, quantity, artefact_id, dungeon_floor_id)
-values (2, 2, 2, 2);
-INSERT INTO artefact_reward(id, quantity, artefact_id, dungeon_floor_id)
-values (3, 3, 3, 3);
---material_reward
-INSERT INTO material_reward (id, material_id, dungeon_floor_id, quantity)
-VALUES (1, 1, 1, 1);
-INSERT INTO material_reward (id, material_id, dungeon_floor_id, quantity)
-VALUES (2, 2, 2, 20);
-INSERT INTO material_reward (id, material_id, dungeon_floor_id, quantity)
-VALUES (3, 3, 3, 300);
---weapon_reward
-INSERT INTO weapon_reward (id, weapon_id, dungeon_floor_id, quantity)
-VALUES (1, 1, 1, 1);
-INSERT INTO weapon_reward (id, weapon_id, dungeon_floor_id, quantity)
-VALUES (2, 2, 2, 20);
-INSERT INTO weapon_reward (id, weapon_id, dungeon_floor_id, quantity)
-VALUES (3, 3, 3, 300);
+INSERT INTO `artefact_reward` (`id`, `quantity`, `artefact_id`, `dungeon_floor_id`)
+VALUES (10, 15, 9, 19),
+       (11, 15, 8, 19),
+       (12, 15, 7, 19),
+       (13, 2, 1, 8),
+       (14, 2, 2, 8),
+       (15, 2, 3, 8),
+       (16, 2, 7, 9),
+       (17, 2, 8, 9),
+       (18, 2, 9, 9),
+       (19, 2, 4, 10),
+       (20, 2, 5, 10),
+       (21, 2, 6, 10);
+-- --material_reward
+INSERT INTO `material_reward` (`id`, `quantity`, `dungeon_floor_id`, `material_id`)
+VALUES (2, 69, 19, 8),
+       (3, 69, 19, 7),
+       (4, 69, 19, 1),
+       (5, 69, 19, 2),
+       (7, 69, 19, 4),
+       (8, 69, 19, 5),
+       (9, 69, 19, 3),
+       (10, 96, 19, 6),
+       (11, 10, 25, 3),
+       (12, 10, 23, 4),
+       (13, 10, 21, 1),
+       (14, 10, 22, 2),
+       (15, 10, 24, 5),
+       (16, 10, 26, 6),
+       (17, 10, 26, 7),
+       (18, 10, 26, 8);
+-- --weapon_reward
+INSERT INTO `weapon_reward` (`id`, `quantity`, `dungeon_floor_id`, `weapon_id`)
+VALUES (4, 1, 19, 6),
+       (5, 3, 19, 14),
+       (6, 1, 19, 11),
+       (7, 1, 5, 15),
+       (8, 1, 6, 3),
+       (9, 1, 7, 12);
 --weapon_chest
 INSERT INTO weapon_chest (weapon_id, chest_id_chest)
 VALUES (1, 1);
@@ -685,56 +783,140 @@ VALUES (4, 3, 2, 1),
        (51, 77, 6, 15),
        (52, 20, 3, 15);
 --partycharacter
-INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (1, 1);
-INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (1, 2);
-INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (1, 3);
-INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (1, 4);
 
-INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (2, 10);
-INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (2, 11);
-INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (2, 12);
-INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (2, 13);
 
-INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (3, 14);
-INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (3, 15);
-INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (3, 16);
-INSERT INTO partycharacter (party_id, player_character_id)
-VALUES (3, 17);
+INSERT INTO `partycharacter` (`player_character_id`, `party_id`)
+VALUES (1, 1),
+       (2, 1),
+       (3, 1),
+       (4, 1),
+       (10, 2),
+       (11, 2),
+       (12, 2),
+       (13, 2),
+       (14, 3),
+       (15, 3),
+       (16, 3),
+       (17, 3),
+       (19, 7),
+       (20, 7),
+       (22, 7),
+       (32, 7),
+       (23, 8),
+       (40, 8),
+       (47, 8),
+       (50, 8),
+       (53, 9),
+       (56, 9),
+       (58, 9),
+       (63, 9),
+       (4, 10),
+       (22, 10),
+       (37, 10),
+       (52, 10),
+       (40, 11),
+       (46, 11),
+       (48, 11),
+       (51, 11),
+       (53, 12),
+       (56, 12),
+       (58, 12),
+       (63, 12),
+       (54, 21),
+       (56, 21),
+       (60, 21),
+       (66, 21),
+       (54, 22),
+       (60, 22),
+       (62, 22),
+       (65, 22),
+       (1, 23),
+       (6, 23),
+       (30, 23),
+       (61, 23),
+       (20, 24),
+       (21, 24),
+       (24, 24),
+       (64, 24),
+       (5, 25),
+       (22, 25),
+       (25, 25),
+       (62, 25),
+       (24, 26),
+       (57, 26),
+       (62, 26),
+       (65, 26),
+       (1, 27),
+       (6, 27),
+       (30, 27),
+       (32, 27),
+       (21, 28),
+       (23, 28),
+       (24, 28),
+       (60, 28);
+
 --player_weapon
-INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
-VALUES (1, 1, 1, 1, 1);
-INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
-VALUES (2, 2, 2, 2, 2);
-INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
-VALUES (3, 3, 3, 3, 3);
 
-INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
-VALUES (4, 2, 2, 1, 11);
-INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
-VALUES (5, 2, 9, 1, 11);
-INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
-VALUES (6, 2, 11, 1, 11);
-INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
-VALUES (7, 2, 14, 1, 11);
+INSERT INTO `player_weapon` (`id`, `ascension`, `lvl`, `player_id_player`, `weapon_id`)
+VALUES (1, 1, 1, 1, 1),
+       (2, 2, 2, 2, 2),
+       (3, 3, 3, 3, 3),
+       (4, 1, 11, 2, 2),
+       (5, 1, 11, 2, 9),
+       (6, 1, 11, 2, 11),
+       (7, 1, 11, 2, 14),
+       (9, 1, 11, 3, 5),
+       (10, 1, 11, 3, 7),
+       (11, 1, 11, 3, 12),
+       (37, 1, 1, 1, 1),
+       (38, 1, 1, 1, 4),
+       (39, 1, 1, 1, 10),
+       (40, 1, 1, 1, 7),
+       (41, 1, 2, 1, 4),
+       (42, 1, 1, 1, 1),
+       (43, 1, 1, 1, 2),
+       (44, 1, 1, 1, 4),
+       (45, 1, 1, 1, 6),
+       (46, 1, 1, 1, 5),
+       (47, 1, 1, 1, 7),
+       (48, 1, 1, 1, 8),
+       (49, 1, 1, 1, 8),
+       (50, 1, 1, 1, 10),
+       (51, 1, 1, 1, 11),
+       (52, 1, 1, 1, 12),
+       (53, 1, 1, 1, 15),
+       (54, 1, 1, 1, 14),
+       (55, 1, 1, 1, 13),
+       (56, 1, 2, 1, 1),
+       (57, 1, 2, 1, 1),
+       (58, 1, 2, 1, 2),
+       (59, 1, 2, 1, 5),
+       (60, 1, 2, 1, 6),
+       (61, 1, 2, 1, 5),
+       (62, 1, 2, 1, 8),
+       (63, 1, 2, 1, 9),
+       (64, 1, 2, 1, 8),
+       (65, 1, 2, 1, 12),
+       (66, 1, 2, 1, 10),
+       (67, 1, 2, 1, 11),
+       (68, 1, 2, 1, 15),
+       (69, 1, 2, 1, 14),
+       (70, 1, 3, 1, 2),
+       (71, 1, 3, 1, 3),
+       (72, 1, 3, 1, 2),
+       (73, 1, 3, 1, 5),
+       (74, 1, 3, 1, 6),
+       (75, 1, 3, 1, 4),
+       (76, 1, 3, 1, 7),
+       (77, 1, 3, 1, 7),
+       (78, 1, 3, 1, 9),
+       (79, 1, 3, 1, 12),
+       (80, 1, 3, 1, 11),
+       (81, 1, 3, 1, 12),
+       (82, 1, 3, 1, 15),
+       (83, 1, 3, 1, 15),
+       (84, 1, 3, 1, 13);
 
-
-INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
-VALUES (9, 3, 5, 1, 11);
-INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
-VALUES (10, 3, 7, 1, 11);
-INSERT INTO player_weapon (id, player_id_player, weapon_id, ascension, lvl)
-VALUES (11, 3, 12, 1, 11);
 
 UPDATE player_character
 SET wielded_weapon = 4
