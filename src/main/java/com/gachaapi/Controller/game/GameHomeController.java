@@ -20,6 +20,7 @@ public class GameHomeController {
     @GetMapping("/game/home")
     public ModelAndView getHome(Model model, Principal principal){
         return new ModelAndView("game/home")
+                .addObject("premiumRewards", playerService.getPremiumRewards(principal.getName()))
                 .addObject("player",playerService.getByName(principal.getName()));
     }
 

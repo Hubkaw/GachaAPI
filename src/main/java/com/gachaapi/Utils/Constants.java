@@ -9,6 +9,9 @@ public class Constants {
 
     public static final int DEFAULT_STAMINA_AMOUNT = 100;
     public static final int DUNGEON_STAMINA_COST = 5;
+    public static final int PREMIUM_DAILY_MATERIAL_REWARD = 15;
+    public static final int PREMIUM_DAILY_BALANCE_REWARD = 150;
+
 
     public static final String FIRE_ELEMENT = "FIRE";
     public static final String ICE_ELEMENT = "ICE";

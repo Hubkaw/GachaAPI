@@ -1,12 +1,14 @@
 package com.gachaapi.Service.impl;
 
-import com.gachaapi.Entity.Player;
-import com.gachaapi.Entity.PlayerMaterial;
-import com.gachaapi.Entity.Role;
+import com.gachaapi.Entity.*;
+import com.gachaapi.Repository.MaterialRepository;
+import com.gachaapi.Repository.PlayerMaterialRepository;
 import com.gachaapi.Repository.PlayerRepository;
 import com.gachaapi.Repository.RoleRepository;
 import com.gachaapi.Utils.NewPlayer;
 import com.gachaapi.Service.interfaces.PlayerService;
+import com.gachaapi.Utils.PremiumRewards;
+import com.gachaapi.Utils.PvEReward;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,8 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-import static com.gachaapi.Utils.Constants.DEFAULT_STAMINA_AMOUNT;
-import static com.gachaapi.Utils.Constants.USER_ROLE;
+import static com.gachaapi.Utils.Constants.*;
 
 @Service
 @AllArgsConstructor
@@ -35,15 +36,18 @@ public class PlayerServiceImpl implements PlayerService {
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
 
+    private MaterialRepository materialRepository;
+    private PlayerMaterialRepository playerMaterialRepository;
+
     @Override
     public List<Player> getAllPlayers() {
         return playerRepository.findAll();
     }
 
     @Override
-    public Player createNewPlayer(NewPlayer newPlayer){
+    public Player createNewPlayer(NewPlayer newPlayer) {
         Timestamp birthDate = validateNewPlayer(newPlayer);
-        if (playerRepository.existsByNick(newPlayer.getNick())){
+        if (playerRepository.existsByNick(newPlayer.getNick())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Nickname already used");
         }
         System.out.println(newPlayer.getNick());
@@ -60,6 +64,7 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPremiumLeft(0);
         player.setStamina(DEFAULT_STAMINA_AMOUNT);
         player.setPityRollStatus(0);
+        player.setPremiumCollected(false);
         player.setLevel(1);
         player.setPlayerBalance(2000);
         playerRepository.save(player);
@@ -76,11 +81,11 @@ public class PlayerServiceImpl implements PlayerService {
         return playerRepository.findByNick(nick).orElseThrow(() -> new UsernameNotFoundException("Invalid username"));
     }
 
-    private Timestamp validateNewPlayer(NewPlayer player){
-        if (player.getNick() == null || player.getNick().isBlank() || player.getNick().contains("/") || player.getNick().contains(";") || player.getNick().contains("%") || player.getNick().length() >=32){
-            throw  new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid nickname.");
+    private Timestamp validateNewPlayer(NewPlayer player) {
+        if (player.getNick() == null || player.getNick().isBlank() || player.getNick().contains("/") || player.getNick().contains(";") || player.getNick().contains("%") || player.getNick().length() >= 32) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid nickname.");
         }
-        if (player.getPassword() == null || player.getPassword().isBlank() || player.getPassword().contains("/") || player.getPassword().contains(";") || player.getPassword().contains("%") || player.getPassword().length()>64){
+        if (player.getPassword() == null || player.getPassword().isBlank() || player.getPassword().contains("/") || player.getPassword().contains(";") || player.getPassword().contains("%") || player.getPassword().length() > 64) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid password");
         }
         Timestamp timestamp;
@@ -89,18 +94,57 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (ParseException parseException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect date.");
         }
-        if (timestamp.after(Timestamp.valueOf(LocalDateTime.now().minus(13, ChronoUnit.YEARS)))){
+        if (timestamp.after(Timestamp.valueOf(LocalDateTime.now().minus(13, ChronoUnit.YEARS)))) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You are too young to create an account.");
         }
         return timestamp;
     }
 
-    public Map<String, Integer> getMaterialMap(String nickname){
+    public Map<String, Integer> getMaterialMap(String nickname) {
         Player player = playerRepository.findByNick(nickname).orElseThrow();
         Map<String, Integer> result = new HashMap<>();
         for (PlayerMaterial pm : player.getPlayerMaterials()) {
             result.put(pm.getMaterial().getName(), pm.getAmount());
         }
         return result;
+    }
+
+    @Override
+    public PremiumRewards getPremiumRewards(String nick) {
+        Player player = playerRepository.findByNick(nick).orElseThrow();
+        if (player.getRoles().stream().noneMatch(r -> r.getName().equals(PREMIUM_ROLE))){
+            System.out.println(1);
+            return null;
+        }
+        if (player.isPremiumCollected()){
+            System.out.println(player.isPremiumCollected());
+            return null;
+        }
+
+        player.setPlayerBalance(player.getPlayerBalance() + PREMIUM_DAILY_BALANCE_REWARD);
+        Map<Material, Integer> rewarded = new HashMap<>();
+        materialRepository.findAll().forEach(material -> {
+            rewarded.put(material, PREMIUM_DAILY_MATERIAL_REWARD);
+                PlayerMaterial playerMaterial = player.getPlayerMaterials().stream()
+                        .filter(pm -> pm.getMaterial().equals(material))
+                        .findFirst()
+                        .orElse(null);
+                if (playerMaterial == null) {
+                    playerMaterial = new PlayerMaterial();
+                    playerMaterial.setMaterial(material);
+                    playerMaterial.setAmount(PREMIUM_DAILY_MATERIAL_REWARD);
+                    playerMaterial.setPlayer(player);
+                } else {
+                    playerMaterial.setAmount(playerMaterial.getAmount() + PREMIUM_DAILY_MATERIAL_REWARD);
+                }
+                playerMaterialRepository.save(playerMaterial);
+            }
+        );
+        player.setPremiumCollected(true);
+        playerRepository.save(player);
+
+
+        System.out.println(rewarded);
+        return new PremiumRewards(rewarded, PREMIUM_DAILY_BALANCE_REWARD);
     }
 }

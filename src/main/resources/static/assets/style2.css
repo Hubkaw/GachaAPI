@@ -693,3 +693,50 @@ table.opponent-list tr td {
     border: green 2px solid;
 
 }
+
+#premium-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.premium-content{
+    position: relative;
+    width: 55vw;
+    background-color: lightgray;
+    border: green 2px solid;
+    text-align: center;
+    padding-bottom: 15px;
+    align-items: center;
+}
+.premium-close-button {
+    border: green 2px solid;
+    background-color: green;
+    color: lightgray;
+    float: right;
+}
+.premium-close-button:hover{
+    background-color: darkgreen;
+    border: darkgreen 2px solid;
+}
+
+.premium-close-button-2{
+    margin-top: 15px;
+    border: green 2px solid;
+    background-color: green;
+    color: lightgray;
+    align-items: center;
+}
+.premium-close-button-2:hover{
+    background-color: darkgreen;
+    border: darkgreen 2px solid;
+}
+
+.premium-entry {
+    font-weight: bold;
+    font-style: italic;
+}
+.premium-content h1 {
+    text-align: center;
+    border-bottom: green 1px solid;
+}

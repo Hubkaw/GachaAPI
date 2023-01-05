@@ -22,6 +22,7 @@ public class Player {
 
     @Basic
     @Column(name = "Nick", nullable = false, length = 32, unique = true)
+
     private String nick;
 
     @Basic
