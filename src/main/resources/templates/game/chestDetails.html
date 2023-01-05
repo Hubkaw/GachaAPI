@@ -63,21 +63,26 @@
             <table class="listTable">
                     <tr th:if="${#lists.size(chestWeapons) >0} AND ${#lists.size(chestCharacters)>0}">
                         <th>Name</th>
+                        <th>Type</th>
+                        <th>Class</th>
                         <th>Image</th>
                         <th>Rarity</th>
                     </tr>
                 </span>
                   <tr th:each="itemW : ${chestWeapons}">
                       <td style="width:20%;"><h3 th:text="${itemW.name}"></h3></td>
-                      <td style="width:30%"><img  th:src="@{'/images/weapon/'+${itemW.id}+'.png'}" alt="chest image" style="width:420px;height:auto;"/></td>
+                      <td>weapon</td>
+                      <td th:text="'Class- '+${itemW.weaponClass.name}"></td>
+                      <td style="width:30%;max-height:256px;"><img  th:src="@{'/images/weapon/'+${itemW.id}+'.png'}" alt="chest image" style="max-height:256px;"/></td>
                       <td style="width:20%"><span th:text="${itemW.rarity.name}"/></td>
 
                       </tr>
                 <tr th:each="itemC : ${chestCharacters}">
-
                     <td style="width:20%;"><h3 th:text="${itemC.name}"></h3></td>
-                    <td style="width:30%"><img  th:src="@{'/images/character/'+${itemC.id}+'.png'}" alt="character image" style="width:420px;height:auto;"/></td>
-                    <td style="width:20%"><span th:text="${itemC.rarity.name}"/></td>
+                    <td>character</td>
+                    <td th:text="'Class- '+${itemC.characterClass.name}"></td>
+                    <td style="width:30%;"><img  th:src="@{'/images/character/'+${itemC.id}+'.png'}" alt="character image" style="max-height:256px;"/></td>
+                    <td style="width:20%;"><span th:text="${itemC.rarity.name}"/></td>
                 </tr>
 
             </table>
