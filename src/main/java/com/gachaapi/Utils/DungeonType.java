@@ -7,3 +7,4 @@ public enum DungeonType {
     MAIN,
     INFINITE
 }
+//event i main wchodzisz raz, inne depty dowolnie

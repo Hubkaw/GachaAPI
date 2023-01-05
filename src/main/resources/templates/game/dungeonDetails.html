@@ -1,8 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" th:href="@{/assets/style2.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <title>Login to Gacha</title>
+</head>
+
+<body>
+<div class="container"  id="shop1">
+    <div>
+        <table class='headertable'>
+            <tr>
+                <td class="playerinfo"  rowspan= 2>
+                    <table class="border">
+                        <tr>
+                            <td class="pagename" colspan="5"><h2 th:text="${dungeonDetails.name}"></h2></td>
+                        </tr>
+                        <tr>
+                            <td class="navfield"><a th:href="@{/game/home}" class="nav-link">Home</a> </td>
+                            <td class="navfield"><a th:href="@{/game/equipment}" class="nav-link">Equipment</a> </td>
+                            <td class="navfield"><a th:href="@{/game/chests}" class="nav-link">Chests</a> </td>
+                            <td class="navfield"><a th:href="@{/game/dungeons}" class="nav-link">PvE</a></td>
+                            <td class="navfield"><a th:href="@{/game/pvp}" class="nav-link">PvP</a> </td>
+                        </tr>
+                    </table>
+                </td>
+
+                <!-- currency -->
+                <td class="currencytab"><a href="#" onclick="toggle()"><img  th:src="@{/images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>
+                    <span th:text="${player.PlayerBalance}+'$'"/></td>
+                <td><a href="#" onclick="toggle3()"><img  th:src="@{/images/cog.png}" alt="Options" style="width:42px;height:42px;"></a></td>
+            </tr>
+            <tr>
+                <!-- stamina-->
+                <td class="currencytab"><a href="#" onclick="toggle2()"><img th:src="@{/images/plus.png}" alt="Add shit" style="width:42px;height:42px;"></a>
+                    <span th:text="'Stamina:'+${player.Stamina}+'/100'"/>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <br>
+    <div class="middleb">
+<div>
+    <!-- id/depth -->
+    <h3>Floor selection</h3>
+    <select id="select" name="cd-dropdown" class="cd-select">
+        <option selected disabled value="-1" >Choose floor</option>
+        <span th:each="floor : ${dungeonDetails.floors}">
+            <option th:value="${floor.id}"
+                    th:text="${floor.depth}"/>
+        </span>
+    </select>
+
+</div>
+        <br>
+        <!-- enemy teams-->
+<div>
+
+    <span th:each="floor : ${dungeonDetails.floors}">
+
+    <div th:class="'pr-price d'+${floor.id}">
+            <h3>Enemy Party</h3>
+        <table class="dungeonList">
+        <!--<span th:text="'wrogowie na '+${floor.depth}"></span>-->
+            <tr>
+        <span th:each="enemy : ${floor.party.characters}">
+            <td th:text="${enemy.character.name}+' lvl '+${enemy.lvl}"></td>
+        </span>
+            </tr>
+            </table>
+    </div>
+
+
+
+            <div th:class="'pr-price d'+${floor.id}">
+                <h3>Rewards</h3>
+    <table th:class="dungeonList">
+        <tr>
+            <td th:text="'Cash reward- '+${floor.balanceReward}"></td>
+        </tr>
+        <!-- weapon row-->
+
+
+            <span th:if="${#lists.size(floor.weaponRewards) >0}">
+                        <tr th:each="weapon : ${floor.weaponRewards}">
+            <td th:text="${weapon.quantity}+'x '+${weapon.weapon.weaponClass.name}+'- '+${weapon.weapon.name}">
+
+            </td>
+                        </tr>
+                </span>
+
+
+        <!-- material-->
+            <span th:if="${#lists.size(floor.materialRewards) >0}">
+                        <tr th:each="mat : ${floor.materialRewards}">
+            <td th:text="${mat.quantity}+'x '+${mat.material.name}">
+
+            </td>
+                        </tr>
+                </span>
+        <!-- artefact-->
+            <span th:if="${#lists.size(floor.artefactRewards) >0}">
+                        <tr th:each="art : ${floor.artefactRewards}">
+            <td th:text="${art.quantity}+'x '+${art.artefact.type} +'- '+${art.artefact.name}">
+
+            </td>
+                        </tr>
+                </span>
+
+    </table>
+
+    </div>
+    </span>
+    <!-- enemy teams-->
+    <!-- rewards-->
+
+    <hr/>
+
+
+
+</div>
+<br>
+        <h3>
+            Your team
+        </h3>
+        <br>
+        <div>
+            <table class="dungeonList">
+                <tr>
+                    <td colspan="4" th:text="'Team average level:'+(${playerParty.characters[0].lvl}
+                    +${playerParty.characters[1].lvl}
+                    +${playerParty.characters[2].lvl}
+                    +${playerParty.characters[3].lvl})/4"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">Current team: </td>
+                </tr>
+                <Tr>
+                    <span th:each="char : ${playerParty.characters}">
+                        <td  th:text="${char.character.name}+' lvl '+${char.lvl}"></td>
+                    </span>
+                </Tr>
+                <tr>
+                    <td>
+                        <button type="button" th:text="'Change team'" th:href="@{/game/equipment/parties}"></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+<!-- buttons-->
+
+        <div class="dungeonList">
+            <button type="button">Challenge</button>
+            <br>
+            <button type="button">Back</button>
+
+        </div>
+
+
+    </div>
+
+</div>
+<div id="popup3">
+    <div class="settingList">
+        <div class="settingField">Opcje</div><br>
+        <div class="settingField">Twórcy</div><br>
+        <div class="settingField"><a th:href="@{/logout}">Wyloguj</a></div><br>
+        <div class="settingField"><a href="#" onclick="toggle3()">Wróć</a></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    function toggle3()
+    {
+        var blur=document.getElementById('shop1');
+        blur.classList.toggle('active');
+        var popup3=document.getElementById('popup3');
+        popup3.classList.toggle('active');
+    }
+    $(function () {
+        $('.pr-price').hide();
+        $('.d2').show();
+        $('#select').on("change",function () {
+            $('.pr-price').hide();
+            $('.d'+$(this).val()).show();
+        }).val(-1); // reflect the div shown
+    });
+</script>
+</html></title>
 </head>
 <body>
 

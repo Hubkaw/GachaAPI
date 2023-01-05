@@ -54,7 +54,7 @@
                 <tr>
                     <td style="width:80%;" colspan="2"><h3 th:text="${item.name}"></h3></td>
                     <td style="width:20%;border-left: green solid 5px" rowspan="3" >
-                        <a href="#"> <img src="../../static/images/sword.png" th:src="@{../../images/sword.png}" alt="venture" style="width:86px;height:86px;"/></a>
+                        <a th:href="@{'/game/dungeons/'+${item.id}}" > <img th:src="@{/images/sword.png}" alt="venture" style="width:86px;height:86px;"/></a>
                     </td>
                 </tr>
                 <tr>
@@ -63,7 +63,7 @@
                     <td th:text="${item.expiresAt !=null} ? 'Expires at '+ ${#strings.substring(item.expiresAt,0,10)} : 'Pernament dungeon'"></td>
                 </tr>
                 <tr>
-                    <td >!drop list!</td>
+                    <td th:text="'Dungeon type- '+${#strings.toLowerCase(item.type)}"/>
                 </tr>
                 <!--first dungeon -->
             </table>
