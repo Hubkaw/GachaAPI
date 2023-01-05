@@ -30,6 +30,7 @@ public class ScheduledTasks {
         playerRepository.findAll().forEach(player -> {
             progressPremium(player, premiumRole);
             resetStamina(player);
+            player.setPremiumCollected(false);
             playerRepository.save(player);
         });
 

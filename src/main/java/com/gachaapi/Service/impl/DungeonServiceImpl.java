@@ -155,7 +155,6 @@ public class DungeonServiceImpl implements DungeonService {
             PlayerWeapon playerWeapon = new PlayerWeapon();
             playerWeapon.setLvl(1);
             playerWeapon.setWeapon(wr.getWeapon());
-            playerWeapon.setAscension(1);
             playerWeapon.setPlayer(player);
             playerWeaponRepository.save(playerWeapon);
         }

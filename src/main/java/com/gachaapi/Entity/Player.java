@@ -2,6 +2,7 @@ package com.gachaapi.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -96,6 +97,10 @@ public class Player {
     @OneToMany(mappedBy = "player")
     private Set<PlayerWeapon> playerWeapons;
 
+    @Basic
+    @ColumnDefault("false")
+    @Column(name = "Premium_Collected", nullable = false)
+    private boolean premiumCollected;
 
     @OneToMany(mappedBy = "attacker")
     private List<BattleHistory> attacks;

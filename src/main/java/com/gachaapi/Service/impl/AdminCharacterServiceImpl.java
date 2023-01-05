@@ -69,14 +69,12 @@ public class AdminCharacterServiceImpl implements AdminCharacterService {
             pw.setWeapon(weapon);
             pw.setLvl(newAdminCharacter.getWeaponLvl());
             pw.setPlayer(admin);
-            pw.setAscension((int)Math.ceil((double)(newAdminCharacter.getWeaponLvl())/10));
             playerWeaponRepository.save(pw);
             pc.setWieldedWeapon(pw);
         }
         pc.setCharacter(characterRepository.getReferenceById(newAdminCharacter.getCharId()));
         pc.setPlayer(admin);
         pc.setLvl(newAdminCharacter.getCharLvl());
-        pc.setAscention((int)Math.ceil((double)(newAdminCharacter.getWeaponLvl())/10));
         playerCharacterRepository.save(pc);
     }
 

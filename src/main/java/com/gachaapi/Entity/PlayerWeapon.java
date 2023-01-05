@@ -9,7 +9,6 @@ import java.util.Objects;
 @Table(name = "player_weapon", schema = "gacha", catalog = "")
 public class PlayerWeapon {
     private int id;
-    private int ascension;
     private int lvl;
     @JsonIgnore
     private PlayerCharacter wieldingCharacter;
@@ -28,15 +27,6 @@ public class PlayerWeapon {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "Ascension", nullable = false)
-    public int getAscension() {
-        return ascension;
-    }
-
-    public void setAscension(int ascension) {
-        this.ascension = ascension;
-    }
 
     @Basic
     @Column(name = "Lvl", nullable = false)
@@ -53,12 +43,12 @@ public class PlayerWeapon {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlayerWeapon that = (PlayerWeapon) o;
-        return id == that.id && ascension == that.ascension && lvl == that.lvl;
+        return id == that.id && lvl == that.lvl;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ascension, lvl);
+        return Objects.hash(id, lvl);
     }
 
     @OneToOne(mappedBy = "wieldedWeapon")

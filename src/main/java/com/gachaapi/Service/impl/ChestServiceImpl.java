@@ -167,7 +167,6 @@ public class ChestServiceImpl implements ChestService {
             System.out.println(playerWeapon.getId());
             playerWeapon.setWeapon((Weapon) reward);
             playerWeapon.setPlayer(player);
-            playerWeapon.setAscension(1);
             playerWeapon.setLvl(1);
             playerWeaponRepository.save(playerWeapon);
             return new ChestReward("Weapon", reward);
@@ -176,7 +175,6 @@ public class ChestServiceImpl implements ChestService {
             PlayerCharacter playerCharacter = new PlayerCharacter();
             playerCharacter.setCharacter((Character) reward);
             playerCharacter.setPlayer(player);
-            playerCharacter.setAscention(1);
             playerCharacter.setLvl(1);
             playerCharacter.setParties(new HashSet<>());
             playerCharacter.setPlayerArtefacts(new HashSet<>());

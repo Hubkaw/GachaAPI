@@ -18,9 +18,6 @@ public class PlayerCharacter {
     @Column(name = "Id", nullable = false)
     private int id;
 
-    @Basic
-    @Column(name = "Ascention", nullable = false)
-    private int ascention;
 
     @Basic
     @Column(name = "Lvl", nullable = false)
@@ -71,11 +68,11 @@ public class PlayerCharacter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlayerCharacter that = (PlayerCharacter) o;
-        return id == that.id && ascention == that.ascention && lvl == that.lvl;
+        return id == that.id && lvl == that.lvl;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ascention, lvl);
+        return Objects.hash(id, lvl);
     }
 }
