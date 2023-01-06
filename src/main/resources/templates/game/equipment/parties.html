@@ -10,46 +10,8 @@
 </head>
 
 <body>
-<div class="container" id="shop1">
-    <div>
-        <table class='headertable'>
-            <tr>
-                <td class="playerinfo" rowspan=2>
-                    <table class="border">
-                        <tr>
-                            <td class="pagename" colspan="5"><h2 th:text="'Greetings, '+${player.nick}"></h2></td>
-                        </tr>
-                        <tr>
-                            <td class="navfield"><a class="nav-link" th:href="@{/game/home}">Home</a></td>
-                            <td class="navfield"><a class="nav-link-current" th:href="@{/game/equipment}">Equipment</a>
-                            </td>
-                            <td class="navfield"><a class="nav-link" th:href="@{/game/chests}">Chests</a></td>
-                            <td class="navfield"><a class="nav-link" th:href="@{/game/dungeons}">PvE</a></td>
-                            <td class="navfield"><a class="nav-link" th:href="@{/game/pvp}">PvP</a></td>
-                        </tr>
-                    </table>
-                </td>
-
-                <!-- currency -->
-                <td class="currencytab"><a href="#" onclick="toggle()"><img alt="Add shit"
-                                                                            style="width:42px;height:42px;"
-                                                                            th:src="@{/images/plus.png}"></a>
-                    <span th:text="${player.PlayerBalance}+'$'"/></td>
-                <td><a href="#" onclick="toggle3()"><img alt="Options"
-                                                         style="width:42px;height:42px;"
-                                                         th:src="@{/images/cog.png}"></a></td>
-            </tr>
-            <tr>
-                <!-- stamina-->
-                <td class="currencytab"><a href="#" onclick="toggle2()"><img alt="Add shit"
-                                                                             style="width:42px;height:42px;"
-                                                                             th:src="@{/images/plus.png}"></a>
-                    <span th:text="'Stamina:'+${player.Stamina}+'/100'"/>
-                </td>
-            </tr>
-
-        </table>
-    </div>
+<div th:replace="game/fragments :: nav">
+</div>
     <div class="eq-middle">
         <p class="error" th:text="${error != null} ? ${error} : ''"></p>
         <ul class="party-list">
