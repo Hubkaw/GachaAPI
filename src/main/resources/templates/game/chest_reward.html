@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link rel="stylesheet" th:href="@{/assets/style2.css}"/>
+
+    <title>Gacha</title>
+</head>
+
+<body>
+<div th:replace="game/fragments :: nav">
+</div>
+<br>
+<div class="middleb">
+    <div id="reward-container">
+        <button id="reveal-button" onclick="reveal()">REVEAL</button>
+        <div id="reward">
+            <span class="bold">Your Reward is:</span><br>
+            <span th:if="${reward.type == 'Weapon'}"><br>
+      <img style="max-height: 400px" th:src="@{'/images/weapon/'+${reward.drop.id}+'.png'}"/><br>
+      <span class="bold" th:text="${reward.drop.name}"></span><br>
+      <span class="bold" th:text="${reward.drop.rarity.name}"></span><br>
+    </span>
+            <span th:if="${reward.type == 'Character'}">
+      <img style="max-height: 400px" th:src="@{'/images/character/'+${reward.drop.id}+'.png'}"/><br>
+      <span class="bold" th:text="${reward.drop.name}"></span><br>
+      <span class="bold" th:text="${reward.drop.rarity.name}"></span><br>
+    </span><br>
+            <a th:href="@{/game/chests}">
+                <button class="reward-close-button">Back to Chests</button>
+            </a>
+            <br>
+            <a th:href="@{'/game/chests/open/'+${chestId}}">
+                <button class="reward-close-button">Open Another</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+<div id="popup3">
+    <div class="settingList">
+        <div class="settingField">Opcje</div>
+        <br>
+        <div class="settingField">Twórcy</div>
+        <br>
+        <div class="settingField"><a th:href="@{/logout}">Wyloguj</a></div>
+        <br>
+        <div class="settingField"><a href="#" onclick="toggle3()">Wróć</a></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    function reveal(){
+        var container = document.getElementById('reward-container');
+        var reward = document.getElementById('reward');
+        var button = document.getElementById('reveal-button');
+
+        container.style.backgroundColor = 'lightgrey';
+        reward.style.opacity = '100';
+        button.style.display = 'none';
+    }
+
+    function toggle3() {
+        var blur = document.getElementById('shop1');
+        blur.classList.toggle('active');
+        var popup3 = document.getElementById('popup3');
+        popup3.classList.toggle('active');
+    }
+</script>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

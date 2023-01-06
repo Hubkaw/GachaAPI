@@ -825,3 +825,46 @@ align-items: center;
     width: 100%;
     height: 100%;
 }
+#reward-container{
+    font-size: large;
+    width: 55vw;
+    margin-left: 18vw;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: green;
+    border: green 2px solid;
+    min-height: 350px;
+    display: block;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+.reward-close-button{
+    border: green 2px solid;
+    background-color: green;
+    color: lightgray;
+}
+#reward{
+    -webkit-transition: all 3s ease-in-out;
+    -moz-transition: all 3s ease-in-out;
+    -o-transition: all 3s ease-in-out;
+    -ms-transition: all 3s ease-in-out;
+    transition: all 3s ease-in-out;
+    opacity: 0;
+}
+
+.chest-button {
+    background-color: green;
+    border-color: green;
+    color: lightgray;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: large;
+}
+.chest-button:hover {
+    background-color: darkgreen;
+}

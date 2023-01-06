@@ -2,11 +2,13 @@ package com.gachaapi.Controller.game;
 
 import com.gachaapi.Service.interfaces.ChestService;
 import com.gachaapi.Service.interfaces.PlayerService;
+import com.gachaapi.Utils.ChestReward;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -23,7 +25,7 @@ public class GameChestsController {
     @GetMapping("/game/chests")
     public ModelAndView getChests(Model model, Principal principal){
         return new ModelAndView("game/chests")
-                .addObject("chestList",chestService.getAll())
+                .addObject("chestList",chestService.getAvailable())
                 .addObject("player",playerService.getByName(principal.getName()));
     }
 
@@ -34,6 +36,21 @@ public class GameChestsController {
                 .addObject("chestDetails",chestService.getById(id))
                 .addObject("chestWeapons",chestService.getAllWeapons(id))
                 .addObject("chestCharacters",chestService.getAllCharacters(id));
+    }
+
+    @GetMapping("/game/chests/open/{id}")
+    public String getOpenChest(Model model,@PathVariable int id, Principal principal){
+        try {
+            model.addAttribute("reward",chestService.openChest(principal.getName(), id));
+            model.addAttribute("player", playerService.getByName(principal.getName()));
+            model.addAttribute("chestId", id);
+            return "game/chest_reward";
+        } catch (ResponseStatusException e){
+            model.addAttribute("chestList",chestService.getAvailable());
+            model.addAttribute("player",playerService.getByName(principal.getName()));
+            model.addAttribute("error", e.getReason());
+            return "game/chests";
+        }
     }
 
 

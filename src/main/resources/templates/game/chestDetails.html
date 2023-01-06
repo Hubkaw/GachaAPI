@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+      xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <!-- CSS only -->
-    <link rel="stylesheet" href="/../static/assets/style2.css"  th:href="@{/assets/style2.css}"/>
+    <link href="/../static/assets/style2.css" rel="stylesheet" th:href="@{/assets/style2.css}"/>
 
     <title>Login to Gacha</title>
 </head>
@@ -12,71 +12,76 @@
 <body>
 <div th:replace="game/fragments :: nav">
 </div>
-    <br>
-    <div class="middleb">
-<div>
-    <button type="button"><span th:text="'Open chest-'+${chestDetails.Price}+'$'"/></button>
+<br>
+<div class="middleb">
+    <div>
 
-</div>
-        <h1 th:if="${#lists.size(chestWeapons) ==0} AND ${#lists.size(chestCharacters)==0}" >No items available in chest</h1>
 
-        <h1 th:if="${#lists.size(chestWeapons) >0} AND ${#lists.size(chestCharacters)>0}" >Items available in chest</h1>
+    </div>
+    <h1 th:if="${#lists.size(chestWeapons) ==0} AND ${#lists.size(chestCharacters)==0}">No items available in chest</h1>
 
-<!--
-        <span th:text="${#lists.size(chestWeapons) ==0} ? 'No weapons ': ${chestWeapons[0].name}"/>
-        <span th:text="${#lists.size(chestCharacters)==0} ? 'No chars ': ${chestCharacters[0].name}"/>
-        -->
-        <br>
+    <h1 th:if="${#lists.size(chestWeapons) >0} AND ${#lists.size(chestCharacters)>0}">Items available in chest</h1>
 
-        <div>
-            <table class="listTable">
-                    <tr th:if="${#lists.size(chestWeapons) >0} AND ${#lists.size(chestCharacters)>0}">
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Class</th>
-                        <th>Image</th>
-                        <th>Rarity</th>
-                    </tr>
-                </span>
-                  <tr th:each="itemW : ${chestWeapons}">
-                      <td style="width:20%;"><h3 th:text="${itemW.name}"></h3></td>
-                      <td>weapon</td>
-                      <td th:text="'Class- '+${itemW.weaponClass.name}"></td>
-                      <td style="width:30%;max-height:256px;"><img  th:src="@{'/images/weapon/'+${itemW.id}+'.png'}" alt="chest image" style="max-height:256px;"/></td>
-                      <td style="width:20%"><span th:text="${itemW.rarity.name}"/></td>
+    <!--
+            <span th:text="${#lists.size(chestWeapons) ==0} ? 'No weapons ': ${chestWeapons[0].name}"/>
+            <span th:text="${#lists.size(chestCharacters)==0} ? 'No chars ': ${chestCharacters[0].name}"/>
+            -->
+    <br><a th:href="@{'/game/chests/open/'+${chestDetails.idChest}}">
+    <button type="button" class="chest-button"><span th:text="'Open chest: '+${chestDetails.Price}+'$'"/></button>
+</a><br>
+    <div>
+        <table class="listTable">
+            <tr th:if="${#lists.size(chestWeapons) >0} AND ${#lists.size(chestCharacters)>0}">
+                <th>Name</th>
+                <th>Type</th>
+                <th>Class</th>
+                <th>Image</th>
+                <th>Rarity</th>
+            </tr>
+            </span>
+            <tr th:each="itemW : ${chestWeapons}">
+                <td style="width:20%;"><h3 th:text="${itemW.name}"></h3></td>
+                <td>weapon</td>
+                <td th:text="'Class- '+${itemW.weaponClass.name}"></td>
+                <td style="width:30%;max-height:256px;"><img alt="chest image"
+                                                             style="max-height:256px;" th:src="@{'/images/weapon/'+${itemW.id}+'.png'}"/></td>
+                <td style="width:20%"><span th:text="${itemW.rarity.name}"/></td>
 
-                      </tr>
-                <tr th:each="itemC : ${chestCharacters}">
-                    <td style="width:20%;"><h3 th:text="${itemC.name}"></h3></td>
-                    <td>character</td>
-                    <td th:text="'Class- '+${itemC.characterClass.name}"></td>
-                    <td style="width:30%;"><img  th:src="@{'/images/character/'+${itemC.id}+'.png'}" alt="character image" style="max-height:256px;"/></td>
-                    <td style="width:20%;"><span th:text="${itemC.rarity.name}"/></td>
-                </tr>
+            </tr>
+            <tr th:each="itemC : ${chestCharacters}">
+                <td style="width:20%;"><h3 th:text="${itemC.name}"></h3></td>
+                <td>character</td>
+                <td th:text="'Class- '+${itemC.characterClass.name}"></td>
+                <td style="width:30%;"><img alt="character image" style="max-height:256px;"
+                                            th:src="@{'/images/character/'+${itemC.id}+'.png'}"/></td>
+                <td style="width:20%;"><span th:text="${itemC.rarity.name}"/></td>
+            </tr>
 
-            </table>
-
-        </div>
+        </table>
 
     </div>
 
 </div>
+
+</div>
 <div id="popup3">
     <div class="settingList">
-        <div class="settingField">Opcje</div><br>
-        <div class="settingField">Twórcy</div><br>
-        <div class="settingField"><a th:href="@{/logout}">Wyloguj</a></div><br>
+        <div class="settingField">Opcje</div>
+        <br>
+        <div class="settingField">Twórcy</div>
+        <br>
+        <div class="settingField"><a th:href="@{/logout}">Wyloguj</a></div>
+        <br>
         <div class="settingField"><a href="#" onclick="toggle3()">Wróć</a></div>
     </div>
 </div>
 </body>
 <script type="text/javascript">
 
-    function toggle3()
-    {
-        var blur=document.getElementById('shop1');
+    function toggle3() {
+        var blur = document.getElementById('shop1');
         blur.classList.toggle('active');
-        var popup3=document.getElementById('popup3');
+        var popup3 = document.getElementById('popup3');
         popup3.classList.toggle('active');
     }
 </script>
