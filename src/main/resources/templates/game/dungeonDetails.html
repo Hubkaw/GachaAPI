@@ -27,6 +27,19 @@
 
 </div>
         <br>
+
+        <!-- buttons-->
+        <span th:each="floor : ${dungeonDetails.floors}">
+            <span th:class="'pr-price d'+${floor.id}">
+            <table class="dungeonList">
+        <tr>
+            <td class="navfields" ><a th:href="@{'/game/enter-dungeon/'+${floor.id}}" />Venture in</td>
+            <td  class="navfields" ><a th:href="@{/game/dungeons}">Back</a></td>
+        </tr>
+                </table>
+                </span>
+ </span>
+        <br>
         <!-- enemy teams-->
 <div>
 
@@ -122,20 +135,12 @@
             </table>
         </div>
         <br>
-<!-- buttons-->
-        <span th:each="floor : ${dungeonDetails.floors}">
-            <div class="header">
-        <div class="dungeonList" th:class="'pr-price d'+${floor.id}">
-            <div class="navfield" ><a th:href="@{'/game/enter-dungeon/'+${floor.id}}" />Venture in</div>
-            <br>
-            <div  class="navfield" ><a th:href="@{/game/dungeons}">Back</a></div>
-        </div>
-                </div>
- </span>
+
+
 
     </div>
 
-</div>
+
 <div id="popup3">
     <div class="settingList">
         <div class="settingField">Opcje</div><br>
@@ -163,9 +168,4 @@
         }).val(-1); // reflect the div shown
     });
 </script>
-</html></title>
-</head>
-<body>
-
-</body>
 </html>
