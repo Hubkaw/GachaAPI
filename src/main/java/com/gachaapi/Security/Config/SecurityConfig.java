@@ -33,7 +33,7 @@ public class SecurityConfig {
     private RsaKeyProperties rsaKeys;
     private GachaUserDetailsService gachaUserDetailsService;
 
-    private static final String[] NO_AUTH_URLS = {"/","/api/signup", "/token", "/assets/**", "/images/**","/createAccount"};
+    private static final String[] NO_AUTH_URLS = {"/","/api/signup", "/token", "/assets/**", "/images/**","/new-account"};
     private static final String[] ADMIN_ONLY_URLS = {"/dev/**","/error"};
     private static final String[] USER_BASIC_ALLOWED_URLS = {"/game/**"};
     private static final String[] USER_TOKEN_ALLOWED_URLS = {"/api/**"};
@@ -41,10 +41,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .csrf()
-                .disable()
-                .cors()
-                .disable()
                 .userDetailsService(gachaUserDetailsService)
                 .authorizeRequests(auth -> {
                     auth.antMatchers(NO_AUTH_URLS).permitAll();

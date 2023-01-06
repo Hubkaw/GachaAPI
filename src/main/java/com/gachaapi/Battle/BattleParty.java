@@ -41,7 +41,7 @@ public class BattleParty {
             damage = (double) a * ((double) a / (double) (def + a));
             message = "criticaly strike for " + (int)damage;
         } else {
-            damage = ((double) a * (double) cd) * ((double) a / (double) (def + a));
+            damage = ((double) a * ((double) cd) *  0.01) * ((double) a / (double) (def + a));
             message = "strike for " + (int)damage;
         }
         hp -= (int) damage;

@@ -20,4 +20,6 @@ public interface PlayerService {
     Map<String, Integer> getMaterialMap(String nick);
 
     PremiumRewards getPremiumRewards(String nick);
+
+    Player buyStaminaForCurrency(int amount, String nick);
 }

@@ -12,6 +12,8 @@ public class Constants {
     public static final int PREMIUM_DAILY_MATERIAL_REWARD = 15;
     public static final int PREMIUM_DAILY_BALANCE_REWARD = 150;
 
+    public static final double BALANCE_TO_STAMINA_EXCHANGE_RATIO = 1.0;
+
 
     public static final String FIRE_ELEMENT = "FIRE";
     public static final String ICE_ELEMENT = "ICE";

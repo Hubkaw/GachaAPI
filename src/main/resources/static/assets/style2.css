@@ -749,3 +749,32 @@ table.opponent-list tr td {
     text-align: center;
     border-bottom: green 1px solid;
 }
+.exchange-container{
+    margin-left: 18vw;
+    width: 55vw;
+    border: green 2px solid;
+    padding: 15px;
+    background-color: lightgray;
+    margin-top: 25vh;
+}
+#amount{
+    width: 50px;
+    border: green 1px solid;
+    font-style: italic;
+    font-weight: bold;
+}
+.exchange-button {
+    background-color: green;
+    width: 100px;
+    color: lightgray;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    padding: 3px;
+}
+.exchange-button:hover {
+    background-color: darkgreen;
+}
+.exchange-error{
+    color: red;
+}

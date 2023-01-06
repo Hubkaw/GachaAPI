@@ -147,4 +147,15 @@ public class PlayerServiceImpl implements PlayerService {
         System.out.println(rewarded);
         return new PremiumRewards(rewarded, PREMIUM_DAILY_BALANCE_REWARD);
     }
+
+    @Override
+    public Player buyStaminaForCurrency(int amount, String nick) {
+        Player player = playerRepository.findByNick(nick).orElseThrow();
+        if (player.getPlayerBalance()<amount){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You cannot afford this");
+        }
+        player.setPlayerBalance(player.getPlayerBalance()-amount);
+        player.setStamina(player.getStamina()+(int)(amount * BALANCE_TO_STAMINA_EXCHANGE_RATIO));
+        return playerRepository.save(player);
+    }
 }
