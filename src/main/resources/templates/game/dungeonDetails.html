@@ -155,14 +155,15 @@
         </div>
         <br>
 <!-- buttons-->
-
-        <div class="dungeonList">
-            <button type="button">Challenge</button>
+        <span th:each="floor : ${dungeonDetails.floors}">
+            <div class="header">
+        <div class="dungeonList" th:class="'pr-price d'+${floor.id}">
+            <div class="navfield" ><a th:href="@{'/game/enter-dungeon/'+${floor.id}}" />Venture in</div>
             <br>
-            <button type="button">Back</button>
-
+            <div  class="navfield" ><a th:href="@{/game/dungeons}">Back</a></div>
         </div>
-
+                </div>
+ </span>
 
     </div>
 

@@ -42,6 +42,13 @@ public class GameDungeonsController {
         .addObject("playerParty",partyService.getById(playerService.getByName(principal.getName()).getActiveParty()));
     }
 
+    @GetMapping("/game/enter-dungeon/{floorId}")
+    public ModelAndView enterDungeon(@PathVariable int floorId, Principal principal){
+        return new ModelAndView("game/dungeonResult").
+                                addObject("player",playerService.getByName(principal.getName())).
+                                addObject("result",dungeonService.enterDungeon(floorId,principal.getName()));
+       // return ResponseEntity.ok(dungeonService.enterDungeon(floorId, principal.getName()));
+    }
 
 
 }

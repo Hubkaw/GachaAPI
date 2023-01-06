@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link href="/../static/assets/style2.css" rel="stylesheet" th:href="@{/assets/style2.css}"/>
+
+    <title>Gacha</title>
+</head>
+<body>
+<div class="container" id="shop1">
+    <div>
+        <table class='headertable'>
+            <tr>
+                <td class="playerinfo" rowspan=2>
+                    <table class="border">
+                        <tr>
+                            <td class="pagename" colspan="5"><h2>Dungeon result</h2></td>
+                        </tr>
+                        <tr>
+                            <td class="navfield"><a class="nav-link-current" th:href="@{/game/home}">Home</a></td>
+                            <td class="navfield"><a class="nav-link" th:href="@{/game/equipment}">Equipment</a></td>
+                            <td class="navfield"><a class="nav-link" th:href="@{/game/chests}">Chests</a></td>
+                            <td class="navfield"><a class="nav-link" th:href="@{/game/dungeons}">PvE</a></td>
+                            <td class="navfield"><a class="nav-link" th:href="@{/game/pvp}">PvP</a></td>
+                        </tr>
+                    </table>
+                </td>
+
+                <!-- currency -->
+                <td class="currencytab"><a href="#" onclick="toggle()"><img alt="Add shit" style="width:42px;height:42px;"
+                                                                            th:src="@{/images/plus.png}"></a>
+                    <span th:text="${player.PlayerBalance}+'$'"/></td>
+                <td><a href="#" onclick="toggle3()"><img alt="Options" style="width:42px;height:42px;"
+                                                         th:src="@{/images/cog.png}"></a></td>
+            </tr>
+            <tr>
+                <!-- stamina-->
+                <td class="currencytab"><a href="#" onclick="toggle2()"><img alt="Add shit" style="width:42px;height:42px;"
+                                                                             th:src="@{/images/plus.png}"></a>
+                    <span th:text="'Stamina:'+${player.Stamina}+'/100'"/>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <br>
+    <div class="middle">
+        <table class="listTable">
+            <tr><td>
+                <h2 th:text="${result.isWinner} ? 'You won!' : 'You lost!'"/>
+            </td></tr>
+            <tr>
+                <td th:text="'You gained '+${result.balanceReward}+'$'"/>
+            </tr>
+            <tr th:each="reward : ${result.rewardList}">
+                <td th:text="${reward.quantity}+'x '+${reward.reward.name}"></td>
+            </tr>
+            <!--
+            <tr>
+                <td th:text="${result.rewardList[0].reward.name}"/>
+            </tr> -->
+
+
+
+        </table>
+
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>
