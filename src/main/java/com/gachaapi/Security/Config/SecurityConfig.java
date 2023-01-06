@@ -41,6 +41,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
+                .csrf()
+                .disable()
                 .userDetailsService(gachaUserDetailsService)
                 .authorizeRequests(auth -> {
                     auth.antMatchers(NO_AUTH_URLS).permitAll();
