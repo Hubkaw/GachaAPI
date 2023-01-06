@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "player_purchase", schema = "gacha", catalog = "")
+@Table(name = "player_purchase", catalog = "")
 public class PlayerPurchase {
     private int id;
     private Timestamp boughtAt;

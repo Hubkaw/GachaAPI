@@ -99,7 +99,7 @@ public class Player {
     private Set<PlayerWeapon> playerWeapons;
 
     @Basic
-    @ColumnDefault("false")
+    @ColumnDefault("0")
     @Column(name = "Premium_Collected", nullable = false)
     private boolean premiumCollected;
 

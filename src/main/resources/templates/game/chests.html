@@ -22,7 +22,7 @@
                 <td th:if="${item.releasedAt.before(#dates.createNow())} AND ${item.expiresAt.after(#dates.createNow())} " th:text="'Chest available until '+${#strings.substring(item.expiresAt,0,10)}"></td>
 
                <span th:if="${item.releasedAt.before(#dates.createNow())} AND ${item.expiresAt.after(#dates.createNow())} " ><td style="width:20%" ><a href="#" th:text="${item.price}+'$'"></a> <a href="#"><img   th:src="@{/images/cart.png}" alt="buy" style="width:86px;height:86px;"/></a></td></span>
-                <td style="width:20%" th:if="${item.releasedAt.after(#dates.createNow())} OR ${item.expiresAt.before(#dates.createNow())} " ><a href="#" ><img th:src="@{../../images/unavailable.png}" alt="buy" style="width:86px;height:86px;"/></a></td>
+                <td style="width:20%" th:if="${item.releasedAt.after(#dates.createNow())} OR ${item.expiresAt.before(#dates.createNow())} " ><a href="#" ><img th:src="@{/images/unavailable.png}" alt="buy" style="width:86px;height:86px;"/></a></td>
                 <td style="width:10%"><a th:href="@{'/game/chests/'+${item.IdChest}}" >More info</a><img src="../../static/images/info.png" th:src="@{../../images/info.png}" alt="more info"  style="width:86px;height:86px;"/></a></td>
             </tr>
         </table>

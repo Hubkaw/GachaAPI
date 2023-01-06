@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "player_artefact", schema = "gacha", catalog = "")
+@Table(name = "player_artefact", catalog = "")
 public class PlayerArtefact implements Comparable<PlayerArtefact>{
 
     @Id

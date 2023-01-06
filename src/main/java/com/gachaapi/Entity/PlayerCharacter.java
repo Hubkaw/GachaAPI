@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "player_character", schema = "gacha", catalog = "")
+@Table(name = "player_character", catalog = "")
 public class PlayerCharacter {
 
     @Id

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "artefact_reward", schema = "gacha", catalog = "")
+@Table(name = "artefact_reward", catalog = "")
 public class ArtefactReward {
     private int id;
     private int quantity;
