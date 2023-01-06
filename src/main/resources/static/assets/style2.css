@@ -755,7 +755,7 @@ table.opponent-list tr td {
     border: green 2px solid;
     padding: 15px;
     background-color: lightgray;
-    margin-top: 25vh;
+    margin-top: 30vh;
 }
 #amount{
     width: 50px;
@@ -777,4 +777,28 @@ table.opponent-list tr td {
 }
 .exchange-error{
     color: red;
+}
+
+.character-levelup-cost{
+    display: block;
+align-items: center;
+}
+.character-levelup-button{
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 3px;
+    background-color: green;
+    color: lightgray;
+    font-weight: bold;
+}
+.character-levelup-button:hover{
+    background-color: darkgreen;
+}
+.float-left{
+    float: left;
+}
+.fill{
+    width: 100%;
+    height: 100%;
 }

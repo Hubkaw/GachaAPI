@@ -30,17 +30,17 @@
         </td>
 
         <!-- currency -->
-        <td class="currencytab"><a href="#" onclick="toggle()"><img alt="Add shit" style="width:42px;height:42px;"
-                                                                    th:src="@{/images/plus.png}"></a>
-          <span th:text="${player.PlayerBalance}+'$'"/></td>
+        <td class="currencytab"><a href="#" onclick="toggle()" style="width: 100%; text-decoration: none; color: black;"><img alt="Add shit" style="width:42px;height:42px;"
+                                                                    th:src="@{/images/plus.png}">
+          <span class="float-right" style="" th:text="${player.PlayerBalance}+'$'"/></a></td>
         <td><a href="#" onclick="toggle3()"><img alt="Options" style="width:42px;height:42px;"
                                                  th:src="@{/images/cog.png}"></a></td>
       </tr>
       <tr>
         <!-- stamina-->
-        <td class="currencytab"><a href="#" onclick="toggle2()"><img alt="Add shit" style="width:42px;height:42px;"
-                                                                     th:src="@{/images/plus.png}"></a>
-          <span th:text="'Stamina:'+${player.Stamina}+'/100'"/>
+        <td class="currencytab"><a th:href="@{/game/stamina-exchange}" style="width: 100%; text-decoration: none; color: black;"><img alt="Add shit" style="width:42px;height:42px;"
+                                                                     th:src="@{/images/plus.png}">
+          <span class="float-right" th:utext="'Stamina:<br>'+${player.Stamina}+'/100'"/></a>
         </td>
       </tr>
 
