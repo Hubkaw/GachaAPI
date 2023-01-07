@@ -15,4 +15,6 @@ public interface BattleLogRepository extends JpaRepository<BattleHistory, Intege
     List<BattleHistory> findAllByAttackerNickOrDefenderNick(String attackerNick, String defenderNick);
     List<BattleHistory> findAllByAttackerNick(String nick);
     List<BattleHistory> findAllByDefenderNick(String nick);
+
+    BattleHistory getById(int id);
 }

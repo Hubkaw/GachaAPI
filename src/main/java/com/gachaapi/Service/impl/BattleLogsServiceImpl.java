@@ -38,4 +38,10 @@ public class BattleLogsServiceImpl implements BattleLogsService {
         return battleLogRepository.findAllByDefenderNick(nickname);
     }
 
+    @Override
+    public BattleHistory getById(int id) {
+        return battleLogRepository.getById(id);
+    }
+
+
 }
