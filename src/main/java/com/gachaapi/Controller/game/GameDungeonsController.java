@@ -24,6 +24,8 @@ public class GameDungeonsController {
 
     private PartyService partyService;
 
+    private BattleLogsService battleLogsService;
+
     @GetMapping("/game/dungeons")
     public ModelAndView getDungeons(Model model, Principal principal){
         return new ModelAndView("game/dungeons")

@@ -355,6 +355,29 @@ table.listTable td {
 
 }
 
+#listTable {
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 90%;
+
+}
+
+#listTable#tr {
+    width: 100%;
+    background-color: lightgrey;
+
+}
+
+table#listTable td {
+    border: 1px solid black;
+    /* width: 20%; */
+    vertical-align: middle;
+    background-color: lightgrey;
+
+}
+
+
+
 .box {
     display: flex;
     align-items: center;

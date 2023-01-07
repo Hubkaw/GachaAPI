@@ -4,8 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gachaapi.Battle.BattleLog;
 import com.gachaapi.Utils.BattleType;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.jpa.repository.Temporal;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -34,5 +38,8 @@ public class BattleHistory {
     @Basic
     @Column(name = "type", nullable = false)
     private BattleType type;
+
+    @CreationTimestamp
+    private LocalDateTime createDateTime;
 }
 
