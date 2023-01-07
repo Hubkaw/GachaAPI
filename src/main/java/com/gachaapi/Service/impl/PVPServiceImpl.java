@@ -64,6 +64,7 @@ public class PVPServiceImpl implements PVPService {
 
         double Ra = attacker.getEloPoints();
         double Rd = defender.getEloPoints();
+        double Ratio = 26.00;
 
         double Ea = 1 / (1 + Math.pow(10.0, ((Ra - Rd) / 400.0)));
         double Ed = 1 / (1 + Math.pow(10.0, ((Rd - Ra) / 400.0)));
@@ -77,8 +78,9 @@ public class PVPServiceImpl implements PVPService {
             Sa = 0;
             Sd = 1;
         }
-        double Rpa = Ra + (26 * (Sa - Ea));
-        double Rpd = Rd + (26 * (Sd - Ed));
+        double Rpa = Math.ceil(Ra + (Ratio * (Sa - Ea)));
+        double Rpd = Math.ceil(Rd + (Ratio * (Sd - Ed)));
+
         attacker.setEloPoints((int) Rpa);
         defender.setEloPoints((int) Rpd);
         playerRepository.save(attacker);
