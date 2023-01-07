@@ -21,7 +21,7 @@
         <option selected disabled value="-1" >Choose floor</option>
         <span th:each="floor : ${dungeonDetails.floors}">
             <option th:value="${floor.id}"
-                    th:text="${floor.depth}"/>
+                    th:text="${floor.party.name}"/>
         </span>
     </select>
 

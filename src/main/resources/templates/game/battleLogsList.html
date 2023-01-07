@@ -20,23 +20,23 @@
       <th>Date</th>
       <th>Attack/defense</th>
       <th>Opponent</th>
-      <th>result</th>
+      <th>winner</th>
       <th>deails</th>
     </tr>
     <tr th:each="att : ${attRep}"  class="item">
       <td th:text="${#strings.substring(att.createDateTime,0,10)}+' '+${#strings.substring(att.createDateTime,11,16)} "></td>
       <td><img th:src="@{/images/att.png}" style="width:86px;height:86px;"/></td>
       <td th:text="${att.defender.nick=='admin'? 'Dungeon battle' : att.defender.nick}"></td>
-      <td th:text="${att.log.winner.name=='ATTACKER'? 'You won': 'You lost'}">
-      <td>to do- detail redirect</td>
+      <td th:text="${att.log.winner.name=='ATTACKER'? att.attacker.nick: att.defender.nick}">
+      <td ><a th:href="@{'/game/reports/'+${att.id}}"><img th:src="@{/images/log.png}" style="width:86px;height:86px;"/></a></td>
     </tr>
 
     <tr th:each="att : ${defRep}"  class="item">
       <td th:text="${#strings.substring(att.createDateTime,0,10)}+' '+${#strings.substring(att.createDateTime,11,16)} "></td>
       <td><img th:src="@{/images/def.png}" style="width:86px;height:86px;"/></td>
-      <td th:text="${att.attacker.nick=='admin'? 'Dungeon battle' : att.defender.nick}"></td>
-      <td th:text="${att.log.winner.name=='DEFENDER'? 'You won': 'You lost'}">
-      <td>to do- detail redirect</td>
+      <td th:text="${att.attacker.nick=='admin'? 'Dungeon battle' : att.attacker.nick}"></td>
+      <td th:text="${att.log.winner.name=='DEFENDER'? att.defender.nick: att.attacker.nick}">
+      <td ><a th:href="@{'/game/reports/'+${att.id}}"><img th:src="@{/images/log.png}" style="width:86px;height:86px;"/></a></td>
     </tr>
 
   </table>

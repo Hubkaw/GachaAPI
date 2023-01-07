@@ -12,4 +12,5 @@ public interface BattleLogsService {
     List<BattleHistory> getAllByAttacker(String nickname);
     List<BattleHistory> getAllByDefender(String nickname);
 
+    BattleHistory getById(int id);
 }

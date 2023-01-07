@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link rel="stylesheet" th:href="@{/assets/style2.css}"/>
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+    <title>Battle report</title>
+</head>
+
+<body>
+<div th:replace="game/fragments :: nav">
+</div>
+<br>
+<div class="middleb">
+    <h4><a th:href="@{/game/reports}">Return to list</a></h4>
+<table class="listTable">
+
+    <tr th:each="line : ${report.log.log}"  class="item">
+        <td th:text="${line.getEntry()}"/>
+    </tr>
+
+</table>
+</div>
+</div>
+<div id="popup3">
+    <div class="settingList">
+        <div class="settingField">Opcje</div><br>
+        <div class="settingField">Twórcy</div><br>
+        <div class="settingField"><a th:href="@{/logout}">Wyloguj</a></div><br>
+        <div class="settingField"><a href="#" onclick="toggle3()">Wróć</a></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    function toggle3()
+    {
+        var blur=document.getElementById('shop1');
+        blur.classList.toggle('active');
+        var popup3=document.getElementById('popup3');
+        popup3.classList.toggle('active');
+    }
+</script>
+</html>

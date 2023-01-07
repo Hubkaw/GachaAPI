@@ -45,6 +45,18 @@ public class GameBattleLogsController {
 
 
     }
+    @GetMapping("/game/reports/{repID}")
+    public String getReportDetails(Model model, @PathVariable(value="repID") int id, Principal principal){
+       model.addAttribute("report",battleLogsService.getById(id));
+       model.addAttribute("player",playerService.getByName(principal.getName()));
+       return "game/battleLogDetails";
+
+        /* return new ModelAndView("game/battleLogDetails")
+                .addObject("report",battleLogsService.getById(id))
+                .addObject("player",playerService.getByName(principal.getName()));
+*/
+
+    }
 
 }
 

@@ -11,7 +11,7 @@ public class Constants {
     public static final int DUNGEON_STAMINA_COST = 5;
     public static final int PREMIUM_DAILY_MATERIAL_REWARD = 15;
     public static final int PREMIUM_DAILY_BALANCE_REWARD = 150;
-
+    public final static int PREMIUM_DAY_PRICE = 120;
     public static final double BALANCE_TO_STAMINA_EXCHANGE_RATIO = 1.0;
 
 
