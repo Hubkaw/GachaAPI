@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.sql.Timestamp;
 import java.time.Instant;
 
+import static com.gachaapi.Utils.Constants.PREMIUM_DAY_PRICE;
 import static com.gachaapi.Utils.Constants.PREMIUM_ROLE;
 
 @Service
@@ -24,7 +25,6 @@ public class PremiumServiceImpl implements PremiumService {
     private PremiumPurchaseRepository premiumPurchaseRepository;
     private RoleRepository roleRepository;
 
-    private final static int PREMIUM_DAY_PRICE = 10;
 
     @Override
     public PremiumPurchase buyPremium(String nickname, int days) {

@@ -1,14 +1,10 @@
 package com.gachaapi.Service.impl;
 
 import com.gachaapi.Entity.*;
-import com.gachaapi.Repository.MaterialRepository;
-import com.gachaapi.Repository.PlayerMaterialRepository;
-import com.gachaapi.Repository.PlayerRepository;
-import com.gachaapi.Repository.RoleRepository;
-import com.gachaapi.Utils.NewPlayer;
+import com.gachaapi.Repository.*;
 import com.gachaapi.Service.interfaces.PlayerService;
+import com.gachaapi.Utils.NewPlayer;
 import com.gachaapi.Utils.PremiumRewards;
-import com.gachaapi.Utils.PvEReward;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,15 +12,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.ejb.Local;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 import static com.gachaapi.Utils.Constants.*;
 
@@ -35,7 +31,11 @@ public class PlayerServiceImpl implements PlayerService {
     private PlayerRepository playerRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
-
+    private PlayerWeaponRepository playerWeaponRepository;
+    private PlayerCharacterRepository playerCharacterRepository;
+    private CharacterRepository characterRepository;
+    private WeaponRepository weaponRepository;
+    private PartyRepository partyRepository;
     private MaterialRepository materialRepository;
     private PlayerMaterialRepository playerMaterialRepository;
 
@@ -67,8 +67,15 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPremiumCollected(false);
         player.setLevel(1);
         player.setPlayerBalance(2000);
+
         playerRepository.save(player);
-        return player;
+
+        Party firstParty = createFirstParty(player);
+        player.setParties(new HashSet<>());
+        player.getParties().add(firstParty);
+        player.setActiveParty(firstParty.getId());
+
+        return playerRepository.save(player);
     }
 
     @Override
@@ -112,11 +119,11 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public PremiumRewards getPremiumRewards(String nick) {
         Player player = playerRepository.findByNick(nick).orElseThrow();
-        if (player.getRoles().stream().noneMatch(r -> r.getName().equals(PREMIUM_ROLE))){
+        if (player.getRoles().stream().noneMatch(r -> r.getName().equals(PREMIUM_ROLE))) {
             System.out.println(1);
             return null;
         }
-        if (player.isPremiumCollected()){
+        if (player.isPremiumCollected()) {
             System.out.println(player.isPremiumCollected());
             return null;
         }
@@ -124,24 +131,23 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPlayerBalance(player.getPlayerBalance() + PREMIUM_DAILY_BALANCE_REWARD);
         Map<Material, Integer> rewarded = new HashMap<>();
         materialRepository.findAll().forEach(material -> {
-            rewarded.put(material, PREMIUM_DAILY_MATERIAL_REWARD);
-                PlayerMaterial playerMaterial = player.getPlayerMaterials().stream()
-                        .filter(pm -> pm.getMaterial().equals(material))
-                        .findFirst()
-                        .orElse(null);
-                if (playerMaterial == null) {
-                    playerMaterial = new PlayerMaterial();
-                    playerMaterial.setMaterial(material);
-                    playerMaterial.setAmount(PREMIUM_DAILY_MATERIAL_REWARD);
-                    playerMaterial.setPlayer(player);
-                } else {
-                    playerMaterial.setAmount(playerMaterial.getAmount() + PREMIUM_DAILY_MATERIAL_REWARD);
+                    rewarded.put(material, PREMIUM_DAILY_MATERIAL_REWARD);
+                    PlayerMaterial playerMaterial = player.getPlayerMaterials().stream()
+                            .filter(pm -> pm.getMaterial().equals(material))
+                            .findFirst()
+                            .orElse(null);
+                    if (playerMaterial == null) {
+                        playerMaterial = new PlayerMaterial();
+                        playerMaterial.setMaterial(material);
+                        playerMaterial.setAmount(PREMIUM_DAILY_MATERIAL_REWARD);
+                        playerMaterial.setPlayer(player);
+                    } else {
+                        playerMaterial.setAmount(playerMaterial.getAmount() + PREMIUM_DAILY_MATERIAL_REWARD);
+                    }
+                    playerMaterialRepository.save(playerMaterial);
                 }
-                playerMaterialRepository.save(playerMaterial);
-            }
         );
         player.setPremiumCollected(true);
-        playerRepository.save(player);
 
 
         System.out.println(rewarded);
@@ -151,11 +157,39 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Player buyStaminaForCurrency(int amount, String nick) {
         Player player = playerRepository.findByNick(nick).orElseThrow();
-        if (player.getPlayerBalance()<amount){
+        if (player.getPlayerBalance() < amount) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You cannot afford this");
         }
-        player.setPlayerBalance(player.getPlayerBalance()-amount);
-        player.setStamina(player.getStamina()+(int)(amount * BALANCE_TO_STAMINA_EXCHANGE_RATIO));
+        player.setPlayerBalance(player.getPlayerBalance() - amount);
+        player.setStamina(player.getStamina() + (int) (amount * BALANCE_TO_STAMINA_EXCHANGE_RATIO));
         return playerRepository.save(player);
+    }
+
+    private PlayerCharacter createPartyCharacter(Player player, int eqId) {
+        PlayerCharacter pc = new PlayerCharacter();
+        PlayerWeapon pw = new PlayerWeapon();
+        pw.setLvl(2);
+        pw.setPlayer(player);
+        pw.setWeapon(weaponRepository.getReferenceById(eqId));
+        playerWeaponRepository.save(pw);
+        pc.setWieldedWeapon(pw);
+        pc.setLvl(2);
+        pc.setPlayer(player);
+        pc.setCharacter(characterRepository.getReferenceById(eqId));
+        return playerCharacterRepository.save(pc);
+    }
+
+    private Party createFirstParty(Player player){
+        Party party = new Party();
+        party.setName("First Party");
+        party.setPlayer(player);
+
+        HashSet<PlayerCharacter> hashset = new HashSet<>();
+        hashset.add(createPartyCharacter(player, 1));
+        hashset.add(createPartyCharacter(player, 4));
+        hashset.add(createPartyCharacter(player, 8));
+        hashset.add(createPartyCharacter(player, 11));
+        party.setCharacters(hashset);
+        return partyRepository.save(party);
     }
 }
