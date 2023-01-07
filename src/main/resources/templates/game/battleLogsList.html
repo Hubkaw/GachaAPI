@@ -31,6 +31,14 @@
       <td>to do- detail redirect</td>
     </tr>
 
+    <tr th:each="att : ${defRep}"  class="item">
+      <td th:text="${#strings.substring(att.createDateTime,0,10)}+' '+${#strings.substring(att.createDateTime,11,16)} "></td>
+      <td><img th:src="@{/images/def.png}" style="width:86px;height:86px;"/></td>
+      <td th:text="${att.attacker.nick=='admin'? 'Dungeon battle' : att.defender.nick}"></td>
+      <td th:text="${att.log.winner.name=='DEFENDER'? 'You won': 'You lost'}">
+      <td>to do- detail redirect</td>
+    </tr>
+
   </table>
 </div>
 </div>
