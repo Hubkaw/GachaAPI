@@ -3,10 +3,8 @@ package com.gachaapi.Service.impl;
 import com.gachaapi.Battle.Battle;
 import com.gachaapi.Battle.BattleLog;
 import com.gachaapi.Battle.Side;
-import com.gachaapi.Controller.api.PlayerMaterialController;
 import com.gachaapi.Entity.*;
 import com.gachaapi.Repository.*;
-import com.gachaapi.Service.interfaces.CollectionService;
 import com.gachaapi.Service.interfaces.DungeonService;
 import com.gachaapi.Utils.BattleType;
 import com.gachaapi.Utils.DungeonType;
@@ -23,8 +21,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 import static com.gachaapi.Utils.Constants.DUNGEON_STAMINA_COST;
@@ -92,26 +88,31 @@ public class DungeonServiceImpl implements DungeonService {
         }
 
         switch (dungeonfloor.getDungeon().getType()) {
-            case MAIN, EVENT -> {
+            case MAIN:
+            case EVENT: {
                 if (player.getPlayerDungeonfloors().stream().anyMatch(pdf -> pdf.getDungeonfloor().equals(dungeonfloor))) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You have already cleared this floor");
                 }
             }
-            case DAILY -> {
+            case DAILY: {
                 if (player.getPlayerDungeonfloors().stream().anyMatch(pdf ->
                         pdf.getDungeonfloor().equals(dungeonfloor) &&
                                 pdf.getClearDate().after(Timestamp.valueOf(LocalDateTime.now().minus(23, ChronoUnit.HOURS))))) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You can only clear this floor once a day.");
                 }
             }
-            case WEEKLY -> {
+            case WEEKLY: {
                 if (player.getPlayerDungeonfloors().stream().anyMatch(pdf ->
                         pdf.getDungeonfloor().equals(dungeonfloor) &&
                                 pdf.getClearDate().after(Timestamp.valueOf(LocalDateTime.now().minus(7, ChronoUnit.DAYS))))) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You can only clear this floor once every 7 days.");
                 }
             }
+            default: {
+                // Jakieś ewentualne inne dungeony ale to już do dodania wedle uznania
+            }
         }
+
 
         BattleLog log = Battle.simulate(party, dungeonfloor.getParty());
         Side winner = log.getWinner();

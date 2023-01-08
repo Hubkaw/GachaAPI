@@ -20,6 +20,11 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>com.paypal.sdk</groupId>
+            <artifactId>rest-api-sdk</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
@@ -204,5 +209,7 @@
             </build>
         </profile>
     </profiles>
+
+
 
 </project>
