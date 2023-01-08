@@ -14,6 +14,7 @@
 
     <br>
     <div class="middleb">
+        <p class="error" th:text="${error != null} ? ${error} : ''"></p>
         <!--dungeon list-->
 <span th:each="item : ${dungeonsList}">
         <div th:if="${item.expiresAt ==null}  OR ${item.expiresAt.after(#dates.createNow())}">

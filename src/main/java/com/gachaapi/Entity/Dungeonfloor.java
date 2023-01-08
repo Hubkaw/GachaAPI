@@ -61,4 +61,9 @@ public class Dungeonfloor {
     public int hashCode() {
         return Objects.hash(id, depth);
     }
+
+    @Override
+    public String toString(){
+        return id +" "+ depth;
+    }
 }

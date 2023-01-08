@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.lang.module.ResolutionException;
 import java.security.Principal;
 
 @Controller
@@ -46,10 +48,17 @@ public class GameDungeonsController {
 
     @GetMapping("/game/enter-dungeon/{floorId}")
     public ModelAndView enterDungeon(@PathVariable int floorId, Principal principal){
-        return new ModelAndView("game/dungeonResult").
-                                addObject("player",playerService.getByName(principal.getName())).
-                                addObject("result",dungeonService.enterDungeon(floorId,principal.getName()));
-       // return ResponseEntity.ok(dungeonService.enterDungeon(floorId, principal.getName()));
+        try {
+            return new ModelAndView("game/dungeonResult").
+                    addObject("player", playerService.getByName(principal.getName())).
+                    addObject("result", dungeonService.enterDungeon(floorId, principal.getName()));
+        } catch (ResponseStatusException e){
+            return new ModelAndView("game/dungeons")
+                    .addObject("dungeonsList",dungeonService.getAll())
+                    .addObject("player",playerService.getByName(principal.getName()))
+                    .addObject("error", e.getReason());
+        }
+
     }
 
 

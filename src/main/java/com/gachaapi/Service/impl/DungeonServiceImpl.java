@@ -37,6 +37,7 @@ public class DungeonServiceImpl implements DungeonService {
     private PlayerArtefactRepository playerArtefactRepository;
     private PlayerWeaponRepository playerWeaponRepository;
     private PlayerMaterialRepository playerMaterialRepository;
+    private PlayerDungeonfloorRepository playerDungeonfloorRepository;
 
 
     @Override
@@ -95,9 +96,11 @@ public class DungeonServiceImpl implements DungeonService {
                 }
             }
             case DAILY: {
+                System.out.println(player.getPlayerDungeonfloors());
                 if (player.getPlayerDungeonfloors().stream().anyMatch(pdf ->
                         pdf.getDungeonfloor().equals(dungeonfloor) &&
                                 pdf.getClearDate().after(Timestamp.valueOf(LocalDateTime.now().minus(23, ChronoUnit.HOURS))))) {
+                    ;
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You can only clear this floor once a day.");
                 }
             }
@@ -122,6 +125,15 @@ public class DungeonServiceImpl implements DungeonService {
             playerRepository.save(player);
             return new PvEResult(false, 0, new ArrayList<>(), log);
         }
+
+
+        playerDungeonfloorRepository.deletePlayerDungeonfloorByPlayerIdPlayerAndDungeonfloorId(player.getIdPlayer(), dungeonfloor.getId());
+
+        PlayerDungeonfloor pdf = new PlayerDungeonfloor();
+        pdf.setPlayer(player);
+        pdf.setDungeonfloor(dungeonfloor);
+        pdf.setClearDate(Timestamp.from(Instant.now()));
+        playerDungeonfloorRepository.save(pdf);
 
         PvEResult result = new PvEResult(true, dungeonfloor.getBalanceReward(), new ArrayList<>(), log);
 
@@ -165,11 +177,11 @@ public class DungeonServiceImpl implements DungeonService {
         }
 
         player.setPlayerBalance(player.getPlayerBalance() + dungeonfloor.getBalanceReward());
-        PlayerDungeonfloor pdf = new PlayerDungeonfloor();
-        pdf.setPlayer(player);
-        pdf.setDungeonfloor(dungeonfloor);
-        pdf.setClearDate(Timestamp.from(Instant.now()));
-        player.getPlayerDungeonfloors().add(pdf);
+        PlayerDungeonfloor newPDF = new PlayerDungeonfloor();
+        newPDF.setPlayer(player);
+        newPDF.setDungeonfloor(dungeonfloor);
+        newPDF.setClearDate(Timestamp.from(Instant.now()));
+        player.getPlayerDungeonfloors().add(newPDF);
 
         if (dungeonfloor.getDungeon().getType() == DungeonType.MAIN) {
             player.setLevel(player.getLevel() + 1);
