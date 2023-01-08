@@ -83,7 +83,7 @@ public class DungeonServiceImpl implements DungeonService {
         Dungeonfloor dungeonfloor = dungeonFloorRepository.findById(floorId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find this floor"));
         Player player = playerRepository.findByNick(nickname).orElseThrow();
-        if (player.getStamina()<DUNGEON_STAMINA_COST){
+        if (player.getStamina() < DUNGEON_STAMINA_COST) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You do not have enough stamina to enter.");
         }
 
@@ -116,7 +116,7 @@ public class DungeonServiceImpl implements DungeonService {
 
         BattleLog log = Battle.simulate(party, dungeonfloor.getParty());
         Side winner = log.getWinner();
-        player.setStamina(player.getStamina()-DUNGEON_STAMINA_COST);
+        player.setStamina(player.getStamina() - DUNGEON_STAMINA_COST);
 
         if (winner != Side.ATTACKER) {
             playerRepository.save(player);
@@ -127,11 +127,13 @@ public class DungeonServiceImpl implements DungeonService {
 
         for (ArtefactReward ar : dungeonfloor.getArtefactRewards()) {
             result.getRewardList().add(new PvEReward(ar.getArtefact(), ar.getQuantity()));
-            PlayerArtefact pa = new PlayerArtefact();
-            pa.setArtefact(ar.getArtefact());
-            pa.setLvl(1);
-            pa.setPlayer(player);
-            playerArtefactRepository.save(pa);
+            for (int i = 0; i < ar.getQuantity(); i++) {
+                PlayerArtefact pa = new PlayerArtefact();
+                pa.setArtefact(ar.getArtefact());
+                pa.setLvl(1);
+                pa.setPlayer(player);
+                playerArtefactRepository.save(pa);
+            }
         }
 
         for (MaterialReward mr : dungeonfloor.getMaterialRewards()) {
@@ -153,22 +155,24 @@ public class DungeonServiceImpl implements DungeonService {
 
         for (WeaponReward wr : dungeonfloor.getWeaponRewards()) {
             result.getRewardList().add(new PvEReward(wr.getWeapon(), wr.getQuantity()));
-            PlayerWeapon playerWeapon = new PlayerWeapon();
-            playerWeapon.setLvl(1);
-            playerWeapon.setWeapon(wr.getWeapon());
-            playerWeapon.setPlayer(player);
-            playerWeaponRepository.save(playerWeapon);
+            for (int i = 0; i < wr.getQuantity(); i++) {
+                PlayerWeapon playerWeapon = new PlayerWeapon();
+                playerWeapon.setLvl(1);
+                playerWeapon.setWeapon(wr.getWeapon());
+                playerWeapon.setPlayer(player);
+                playerWeaponRepository.save(playerWeapon);
+            }
         }
 
-        player.setPlayerBalance(player.getPlayerBalance()+dungeonfloor.getBalanceReward());
+        player.setPlayerBalance(player.getPlayerBalance() + dungeonfloor.getBalanceReward());
         PlayerDungeonfloor pdf = new PlayerDungeonfloor();
         pdf.setPlayer(player);
         pdf.setDungeonfloor(dungeonfloor);
         pdf.setClearDate(Timestamp.from(Instant.now()));
         player.getPlayerDungeonfloors().add(pdf);
 
-        if (dungeonfloor.getDungeon().getType() == DungeonType.MAIN){
-            player.setLevel(player.getLevel()+1);
+        if (dungeonfloor.getDungeon().getType() == DungeonType.MAIN) {
+            player.setLevel(player.getLevel() + 1);
         }
 
         playerRepository.save(player);
