@@ -912,3 +912,7 @@ align-items: center;
     border: 1px solid black;
     padding: 10px;
 }
+
+.premium-shop-td {
+    padding: 0;
+}
