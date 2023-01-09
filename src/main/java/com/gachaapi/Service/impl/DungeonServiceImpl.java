@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -89,30 +90,25 @@ public class DungeonServiceImpl implements DungeonService {
         }
 
         switch (dungeonfloor.getDungeon().getType()) {
-            case MAIN:
-            case EVENT: {
+            case MAIN, EVENT -> {
                 if (player.getPlayerDungeonfloors().stream().anyMatch(pdf -> pdf.getDungeonfloor().equals(dungeonfloor))) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You have already cleared this floor");
                 }
             }
-            case DAILY: {
-                System.out.println(player.getPlayerDungeonfloors());
+            case DAILY -> {
                 if (player.getPlayerDungeonfloors().stream().anyMatch(pdf ->
                         pdf.getDungeonfloor().equals(dungeonfloor) &&
                                 pdf.getClearDate().after(Timestamp.valueOf(LocalDateTime.now().minus(23, ChronoUnit.HOURS))))) {
-                    ;
+
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You can only clear this floor once a day.");
                 }
             }
-            case WEEKLY: {
+            case WEEKLY -> {
                 if (player.getPlayerDungeonfloors().stream().anyMatch(pdf ->
                         pdf.getDungeonfloor().equals(dungeonfloor) &&
                                 pdf.getClearDate().after(Timestamp.valueOf(LocalDateTime.now().minus(7, ChronoUnit.DAYS))))) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You can only clear this floor once every 7 days.");
                 }
-            }
-            default: {
-                // Jakieś ewentualne inne dungeony ale to już do dodania wedle uznania
             }
         }
 
@@ -126,9 +122,9 @@ public class DungeonServiceImpl implements DungeonService {
             return new PvEResult(false, 0, new ArrayList<>(), log);
         }
 
-
+        System.out.println(1);
         playerDungeonfloorRepository.deletePlayerDungeonfloorByPlayerIdPlayerAndDungeonfloorId(player.getIdPlayer(), dungeonfloor.getId());
-
+        System.out.println(2);
         PlayerDungeonfloor pdf = new PlayerDungeonfloor();
         pdf.setPlayer(player);
         pdf.setDungeonfloor(dungeonfloor);
