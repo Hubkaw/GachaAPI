@@ -18,7 +18,13 @@
     <div>
         <table class="playerDetail">
             <tr>
-                <td th:text="${player.PremiumLeft ==0} ? 'Premium status: expired' : 'Premium status: '+${player.PremiumLeft}+' days left'"></td>
+                <td th:if="${player.premiumLeft ==0}">
+                    <a th:href="@{/game/premium}"><div class="fill">Buy premium benefits here</div></a>
+                </td>
+                <td th:unless="${player.premiumLeft ==0}">
+                    <span th:text="'You have '+${player.premiumLeft}+' premium days left.'"></span><br>
+                    Consider extending your premium privileges <a th:href="@{/game/premium}">here</a>
+                </td>
                 <td>TO DO PREMIUM SHOP REDIRECT</td>
             </tr>
             <tr>

@@ -109,6 +109,9 @@ public class Player {
     @OneToMany(mappedBy = "defender")
     private List<BattleHistory> defences;
 
+    @OneToMany(mappedBy = "player")
+    private List<PremiumPurchase> premiumPurchases;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "Player_Role",
             joinColumns = {

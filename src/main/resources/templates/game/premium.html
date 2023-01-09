@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <!-- CSS only -->
+  <link rel="stylesheet" th:href="@{/assets/style2.css}"/>
+
+  <title>Login to Gacha</title>
+</head>
+
+<body>
+<div th:replace="game/fragments :: nav">
+</div>
+<br>
+<div class="middle">
+  <div class="exchange-container">
+    <p th:text="${error != null} ? ${error} : ''" class="exchange-error"></p>
+    <h3>Buy Premium</h3>
+    <form th:action="@{/game/premium}" method="post">
+      <span class="bold" th:text="${price}+'$ for 1 day'"></span>
+      <p>Exchange: <input type="number" style="max-width: 60px" name="totalPrice" id="totalPrice" th:step="${price}" onchange="calcPremium()">$ to <input type="number" value="1" name="amount" id="amount" onchange="calcTotal()"> premium days
+      </p>
+      <input type="submit" value="Exchange" class="exchange-button">
+    </form>
+  </div>
+</div>
+<input type="hidden" id="price" th:value="${price}">
+</div>
+<script type="text/javascript">
+  var totalPrice = document.getElementById('totalPrice');
+  var amount = document.getElementById('amount');
+  var price = document.getElementById('price');
+
+  function calcPremium(){
+    if (totalPrice.value < price.value){
+      totalPrice.value = price.value;
+    }
+    amount.value = (totalPrice.value / price.value)
+  }
+
+  function calcTotal(){
+    if (amount.value < 1){
+      amount.value = 1;
+    }
+    totalPrice.value = (amount.value * price.value)
+  }
+
+</script>
+</body>
+</html>
