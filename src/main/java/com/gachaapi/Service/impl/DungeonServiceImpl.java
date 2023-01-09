@@ -122,9 +122,9 @@ public class DungeonServiceImpl implements DungeonService {
             return new PvEResult(false, 0, new ArrayList<>(), log);
         }
 
-        System.out.println(1);
+
         playerDungeonfloorRepository.deletePlayerDungeonfloorByPlayerIdPlayerAndDungeonfloorId(player.getIdPlayer(), dungeonfloor.getId());
-        System.out.println(2);
+
         PlayerDungeonfloor pdf = new PlayerDungeonfloor();
         pdf.setPlayer(player);
         pdf.setDungeonfloor(dungeonfloor);

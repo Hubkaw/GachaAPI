@@ -164,7 +164,6 @@ public class ChestServiceImpl implements ChestService {
     private ChestReward addRewardToPlayer(PossibleChestReward reward, Player player) {
         if (reward instanceof Weapon) {
             PlayerWeapon playerWeapon = new PlayerWeapon();
-            System.out.println(playerWeapon.getId());
             playerWeapon.setWeapon((Weapon) reward);
             playerWeapon.setPlayer(player);
             playerWeapon.setLvl(1);
@@ -206,7 +205,6 @@ public class ChestServiceImpl implements ChestService {
 
         public PossibleChestReward generate(int pity) {
 
-            System.out.println(map);
             int rnd = random.nextInt(total) + 1;
             return map.ceilingEntry(rnd).getValue();
         }

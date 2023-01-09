@@ -57,7 +57,6 @@ public class ArtefactServiceImpl implements ArtefactService {
     @Override
     public void createStatArtefact(NewStatArtefact newStatArtefact) {
         StatArtifact statArtefact = new StatArtifact();
-        System.out.println(newStatArtefact.getStatId());
         statArtefact.setStats(statisticRepository.getReferenceById(newStatArtefact.getStatId()));
         statArtefact.setArtefactByArtefactId(artefactRepository.getReferenceById(newStatArtefact.getArtefactId()));
         statArtefact.setValue(newStatArtefact.getValue());

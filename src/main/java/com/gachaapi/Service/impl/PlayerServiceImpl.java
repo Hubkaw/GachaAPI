@@ -50,8 +50,6 @@ public class PlayerServiceImpl implements PlayerService {
         if (playerRepository.existsByNick(newPlayer.getNick())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Nickname already used");
         }
-        System.out.println(newPlayer.getNick());
-        System.out.println(newPlayer.getBirthDate());
         Player player = new Player();
         player.setNick(newPlayer.getNick());
         player.setHashedPassword(passwordEncoder.encode(newPlayer.getPassword()));
@@ -120,11 +118,9 @@ public class PlayerServiceImpl implements PlayerService {
     public PremiumRewards getPremiumRewards(String nick) {
         Player player = playerRepository.findByNick(nick).orElseThrow();
         if (player.getRoles().stream().noneMatch(r -> r.getName().equals(PREMIUM_ROLE))) {
-            System.out.println(1);
             return null;
         }
         if (player.isPremiumCollected()) {
-            System.out.println(player.isPremiumCollected());
             return null;
         }
 
@@ -148,9 +144,8 @@ public class PlayerServiceImpl implements PlayerService {
                 }
         );
         player.setPremiumCollected(true);
+        playerRepository.saveAndFlush(player);
 
-
-        System.out.println(rewarded);
         return new PremiumRewards(rewarded, PREMIUM_DAILY_BALANCE_REWARD);
     }
 

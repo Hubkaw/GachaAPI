@@ -175,7 +175,6 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
         for (Statistic statistic : statisticRepository.findAll()) {
             result.put(statistic.getShortName(), 0);
         }
-        System.out.println(result);
         for (StatClass cs : pc.getCharacter().getCharacterClass().getStats()) {
             result.put(cs.getStat().getShortName(), result.get(cs.getStat().getShortName()) + (cs.getValue() * pc.getLvl()));
         }
@@ -210,7 +209,6 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
                 }
             }
         }
-        System.out.println(result);
         return result;
     }
 
@@ -321,9 +319,6 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
             playerArtefactRepository.saveAndFlush(pa);
             pc.getPlayerArtefacts().add(pa);
             playerCharacterRepository.saveAndFlush(pc);
-            System.out.println(changeArtefact);
-            System.out.println(pa.getPlayerCharacters());
-            System.out.println(pc.getPlayerArtefacts());
         }
     }
 
