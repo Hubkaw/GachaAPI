@@ -418,6 +418,11 @@ table.playerDetail tr {
 
 
 }
+table.playerDetail td.party-cell {
+    background-color: lightgrey;
+    text-align: center;
+    font-weight: bold;
+}
 
 table.playerDetail td {
     vertical-align: middle;
@@ -425,7 +430,7 @@ table.playerDetail td {
     width: 50%;
     padding-top: 25px;
     padding-bottom: 25px;
-
+    border: 2px solid green;
 }
 
 .eq-nav-field {
@@ -890,4 +895,20 @@ align-items: center;
 }
 .chest-button:hover {
     background-color: darkgreen;
+}
+
+.userdetails {
+    display: block;
+    font-size: 1.0em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.logout-box {
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
 }
