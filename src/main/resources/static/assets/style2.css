@@ -920,3 +920,18 @@ align-items: center;
 .premium-shop-td {
     padding: 0;
 }
+
+.payment-entry {
+    border: green solid 2px;
+    background-color: lightgray;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+.pay-table{
+    border: green 2px solid;
+    border-spacing: 2px;
+    margin-left: 18vw;
+    width: 55vw;
+    background-color: lightgray;
+    padding-bottom: 10px;
+}

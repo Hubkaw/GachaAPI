@@ -30,7 +30,7 @@
         </td>
 
         <!-- currency -->
-        <td class="currencytab"><a href="#" onclick="toggle()" style="width: 100%; text-decoration: none; color: black;"><img alt="Add shit" style="width:42px;height:42px;"
+        <td class="currencytab"><a th:href="@{/game/payment}" style="width: 100%; text-decoration: none; color: black;"><img alt="Add shit" style="width:42px;height:42px;"
                                                                     th:src="@{/images/plus.png}">
           <span class="float-right" style="" th:text="${player.PlayerBalance}+'$'"/></a></td>
         <td><a th:href="@{/logout}" ><img alt="Options" style="width:42px;height: auto"

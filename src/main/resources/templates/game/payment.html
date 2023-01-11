@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <!-- CSS only -->
+  <link rel="stylesheet" th:href="@{/assets/style2.css}"/>
+
+  <title>Gacha</title>
+</head>
+
+<body>
+<div th:replace="game/fragments :: nav">
+</div>
+<br>
+<div class="middleb">
+  <ul class="material-list">
+    <li th:each="price : ${prices}" >
+      <div class="payment-entry">
+        <h2 th:text="${price.volume}+'$'"></h2>
+        <h3 th:text="'for '+${price.price.doubleValue()}+' PLN'"></h3>
+        <a th:href="@{'/game/payment/'+${price.idigcp}}"><button class="chest-button">BUY</button></a>
+      </div>
+    </li>
+  </ul>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -18,6 +18,8 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.*;
 
+import static com.gachaapi.Utils.Constants.HARD_PITY;
+
 @Service
 @AllArgsConstructor
 public class ChestServiceImpl implements ChestService {
@@ -32,8 +34,6 @@ public class ChestServiceImpl implements ChestService {
     private CharacterRepository characterRepository;
 
     private static final Random random = new Random();
-
-    private static final int HARD_PITY = 15;
 
 
     @Override
