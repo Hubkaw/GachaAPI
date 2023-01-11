@@ -114,8 +114,6 @@ background: dimgrey;
 }
 
 .navfields {
-    padding-right: 20%;
-    padding-left:20%;
     width: 30%;
     background: darkgrey;
     text-align: center;
@@ -123,6 +121,7 @@ background: dimgrey;
     text-decoration: none;
     font-weight: bold;
     font-style: italic;
+    align-content: center;
 }
 .navfields:hover{
     background: dimgrey;
@@ -612,6 +611,11 @@ details[open] summary {
     font-weight: bold;
     font-style: italic;
     color: green;
+    display: block;
+}
+.nav-link-b{
+    height: 100%;
+    width: 100%;
     display: block;
 }
 .nav-link-current {
