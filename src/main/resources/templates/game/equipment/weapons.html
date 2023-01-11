@@ -13,8 +13,9 @@
 <div th:replace="game/fragments :: nav">
 </div>
     <div class="eq-middle">
+        <input type="text" id="textInput" onkeyup="textSearch()" placeholder="Search for weapons" style="width:33%;margin-left: 33%;margin-right: 33%;">
         <p th:text="${error != null} ? ${error} : ''" class="error"></p>
-        <ul class="artefact-list">
+        <ul class="artefact-list" id="wpnList">
             <li th:each="item : ${player.playerWeapons}">
                 <details>
                     <summary th:text="${item.weapon.name}+' lvl'+${item.lvl}"></summary>
@@ -71,6 +72,24 @@
         blur.classList.toggle('active');
         var popup3 = document.getElementById('popup3');
         popup3.classList.toggle('active');
+    }
+    function textSearch() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('textInput');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("wpnList");
+        li = ul.getElementsByTagName('li');
+
+        for (i = 0; i < li.length; i++) {
+            //TO WEŹMIE PIERWSZY SPAN, JAK ZOSTANIE DODANY KOLEJNY SPAN PRZED NAME, TRZEBA ZMIENIC
+            a = li[i].getElementsByTagName("summary")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
     }
 </script>
 </html>

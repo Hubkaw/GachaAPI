@@ -21,7 +21,7 @@
       <th>Attack/defense</th>
       <th>Opponent</th>
       <th>winner</th>
-      <th>deails</th>
+      <th>details</th>
     </tr>
     <tr th:each="att : ${attRep}"  class="item">
       <td th:text="${#strings.substring(att.createDateTime,0,10)}+' '+${#strings.substring(att.createDateTime,11,16)} "></td>
