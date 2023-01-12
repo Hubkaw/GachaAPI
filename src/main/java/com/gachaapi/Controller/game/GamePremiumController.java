@@ -40,8 +40,7 @@ public class GamePremiumController {
         }
         try{
             premiumService.buyPremium(principal.getName(), order.getAmount());
-            model.addAttribute("player", playerService.getByName(principal.getName()));
-            return "game/home";
+            return "redirect:/game/home";
         }catch (ResponseStatusException e){
             model.addAttribute("player", playerService.getByName(principal.getName()));
             model.addAttribute("price", PREMIUM_DAY_PRICE);

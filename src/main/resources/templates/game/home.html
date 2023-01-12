@@ -25,124 +25,60 @@
                     <span th:text="'You have '+${player.premiumLeft}+' premium days left.'"></span>
 
                 </td>
-                <td class="premium-shop-td"><a th:href="@{/game/premium}"><div class="fill">BUY PREMIUM STATUS</div></a></td>
+                <td class="premium-shop-td"><a th:href="@{/game/premium}">
+                    <div class="fill">BUY PREMIUM STATUS</div>
+                </a></td>
             </tr>
             <tr>
                 <td th:text="'Your ELO points- '+${player.eloPoints}"></td>
-                <td><a th:href="@{/game/reports}" >Combat logs</a></td>
+                <td><a th:href="@{/game/reports}">Combat logs</a></td>
             </tr>
-            <tr>
-                <td colspan="2" class="party-cell">Your party</td>
-            </tr>
+
             <tr>
                 <td colspan="2">
-
-                        <li th:each="party : ${player.parties}">
-                            <details th:if="${party.characters.size() == 4}">
-                                <summary>
-                                    <span th:text="${party.name}"></span>
-                                    <span class="float-right" th:if="${party.id == player.activeParty}">Active party</span>
-                                </summary>
-                                <table class="party-character-table">
-                                    <tr>
-                                        <td>
-                                <span class="party-float-left">
+                    <h2>Your Active Party</h2>
+                    <li th:each="party : ${player.parties}" th:if="${party.id == player.activeParty}" class="home-party">
+                        <details th:if="${party.characters.size() == 4}" open>
+                            <summary>
+                                <span th:text="${party.name}"></span>
+                                <span class="float-right" th:if="${party.id == player.activeParty}">Active party</span>
+                            </summary>
+                            <table class="party-character-table">
+                                <tr>
+                                    <td>
+                                <span>
                                 <span th:text="${party.characters[0].character.name}"></span><br>
                                 <span th:text="${party.characters[0].lvl}+'lvl'"></span><br>
                                 <span th:text="${party.characters[0].character.characterClass.name}"></span><br>
                                 </span>
-                                            <span class="float-right">
-                                    <span class="bold">Change:</span>
-                                    <form method="post" th:action="@{/game/equipment/parties/change-character}">
-                                        <select class="weapon-select" name="characterId" onchange="this.form.submit()">
-                                            <option th:each="character : ${player.playerCharacters}"
-                                                    th:if="${character.character.characterClass.name != party.characters[1].character.characterClass.name &&
-                                                             character.character.characterClass.name != party.characters[2].character.characterClass.name &&
-                                                             character.character.characterClass.name != party.characters[3].character.characterClass.name}"
-                                                    th:selected="${character.id == party.characters[0].id}"
-                                                    th:text="${character.character.name}+' '+${character.lvl}+'lvl'"
-                                                    th:value="${character.id}"></option>
-                                        </select>
-                                        <input name="oldCharacterId" th:value="${party.characters[0].id}" type="hidden">
-                                        <input name="partyId" th:value="${party.id}" type="hidden">
-                                    </form>
-                                </span>
-                                        </td>
-                                        <td>
-                                <span class="party-float-left">
+                                    </td>
+                                    <td>
+                                <span >
                                 <span th:text="${party.characters[1].character.name}"></span><br>
                                 <span th:text="${party.characters[1].lvl}+'lvl'"></span><br>
                                 <span th:text="${party.characters[1].character.characterClass.name}"></span><br>
                                 </span>
-                                            <span class="float-right">
-                                    <span class="bold">Change:</span>
-                                    <form method="post" th:action="@{/game/equipment/parties/change-character}">
-                                        <select class="weapon-select" name="characterId" onchange="this.form.submit()">
-                                            <option th:each="character : ${player.playerCharacters}"
-                                                    th:if="${character.character.characterClass.name != party.characters[1].character.characterClass.name &&
-                                                             character.character.characterClass.name != party.characters[2].character.characterClass.name &&
-                                                             character.character.characterClass.name != party.characters[3].character.characterClass.name}"
-                                                    th:selected="${character.id == party.characters[1].id}"
-                                                    th:text="${character.character.name}+' '+${character.lvl}+'lvl'"
-                                                    th:value="${character.id}"></option>
-                                        </select>
-                                        <input name="oldCharacterId" th:value="${party.characters[1].id}" type="hidden">
-                                        <input name="partyId" th:value="${party.id}" type="hidden">
-                                    </form>
-                                </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                <span class="party-float-left">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                <span >
                                 <span th:text="${party.characters[2].character.name}"></span><br>
                                 <span th:text="${party.characters[2].lvl}+'lvl'"></span><br>
                                 <span th:text="${party.characters[2].character.characterClass.name}"></span><br>
                                 </span>
-                                            <span class="float-right">
-                                    <span class="bold">Change:</span>
-                                    <form method="post" th:action="@{/game/equipment/parties/change-character}">
-                                        <select class="weapon-select" name="characterId" onchange="this.form.submit()">
-                                            <option th:each="character : ${player.playerCharacters}"
-                                                    th:if="${character.character.characterClass.name != party.characters[1].character.characterClass.name &&
-                                                             character.character.characterClass.name != party.characters[2].character.characterClass.name &&
-                                                             character.character.characterClass.name != party.characters[3].character.characterClass.name}"
-                                                    th:selected="${character.id == party.characters[2].id}"
-                                                    th:text="${character.character.name}+' '+${character.lvl}+'lvl'"
-                                                    th:value="${character.id}"></option>
-                                        </select>
-                                        <input name="oldCharacterId" th:value="${party.characters[2].id}" type="hidden">
-                                        <input name="partyId" th:value="${party.id}" type="hidden">
-                                    </form>
-                                </span>
-                                        </td>
-                                        <td>
-                                <span class="party-float-left">
+                                    </td>
+                                    <td>
+                                <span >
                                 <span th:text="${party.characters[3].character.name}"></span><br>
                                 <span th:text="${party.characters[3].lvl}+'lvl'"></span><br>
                                 <span th:text="${party.characters[3].character.characterClass.name}"></span><br>
                                 </span>
-                                            <span class="float-right">
-                                    <span class="bold">Change:</span>
-                                    <form method="post" th:action="@{/game/equipment/parties/change-character}">
-                                        <select class="weapon-select" name="characterId" onchange="this.form.submit()">
-                                            <option th:each="character : ${player.playerCharacters}"
-                                                    th:if="${character.character.characterClass.name != party.characters[1].character.characterClass.name &&
-                                                             character.character.characterClass.name != party.characters[2].character.characterClass.name &&
-                                                             character.character.characterClass.name != party.characters[3].character.characterClass.name}"
-                                                    th:selected="${character.id == party.characters[3].id}"
-                                                    th:text="${character.character.name}+' '+${character.lvl}+'lvl'"
-                                                    th:value="${character.id}"></option>
-                                        </select>
-                                        <input name="oldCharacterId" th:value="${party.characters[3].id}" type="hidden">
-                                        <input name="partyId" th:value="${party.id}" type="hidden">
-                                    </form>
-                                </span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </details>
-                        </li>
+                                    </td>
+                                </tr>
+                            </table>
+                        </details>
+                    </li>
 
                 </td>
             </tr>
@@ -275,7 +211,7 @@
         popup3.classList.toggle('active');
     }
 
-    function closePremiumRewards(){
+    function closePremiumRewards() {
         var premiumPopup = document.getElementById('premium-popup');
         premiumPopup.style.display = "none";
     }

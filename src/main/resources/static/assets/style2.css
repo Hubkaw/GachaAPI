@@ -935,3 +935,8 @@ align-items: center;
     background-color: lightgray;
     padding-bottom: 10px;
 }
+.home-party{
+    list-style: none;
+    margin: 0;
+    width: 100%;
+}
