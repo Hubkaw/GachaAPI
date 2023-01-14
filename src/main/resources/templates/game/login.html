@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <!-- CSS only -->
-    <link th:href="@{/assets/style.css}" rel="stylesheet" />
+    <link th:href="@{/assets/style2.css}" rel="stylesheet" />
     <title>Login to Gacha</title>
 </head>
 <body>
 <h1 class="center">Login to Gacha</h1>
 <form name="f" th:action="@{/login}" method="post">
-    <table id="login-table">
+    <table id="login-table" class="signup-table">
         <tr> <td class="head-cell"><label for="nick">Your Login:</label></td></tr>
         <tr> <td><input name="nick" type="text" id="nick"></td></tr>
         <tr> <td class="head-cell"><label for="password">Your Password:</label></td></tr>
