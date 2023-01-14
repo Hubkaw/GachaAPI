@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <!-- CSS only -->
-    <link th:href="@{/assets/style.css}" rel="stylesheet" />
+    <link th:href="@{/assets/style2.css}" rel="stylesheet" />
     <title>Create Gacha Account</title>
 </head>
 <body>
 <div>
-    <h1 class="center">Create a Gacha account.</h1>
+    <h1 style="text-align: center">Create a Gacha account.</h1>
     <form th:action="@{/signup}" th:method="post" th:object="${newPlayer}">
-        <table class="center">
+        <table class="signup-table">
             <tr>
                 <td th:colspan="2" class="head-cell">New Account</td>
             </tr>
@@ -28,6 +28,10 @@
                 <td><input name="birthDate" th:type="date" value="2000-01-01"></td>
             </tr>
             <tr>
+                <td>Do you allow us to process the data that you provide us with?</td>
+                <td><input type="checkbox" name="dataProcessing" required></td>
+            </tr>
+            <tr>
                 <td th:colspan="2">
                     <input type="submit" value="submit">
                 </td>
@@ -35,10 +39,10 @@
         </table>
     </form>
 
-    <div class="center">
+    <div style="text-align: center">
         <p class="error" th:text="${error == null} ? '' : ${error}"></p>
     </div>
-    <div class="center">
+    <div style="text-align: center">
         <p>Already have an account? Log in <a th:href="@{/login}">here</a>.</p>
     </div>
 

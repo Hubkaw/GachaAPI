@@ -383,10 +383,10 @@ table#listTable td {
 }
 
 .dungeonList {
-    border: 1px solid black;
+    border: 2px solid green;
     width: 100%;
-    border-spacing: 0;
     background: lightgrey;
+    border-spacing: 2px;
 
 }
 
@@ -617,6 +617,8 @@ details[open] summary {
     height: 100%;
     width: 100%;
     display: block;
+    color: black;
+    text-decoration: none;
 }
 .nav-link-current {
     height: 100%;
@@ -939,4 +941,54 @@ align-items: center;
     list-style: none;
     margin: 0;
     width: 100%;
+}
+.signup-table{
+    width: 50vw;
+    margin-left: 25vw;
+    border: green 2px solid;
+    background-color: #9c9c9c;
+    text-align: center;
+    table-layout: fixed;
+}
+.signup-table td {
+    border: green 2px solid;
+    background-color: lightgray;
+    padding: 2px;
+}
+.signup-table .head-cell {
+    background-color: green;
+    color: lightgray;
+    font-weight: bold;
+}
+.center {
+    text-align: center;
+}
+.dungeon-details{
+    width: 55vw;
+    margin-left: 18vw;
+    border: green 2px solid;
+    background-color: lightgray;
+}
+.cd-select{
+    background-color: green;
+    color: lightgray;
+    font-weight: bold;
+    font-size: large;
+    padding: 4px;
+}
+.cd-select td {
+    border: green 2px solid;
+}
+.enemy-list{
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 20px;
+    column-count: 2;
+    column-gap: 20px;
+    list-style: none;
+}
+.enemy-list li{
+    margin: 5px;
+    border: green 2px solid;
 }

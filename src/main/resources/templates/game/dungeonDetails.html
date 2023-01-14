@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+      xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <!-- CSS only -->
@@ -13,19 +13,20 @@
 <body>
 <div th:replace="game/fragments :: nav">
 </div>
-    <div class="middleb">
-<div>
-    <!-- id/depth -->
-    <h3>Floor selection</h3>
-    <select id="select" name="cd-dropdown" class="cd-select">
-        <option selected disabled value="-1" >Choose floor</option>
-        <span th:each="floor : ${dungeonDetails.floors}">
-            <option th:value="${floor.id}"
-                    th:text="${floor.party.name}"/>
+<div class="middleb">
+    <div class="dungeon-details">
+        <div>
+            <!-- id/depth -->
+            <h3>Floor selection</h3>
+            <select class="cd-select" id="select" name="cd-dropdown">
+                <option disabled selected value="-1">Choose floor</option>
+                <span th:each="floor : ${dungeonDetails.floors}">
+            <option th:text="${floor.party.name}"
+                    th:value="${floor.id}"/>
         </span>
-    </select>
+            </select>
 
-</div>
+        </div>
         <br>
 
         <!-- buttons-->
@@ -33,28 +34,26 @@
             <span th:class="'pr-price d'+${floor.id}">
             <table class="dungeonList">
         <tr>
-            <td class="navfields" ><a class="nav-link-b" th:href="@{'/game/enter-dungeon/'+${floor.id}}" />Venture in</td>
-            <td  class="navfields" ><a  class="nav-link-b" th:href="@{/game/dungeons}">Back</a></td>
+            <td class="navfields"><a class="nav-link-b" th:href="@{'/game/enter-dungeon/'+${floor.id}}">Venture in</a></td>
+            <td class="navfields"><a class="nav-link-b" th:href="@{/game/dungeons}">Back</a></td>
         </tr>
                 </table>
                 </span>
  </span>
         <br>
         <!-- enemy teams-->
-<div>
+        <div>
 
     <span th:each="floor : ${dungeonDetails.floors}">
 
     <div th:class="'pr-price d'+${floor.id}">
             <h3>Enemy Party</h3>
-        <table class="dungeonList">
-        <!--<span th:text="'wrogowie na '+${floor.depth}"></span>-->
-            <tr>
-        <span th:each="enemy : ${floor.party.characters}">
-            <td th:text="${enemy.character.name}+' lvl '+${enemy.lvl}"></td>
-        </span>
-            </tr>
-            </table>
+        <ul class="enemy-list">
+        <li th:each="enemy : ${floor.party.characters}">
+            <span th:text="${enemy.character.name}+' lvl '+${enemy.lvl}"></span>
+        </li>
+        </ul>
+
     </div>
 
 
@@ -98,15 +97,14 @@
 
     </div>
     </span>
-    <!-- enemy teams-->
-    <!-- rewards-->
+            <!-- enemy teams-->
+            <!-- rewards-->
 
-    <hr/>
+            <hr/>
 
 
-
-</div>
-<br>
+        </div>
+        <br>
         <h3>
             Your team
         </h3>
@@ -120,16 +118,16 @@
                     +${playerParty.characters[3].lvl})/4"></td>
                 </tr>
                 <tr>
-                    <td colspan="4">Current team: </td>
+                    <td colspan="4">Current team:</td>
                 </tr>
                 <Tr>
                     <span th:each="char : ${playerParty.characters}">
-                        <td  th:text="${char.character.name}+' lvl '+${char.lvl}"></td>
+                        <td th:text="${char.character.name}+' lvl '+${char.lvl}"></td>
                     </span>
                 </Tr>
                 <tr>
-                    <td>
-                        <button type="button" th:text="'Change team'" th:href="@{/game/equipment/parties}"></button>
+                    <td colspan="4">
+                        <button th:href="@{/game/equipment/parties}" th:text="'Change team'" type="button"></button>
                     </td>
                 </tr>
             </table>
@@ -137,34 +135,37 @@
         <br>
 
 
-
     </div>
+</div>
 
 
 <div id="popup3">
     <div class="settingList">
-        <div class="settingField">Opcje</div><br>
-        <div class="settingField">Twórcy</div><br>
-        <div class="settingField"><a th:href="@{/logout}">Wyloguj</a></div><br>
+        <div class="settingField">Opcje</div>
+        <br>
+        <div class="settingField">Twórcy</div>
+        <br>
+        <div class="settingField"><a th:href="@{/logout}">Wyloguj</a></div>
+        <br>
         <div class="settingField"><a href="#" onclick="toggle3()">Wróć</a></div>
     </div>
 </div>
 </body>
 <script type="text/javascript">
 
-    function toggle3()
-    {
-        var blur=document.getElementById('shop1');
+    function toggle3() {
+        var blur = document.getElementById('shop1');
         blur.classList.toggle('active');
-        var popup3=document.getElementById('popup3');
+        var popup3 = document.getElementById('popup3');
         popup3.classList.toggle('active');
     }
+
     $(function () {
         $('.pr-price').hide();
         $('.d2').show();
-        $('#select').on("change",function () {
+        $('#select').on("change", function () {
             $('.pr-price').hide();
-            $('.d'+$(this).val()).show();
+            $('.d' + $(this).val()).show();
         }).val(-1); // reflect the div shown
     });
 </script>
