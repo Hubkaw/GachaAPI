@@ -28,12 +28,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td rowspan="2" >Lvl requirement</td>
                     <!--desc   <td th:text="${item.expiresAt !=null} ? 'Expires at '+${#strings.substring(${item.expiresAt},3,5)} : 'Pernament dungeon'"></td>-->
                     <td th:text="${item.expiresAt !=null} ? 'Expires at '+ ${#strings.substring(item.expiresAt,0,10)} : 'Pernament dungeon'"></td>
                 </tr>
                 <tr>
-                    <td th:text="'Dungeon type- '+${#strings.toLowerCase(item.type)}"/>
+                    <td th:text="' '+${#strings.toUpperCase(item.type)}"/>
                 </tr>
                 <!--first dungeon -->
             </table>
