@@ -23,10 +23,10 @@ public class GameChestsController {
     private PlayerService playerService;
 
     @GetMapping("/game/chests")
-    public ModelAndView getChests(Model model, Principal principal){
-        return new ModelAndView("game/chests")
-                .addObject("chestList",chestService.getAvailable())
-                .addObject("player",playerService.getByName(principal.getName()));
+    public String getChests(Model model, Principal principal){
+        model.addAttribute("chestList",chestService.getAvailable());
+        model.addAttribute("player",playerService.getByName(principal.getName()));
+        return "game/chests";
     }
 
     @GetMapping("/game/chests/{someID}")
