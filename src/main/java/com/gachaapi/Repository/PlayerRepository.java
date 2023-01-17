@@ -14,4 +14,7 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
     boolean existsByNick(String nick);
 
     List<Player> findAllByEloPointsGreaterThanEqualAndActivePartyIsNot(int eloPoints, int activeParty);
+
+
+
 }

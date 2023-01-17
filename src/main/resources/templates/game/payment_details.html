@@ -1,66 +1,60 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <!-- CSS only -->
   <link rel="stylesheet" th:href="@{/assets/style2.css}"/>
 
   <title>Gacha</title>
 </head>
-
 <body>
 <div th:replace="game/fragments :: nav">
 </div>
+<div>
+  <nav>
+  </nav>
+</div>
 <br>
 <div class="middleb">
-  <h1>Buy $</h1>
-  <table class="pay-table">
-    <tr>
-      <td>Amount of $:</td>
-      <td th:text="${price.volume}"></td>
-    </tr>
-    <tr>
-      <td>Total Price:</td>
-      <td th:text="${price.price}"></td>
-    </tr>
-    <tr>
-      <td>First Name:</td>
-      <td><input type="text" name="firstName"></td>
-    </tr>
-    <tr>
-      <td>Last Name:</td>
-      <td><input type="text" name="lastName"></td>
-    </tr>
-    <tr>
-      <td>Address:</td>
-      <td><input type="text" name="address"></td>
-    </tr>
-    <tr>
-      <td>Province:</td>
-      <td><input type="text" name="province"></td>
-    </tr>
-    <tr>
-      <td>Card Number:</td>
-      <td><input type="Number" name="cardNumber"></td>
-    </tr>
-    <tr>
-      <td>Card Expiration date:</td>
-      <td><input type="month" name="cardExp"></td>
-    </tr>
-    <tr>
-      <td>Card CVV:</td>
-      <td><input type="number" name="cardCVV"></td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <BUTTON>BUY</BUTTON>
-      </td>
-    </tr>
-  </table>
+  <form method="post" th:action="@{/pay}">
+    <h1>Buy $</h1>
+    <table class="pay-table">
+      <tr>
+        <td>
+          <label for="price">Total</label>
+          <input type="text" id="price" readonly name="price" th:value="${price.price}">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="currency">Currency</label>
+          <input type="text" id="currency" readonly name="currency" placeholder="Enter Currency" th:value="PLN">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="method">Payment Method</label>
+          <input type="text" id="method" readonly name="method" placeholder="Payment Method" th:value="PayPal">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="intent">Intent</label>
+          <input type="text" id="intent" readonly name="intent" th:value="SALE">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="description">Payment Description</label>
+          <input type="text" id="description" readonly name="description" placeholder="Payment Description" th:value="${price.volume}+'$'">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button type="submit">BUY</button>
+        </td>
+      </tr>
+    </table>
+  </form>
 </div>
-
-</div>
-
 </body>
 </html>
