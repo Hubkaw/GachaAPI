@@ -94,6 +94,8 @@ DELETE
 FROM affilation;
 DELETE
 FROM ability;
+DELETE
+FROM paymentmethod;
 SET
 foreign_key_checks = 1;
 

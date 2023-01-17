@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface InGameCurrencyPurchaseRepository extends JpaRepository<Ingamecurrencypurchase, Integer> {
 
+    Ingamecurrencypurchase findByVolume(int value);
 }

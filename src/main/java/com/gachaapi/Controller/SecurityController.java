@@ -1,30 +1,25 @@
 package com.gachaapi.Controller;
 
 import com.gachaapi.Entity.Player;
-import com.gachaapi.Utils.NewPlayer;
 import com.gachaapi.Security.Service.JWTService;
 import com.gachaapi.Service.interfaces.PlayerService;
+import com.gachaapi.Utils.NewPlayer;
 import com.gachaapi.Utils.TokenResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.boot.Banner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
-import org.thymeleaf.spring5.view.ThymeleafView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.text.ParseException;
-
-import static com.gachaapi.Utils.Constants.ADMIN_ROLE;
 
 @Controller
 @AllArgsConstructor
@@ -84,5 +79,6 @@ public class SecurityController {
         }
         return redirectView;
     }
+
 
 }
