@@ -4,9 +4,7 @@ import com.gachaapi.Service.interfaces.BattleLogsService;
 import com.gachaapi.Service.interfaces.ChestService;
 import com.gachaapi.Service.interfaces.PVPService;
 import com.gachaapi.Service.interfaces.PlayerService;
-import lombok.AllArgsConstructor;
 import org.springframework.boot.Banner;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,19 +12,16 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
 
 @Controller
 @AllArgsConstructor
 
 
 public class GamePvPController {
-
-    //how to get enemies
     private PlayerService playerService;
     private PVPService pvpService;
-
-    private BattleLogsService battleLogsService;
-
 
     @GetMapping("/game/pvp")
     public String getPvPSelection(Model model, Principal principal){

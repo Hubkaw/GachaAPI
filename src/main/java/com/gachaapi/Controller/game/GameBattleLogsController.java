@@ -21,7 +21,6 @@ import java.security.Principal;
 
 public class GameBattleLogsController {
 
-    //how to get enemies
     private PlayerService playerService;
 
     private BattleLogsService battleLogsService;

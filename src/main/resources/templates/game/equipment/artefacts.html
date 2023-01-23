@@ -71,7 +71,7 @@
         popup3.classList.toggle('active');
     }
     function textSearch() {
-        var input, filter, ul, li, a, i, txtValue;
+        var input, filter, ul, li, info, i, txtValue;
         input = document.getElementById('textInput');
         filter = input.value.toUpperCase();
         ul = document.getElementById("artList");
@@ -79,8 +79,8 @@
 
         for (i = 0; i < li.length; i++) {
             //TO WEŹMIE PIERWSZY SPAN, JAK ZOSTANIE DODANY KOLEJNY SPAN PRZED NAME, TRZEBA ZMIENIC
-            a = li[i].getElementsByTagName("summary")[0];
-            txtValue = a.textContent || a.innerText;
+            info = li[i].getElementsByTagName("summary")[0];
+            txtValue = info.textContent || info.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 li[i].style.display = "";
             } else {
