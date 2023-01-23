@@ -1,6 +1,7 @@
 package com.gachaapi.Service.interfaces;
 
 
+import com.gachaapi.Entity.Material;
 import com.gachaapi.Entity.PlayerCharacter;
 import com.gachaapi.Utils.ChangeArtefact;
 import com.gachaapi.Utils.CharacterArtefacts;
@@ -18,7 +19,7 @@ public interface PlayerCharacterService {
 
     PlayerCharacter getSafeById(int id, String nickname);
     Map<String, Integer> getTotalStats(int id, String nickname);
-
+    Map<Material, Integer> getLevelUpCosts(int id, String nickname);
     void changeWeapon(WeaponChange weaponChange, String nickname);
 
     CharacterArtefacts getCharacterArtefacts(int id, String nickname);

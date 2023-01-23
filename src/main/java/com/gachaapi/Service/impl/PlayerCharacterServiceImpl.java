@@ -1,7 +1,6 @@
 package com.gachaapi.Service.impl;
 
 import com.gachaapi.Entity.*;
-import com.gachaapi.Entity.Collection;
 import com.gachaapi.Entity.Set;
 import com.gachaapi.Repository.*;
 import com.gachaapi.Service.interfaces.PlayerCharacterService;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
+import java.util.Collection;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
@@ -210,6 +210,41 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
             }
         }
         return result;
+    }
+
+    @Override
+    public Map<Material, Integer> getLevelUpCosts(int id, String nickname) {
+        PlayerCharacter pc = playerCharacterRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "This character does not exist")
+        );
+
+        Map<Material, Integer> out = new HashMap<>();
+        Collection<Materialclass> materialClasses = pc.getCharacter().getCharacterClass().getMaterialClasses();
+        for (Materialclass materialClass : materialClasses) {
+            if (out.containsKey(materialClass.getMaterial())){
+                int amount = out.get(materialClass.getMaterial());
+                amount += materialClass.getBaseAmount() + (materialClass.getPerLvlAmount() * pc.getLvl());
+
+                out.put(materialClass.getMaterial(), amount);
+            } else {
+                out.put(materialClass.getMaterial(), materialClass.getBaseAmount() + (materialClass.getPerLvlAmount()*pc.getLvl()));
+            }
+        }
+
+        Collection<Materialaffilation> materialAffilations = pc.getCharacter().getAffilation().getMaterialAffilations();
+        for (Materialaffilation materialAffilation : materialAffilations) {
+            if (out.containsKey(materialAffilation.getMaterial())){
+                int amount = out.get(materialAffilation.getMaterial());
+                amount += materialAffilation.getBaseAmount() + (materialAffilation.getPerLvlAmount() * pc.getLvl());
+
+                out.put(materialAffilation.getMaterial(), amount);
+            } else {
+                out.put(materialAffilation.getMaterial(), materialAffilation.getBaseAmount() + (materialAffilation.getPerLvlAmount()*pc.getLvl()));
+            }
+        }
+
+
+        return out;
     }
 
     @Override

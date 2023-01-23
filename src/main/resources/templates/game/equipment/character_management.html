@@ -61,13 +61,9 @@
             <td colspan="2" rowspan="2">
                     <span class="float-right">
                         <span class="bold">Cost:</span><br>
-                            <span th:each="cost : ${playerCharacter.character.characterClass.materialClasses}">
-                                <span th:text="${cost.material.name}+': '+${cost.baseAmount + (cost.perLvlAmount * playerCharacter.lvl)}+' /'"></span>
-                                <span th:text="${materialMap.containsKey(cost.material.name)} ? ${materialMap.get(cost.material.name)} : '0'"></span><br>
-                            </span>
-                            <span th:each="cost : ${playerCharacter.character.affilation.materialAffilations}">
-                                <span th:text="${cost.material.name}+': '+${cost.baseAmount + (cost.perLvlAmount * playerCharacter.lvl)}+' /'"></span>
-                                <span th:text="${materialMap.containsKey(cost.material.name)} ? ${materialMap.get(cost.material.name)} : '0'"></span><br>
+                            <span th:each="cost : ${costs}">
+                                <span th:text="${cost.key.name}+': '+${cost.value}+' /'"></span>
+                                <span th:text="${materialMap.containsKey(cost.key.name)} ? ${materialMap.get(cost.key.name)} : '0'"></span><br>
                             </span>
                         </span>
             </td>

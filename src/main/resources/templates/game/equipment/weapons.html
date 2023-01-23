@@ -16,35 +16,31 @@
         <input type="text" id="textInput" onkeyup="textSearch()" placeholder="Search for weapons" style="width:33%;margin-left: 33%;margin-right: 33%;">
         <p th:text="${error != null} ? ${error} : ''" class="error"></p>
         <ul class="artefact-list" id="wpnList">
-            <li th:each="item : ${player.playerWeapons}">
+            <li th:each="item : ${playerWeapons}">
                 <details>
-                    <summary th:text="${item.weapon.name}+' lvl'+${item.lvl}"></summary>
+                    <summary th:text="${item.key.weapon.name}+' lvl'+${item.key.lvl}"></summary>
                     <p class="artefact-details-paragraph">
                         <span class="bold">Weapon Class: </span>
-                        <span th:text="${item.weapon.weaponClass.name}"></span><br>
+                        <span th:text="${item.key.weapon.weaponClass.name}"></span><br>
                         <span class="bold">Rarity: </span>
-                        <span th:text="${item.weapon.rarity.name}"></span><br>
+                        <span th:text="${item.key.weapon.rarity.name}"></span><br>
                         <span class="bold">Element: </span>
-                        <span th:text="${item.weapon.element.name}"></span><br>
+                        <span th:text="${item.key.weapon.element.name}"></span><br>
                         <span class="bold">Wielded by: </span>
-                        <span th:text="${item.wieldingCharacter != null} ?
-                        ${item.wieldingCharacter.character.name}+' lvl'+${item.wieldingCharacter.lvl} : 'none'"></span><br>
+                        <span th:text="${item.key.wieldingCharacter != null} ?
+                        ${item.key.wieldingCharacter.character.name}+' lvl'+${item.key.wieldingCharacter.lvl} : 'none'"></span><br>
                         <span class="bold">Stats: </span>
-                        <span th:each="stat : ${item.weapon.stats}"
-                              th:text="'&emsp;'+${stat.stat.shortName}+': '+${stat.value * item.lvl}"></span><br>
+                        <span th:each="stat : ${item.key.weapon.stats}"
+                              th:text="'&emsp;'+${stat.stat.shortName}+': '+${stat.value * item.key.lvl}"></span><br>
                     </p>
                     <p>
                         <span class="bold">Level up:</span><br>
                         Cost:<br>
-                        <span th:each="mwc : ${item.weapon.weaponClass.materialWeaponClasses}">
-                            <span th:text="${mwc.material.name}+': '+${mwc.baseAmount + (mwc.perLvlAmount * item.lvl)}+' /'"></span>
-                            <span th:text="${materialMap.containsKey(mwc.material.name)} ? ${materialMap.get(mwc.material.name)} : '0'"></span><br>
+                        <span th:each="cost : ${item.value}">
+                            <span th:text="${cost.key.name}+': '+${cost.value}+' /'"></span>
+                            <span th:text="${materialMap.containsKey(cost.key.name)} ? ${materialMap.get(cost.key.name)} : '0'"></span><br>
                         </span>
-                        <span th:each="me : ${item.weapon.element.materialElements}">
-                            <span th:text="${me.material.name}+': '+${me.baseAmount + (me.perLvlAmount * item.lvl)}+' /'"></span>
-                            <span th:text="${materialMap.containsKey(me.material.name)} ? ${materialMap.get(me.material.name)} : '0'"></span><br>
-                        </span><br>
-                        <a th:href="@{'/game/equipment/weapons/level-up/'+${item.id}}">
+                        <a th:href="@{'/game/equipment/weapons/level-up/'+${item.key.id}}">
                             <button>Confirm</button>
                         </a>
                     </p>

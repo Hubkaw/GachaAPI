@@ -36,6 +36,7 @@ public class GameCharacterController {
             model.addAttribute("player", playerService.getByName(principal.getName()));
             model.addAttribute("playerCharacter",playerCharacterService.getSafeById(id, principal.getName()));
             model.addAttribute("totalStats", playerCharacterService.getTotalStats(id, principal.getName()));
+            model.addAttribute("costs", playerCharacterService.getLevelUpCosts(id, principal.getName()));
             model.addAttribute("artefacts", playerCharacterService.getCharacterArtefacts(id, principal.getName()));
             model.addAttribute("materialMap", playerService.getMaterialMap(principal.getName()));
             return "game/equipment/character_management";
@@ -53,6 +54,7 @@ public class GameCharacterController {
             model.addAttribute("player", playerService.getByName(principal.getName()));
             model.addAttribute("playerCharacter",playerCharacterService.getSafeById(weaponChange.getCharacterId(), principal.getName()));
             model.addAttribute("totalStats", playerCharacterService.getTotalStats(weaponChange.getCharacterId(), principal.getName()));
+            model.addAttribute("costs", playerCharacterService.getLevelUpCosts(weaponChange.getCharacterId(), principal.getName()));
             model.addAttribute("artefacts", playerCharacterService.getCharacterArtefacts(weaponChange.getCharacterId(), principal.getName()));
             model.addAttribute("error", "Something went wrong with changing the weapon");
             model.addAttribute("materialMap", playerService.getMaterialMap(principal.getName()));
@@ -66,6 +68,7 @@ public class GameCharacterController {
             model.addAttribute("playerCharacter",playerCharacterService.getSafeById(weaponChange.getCharacterId(), principal.getName()));
             model.addAttribute("error", e.getReason());
             model.addAttribute("materialMap", playerService.getMaterialMap(principal.getName()));
+            model.addAttribute("costs", playerCharacterService.getLevelUpCosts(weaponChange.getCharacterId(), principal.getName()));
             model.addAttribute("totalStats", playerCharacterService.getTotalStats(weaponChange.getCharacterId(), principal.getName()));
             model.addAttribute("artefacts", playerCharacterService.getCharacterArtefacts(weaponChange.getCharacterId(), principal.getName()));
             return "game/equipment/character_management";
@@ -77,6 +80,7 @@ public class GameCharacterController {
         if (result.hasErrors()){
             model.addAttribute("player", playerService.getByName(principal.getName()));
             model.addAttribute("error", "Something went wrong with changing the weapon");
+            model.addAttribute("costs", playerCharacterService.getLevelUpCosts(changeArtefact.getCharacterId(), principal.getName()));
             model.addAttribute("playerCharacter",playerCharacterService.getSafeById(changeArtefact.getCharacterId(), principal.getName()));
             model.addAttribute("totalStats", playerCharacterService.getTotalStats(changeArtefact.getCharacterId(), principal.getName()));
             model.addAttribute("materialMap", playerService.getMaterialMap(principal.getName()));
@@ -90,6 +94,7 @@ public class GameCharacterController {
             model.addAttribute("player", playerService.getByName(principal.getName()));
             model.addAttribute("playerCharacter",playerCharacterService.getSafeById(changeArtefact.getCharacterId(), principal.getName()));
             model.addAttribute("error", e.getReason());
+            model.addAttribute("costs", playerCharacterService.getLevelUpCosts(changeArtefact.getCharacterId(), principal.getName()));
             model.addAttribute("materialMap", playerService.getMaterialMap(principal.getName()));
             model.addAttribute("totalStats", playerCharacterService.getTotalStats(changeArtefact.getCharacterId(), principal.getName()));
             model.addAttribute("artefacts", playerCharacterService.getCharacterArtefacts(changeArtefact.getCharacterId(), principal.getName()));
@@ -104,11 +109,13 @@ public class GameCharacterController {
             model.addAttribute("playerCharacter",playerCharacterService.levelUp(id, principal.getName()));
             model.addAttribute("totalStats", playerCharacterService.getTotalStats(id, principal.getName()));
             model.addAttribute("artefacts", playerCharacterService.getCharacterArtefacts(id, principal.getName()));
+            model.addAttribute("costs", playerCharacterService.getLevelUpCosts(id, principal.getName()));
             model.addAttribute("materialMap", playerService.getMaterialMap(principal.getName()));
             return "game/equipment/character_management";
         } catch (ResponseStatusException e){
             model.addAttribute("player", playerService.getByName(principal.getName()));
             model.addAttribute("playerCharacter",playerCharacterService.getSafeById(id, principal.getName()));
+            model.addAttribute("costs", playerCharacterService.getLevelUpCosts(id, principal.getName()));
             model.addAttribute("totalStats", playerCharacterService.getTotalStats(id, principal.getName()));
             model.addAttribute("artefacts", playerCharacterService.getCharacterArtefacts(id, principal.getName()));
             model.addAttribute("error", e.getReason());

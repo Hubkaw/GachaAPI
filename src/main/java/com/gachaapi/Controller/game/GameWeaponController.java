@@ -23,6 +23,7 @@ public class GameWeaponController {
     @GetMapping("/game/equipment/weapons")
     public String getGameEquipmentWeapons(Model model, Principal principal){
         model.addAttribute("player", playerService.getByName(principal.getName()));
+        model.addAttribute("playerWeapons", playerWeaponService.getAllWithCost(principal.getName()));
         model.addAttribute("materialMap", playerService.getMaterialMap(principal.getName()));
         return "game/equipment/weapons";
     }
@@ -33,6 +34,7 @@ public class GameWeaponController {
             playerWeaponService.levelUp(id, principal.getName());
         } catch (ResponseStatusException e){
             model.addAttribute("player", playerService.getByName(principal.getName()));
+            model.addAttribute("playerWeapons", playerWeaponService.getAllWithCost(principal.getName()));
             model.addAttribute("materialMap", playerService.getMaterialMap(principal.getName()));
             model.addAttribute("error", e.getReason());
             return "game/equipment/weapons";

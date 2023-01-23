@@ -10,10 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.*;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -73,5 +71,46 @@ public class PlayerWeaponServiceImpl implements PlayerWeaponService {
         });
         playerWeapon.setLvl(playerWeapon.getLvl()+1);
         return playerWeaponRepository.save(playerWeapon);
+    }
+
+    @Override
+    public Map<PlayerWeapon, Map<Material, Integer>> getAllWithCost(String nickname) {
+        List<PlayerWeapon> playerWeapons = playerWeaponRepository.findAllByPlayerNick(nickname);
+
+        Map<PlayerWeapon, Map<Material, Integer>> out = new TreeMap<>((key, nextKey) -> {
+            if (0 != key.getWeapon().getName().compareTo(nextKey.getWeapon().getName())){
+                return key.getWeapon().getName().compareTo(nextKey.getWeapon().getName());
+            }
+            return Integer.compare(nextKey.getLvl(),key.getLvl());
+        });
+
+        for (PlayerWeapon playerWeapon : playerWeapons) {
+            Map<Material, Integer> requiredMaterials = new HashMap<>();
+
+            Collection<Materialweaponclass> materialWeaponClasses = playerWeapon.getWeapon().getWeaponClass().getMaterialWeaponClasses();
+            for (Materialweaponclass materialWeaponClass : materialWeaponClasses) {
+                if (requiredMaterials.containsKey(materialWeaponClass.getMaterial())){
+                    int amount = requiredMaterials.get(materialWeaponClass.getMaterial());
+                    amount += materialWeaponClass.getBaseAmount() + (materialWeaponClass.getPerLvlAmount() * playerWeapon.getLvl());
+
+                    requiredMaterials.put(materialWeaponClass.getMaterial(), amount);
+                } else {
+                    requiredMaterials.put(materialWeaponClass.getMaterial(), materialWeaponClass.getBaseAmount() + (materialWeaponClass.getPerLvlAmount()*playerWeapon.getLvl()));
+                }
+            }
+            Element element = playerWeapon.getWeapon().getElement();
+            for (Materialelement materialElement : element.getMaterialElements()) {
+            if (requiredMaterials.containsKey(materialElement.getMaterial())){
+                    int amount = requiredMaterials.get(materialElement.getMaterial());
+                    amount += materialElement.getBaseAmount() + (materialElement.getPerLvlAmount() * playerWeapon.getLvl());
+
+                    requiredMaterials.put(materialElement.getMaterial(), amount);
+                } else {
+                    requiredMaterials.put(materialElement.getMaterial(), materialElement.getBaseAmount() + (materialElement.getPerLvlAmount()*playerWeapon.getLvl()));
+                }
+            }
+            out.put(playerWeapon, requiredMaterials);
+        }
+        return out;
     }
 }
