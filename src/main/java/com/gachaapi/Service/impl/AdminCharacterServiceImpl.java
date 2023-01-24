@@ -5,7 +5,9 @@ import com.gachaapi.Repository.*;
 import com.gachaapi.Service.interfaces.AdminCharacterService;
 import com.gachaapi.Utils.dev.NewAdminCharacter;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -30,9 +32,22 @@ public class AdminCharacterServiceImpl implements AdminCharacterService {
 
     @Override
     public void create(NewAdminCharacter newAdminCharacter) {
-        if (newAdminCharacter.getCharId() == -1){
-            return;
+        if (newAdminCharacter.getCharId() < 1 || newAdminCharacter.getCharLvl()<1){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid character or character level");
         }
+        if(newAdminCharacter.getGlassesId()>=1 && newAdminCharacter.getGlassesLvl()<1){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Level must be above 0");
+        }
+        if(newAdminCharacter.getHatId()>=1 && newAdminCharacter.getHatLvl()<1){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Level must be above 0");
+        }
+        if(newAdminCharacter.getWeaponId()>=1 && newAdminCharacter.getWeaponLvl()<1){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Level must be above 0");
+        }
+        if(newAdminCharacter.getRingId()>=1 && newAdminCharacter.getRingLvl()<1){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Level must be above 0");
+        }
+
         Player admin = playerRepository.findByNick("admin").orElseThrow();
         PlayerCharacter pc = new PlayerCharacter();
         pc.setPlayerArtefacts(new HashSet<>());
@@ -45,8 +60,8 @@ public class AdminCharacterServiceImpl implements AdminCharacterService {
             playerArtefactRepository.save(pa);
             pc.getPlayerArtefacts().add(pa);
         }
-        if(newAdminCharacter.getHatId()!=-1){
-            Artefact hat = artefactRepository.getReferenceById(newAdminCharacter.getHatId());
+        if(newAdminCharacter.getHatId()!=-1 && newAdminCharacter.getHatLvl()>=1){
+            Artefact hat = artefactRepository.findById(newAdminCharacter.getHatId()).orElseThrow();
             PlayerArtefact pa = new PlayerArtefact();
             pa.setArtefact(hat);
             pa.setLvl(newAdminCharacter.getHatLvl());
@@ -54,7 +69,7 @@ public class AdminCharacterServiceImpl implements AdminCharacterService {
             playerArtefactRepository.save(pa);
             pc.getPlayerArtefacts().add(pa);
         }
-        if(newAdminCharacter.getRingId()!=-1){
+        if(newAdminCharacter.getRingId()!=-1 && newAdminCharacter.getRingLvl()>=1){
             Artefact ring = artefactRepository.getReferenceById(newAdminCharacter.getRingId());
             PlayerArtefact pa = new PlayerArtefact();
             pa.setArtefact(ring);
@@ -63,7 +78,7 @@ public class AdminCharacterServiceImpl implements AdminCharacterService {
             playerArtefactRepository.save(pa);
             pc.getPlayerArtefacts().add(pa);
         }
-        if (newAdminCharacter.getWeaponId()!=-1){
+        if (newAdminCharacter.getWeaponId()!=-1 && newAdminCharacter.getWeaponLvl()>=1){
             PlayerWeapon pw = new PlayerWeapon();
             Weapon weapon = weaponRepository.getReferenceById(newAdminCharacter.getWeaponId());
             pw.setWeapon(weapon);
@@ -80,6 +95,6 @@ public class AdminCharacterServiceImpl implements AdminCharacterService {
 
     @Override
     public void delete(int id) {
-        PlayerCharacter pc = playerCharacterRepository.getReferenceById(id);
+        playerCharacterRepository.deleteById(id);
     }
 }

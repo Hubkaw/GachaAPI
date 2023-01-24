@@ -11,6 +11,7 @@
 <div>
     <h1>Dev Collections</h1>
     <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <p class="center" th:text="${error != null} ? ${error} : ''"></p>
     <form th:action="@{/dev/collection}" th:method="post" th:object="${newCollection}">
         <h2>Name:</h2><br>
         <input th:type="text" name="name" required><br>

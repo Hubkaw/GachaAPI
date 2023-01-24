@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static com.gachaapi.Utils.Constants.CANT_DELETE_USED;
+
 @AllArgsConstructor
 @Controller
 public class DevRarityController {
@@ -31,7 +33,13 @@ public class DevRarityController {
 
     @GetMapping("/dev/rarity/delete/{id}")
     public String deleteRarity(Model model, @PathVariable("id")int id){
-        rarityService.delete(id);
-        return "redirect:/dev/rarity";
+        try {
+            rarityService.delete(id);
+            return "redirect:/dev/rarity";
+        } catch (Exception e){
+            model.addAttribute("rarityList", rarityService.getAll());
+            model.addAttribute("error", CANT_DELETE_USED);
+            return "dev/Rarity";
+        }
     }
 }

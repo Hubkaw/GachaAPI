@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static com.gachaapi.Utils.Constants.CANT_DELETE_USED;
+
 @Controller
 @AllArgsConstructor
 public class DevSetController {
@@ -35,8 +37,14 @@ public class DevSetController {
 
     @GetMapping("/dev/set/delete/{id}")
     public String deleteSet(Model model, @PathVariable("id")int id){
-        setService.delete(id);
-        return "redirect:/dev/set";
+        try {
+            setService.delete(id);
+            return "redirect:/dev/set";
+        } catch (Exception e){
+            model.addAttribute("setList", setService.getAll());
+            model.addAttribute("error", CANT_DELETE_USED);
+            return "dev/Set";
+        }
     }
 
     @GetMapping("/dev/set/stats/{id}")

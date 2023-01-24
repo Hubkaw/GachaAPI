@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static com.gachaapi.Utils.Constants.CANT_DELETE_USED;
+
 @AllArgsConstructor
 @Controller
 public class DevElementController {
@@ -33,8 +35,14 @@ public class DevElementController {
 
     @GetMapping("/dev/element/delete/{id}")
     public String deleteElement(Model model, @PathVariable("id")int id){
-        elementService.delete(id);
-        return "redirect:/dev/element";
+        try {
+            elementService.delete(id);
+            return "redirect:/dev/element";
+        } catch (Exception e){
+            model.addAttribute("elementList", elementService.getAll());
+            model.addAttribute("error", CANT_DELETE_USED);
+            return "dev/Element";
+        }
     }
 
     @GetMapping("/dev/element/material/{id}")

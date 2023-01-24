@@ -11,10 +11,13 @@ import com.gachaapi.Utils.dev.NewStatArtefact;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import static com.gachaapi.Utils.Constants.CANT_DELETE_USED;
 
 @Controller
 @AllArgsConstructor
@@ -34,15 +37,35 @@ public class DevArtefactController {
     }
 
     @PostMapping("/dev/artefact")
-    public String createArtefact(Model model, @ModelAttribute("newArtefact") NewArtefact newArtefact){
-        artefactService.create(newArtefact);
-        return "redirect:/dev/artefact";
+    public String createArtefact(Model model, @ModelAttribute("newArtefact") NewArtefact newArtefact, BindingResult result){
+        if (result.hasErrors()){
+            model.addAttribute("artefactList", artefactService.getAll());
+            model.addAttribute("rarityList", rarityService.getAll());
+            model.addAttribute("error", "Invalid Parameters");
+            return "dev/Artefact";
+        }
+        try {
+            artefactService.create(newArtefact);
+            return "redirect:/dev/artefact";
+        }catch (Exception e){
+            model.addAttribute("artefactList", artefactService.getAll());
+            model.addAttribute("rarityList", rarityService.getAll());
+            model.addAttribute("error", e.getMessage());
+            return "dev/Artefact";
+        }
     }
 
     @GetMapping("/dev/artefact/delete/{id}")
     public String deleteArtefact(Model model, @PathVariable("id")int id){
-        artefactService.delete(id);
-        return "redirect:/dev/artefact";
+        try {
+            artefactService.delete(id);
+            return "redirect:/dev/artefact";
+        } catch (Exception e){
+            model.addAttribute("artefactList", artefactService.getAll());
+            model.addAttribute("rarityList", rarityService.getAll());
+            model.addAttribute("error", CANT_DELETE_USED);
+            return "dev/Artefact";
+        }
     }
     @GetMapping("/dev/artefact/stats/{id}")
     public String getStatArtefact(Model model, @PathVariable("id")int id){

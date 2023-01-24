@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import static com.gachaapi.Utils.Constants.CANT_DELETE_USED;
+
 @Controller
 @AllArgsConstructor
 public class DevWeaponClassController {
@@ -31,8 +33,14 @@ public class DevWeaponClassController {
 
     @GetMapping("/dev/weaponClass/delete/{id}")
     public String deleteWeaponCLass(Model model, @PathVariable("id")int id){
-        weaponClassService.delete(id);
-        return "redirect:/dev/weaponClass";
+        try {
+            weaponClassService.delete(id);
+            return "redirect:/dev/weaponClass";
+        } catch (Exception e){
+            model.addAttribute("weaponClassList", weaponClassService.getAll());
+            model.addAttribute("error", CANT_DELETE_USED);
+            return "dev/WeaponClass";
+        }
     }
 
     @GetMapping("/dev/weaponClass/material/{id}")

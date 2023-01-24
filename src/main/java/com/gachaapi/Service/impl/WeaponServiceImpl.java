@@ -40,8 +40,6 @@ public class WeaponServiceImpl implements WeaponService {
 
     @Override
     public void delete(int id) {
-        Weapon weapon = weaponRepository.getReferenceById(id);
-        if (weapon.getPlayerWeaponsById().isEmpty())
             weaponRepository.deleteById(id);
     }
 

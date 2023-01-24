@@ -48,8 +48,17 @@ public class DevAdminPartyController {
 
     @GetMapping("/dev/admin/party/delete/{id}")
     public String deleteAdminParty(Model model, @PathVariable("id")int id){
-        adminPartyService.delete(id);
-        return "redirect:/dev/admin/party";
+        try {
+            adminPartyService.delete(id);
+            return "redirect:/dev/admin/party";
+        } catch (Exception e){
+            model.addAttribute("dungeonList", dungeonService.getAll());
+            model.addAttribute("characterList", adminCharacterService.getAll());
+            model.addAttribute("partyList", adminCharacterService.getAll());
+            model.addAttribute("dungeonFloorList", adminPartyService.getAllDungeonFloors());
+            model.addAttribute("error", "You can't do that");
+            return "dev/AdminParty";
+        }
     }
 
     @GetMapping("/dev/admin/party/rewards/{id}")

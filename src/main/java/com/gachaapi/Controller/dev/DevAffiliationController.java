@@ -1,7 +1,6 @@
 package com.gachaapi.Controller.dev;
 
 
-import com.gachaapi.Entity.Materialaffilation;
 import com.gachaapi.Service.interfaces.AffiliationService;
 import com.gachaapi.Service.interfaces.MaterialService;
 import com.gachaapi.Service.interfaces.StatisticService;
@@ -9,12 +8,15 @@ import com.gachaapi.Utils.dev.NewAffiliation;
 import com.gachaapi.Utils.dev.NewAffiliationStat;
 import com.gachaapi.Utils.dev.NewMaterialAffiliation;
 import lombok.AllArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import static com.gachaapi.Utils.Constants.CANT_DELETE_USED;
 
 @AllArgsConstructor
 @Controller
@@ -38,8 +40,14 @@ public class DevAffiliationController {
 
     @GetMapping("/dev/affiliation/delete/{id}")
     public String deleteAffiliation(Model model, @PathVariable("id") int id){
-        affiliationService.delete(id);
-        return "redirect:/dev/affiliation";
+        try {
+            affiliationService.delete(id);
+            return "redirect:/dev/affiliation";
+        } catch (Exception e){
+            model.addAttribute("affiliationList", affiliationService.getAll());
+            model.addAttribute("error", CANT_DELETE_USED);
+            return "dev/Affiliation";
+        }
     }
 
     @GetMapping("/dev/affiliation/stats/{id}")
@@ -57,8 +65,16 @@ public class DevAffiliationController {
 
     @GetMapping("/dev/affiliation/stats/delete/{id}/{affiliationId}")
     public String deleteAffiliationStats(Model model, @PathVariable("id")int id, @PathVariable("affiliationId") int affiliationId){
-        affiliationService.deleteStat(id);
-        return "redirect:/dev/affiliation/stats/"+affiliationId;
+        try {
+            affiliationService.deleteStat(id);
+            return "redirect:/dev/affiliation/stats/" + affiliationId;
+        } catch (ConstraintViolationException e){
+            model.addAttribute("affiliation", affiliationService.getById(affiliationId));
+            model.addAttribute("statList", statisticService.getAll());
+            model.addAttribute("error", CANT_DELETE_USED);
+            return "dev/StatAffiliation";
+        }
+
     }
 
     @GetMapping("/dev/affiliation/material/{id}")

@@ -7,7 +7,9 @@ import com.gachaapi.Service.interfaces.CharacterService;
 import com.gachaapi.Utils.AbilityType;
 import com.gachaapi.Utils.dev.NewCharacter;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,6 +31,11 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public void create(NewCharacter newCharacter) {
+
+        if (newCharacter.getAbilityPotency()<1){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
         Character character = new Character();
         character.setName(newCharacter.getName());
 
@@ -48,8 +55,6 @@ public class CharacterServiceImpl implements CharacterService {
     }
     @Override
     public void delete(int id) {
-        Character character = characterRepository.getReferenceById(id);
-        if(character.getPlayerCharactersById().isEmpty())
-            characterRepository.deleteById(id);
+        characterRepository.deleteById(id);
     }
 }

@@ -11,11 +11,12 @@
 <div>
     <h1>Dev Rarity</h1>
     <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <p class="center" th:text="${error != null} ? ${error} : ''"></p>
     <form th:action="@{/dev/rarity}" th:method="post" th:object="${newRarity}">
         <h3>Name:</h3><br>
         <input th:type="text" name="name" required><br>
         <h3>Short Name (3 capital letters):</h3><br>
-        <input th:type="text" name="shortcut" required><br>
+        <input th:type="text" name="shortcut" maxlength="3" required><br>
         <h3>Weight</h3>
         <input th:type="number" name="weight" required><br>
         <input type="submit" value="submit"><br>

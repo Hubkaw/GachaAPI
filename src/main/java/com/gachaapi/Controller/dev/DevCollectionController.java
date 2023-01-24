@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static com.gachaapi.Utils.Constants.CANT_DELETE_USED;
+
 @Controller
 @AllArgsConstructor
 public class DevCollectionController {
@@ -30,7 +32,13 @@ public class DevCollectionController {
 
     @GetMapping("/dev/collection/delete/{id}")
     public String deleteCollection(Model model, @PathVariable("id")int id){
-        collectionService.delete(id);
-        return "redirect:/dev/collection";
+        try {
+            collectionService.delete(id);
+            return "redirect:/dev/collection";
+        } catch (Exception e){
+            model.addAttribute("collectionList", collectionService.getAll());
+            model.addAttribute("error", CANT_DELETE_USED);
+            return "dev/Collection";
+        }
     }
 }

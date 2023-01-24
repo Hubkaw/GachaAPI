@@ -27,6 +27,5 @@ public class Constants {
     public static final String CRIT_RATE_STAT = "CRT";
     public static final String CRIT_DAMAGE_STAT = "CDM";
 
-
-    public static final String CANT_DELETE_USED_BY_PLAYER = "This resource is already used by a player. You cannot delete it";
+    public static final String CANT_DELETE_USED = "You can't delete a used resource.\nPlease make sure that this resource is not used anywhere in the system.";
 }

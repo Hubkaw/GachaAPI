@@ -11,11 +11,12 @@
 <div>
     <h1>Dev Weapon Class</h1>
     <h3><a th:href="@{/dev/menu}">Back to menu</a></h3>
+    <p class="center" th:text="${error != null} ? ${error} : ''"></p>
     <form th:action="@{/dev/weaponClass}" th:method="post" th:object="${newWeaponClass}">
         <h2>Name:</h2><br>
         <input th:type="text" name="name" required><br>
         <h2>Short Name (3 capital letters):</h2><br>
-        <input th:type="text" name="shortName" required><br>
+        <input th:type="text" name="shortName" maxlength="3" required><br>
         <input type="submit" value="submit"><br>
     </form>
     <div >

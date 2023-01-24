@@ -30,7 +30,7 @@ public class DevStatController {
         return "redirect:/dev/stats";
     }
 
-    @GetMapping("/dev/stats/delete/{id}")
+    @GetMapping("/dev/stat/delete/{id}")
     public String deleteStat(Model model, @PathVariable("id")int id){
         statisticService.delete(id);
         return "redirect:/dev/stats";

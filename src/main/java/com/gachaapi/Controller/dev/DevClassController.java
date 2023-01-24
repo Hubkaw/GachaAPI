@@ -8,12 +8,17 @@ import com.gachaapi.Utils.dev.NewClass;
 import com.gachaapi.Utils.dev.NewMaterialClass;
 import com.gachaapi.Utils.dev.NewStatClass;
 import lombok.AllArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.exception.SQLGrammarException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import static com.gachaapi.Utils.Constants.CANT_DELETE_USED;
 
 @Controller
 @AllArgsConstructor
@@ -32,15 +37,35 @@ public class DevClassController {
     }
 
     @PostMapping("/dev/class")
-    public String createClass(Model model, @ModelAttribute("newClass")NewClass newClass){
-        classService.create(newClass);
-        return "redirect:/dev/class";
+    public String createClass(Model model, @ModelAttribute("newClass")NewClass newClass, BindingResult result) {
+        if (result.hasErrors()) {
+            model.addAttribute("classList", classService.getAll());
+            model.addAttribute("weaponClassList", weaponClassService.getAll());
+            model.addAttribute("error", "Invalid Parameters");
+            return "dev/Class";
+        }
+        try {
+            classService.create(newClass);
+            return "redirect:/dev/class";
+        } catch (Exception e) {
+            model.addAttribute("classList", classService.getAll());
+            model.addAttribute("weaponClassList", weaponClassService.getAll());
+            model.addAttribute("error", "Invalid Parameters");
+            return "dev/Class";
+        }
     }
 
     @GetMapping("/dev/class/delete/{id}")
     public String deleteClass(Model model, @PathVariable("id")int id){
-        classService.delete(id);
-        return "redirect:/dev/class";
+        try {
+            classService.delete(id);
+            return "redirect:/dev/class";
+        } catch (Exception e){
+            model.addAttribute("classList", classService.getAll());
+            model.addAttribute("weaponClassList", weaponClassService.getAll());
+            model.addAttribute("error", CANT_DELETE_USED);
+            return "dev/Class";
+        }
     }
 
     @GetMapping("/dev/class/stats/{id}")
