@@ -1,11 +1,15 @@
 # GachaAPI
-
+  
+To jest martwy projekt po pracy inżynierskiej. Teraz już tylko pamiątka.  
+  
+# Read.me z czasów developmentu:  
+  
 ### INSTRUKCJA POSTAWIENIA TEGO LOKALNIE:
 
 1. zainstaluj [xampp](https://www.apachefriends.org/) (Rozwiązanie tymczasowe dopóki są problemy z mssql)
 2. w panelu kontrolnym xampp wystartuj Apache i MySQL 
 3. Wejdź na http://localhost/phpmyadmin/
-4. Stwórz nową bazę: Po lewej stronie na szczycie listy klikniej "Nowa" i nazwij ją "gacha"
+4. Stwórz nową bazę: Po lewej stronie na szczycie listy kliknij "Nowa" i nazwij ją "gacha"
 5. Wystartuj Api z IntelliJ 
 6. Gotowe :)
 
@@ -36,7 +40,6 @@ Token jest ważny przez 15 minut, potem trzeba uderzyć tu ponownie po nowy.
 ##### GET /api/chests, /api/chests/all, /api/chests/open/{id}
 
 - Pozwala wyświetlać i otwierać skrzynki
-- Zaleca się lokalne dodanie skrzynki z price = 0 bo gracze nie mogą jeszcze zarabiać :)
 - /chests wyświetla tylko aktualnie dostępne skrzynki
 
 ###### Inne końcówki można znależć w plikach znajdujących się w folderze /Controller/api/   
